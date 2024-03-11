@@ -1,0 +1,109 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Root Finding"><title>peroxide::numerical::root - Rust</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-e935ef01ae1c1829.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="peroxide" data-themes="" data-resource-suffix="" data-rustdoc-version="1.78.0-nightly (c475e2303 2024-02-28)" data-channel="nightly" data-search-js="search-dd67cee4cfa65049.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../static.files/storage-4c98445ec4002617.js"></script><script defer src="../sidebar-items.js"></script><script defer src="../../../static.files/main-12cf3b4f4f9dc36d.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-04d5337699b92874.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js"                  integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js"    integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "\\(", right: "\\)", display: false},
+                {left: "$", right: "$", display: false},
+                {left: "\\[", right: "\\]", display: true}
+            ]
+        });
+    });
+</script>
+
+</head><body class="rustdoc mod"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../../../peroxide/index.html">peroxide</a><span class="version">0.34.7</span></h2></div><h2 class="location"><a href="#">Module root</a></h2><div class="sidebar-elems"><section><ul class="block"><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li><li><a href="#functions">Functions</a></li></ul></section><h2><a href="../index.html">In peroxide::numerical</a></h2></div></nav><div class="sidebar-resizer"></div>
+    <main><div class="width-limiter"><nav class="sub"><form class="search-form"><span></span><div id="sidebar-button" tabindex="-1"><a href="../../../peroxide/all.html" title="show sidebar"></a></div><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" tabindex="-1"><a href="../../../help.html" title="help">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="main-heading"><h1>Module <a href="../../index.html">peroxide</a>::<wbr><a href="../index.html">numerical</a>::<wbr><a class="mod" href="#">root</a><button id="copy-path" title="Copy item path to clipboard"><img src="../../../static.files/clipboard-7571035ce49a181d.svg" width="19" height="18" alt="Copy item path"></button></h1><span class="out-of-band"><a class="src" href="../../../src/peroxide/numerical/root.rs.html#1-531">source</a> · <button id="toggle-all-docs" title="collapse all docs">[<span>&#x2212;</span>]</button></span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Root Finding</p>
+<h2 id="implemented-algorithms"><a class="doc-anchor" href="#implemented-algorithms">§</a>Implemented Algorithms</h2>
+<ul>
+<li>Bisection</li>
+<li>False Position (Regula Falsi)</li>
+<li>Secant</li>
+<li>Newton</li>
+</ul>
+<h2 id="low-level-api"><a class="doc-anchor" href="#low-level-api">§</a>Low-level API</h2><h3 id="members"><a class="doc-anchor" href="#members">§</a>Members</h3>
+<ul>
+<li><code>RootState</code>
+<ul>
+<li><code>P(f64)</code> : For point-like initial guess</li>
+<li><code>I(f64, f64)</code> : For interval-like initial guess</li>
+<li><code>fn get_point(&amp;self) -&gt; Option&lt;f64&gt;</code> : Returns the point</li>
+<li><code>fn get_interval(&amp;self) -&gt; Option&lt;(f64, f64)&gt;</code> : Returns the interval</li>
+</ul>
+</li>
+<li><code>RootFind</code> : Algorithms for root finding
+<ul>
+<li><code>Bisection</code></li>
+<li><code>FalsePosition</code></li>
+<li><code>Newton</code></li>
+<li><code>Secant</code></li>
+</ul>
+</li>
+<li><code>RootError</code> : Error for root finding
+<ul>
+<li><code>MismatchedState</code> : Mismatched state and method (ex: Point vs Bisection)</li>
+<li><code>TimesUp</code> : No root until <code>self.times</code></li>
+<li><code>NaNRoot</code> : NaN</li>
+</ul>
+</li>
+<li><code>RootFinder</code> : Main structure for root finding
+<ul>
+<li><code>fn new(RootState, RootFind, f)</code> : Create RootFinder (times: 100, tol: 1e-10)</li>
+<li><code>fn condition_number(&amp;self) -&gt; f64</code> : Compute condition number</li>
+<li><code>fn set_tol(&amp;mut self, f64) -&gt; &amp;mut Self</code> : Set tolerance</li>
+<li><code>fn set_times(&amp;mut self, usize) -&gt; &amp;mut Self</code> : Set max iteration times</li>
+<li><code>fn get_tol(&amp;self) -&gt; f64</code> : Get tolerance</li>
+<li><code>fn get_times(&amp;self) -&gt; usize</code> : Get max iteration times</li>
+<li><code>fn get_method(&amp;self) -&gt; RootFind</code> : Get method</li>
+<li><code>fn get_curr(&amp;self) -&gt; &amp;RootState</code> : Get current state</li>
+<li><code>fn check_find(&amp;self) -&gt; RootBool</code> : Check if find root</li>
+<li><code>fn update(&amp;mut self)</code> : Update one step</li>
+<li><code>fn find_root(&amp;mut self) -&gt; Result&lt;f64, RootError&gt;</code> : Find root</li>
+</ul>
+</li>
+</ul>
+<h3 id="usage"><a class="doc-anchor" href="#usage">§</a>Usage</h3>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern crate </span>peroxide;
+<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
+
+<span class="kw">fn </span>main() -&gt; <span class="prelude-ty">Result</span>&lt;(), RootError&gt; {
+    <span class="kw">let </span>init = RootState::I(<span class="number">1f64</span>, <span class="number">4f64</span>);
+    <span class="kw">let </span><span class="kw-2">mut </span>rf = RootFinder::new(init, Bisection, f)<span class="question-mark">?</span>;
+    rf.set_tol(<span class="number">1e-15</span>)       <span class="comment">// Default: 1e-10
+        </span>.set_times(<span class="number">200</span>);    <span class="comment">// Default: 100
+    </span><span class="kw">let </span>root = rf.find_root()<span class="question-mark">?</span>;
+    root.print();
+    <span class="prelude-val">Ok</span>(())
+}
+
+<span class="kw">fn </span>f(x: AD) -&gt; AD {
+    x.sin()
+}</code></pre></div>
+<h2 id="high-level-api"><a class="doc-anchor" href="#high-level-api">§</a>High-level API</h2><h3 id="members-1"><a class="doc-anchor" href="#members-1">§</a>Members</h3>
+<p>All output type is <code>Result&lt;f64, RootError&gt;</code></p>
+<ul>
+<li><code>bisection(f, interval: (f64, f64), times: usize, tol: f64)</code></li>
+<li><code>false_position(f, interval: (f64, f64), times: usize, tol: f64)</code></li>
+<li><code>secant(f, initial_guess: (f64, f64), times: usize, tol: f64)</code></li>
+<li><code>newton(f, initial_guess: f64, times: usize, tol: f64)</code></li>
+</ul>
+<h3 id="usage-1"><a class="doc-anchor" href="#usage-1">§</a>Usage</h3>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern crate </span>peroxide;
+<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
+
+<span class="kw">fn </span>main() -&gt; <span class="prelude-ty">Result</span>&lt;(), RootError&gt; {
+    <span class="kw">let </span>root = bisection(f, (<span class="number">1f64</span>, <span class="number">4f64</span>), <span class="number">100</span>, <span class="number">1e-15</span>)<span class="question-mark">?</span>;
+    root.print();
+    <span class="prelude-val">Ok</span>(())
+}
+
+<span class="kw">fn </span>f(x: AD) -&gt; AD {
+    x.sin()
+}</code></pre></div>
+<h2 id="reference"><a class="doc-anchor" href="#reference">§</a>Reference</h2>
+<ul>
+<li>Walter Gautschi, <em>Numerical Analysis</em>, Springer (2012)</li>
+</ul>
+</div></details><h2 id="structs" class="section-header">Structs<a href="#structs" class="anchor">§</a></h2><ul class="item-table"><li><div class="item-name"><a class="struct" href="struct.RootFinder.html" title="struct peroxide::numerical::root::RootFinder">RootFinder</a></div><div class="desc docblock-short">Structure for Root finding</div></li></ul><h2 id="enums" class="section-header">Enums<a href="#enums" class="anchor">§</a></h2><ul class="item-table"><li><div class="item-name"><a class="enum" href="enum.RootBool.html" title="enum peroxide::numerical::root::RootBool">RootBool</a></div></li><li><div class="item-name"><a class="enum" href="enum.RootError.html" title="enum peroxide::numerical::root::RootError">RootError</a></div></li><li><div class="item-name"><a class="enum" href="enum.RootFind.html" title="enum peroxide::numerical::root::RootFind">RootFind</a></div></li><li><div class="item-name"><a class="enum" href="enum.RootState.html" title="enum peroxide::numerical::root::RootState">RootState</a></div></li></ul><h2 id="functions" class="section-header">Functions<a href="#functions" class="anchor">§</a></h2><ul class="item-table"><li><div class="item-name"><a class="fn" href="fn.bisection.html" title="fn peroxide::numerical::root::bisection">bisection</a></div><div class="desc docblock-short">Bisection method to find root</div></li><li><div class="item-name"><a class="fn" href="fn.false_position.html" title="fn peroxide::numerical::root::false_position">false_position</a></div><div class="desc docblock-short">False position method to find root</div></li><li><div class="item-name"><a class="fn" href="fn.newton.html" title="fn peroxide::numerical::root::newton">newton</a></div><div class="desc docblock-short">Newton method to find root</div></li><li><div class="item-name"><a class="fn" href="fn.secant.html" title="fn peroxide::numerical::root::secant">secant</a></div><div class="desc docblock-short">Secant method to find root</div></li></ul></section></div></main></body></html>

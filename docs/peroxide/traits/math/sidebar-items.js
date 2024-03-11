@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["Norm"],"trait":["InnerProduct","LinearOp","MatrixProduct","Normed","Vector","VectorProduct"]};

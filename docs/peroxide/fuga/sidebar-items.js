@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"attr":["ad_function"],"enum":["CompressionOptions"],"macro":["ad_closure"],"trait":["ExpLogOps","PowOps","TrigOps"]};

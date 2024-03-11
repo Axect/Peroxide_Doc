@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["Grid","LineStyle","Markers","PlotOptions","PlotScale","PlotStyle"],"struct":["Plot2D"],"trait":["Plot"]};

@@ -1,0 +1,162 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Basic statistics"><title>peroxide::statistics::stat - Rust</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-e935ef01ae1c1829.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="peroxide" data-themes="" data-resource-suffix="" data-rustdoc-version="1.78.0-nightly (c475e2303 2024-02-28)" data-channel="nightly" data-search-js="search-dd67cee4cfa65049.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../static.files/storage-4c98445ec4002617.js"></script><script defer src="../sidebar-items.js"></script><script defer src="../../../static.files/main-12cf3b4f4f9dc36d.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-04d5337699b92874.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js"                  integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js"    integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "\\(", right: "\\)", display: false},
+                {left: "$", right: "$", display: false},
+                {left: "\\[", right: "\\]", display: true}
+            ]
+        });
+    });
+</script>
+
+</head><body class="rustdoc mod"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../../../peroxide/index.html">peroxide</a><span class="version">0.34.7</span></h2></div><h2 class="location"><a href="#">Module stat</a></h2><div class="sidebar-elems"><section><ul class="block"><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li><li><a href="#traits">Traits</a></li><li><a href="#functions">Functions</a></li></ul></section><h2><a href="../index.html">In peroxide::statistics</a></h2></div></nav><div class="sidebar-resizer"></div>
+    <main><div class="width-limiter"><nav class="sub"><form class="search-form"><span></span><div id="sidebar-button" tabindex="-1"><a href="../../../peroxide/all.html" title="show sidebar"></a></div><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" tabindex="-1"><a href="../../../help.html" title="help">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="main-heading"><h1>Module <a href="../../index.html">peroxide</a>::<wbr><a href="../index.html">statistics</a>::<wbr><a class="mod" href="#">stat</a><button id="copy-path" title="Copy item path to clipboard"><img src="../../../static.files/clipboard-7571035ce49a181d.svg" width="19" height="18" alt="Copy item path"></button></h1><span class="out-of-band"><a class="src" href="../../../src/peroxide/statistics/stat.rs.html#1-922">source</a> · <button id="toggle-all-docs" title="collapse all docs">[<span>&#x2212;</span>]</button></span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Basic statistics</p>
+<h3 id="statistics-trait"><a class="doc-anchor" href="#statistics-trait">§</a><code>Statistics</code> trait</h3>
+<ul>
+<li>To make generic code, there is <code>Statistics</code> trait
+<ul>
+<li><code>mean</code>: just mean</li>
+<li><code>var</code> : variance</li>
+<li><code>sd</code> : standard deviation (R-like notation)</li>
+<li><code>cov</code> : covariance</li>
+<li><code>cor</code> : correlation coefficient</li>
+</ul>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">pub trait </span>Statistics {
+    <span class="kw">type </span>Array;
+    <span class="kw">type </span>Value;
+
+    <span class="kw">fn </span>mean(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Value;
+    <span class="kw">fn </span>var(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Value;
+    <span class="kw">fn </span>sd(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Value;
+    <span class="kw">fn </span>cov(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Array;
+    <span class="kw">fn </span>cor(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Array;
+}</code></pre></div>
+</li>
+</ul>
+<h4 id="for-vecf64"><a class="doc-anchor" href="#for-vecf64">§</a>For <code>Vec&lt;f64&gt;</code></h4>
+<ul>
+<li>
+<p>Caution: For <code>Vec&lt;f64&gt;</code>, <code>cov</code> &amp; <code>cor</code> are unimplemented (those for <code>Matrix</code>)</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attr">#[macro_use]
+</span><span class="kw">extern crate </span>peroxide;
+<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
+
+<span class="kw">fn </span>main() {
+    <span class="kw">let </span>a = <span class="macro">c!</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>);
+    a.mean().print(); <span class="comment">// 3
+    </span>a.var().print();  <span class="comment">// 2.5
+    </span>a.sd().print();   <span class="comment">// 1.5811388300841898
+</span>}</code></pre></div>
+</li>
+<li>
+<p>But there are other functions to calculate <code>cov</code> &amp; <code>cor</code></p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attr">#[macro_use]
+</span><span class="kw">extern crate </span>peroxide;
+<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
+
+<span class="kw">fn </span>main() {
+    <span class="kw">let </span>v1 = <span class="macro">c!</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>);
+    <span class="kw">let </span>v2 = <span class="macro">c!</span>(<span class="number">3</span>,<span class="number">2</span>,<span class="number">1</span>);
+
+    cov(<span class="kw-2">&amp;</span>v1, <span class="kw-2">&amp;</span>v2).print(); <span class="comment">// -0.9999999999999998
+    </span>cor(<span class="kw-2">&amp;</span>v1, <span class="kw-2">&amp;</span>v2).print(); <span class="comment">// -0.9999999999999993
+</span>}</code></pre></div>
+</li>
+</ul>
+<h4 id="for-matrix"><a class="doc-anchor" href="#for-matrix">§</a>For <code>Matrix</code></h4>
+<ul>
+<li>
+<p>For <code>Matrix</code>, <code>mean, var, sd</code> means column operations</p>
+</li>
+<li>
+<p><code>cov</code> means covariance matrix &amp; <code>cor</code> means also correlation coefficient matrix</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attr">#[macro_use]
+</span><span class="kw">extern crate </span>peroxide;
+<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
+
+<span class="kw">fn </span>main() {
+    <span class="kw">let </span>m = matrix(<span class="macro">c!</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">1</span>), <span class="number">3</span>, <span class="number">2</span>, Col);
+
+    m.mean().print(); <span class="comment">// [2, 2]
+    </span>m.var().print();  <span class="comment">// [1.0000, 1.0000]
+    </span>m.sd().print();   <span class="comment">// [1.0000, 1.0000]
+
+    </span>m.cov().print();
+    <span class="comment">//         c[0]    c[1]
+    // r[0]  1.0000 -1.0000
+    // r[1] -1.0000  1.0000
+
+    </span>m.cor().print();
+    <span class="comment">//         c[0]    c[1]
+    // r[0]       1 -1.0000
+    // r[1] -1.0000       1
+</span>}</code></pre></div>
+</li>
+</ul>
+<h4 id="for-dataframe"><a class="doc-anchor" href="#for-dataframe">§</a>For <code>DataFrame</code></h4>
+<ul>
+<li>Similar to Matrix but, <code>Value</code> is <code>DataFrame</code></li>
+<li><code>cov</code> means covariance matrix.</li>
+</ul>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attr">#[macro_use]
+</span><span class="kw">extern crate </span>peroxide;
+<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
+
+<span class="kw">fn </span>main() {
+    <span class="attr">#[cfg(feature = <span class="string">"dataframe"</span>)]
+    </span>{
+        <span class="kw">let </span><span class="kw-2">mut </span>m = DataFrame::with_header(<span class="macro">vec!</span>[<span class="string">"x"</span>, <span class="string">"y"</span>]);
+        m[<span class="string">"x"</span>] = <span class="macro">c!</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>);
+        m[<span class="string">"y"</span>] = <span class="macro">c!</span>(<span class="number">3</span>,<span class="number">2</span>,<span class="number">1</span>);
+
+        m.cov().print();
+        <span class="comment">//         c[0]    c[1]
+        // r[0]  1.0000 -1.0000
+        // r[1] -1.0000  1.0000
+    </span>}
+}</code></pre></div>
+<h3 id="confusion-matrix"><a class="doc-anchor" href="#confusion-matrix">§</a>Confusion Matrix</h3>
+<ul>
+<li><code>ConfusionMatrix</code> is a struct to calculate confusion matrix</li>
+<li>The reference is <a href="https://en.wikipedia.org/wiki/Confusion_matrix">here</a></li>
+</ul>
+<h4 id="example"><a class="doc-anchor" href="#example">§</a>Example</h4>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
+
+<span class="kw">fn </span>main() {
+    <span class="kw">let </span>y     = <span class="macro">vec!</span>[<span class="number">1usize</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>];
+    <span class="kw">let </span>y_hat = <span class="macro">vec!</span>[<span class="number">0usize</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>];
+    <span class="kw">let </span>true_val = <span class="number">1usize</span>;
+
+    <span class="kw">let </span>cm = ConfusionMatrix::new(<span class="kw-2">&amp;</span>y, <span class="kw-2">&amp;</span>y_hat, true_val);
+    cm.print();
+    <span class="comment">//         c[0]    c[1]
+    // r[0]       6       2
+    // r[1]       1       3
+
+    // to matrix
+    </span><span class="kw">let </span>cm_mat = cm.to_matrix();
+     
+    <span class="comment">// Calculate accuracy
+    </span>cm.ACC().print(); <span class="comment">// 0.75
+
+    // Calculate TPR (Sensitivity or Recall)
+    </span>cm.TPR().print(); <span class="comment">// 0.6666....
+
+    // Calculate some metrics
+    </span><span class="kw">let </span>metrics = cm.calc_metrics(<span class="kw-2">&amp;</span>[ACC, TPR, TNR, F1]);
+
+    <span class="comment">// Print some metrics
+    </span>cm.summary(<span class="kw-2">&amp;</span>[ACC, TPR, TNR, F1]);
+}</code></pre></div>
+</div></details><h2 id="structs" class="section-header">Structs<a href="#structs" class="anchor">§</a></h2><ul class="item-table"><li><div class="item-name"><a class="struct" href="struct.ConfusionMatrix.html" title="struct peroxide::statistics::stat::ConfusionMatrix">ConfusionMatrix</a></div><div class="desc docblock-short">Confusion Matrix</div></li></ul><h2 id="enums" class="section-header">Enums<a href="#enums" class="anchor">§</a></h2><ul class="item-table"><li><div class="item-name"><a class="enum" href="enum.Metric.html" title="enum peroxide::statistics::stat::Metric">Metric</a></div></li><li><div class="item-name"><a class="enum" href="enum.QType.html" title="enum peroxide::statistics::stat::QType">QType</a></div><div class="desc docblock-short">R Quantile Type enums</div></li></ul><h2 id="traits" class="section-header">Traits<a href="#traits" class="anchor">§</a></h2><ul class="item-table"><li><div class="item-name"><a class="trait" href="trait.OrderedStat.html" title="trait peroxide::statistics::stat::OrderedStat">OrderedStat</a></div><div class="desc docblock-short">Trait for Ordered Statistics</div></li><li><div class="item-name"><a class="trait" href="trait.Statistics.html" title="trait peroxide::statistics::stat::Statistics">Statistics</a></div><div class="desc docblock-short">Statistics Trait</div></li></ul><h2 id="functions" class="section-header">Functions<a href="#functions" class="anchor">§</a></h2><ul class="item-table"><li><div class="item-name"><a class="fn" href="fn.cor.html" title="fn peroxide::statistics::stat::cor">cor</a></div><div class="desc docblock-short">Pearson’s correlation coefficient</div></li><li><div class="item-name"><a class="fn" href="fn.cov.html" title="fn peroxide::statistics::stat::cov">cov</a></div><div class="desc docblock-short">Covariance (to Value)</div></li><li><div class="item-name"><a class="fn" href="fn.lm.html" title="fn peroxide::statistics::stat::lm">lm</a></div><div class="desc docblock-short">R like linear regression</div></li><li><div class="item-name"><a class="fn" href="fn.quantile.html" title="fn peroxide::statistics::stat::quantile">quantile</a></div></li></ul></section></div></main></body></html>

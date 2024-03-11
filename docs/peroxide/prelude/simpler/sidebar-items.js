@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["chebyshev_polynomial","cubic_hermite_spline","eigen","integrate","solve"],"trait":["SimpleNorm","SimpleParquet","SimplerLinearAlgebra"]};

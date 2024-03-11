@@ -1,0 +1,117 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Plotting module for peroxide"><title>peroxide::util::plot - Rust</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-e935ef01ae1c1829.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="peroxide" data-themes="" data-resource-suffix="" data-rustdoc-version="1.78.0-nightly (c475e2303 2024-02-28)" data-channel="nightly" data-search-js="search-dd67cee4cfa65049.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../static.files/storage-4c98445ec4002617.js"></script><script defer src="../sidebar-items.js"></script><script defer src="../../../static.files/main-12cf3b4f4f9dc36d.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-04d5337699b92874.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js"                  integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js"    integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "\\(", right: "\\)", display: false},
+                {left: "$", right: "$", display: false},
+                {left: "\\[", right: "\\]", display: true}
+            ]
+        });
+    });
+</script>
+
+</head><body class="rustdoc mod"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../../../peroxide/index.html">peroxide</a><span class="version">0.34.7</span></h2></div><h2 class="location"><a href="#">Module plot</a></h2><div class="sidebar-elems"><section><ul class="block"><li><a href="#reexports">Re-exports</a></li><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li><li><a href="#traits">Traits</a></li></ul></section><h2><a href="../index.html">In peroxide::util</a></h2></div></nav><div class="sidebar-resizer"></div>
+    <main><div class="width-limiter"><nav class="sub"><form class="search-form"><span></span><div id="sidebar-button" tabindex="-1"><a href="../../../peroxide/all.html" title="show sidebar"></a></div><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" tabindex="-1"><a href="../../../help.html" title="help">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="main-heading"><h1>Module <a href="../../index.html">peroxide</a>::<wbr><a href="../index.html">util</a>::<wbr><a class="mod" href="#">plot</a><button id="copy-path" title="Copy item path to clipboard"><img src="../../../static.files/clipboard-7571035ce49a181d.svg" width="19" height="18" alt="Copy item path"></button></h1><span class="out-of-band"><a class="src" href="../../../src/peroxide/util/plot.rs.html#1-621">source</a> · <button id="toggle-all-docs" title="collapse all docs">[<span>&#x2212;</span>]</button></span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Plotting module for peroxide</p>
+<p>For Rust, there are some plot libraries but, still difficult to use.
+Practically, using python is best choice to plot. And there is awesome crate - <a href="https://crates.io/crates/pyo3">pyo3</a>.</p>
+<p>Let’s see next ordinary code file.</p>
+<div class="example-wrap"><pre class="language-no-run"><code>#[macro_use]
+extern crate peroxide;
+use peroxide::fuga::*;
+
+fn main() {
+    let init_state = State::&lt;f64&gt;::new(0f64, c!(1), c!(0));
+
+    let mut ode_solver = ExplicitODE::new(test_fn);
+
+    ode_solver
+        .set_method(ExMethod::RK4)
+        .set_initial_condition(init_state)
+        .set_step_size(0.01)
+        .set_times(1000);
+
+    let result = ode_solver.integrate();
+    result.write(&quot;example_data/test.csv&quot;);
+}
+
+fn test_fn(st: &amp;mut State&lt;f64&gt;, _: &amp;NoEnv) {
+    let x = st.param;
+    let y = &amp;st.value;
+    let dy = &amp;mut st.deriv;
+    dy[0] = (5f64*x.powi(2) - y[0]) / (x + y[0]).exp();
+}
+</code></pre></div>
+<p>Now, let’s modify this code to below. Then it works surprisingly!</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attr">#[macro_use]
+</span><span class="kw">extern crate </span>peroxide;
+<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
+
+<span class="kw">fn </span>main() {
+    <span class="kw">let </span>init_state = State::&lt;f64&gt;::new(<span class="number">0f64</span>, <span class="macro">c!</span>(<span class="number">1</span>), <span class="macro">c!</span>(<span class="number">0</span>));
+
+    <span class="kw">let </span><span class="kw-2">mut </span>ode_solver = ExplicitODE::new(test_fn);
+
+    ode_solver
+        .set_method(ExMethod::RK4)
+        .set_initial_condition(init_state)
+        .set_step_size(<span class="number">0.01</span>)
+        .set_times(<span class="number">1000</span>);
+
+    <span class="kw">let </span>result = ode_solver.integrate();
+
+    <span class="kw">let </span>x = result.col(<span class="number">0</span>);
+    <span class="kw">let </span>y = result.col(<span class="number">1</span>);
+
+    <span class="comment">// Remove below comments to execute
+    //let mut plt = Plot2D::new();
+    //plt.set_domain(x)
+    //    .insert_image(y)
+    //    .set_title("Test Figure")
+    //    .set_fig_size((10, 6))
+    //    .set_dpi(300)
+    //    .set_legend(vec!["RK4"])
+    //    .set_path("example_data/test_plot.png");
+
+    //plt.savefig();
+</span>}
+
+<span class="kw">fn </span>test_fn(st: <span class="kw-2">&amp;mut </span>State&lt;f64&gt;, <span class="kw">_</span>: <span class="kw-2">&amp;</span>NoEnv) {
+    <span class="kw">let </span>x = st.param;
+    <span class="kw">let </span>y = <span class="kw-2">&amp;</span>st.value;
+    <span class="kw">let </span>dy = <span class="kw-2">&amp;mut </span>st.deriv;
+    dy[<span class="number">0</span>] = (<span class="number">5f64 </span>* x.powi(<span class="number">2</span>) - y[<span class="number">0</span>]) / (x + y[<span class="number">0</span>]).exp();
+}</code></pre></div>
+<p>It draws next image</p>
+<p><img src="https://raw.githubusercontent.com/Axect/Peroxide/master/example_data/test_plot.png" alt="test_plot" /></p>
+<h2 id="available-plot-options"><a class="doc-anchor" href="#available-plot-options">§</a>Available Plot Options</h2>
+<ul>
+<li><code>set_domain</code> : Set x data</li>
+<li><code>insert_image</code> : Insert y data</li>
+<li><code>insert_pair</code> : Insert (x, y) data</li>
+<li><code>set_title</code> : Set title of plot (optional)</li>
+<li><code>set_xlabel</code> : Set xlabel of plot (optional)</li>
+<li><code>set_ylabel</code> : Set ylabel of plot (optional)</li>
+<li><code>set_zlabel</code> : Set zlabel of plot (optional; for 3D plot)</li>
+<li><code>set_xscale</code> : Set xscale of plot (optional; <code>PlotScale::Linear</code> or <code>PlotScale::Log</code>)</li>
+<li><code>set_yscale</code> : Set yscale of plot (optional; <code>PlotScale::Linear</code> or <code>PlotScale::Log</code>)</li>
+<li><code>set_xlim</code> : Set xlim of plot (optional)</li>
+<li><code>set_ylim</code> : Set ylim of plot (optional)</li>
+<li><code>set_legend</code> : Set legend of plot (optional)</li>
+<li><code>set_path</code> : Set path of plot (with filename - e.g. “example_data/test_plot.png”)</li>
+<li><code>set_fig_size</code> : Set figure size of plot (optional)</li>
+<li><code>set_dpi</code> : Set dpi of plot (optional)</li>
+<li><code>grid</code> : Set grid of plot (Grid::On, Grid::Off (default))</li>
+<li><code>set_marker</code> : Set marker of plot (optional; <code>Markers::{Point, Line, Circle, TriangleUp, ...}</code>)</li>
+<li><code>set_style</code> : Set style of plot (<code>PlotStyle::Nature</code>, <code>PlotStyle::IEEE</code>, <code>PlotStyle::Default</code> (default), <code>PlotStyle::Science</code>)</li>
+<li><code>tight_layout</code> : Set tight layout of plot (optional)</li>
+<li><code>set_line_style</code> : Set line style of plot (optional; <code>LineStyle::{Solid, Dashed, Dotted, DashDot}</code>)</li>
+<li><code>set_color</code> : Set color of plot (optional; Vec&lt;&amp;str&gt;)</li>
+<li><code>set_alpha</code> : Set alpha of plot (optional; Vec<f64>)</li>
+<li><code>savefig</code> : Save plot with given path</li>
+</ul>
+</div></details><h2 id="reexports" class="section-header">Re-exports<a href="#reexports" class="anchor">§</a></h2><ul class="item-table"><li><div class="item-name" id="reexport.Off"><code>pub use self::Grid::<a class="enum" href="enum.Grid.html" title="enum peroxide::util::plot::Grid">Off</a>;</code></div></li><li><div class="item-name" id="reexport.On"><code>pub use self::Grid::<a class="enum" href="enum.Grid.html" title="enum peroxide::util::plot::Grid">On</a>;</code></div></li></ul><h2 id="structs" class="section-header">Structs<a href="#structs" class="anchor">§</a></h2><ul class="item-table"><li><div class="item-name"><a class="struct" href="struct.Plot2D.html" title="struct peroxide::util::plot::Plot2D">Plot2D</a></div></li></ul><h2 id="enums" class="section-header">Enums<a href="#enums" class="anchor">§</a></h2><ul class="item-table"><li><div class="item-name"><a class="enum" href="enum.Grid.html" title="enum peroxide::util::plot::Grid">Grid</a></div></li><li><div class="item-name"><a class="enum" href="enum.LineStyle.html" title="enum peroxide::util::plot::LineStyle">LineStyle</a></div></li><li><div class="item-name"><a class="enum" href="enum.Markers.html" title="enum peroxide::util::plot::Markers">Markers</a></div></li><li><div class="item-name"><a class="enum" href="enum.PlotOptions.html" title="enum peroxide::util::plot::PlotOptions">PlotOptions</a></div></li><li><div class="item-name"><a class="enum" href="enum.PlotScale.html" title="enum peroxide::util::plot::PlotScale">PlotScale</a></div></li><li><div class="item-name"><a class="enum" href="enum.PlotStyle.html" title="enum peroxide::util::plot::PlotStyle">PlotStyle</a></div><div class="desc docblock-short">Plot Style (<code>scienceplots</code> should be installed)</div></li></ul><h2 id="traits" class="section-header">Traits<a href="#traits" class="anchor">§</a></h2><ul class="item-table"><li><div class="item-name"><a class="trait" href="trait.Plot.html" title="trait peroxide::util::plot::Plot">Plot</a></div></li></ul></section></div></main></body></html>

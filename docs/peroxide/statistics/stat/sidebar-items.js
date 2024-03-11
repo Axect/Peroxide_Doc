@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["Metric","QType"],"fn":["cor","cov","lm","quantile"],"struct":["ConfusionMatrix"],"trait":["OrderedStat","Statistics"]};

@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["EigenMethod"],"fn":["eigen","jacobi"],"struct":["Eigen","JacobiTemp"]};

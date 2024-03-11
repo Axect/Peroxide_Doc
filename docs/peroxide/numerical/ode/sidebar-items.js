@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["BoundaryCondition","ExMethod","ImMethod","ODEOptions"],"struct":["ExplicitODE","ImplicitODE","NoEnv","State"],"trait":["Environment","ODE"]};

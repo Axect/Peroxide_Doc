@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["least_square"]};

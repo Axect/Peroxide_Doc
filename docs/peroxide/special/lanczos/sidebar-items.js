@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["gamma_approx","ln_gamma_approx","tlg1"]};

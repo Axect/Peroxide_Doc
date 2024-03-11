@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":["eigen","integral","interp","newton","ode","optimize","root","spline","utils"]};

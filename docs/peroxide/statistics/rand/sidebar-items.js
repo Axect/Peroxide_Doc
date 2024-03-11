@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["marsaglia_polar","prs","rand_num","ziggurat"]};

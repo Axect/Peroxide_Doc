@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["auto_zip","choose_longer_vec","choose_shorter_string","choose_shorter_vec","eq_vec","find_interval","gen_range","max","min","nearly_eq","quot_rem","sgn","tab","zip_range"]};

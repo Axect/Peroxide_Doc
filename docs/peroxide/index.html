@@ -1,0 +1,211 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="`peroxide` is comprehensive numerical library for Rust."><title>peroxide - Rust</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../static.files/rustdoc-e935ef01ae1c1829.css"><meta name="rustdoc-vars" data-root-path="../" data-static-root-path="../static.files/" data-current-crate="peroxide" data-themes="" data-resource-suffix="" data-rustdoc-version="1.78.0-nightly (c475e2303 2024-02-28)" data-channel="nightly" data-search-js="search-dd67cee4cfa65049.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../static.files/storage-4c98445ec4002617.js"></script><script defer src="../crates.js"></script><script defer src="../static.files/main-12cf3b4f4f9dc36d.js"></script><noscript><link rel="stylesheet" href="../static.files/noscript-04d5337699b92874.css"></noscript><link rel="alternate icon" type="image/png" href="../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../static.files/favicon-2c020d218678b618.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js"                  integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js"    integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "\\(", right: "\\)", display: false},
+                {left: "$", right: "$", display: false},
+                {left: "\\[", right: "\\]", display: true}
+            ]
+        });
+    });
+</script>
+
+</head><body class="rustdoc mod crate"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../peroxide/index.html">peroxide</a><span class="version">0.34.7</span></h2></div><div class="sidebar-elems"><ul class="block">
+            <li><a id="all-types" href="all.html">All Items</a></li></ul><section><ul class="block"><li><a href="#modules">Modules</a></li><li><a href="#macros">Macros</a></li></ul></section></div></nav><div class="sidebar-resizer"></div>
+    <main><div class="width-limiter"><nav class="sub"><form class="search-form"><span></span><div id="sidebar-button" tabindex="-1"><a href="../peroxide/all.html" title="show sidebar"></a></div><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" tabindex="-1"><a href="../help.html" title="help">?</a></div><div id="settings-menu" tabindex="-1"><a href="../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="main-heading"><h1>Crate <a class="mod" href="#">peroxide</a><button id="copy-path" title="Copy item path to clipboard"><img src="../static.files/clipboard-7571035ce49a181d.svg" width="19" height="18" alt="Copy item path"></button></h1><span class="out-of-band"><a class="src" href="../src/peroxide/lib.rs.html#1-198">source</a> · <button id="toggle-all-docs" title="collapse all docs">[<span>&#x2212;</span>]</button></span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p><code>peroxide</code> is comprehensive numerical library for Rust.</p>
+<h3 id="components"><a class="doc-anchor" href="#components">§</a>Components</h3>
+<p><code>peroxide</code> has various components for scientific computation.</p>
+<ul>
+<li>Linear Algebra (with BLAS &amp; LAPACK)
+<ul>
+<li><a href="structure/matrix/index.html">Matrix</a> operations
+<ul>
+<li><code>+,-,*,/</code></li>
+<li>LU Decomposition, Determinant, Inverse</li>
+<li>QR Decomposition (<code>O3</code> feature needed)</li>
+<li>Singular Value Decomposition (<code>O3</code> feature needed)</li>
+<li>Cholesky Decomposition (<code>O3</code> feature needed)</li>
+<li>Reduced Row Echelon Form</li>
+</ul>
+</li>
+<li><a href="structure/vector/index.html">Vector</a> operations</li>
+<li><a href="numerical/eigen/index.html">Eigenvalue, Eigenvector</a> algorithms</li>
+</ul>
+</li>
+<li>Statistics
+<ul>
+<li><a href="statistics/stat/index.html">Statistical operations</a>
+<ul>
+<li><code>mean, var, sd</code></li>
+<li><code>factorial, P, C, H</code></li>
+<li>Confusion Matrix &amp; metrics</li>
+</ul>
+</li>
+<li><a href="statistics/dist/index.html">Distributions</a>
+<ul>
+<li>Bernoulli</li>
+<li>Uniform</li>
+<li>Binomial</li>
+<li>Normal</li>
+<li>Gamma</li>
+<li>Beta</li>
+<li>Student’s t</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="special/function/index.html">Special functions</a> (Using <code>puruspe</code> crate)
+<ul>
+<li>Gaussian</li>
+<li>Gamma</li>
+<li>Beta</li>
+<li>Error</li>
+<li>Incomplete Gamma</li>
+<li>Incomplete Beta</li>
+</ul>
+</li>
+<li>Automatic Differentiation
+<ul>
+<li><a href="structure/ad/index.html">Taylor mode forward AD</a></li>
+</ul>
+</li>
+<li>Numerical Utils
+<ul>
+<li><a href="numerical/interp/index.html">Interpolation</a></li>
+<li><a href="numerical/spline/index.html">Spline</a></li>
+<li><a href="structure/polynomial/index.html">Polynomial</a></li>
+<li><a href="special/lanczos/index.html">Lanczos Approximation</a></li>
+<li><a href="numerical/integral/index.html">Numerical Integrations</a></li>
+</ul>
+</li>
+<li><a href="numerical/optimize/index.html">Optimization</a>
+<ul>
+<li>Gradient Descent</li>
+<li>Levenberg-Marquardt</li>
+</ul>
+</li>
+<li><a href="numerical/root/index.html">Root Finding</a>
+<ul>
+<li>Bisection</li>
+<li>False Position (Regula falsi)</li>
+<li>Secant</li>
+<li>Newton</li>
+</ul>
+</li>
+<li><a href="numerical/ode/index.html">Differential Equations</a>
+<ul>
+<li>Explicit
+<ul>
+<li>Runge-Kutta 4th order</li>
+<li>Euler methods</li>
+</ul>
+</li>
+<li>Implicit
+<ul>
+<li>Backward Euler</li>
+<li>Gauss-Legendre 4th order</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Communication with Python
+<ul>
+<li><a href="util/plot/index.html">Plot with <code>matplotlib</code></a></li>
+</ul>
+</li>
+<li><a href="structure/dataframe/index.html">DataFrame</a>
+<ul>
+<li>Read &amp; Write with <code>parquet</code> or <code>netcdf</code> or <code>csv</code> format</li>
+</ul>
+</li>
+<li>Macros
+<ul>
+<li><a href="macros/r_macro/index.html">R macros</a></li>
+<li><a href="macros/matlab_macro/index.html">Matlab macros</a></li>
+<li><a href="macros/julia_macro/index.html">Julia macros</a></li>
+</ul>
+</li>
+</ul>
+<p>And all these things are built on mathematical traits.</p>
+<ul>
+<li>Traits
+<ul>
+<li><a href="traits/fp/index.html">Functional Programming tools</a></li>
+<li><a href="traits/general/index.html">General algorithms</a></li>
+<li><a href="traits/math/index.html">Mathematics</a></li>
+<li><a href="traits/mutable/index.html">Mutable tools</a></li>
+<li><a href="traits/num/index.html">Number &amp; Real</a></li>
+<li><a href="traits/pointer/index.html">Pointer</a></li>
+<li><a href="traits/stable/index.html">Stable</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="quick-start"><a class="doc-anchor" href="#quick-start">§</a>Quick Start</h3><h4 id="cargotoml"><a class="doc-anchor" href="#cargotoml">§</a>Cargo.toml</h4>
+<ul>
+<li>Run below commands in your project directory</li>
+</ul>
+<ol>
+<li>Default<div class="example-wrap"><pre class="language-bash"><code>cargo add peroxide
+</code></pre></div></li>
+<li>OpenBLAS<div class="example-wrap"><pre class="language-bash"><code>cargo add peroxide --features O3
+</code></pre></div></li>
+<li>Plot<div class="example-wrap"><pre class="language-bash"><code>cargo add peroxide --features plot
+</code></pre></div></li>
+<li>NetCDF dependency for DataFrame<div class="example-wrap"><pre class="language-bash"><code>cargo add peroxide --features nc
+</code></pre></div></li>
+<li>CSV dependency for DataFrame<div class="example-wrap"><pre class="language-bash"><code>cargo add peroxide --features csv
+</code></pre></div></li>
+<li>Parquet dependency for DataFrame<div class="example-wrap"><pre class="language-bash"><code>cargo add peroxide --features parquet
+</code></pre></div></li>
+<li>All features<div class="example-wrap"><pre class="language-bash"><code>cargo add peroxide --features &quot;O3 plot nc csv parquet&quot;
+</code></pre></div></li>
+</ol>
+<h3 id="import-all-at-once"><a class="doc-anchor" href="#import-all-at-once">§</a>Import all at once</h3>
+<p>Peroxide has two options.</p>
+<ul>
+<li><a href="prelude/index.html"><code>prelude</code></a> : To simple use</li>
+<li><a href="fuga/index.html"><code>fuga</code></a> : To control numerical algorithms</li>
+</ul>
+<p>To see differences, follow above two links.</p>
+<p>You can import all functions &amp; structures at once</p>
+<ul>
+<li><code>prelude</code></li>
+</ul>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attr">#[macro_use]
+</span><span class="kw">extern crate </span>peroxide;
+<span class="kw">use </span>peroxide::prelude::<span class="kw-2">*</span>;
+
+<span class="kw">fn </span>main() {
+    <span class="comment">// Write what you want
+</span>}</code></pre></div>
+<ul>
+<li><code>fuga</code></li>
+</ul>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attr">#[macro_use]
+</span><span class="kw">extern crate </span>peroxide;
+<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
+
+<span class="kw">fn </span>main() {
+    <span class="comment">// Write what you want
+</span>}</code></pre></div>
+<h3 id="useful-tips-for-features"><a class="doc-anchor" href="#useful-tips-for-features">§</a>Useful tips for features</h3>
+<ul>
+<li>After <code>0.28.0</code>, <code>dataframe</code> feature is replaced by <code>nc</code> feature.</li>
+<li>If you want to use <em>QR</em> or <em>SVD</em> or <em>Cholesky Decomposition</em> then should use <code>O3</code> feature (there are no implementations for these decompositions in <code>default</code>)</li>
+<li>If you want to write your numerical results, then use <code>parquet</code> or <code>nc</code> features (corresponding to <code>parquet</code> or <code>netcdf</code> format. (It is much more effective than <code>csv</code> and <code>json</code>.)</li>
+<li>After <code>0.23.0</code>, there are two options - <code>fuga</code>, <code>prelude</code>. Choose proper option for your computations.</li>
+<li>To plot, use <code>parquet</code> or <code>nc</code> feature to export data as parquet or netcdf format and use python to draw plot.
+<ul>
+<li><code>plot</code> feature has limited plot abilities.</li>
+<li>To read parquet file in python, use <code>pandas</code> &amp; <code>pyarrow</code> libraries.</li>
+<li>There is a template of python code for netcdf. - <a href="https://github.com/Axect/Socialst/blob/master/Templates/PyPlot_Template/nc_plot.py">Socialst</a></li>
+</ul>
+</li>
+</ul>
+</div></details><h2 id="modules" class="section-header">Modules<a href="#modules" class="anchor">§</a></h2><ul class="item-table"><li><div class="item-name"><a class="mod" href="fuga/index.html" title="mod peroxide::fuga">fuga</a></div><div class="desc docblock-short">Choose what you want.</div></li><li><div class="item-name"><a class="mod" href="macros/index.html" title="mod peroxide::macros">macros</a></div><div class="desc docblock-short">Useful macros</div></li><li><div class="item-name"><a class="mod" href="ml/index.html" title="mod peroxide::ml">ml</a></div><div class="desc docblock-short">Machine learning tools</div></li><li><div class="item-name"><a class="mod" href="numerical/index.html" title="mod peroxide::numerical">numerical</a></div><div class="desc docblock-short">Differential equations &amp; Numerical Analysis tools</div></li><li><div class="item-name"><a class="mod" href="prelude/index.html" title="mod peroxide::prelude">prelude</a></div><div class="desc docblock-short">Do not disturbed. Just use.</div></li><li><div class="item-name"><a class="mod" href="special/index.html" title="mod peroxide::special">special</a></div><div class="desc docblock-short">Special function module</div></li><li><div class="item-name"><a class="mod" href="statistics/index.html" title="mod peroxide::statistics">statistics</a></div><div class="desc docblock-short">Statistical Modules</div></li><li><div class="item-name"><a class="mod" href="structure/index.html" title="mod peroxide::structure">structure</a></div><div class="desc docblock-short">Main structures for peroxide</div></li><li><div class="item-name"><a class="mod" href="traits/index.html" title="mod peroxide::traits">traits</a></div></li><li><div class="item-name"><a class="mod" href="util/index.html" title="mod peroxide::util">util</a></div><div class="desc docblock-short">Utility - plot, print, pickle and etc.</div></li></ul><h2 id="macros" class="section-header">Macros<a href="#macros" class="anchor">§</a></h2><ul class="item-table"><li><div class="item-name"><a class="macro" href="macro.c.html" title="macro peroxide::c">c</a></div><div class="desc docblock-short">R like concatenate (Type: Vec&lt;f64&gt;)</div></li><li><div class="item-name"><a class="macro" href="macro.cbind.html" title="macro peroxide::cbind">cbind</a></div><div class="desc docblock-short">R like cbind</div></li><li><div class="item-name"><a class="macro" href="macro.dnorm.html" title="macro peroxide::dnorm">dnorm</a></div><div class="desc docblock-short">R like <code>dnorm</code></div></li><li><div class="item-name"><a class="macro" href="macro.dt.html" title="macro peroxide::dt">dt</a></div><div class="desc docblock-short">R like <code>dt</code></div></li><li><div class="item-name"><a class="macro" href="macro.eye.html" title="macro peroxide::eye">eye</a></div><div class="desc docblock-short">MATLAB like eye - identity matrix</div></li><li><div class="item-name"><a class="macro" href="macro.hstack.html" title="macro peroxide::hstack">hstack</a></div></li><li><div class="item-name"><a class="macro" href="macro.linspace.html" title="macro peroxide::linspace">linspace</a></div><div class="desc docblock-short">MATLAB like linspace</div></li><li><div class="item-name"><a class="macro" href="macro.lm.html" title="macro peroxide::lm">lm</a></div><div class="desc docblock-short">R like lm</div></li><li><div class="item-name"><a class="macro" href="macro.matrix.html" title="macro peroxide::matrix">matrix</a></div><div class="desc docblock-short">More R like Matrix constructor (Macro)</div></li><li><div class="item-name"><a class="macro" href="macro.pnorm.html" title="macro peroxide::pnorm">pnorm</a></div><div class="desc docblock-short">R like <code>pnorm</code></div></li><li><div class="item-name"><a class="macro" href="macro.pt.html" title="macro peroxide::pt">pt</a></div><div class="desc docblock-short">R like <code>pt</code></div></li><li><div class="item-name"><a class="macro" href="macro.rand.html" title="macro peroxide::rand">rand</a></div><div class="desc docblock-short">MATLAB like rand - random matrix</div></li><li><div class="item-name"><a class="macro" href="macro.rbind.html" title="macro peroxide::rbind">rbind</a></div><div class="desc docblock-short">R like rbind</div></li><li><div class="item-name"><a class="macro" href="macro.rnorm.html" title="macro peroxide::rnorm">rnorm</a></div><div class="desc docblock-short">R like random normal</div></li><li><div class="item-name"><a class="macro" href="macro.rt.html" title="macro peroxide::rt">rt</a></div><div class="desc docblock-short">R like random Student’s t</div></li><li><div class="item-name"><a class="macro" href="macro.runif.html" title="macro peroxide::runif">runif</a></div><div class="desc docblock-short">R like random uniform</div></li><li><div class="item-name"><a class="macro" href="macro.seq.html" title="macro peroxide::seq">seq</a></div><div class="desc docblock-short">R like seq macro</div></li><li><div class="item-name"><a class="macro" href="macro.vstack.html" title="macro peroxide::vstack">vstack</a></div></li><li><div class="item-name"><a class="macro" href="macro.zeros.html" title="macro peroxide::zeros">zeros</a></div><div class="desc docblock-short">MATLAB like zeros - zero matrix</div></li></ul></section></div></main></body></html>

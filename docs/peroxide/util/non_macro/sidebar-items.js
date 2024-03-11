@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["cat","cbind","concat","eye","eye_shape","linspace","linspace_with_precision","logspace","rand","rbind","seq","seq_with_precision","zeros","zeros_shape"]};

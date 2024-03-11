@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["SlopeMethod"],"fn":["cubic_hermite_spline","cubic_spline"],"struct":["CubicHermiteSpline","CubicSpline"],"trait":["Spline"]};

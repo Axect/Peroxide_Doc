@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":["ad","dataframe","matrix","multinomial","polynomial","sparse","vector"]};

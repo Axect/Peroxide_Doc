@@ -1,0 +1,276 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Extra tools for `Vec&lt;f64&gt;`"><title>peroxide::structure::vector - Rust</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-e935ef01ae1c1829.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="peroxide" data-themes="" data-resource-suffix="" data-rustdoc-version="1.78.0-nightly (c475e2303 2024-02-28)" data-channel="nightly" data-search-js="search-dd67cee4cfa65049.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../static.files/storage-4c98445ec4002617.js"></script><script defer src="../sidebar-items.js"></script><script defer src="../../../static.files/main-12cf3b4f4f9dc36d.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-04d5337699b92874.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js"                  integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js"    integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "\\(", right: "\\)", display: false},
+                {left: "$", right: "$", display: false},
+                {left: "\\[", right: "\\]", display: true}
+            ]
+        });
+    });
+</script>
+
+</head><body class="rustdoc mod"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../../../peroxide/index.html">peroxide</a><span class="version">0.34.7</span></h2></div><h2 class="location"><a href="#">Module vector</a></h2><div class="sidebar-elems"><section><ul class="block"><li><a href="#functions">Functions</a></li></ul></section><h2><a href="../index.html">In peroxide::structure</a></h2></div></nav><div class="sidebar-resizer"></div>
+    <main><div class="width-limiter"><nav class="sub"><form class="search-form"><span></span><div id="sidebar-button" tabindex="-1"><a href="../../../peroxide/all.html" title="show sidebar"></a></div><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" tabindex="-1"><a href="../../../help.html" title="help">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="main-heading"><h1>Module <a href="../../index.html">peroxide</a>::<wbr><a href="../index.html">structure</a>::<wbr><a class="mod" href="#">vector</a><button id="copy-path" title="Copy item path to clipboard"><img src="../../../static.files/clipboard-7571035ce49a181d.svg" width="19" height="18" alt="Copy item path"></button></h1><span class="out-of-band"><a class="src" href="../../../src/peroxide/structure/vector.rs.html#1-939">source</a> · <button id="toggle-all-docs" title="collapse all docs">[<span>&#x2212;</span>]</button></span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Extra tools for <code>Vec&lt;f64&gt;</code></p>
+<h3 id="print-vecf64"><a class="doc-anchor" href="#print-vecf64">§</a>Print <code>Vec&lt;f64&gt;</code></h3>
+<ul>
+<li>
+<p>There are two ways to print vector</p>
+<ul>
+<li>Original way: <code>print!(&quot;{:?}&quot;, a);</code></li>
+<li>Peroxide way: <code>a.print();</code> - <strong>Round-off to fourth digit</strong></li>
+</ul>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern crate </span>peroxide;
+<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
+
+<span class="kw">fn </span>main() {
+    <span class="kw">let </span>a = <span class="macro">vec!</span>[<span class="number">2f64</span>.sqrt()];
+    a.print(); <span class="comment">// [1.4142]
+</span>}</code></pre></div>
+</li>
+</ul>
+<h3 id="syntactic-sugar-for-vecf64"><a class="doc-anchor" href="#syntactic-sugar-for-vecf64">§</a>Syntactic sugar for <code>Vec&lt;f64&gt;</code></h3>
+<ul>
+<li>
+<p>There is useful macro for <code>Vec&lt;f64&gt;</code></p>
+</li>
+<li>
+<p>For <code>R</code>, there is <code>c</code></p>
+<div class="example-wrap"><pre class="language-R"><code># R
+a = c(1,2,3,4)
+</code></pre></div></li>
+<li>
+<p>For <code>Peroxide</code>, there is <code>c!</code></p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="comment">// Rust
+</span><span class="attr">#[macro_use]
+</span><span class="kw">extern crate </span>peroxide;
+<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
+
+<span class="kw">fn </span>main() {
+    <span class="kw">let </span>a = <span class="macro">c!</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>);
+}</code></pre></div>
+</li>
+</ul>
+<h3 id="from-ranges-to-vecf64"><a class="doc-anchor" href="#from-ranges-to-vecf64">§</a>From ranges to <code>Vec&lt;f64&gt;</code></h3>
+<ul>
+<li>
+<p>For <code>R</code>, there is <code>seq</code> to declare sequence.</p>
+<div class="example-wrap"><pre class="language-R"><code># R
+a = seq(1, 4, 1)
+print(a)
+# [1] 1 2 3 4
+</code></pre></div></li>
+<li>
+<p>For <code>peroxide</code>, there is <code>seq</code> to declare sequence.</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern crate </span>peroxide;
+<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
+
+<span class="kw">fn </span>main() {
+    <span class="kw">let </span>a = seq(<span class="number">1</span>, <span class="number">4</span>, <span class="number">1</span>);
+    a.print();
+    <span class="comment">// [1, 2, 3, 4]
+</span>}</code></pre></div>
+</li>
+</ul>
+<h3 id="vecf64-operation"><a class="doc-anchor" href="#vecf64-operation">§</a><code>Vec&lt;f64&gt;</code> Operation</h3>
+<p>There are two ways to do vector operations.</p>
+<ul>
+<li>Use functional programming tools</li>
+<li>Use redox</li>
+</ul>
+<p>Here, I explain second method - for functional programming, see below.</p>
+<p>To use redox, you only need to understand two things - <code>ox()</code>, <code>red()</code>.</p>
+<ul>
+<li><code>ox()</code> : Makes vector to <code>Redox&lt;T: Vector&gt;</code></li>
+<li><code>red()</code> : Makes <code>Redox&lt;T: Vector&gt;</code> to vector.</li>
+</ul>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attr">#[macro_use]
+</span><span class="kw">extern crate </span>peroxide;
+<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
+
+<span class="kw">fn </span>main() {
+    <span class="kw">let </span>a = <span class="macro">c!</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>);
+    <span class="macro">assert_eq!</span>((a.ox() * <span class="number">2f64 </span>- <span class="number">1f64</span>).red(), <span class="macro">c!</span>(<span class="number">1f64</span>, <span class="number">3f64</span>, <span class="number">5f64</span>));
+}</code></pre></div>
+<h3 id="concatenation"><a class="doc-anchor" href="#concatenation">§</a>Concatenation</h3>
+<p>There are two concatenation operations.</p>
+<ul>
+<li>
+<p><code>cat(T, Vec&lt;T&gt;) -&gt; Vec&lt;f64&gt;</code></p>
+</li>
+<li>
+<p><code>concat(Vec&lt;T&gt;, Vec&lt;T&gt;) -&gt; Vec&lt;T&gt;</code></p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attr">#[macro_use]
+</span><span class="kw">extern crate </span>peroxide;
+<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
+
+<span class="kw">fn </span>main() {
+    <span class="kw">let </span>a = <span class="macro">c!</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>);
+    cat(<span class="number">0f64</span>, <span class="kw-2">&amp;</span>a).print();
+    <span class="comment">// [0, 1, 2, 3, 4]
+
+    </span><span class="kw">let </span>b = <span class="macro">c!</span>(<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>);
+    concat(<span class="kw-2">&amp;</span>a, <span class="kw-2">&amp;</span>b).print();
+    <span class="comment">// [1, 2, 3, 4, 5, 6, 7, 8]
+</span>}</code></pre></div>
+</li>
+</ul>
+<h3 id="conversion-to-matrix"><a class="doc-anchor" href="#conversion-to-matrix">§</a>Conversion to Matrix</h3>
+<p>There are two ways to convert <code>Vec&lt;f64&gt;</code> to <code>Matrix</code>.</p>
+<ul>
+<li>
+<p><code>into(self) -&gt; Matrix</code> : <code>Vec&lt;f64&gt;</code> to column matrix</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attr">#[macro_use]
+</span><span class="kw">extern crate </span>peroxide;
+<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
+
+<span class="kw">fn </span>main() {
+    <span class="kw">let </span>a = <span class="macro">c!</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>);
+    <span class="kw">let </span>a_col: Matrix = a.into();
+    <span class="kw">let </span>m_col = matrix(<span class="macro">c!</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>), <span class="number">4</span>, <span class="number">1</span>, Col); <span class="comment">// (4,1) Matrix
+    </span><span class="macro">assert_eq!</span>(a_col, m_col);
+
+    <span class="kw">let </span>m_row = matrix(<span class="macro">c!</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>), <span class="number">1</span>, <span class="number">4</span>, Row); <span class="comment">// (1,4) Matrix
+    </span><span class="macro">assert_eq!</span>(a_col.t(), m_row);
+}</code></pre></div>
+</li>
+</ul>
+<h2 id="functional-programming-functional"><a class="doc-anchor" href="#functional-programming-functional">§</a>Functional Programming {#functional}</h2><h3 id="fp-for-vecf64"><a class="doc-anchor" href="#fp-for-vecf64">§</a>FP for <code>Vec&lt;f64&gt;</code></h3>
+<ul>
+<li>There are some functional programming tools for <code>Vec&lt;f64&gt;</code></li>
+</ul>
+<h4 id="fmap"><a class="doc-anchor" href="#fmap">§</a>fmap</h4>
+<ul>
+<li>
+<p><code>fmap</code> is syntactic sugar for <code>map</code></p>
+</li>
+<li>
+<p>But different to original <code>map</code> - Only <code>f64 -&gt; f64</code> allowed.</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attr">#[macro_use]
+</span><span class="kw">extern crate </span>peroxide;
+<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
+
+<span class="kw">fn </span>main() {
+    <span class="kw">let </span>a = <span class="macro">c!</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>);
+
+    <span class="comment">// Original rust
+    </span>a.clone()
+        .into_iter()
+        .map(|x| x + <span class="number">1f64</span>)
+        .collect::&lt;Vec&lt;f64&gt;&gt;()
+        .print();
+        <span class="comment">// [2, 3, 4, 5]
+
+    // fmap in Peroxide
+    </span>a.fmap(|x| x + <span class="number">1f64</span>).print();
+    <span class="comment">// [2, 3, 4, 5]
+</span>}</code></pre></div>
+</li>
+</ul>
+<h4 id="reduce"><a class="doc-anchor" href="#reduce">§</a>reduce</h4>
+<ul>
+<li>
+<p><code>reduce</code> is syntactic sugar for <code>fold</code></p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attr">#[macro_use]
+</span><span class="kw">extern crate </span>peroxide;
+<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
+
+<span class="kw">fn </span>main() {
+    <span class="kw">let </span>a = <span class="macro">c!</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>);
+
+    <span class="comment">// Original rust
+    </span>a.clone()
+        .into_iter()
+        .fold(<span class="number">0f64</span>, |x, y| x + y)
+        .print(); <span class="comment">// 10
+
+    // reduce in Peroxide
+    </span>a.reduce(<span class="number">0f64</span>, |x, y| x + y).print(); <span class="comment">// 10
+</span>}</code></pre></div>
+</li>
+</ul>
+<h4 id="zip_with"><a class="doc-anchor" href="#zip_with">§</a>zip_with</h4>
+<ul>
+<li>
+<p><code>zip_with</code> is composed of <code>zip</code> &amp; <code>map</code></p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attr">#[macro_use]
+</span><span class="kw">extern crate </span>peroxide;
+<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
+
+<span class="kw">fn </span>main() {
+    <span class="kw">let </span>a = <span class="macro">c!</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>);
+    <span class="kw">let </span>b = <span class="macro">c!</span>(<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>);
+
+    <span class="comment">// Original rust
+    </span>a.clone()
+        .into_iter()
+        .zip(<span class="kw-2">&amp;</span>b)
+        .map(|(x, y)| x + <span class="kw-2">*</span>y)
+        .collect::&lt;Vec&lt;f64&gt;&gt;().print();
+        <span class="comment">// [6, 8, 10, 12]
+
+    // zip_with in Peroxide
+    </span>zip_with(|x, y| x + y, <span class="kw-2">&amp;</span>a, <span class="kw-2">&amp;</span>b).print();
+    <span class="comment">// [6, 8, 10, 12]
+</span>}</code></pre></div>
+</li>
+</ul>
+<h4 id="filter"><a class="doc-anchor" href="#filter">§</a>filter</h4>
+<ul>
+<li>
+<p><code>filter</code> is just syntactic sugar for <code>filter</code></p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attr">#[macro_use]
+</span><span class="kw">extern crate </span>peroxide;
+<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
+
+<span class="kw">fn </span>main() {
+    <span class="kw">let </span>a = <span class="macro">c!</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>);
+    a.filter(|x| x &gt; <span class="number">2f64</span>).print();
+    <span class="comment">// [3, 4]
+</span>}</code></pre></div>
+</li>
+</ul>
+<h4 id="take--skip"><a class="doc-anchor" href="#take--skip">§</a>take &amp; skip</h4>
+<ul>
+<li>
+<p><code>take</code> is syntactic sugar for <code>take</code></p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attr">#[macro_use]
+</span><span class="kw">extern crate </span>peroxide;
+<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
+
+<span class="kw">fn </span>main() {
+    <span class="kw">let </span>a = <span class="macro">c!</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>);
+    a.take(<span class="number">2</span>).print();
+    <span class="comment">// [1, 2]
+</span>}</code></pre></div>
+</li>
+<li>
+<p><code>skip</code> is syntactic sugar for <code>skip</code></p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attr">#[macro_use]
+</span><span class="kw">extern crate </span>peroxide;
+<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
+
+<span class="kw">fn </span>main() {
+    <span class="kw">let </span>a = <span class="macro">c!</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>);
+    a.skip(<span class="number">2</span>).print();
+    <span class="comment">// [3, 4]
+</span>}</code></pre></div>
+</li>
+</ul>
+</div></details><h2 id="functions" class="section-header">Functions<a href="#functions" class="anchor">§</a></h2><ul class="item-table"><li><div class="item-name"><a class="fn" href="fn.blas_daxpy.html" title="fn peroxide::structure::vector::blas_daxpy">blas_daxpy</a></div></li><li><div class="item-name"><a class="fn" href="fn.blas_daxpy_return.html" title="fn peroxide::structure::vector::blas_daxpy_return">blas_daxpy_return</a></div></li><li><div class="item-name"><a class="fn" href="fn.map.html" title="fn peroxide::structure::vector::map">map</a></div><div class="desc docblock-short">Explicit version of <code>map</code></div></li><li><div class="item-name"><a class="fn" href="fn.reduce.html" title="fn peroxide::structure::vector::reduce">reduce</a></div><div class="desc docblock-short">Explicit version of <code>reduce</code></div></li><li><div class="item-name"><a class="fn" href="fn.zip_with.html" title="fn peroxide::structure::vector::zip_with">zip_with</a></div><div class="desc docblock-short">Explicit version of <code>zip_with</code></div></li></ul></section></div></main></body></html>

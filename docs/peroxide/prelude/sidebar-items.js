@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"attr":["ad_function"],"macro":["ad_closure"],"mod":["simpler"],"trait":["ExpLogOps","PowOps","TrigOps"]};

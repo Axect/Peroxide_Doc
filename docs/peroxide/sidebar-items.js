@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"macro":["c","cbind","dnorm","dt","eye","hstack","linspace","lm","matrix","pnorm","pt","rand","rbind","rnorm","rt","runif","seq","vstack","zeros"],"mod":["fuga","macros","ml","numerical","prelude","special","statistics","structure","traits","util"]};

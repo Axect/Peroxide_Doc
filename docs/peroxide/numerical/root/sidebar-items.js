@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["RootBool","RootError","RootFind","RootState"],"fn":["bisection","false_position","newton","secant"],"struct":["RootFinder"]};
