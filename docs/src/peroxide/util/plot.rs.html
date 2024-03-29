@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/util/plot.rs`."><title>plot.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-e935ef01ae1c1829.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="peroxide" data-themes="" data-resource-suffix="" data-rustdoc-version="1.78.0-nightly (c475e2303 2024-02-28)" data-channel="nightly" data-search-js="search-dd67cee4cfa65049.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../static.files/storage-4c98445ec4002617.js"></script><script defer src="../../../static.files/src-script-e66d777a5a92e9b2.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-12cf3b4f4f9dc36d.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-04d5337699b92874.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/util/plot.rs`."><title>plot.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-5bc39a1768837dd0.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="peroxide" data-themes="" data-resource-suffix="" data-rustdoc-version="1.77.1 (7cf61ebde 2024-03-27)" data-channel="1.77.1" data-search-js="search-dd67cee4cfa65049.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../static.files/storage-4c98445ec4002617.js"></script><script defer src="../../../static.files/src-script-e66d777a5a92e9b2.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-48f368f3872407c8.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-04d5337699b92874.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js"                  integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js"    integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
 <script>
@@ -637,88 +637,98 @@
 <a href="#619" id="619">619</a>
 <a href="#620" id="620">620</a>
 <a href="#621" id="621">621</a>
+<a href="#622" id="622">622</a>
+<a href="#623" id="623">623</a>
+<a href="#624" id="624">624</a>
+<a href="#625" id="625">625</a>
+<a href="#626" id="626">626</a>
+<a href="#627" id="627">627</a>
+<a href="#628" id="628">628</a>
+<a href="#629" id="629">629</a>
+<a href="#630" id="630">630</a>
+<a href="#631" id="631">631</a>
+<a href="#632" id="632">632</a>
+<a href="#633" id="633">633</a>
+<a href="#634" id="634">634</a>
+<a href="#635" id="635">635</a>
+<a href="#636" id="636">636</a>
+<a href="#637" id="637">637</a>
+<a href="#638" id="638">638</a>
+<a href="#639" id="639">639</a>
+<a href="#640" id="640">640</a>
+<a href="#641" id="641">641</a>
+<a href="#642" id="642">642</a>
+<a href="#643" id="643">643</a>
+<a href="#644" id="644">644</a>
+<a href="#645" id="645">645</a>
+<a href="#646" id="646">646</a>
+<a href="#647" id="647">647</a>
+<a href="#648" id="648">648</a>
+<a href="#649" id="649">649</a>
+<a href="#650" id="650">650</a>
+<a href="#651" id="651">651</a>
+<a href="#652" id="652">652</a>
+<a href="#653" id="653">653</a>
+<a href="#654" id="654">654</a>
+<a href="#655" id="655">655</a>
+<a href="#656" id="656">656</a>
+<a href="#657" id="657">657</a>
+<a href="#658" id="658">658</a>
+<a href="#659" id="659">659</a>
+<a href="#660" id="660">660</a>
+<a href="#661" id="661">661</a>
+<a href="#662" id="662">662</a>
+<a href="#663" id="663">663</a>
 </pre></div><pre class="rust"><code><span class="doccomment">//! Plotting module for peroxide
 //!
 //! For Rust, there are some plot libraries but, still difficult to use.
 //! Practically, using python is best choice to plot. And there is awesome crate - [pyo3](https://crates.io/crates/pyo3).
 //!
-//! Let's see next ordinary code file.
+//! # Prerequisite
 //!
-//! ```no-run
-//! #[macro_use]
-//! extern crate peroxide;
+//! - python 3
+//! - matplotlib
+//! - scienceplots (Optional)
+//!
+//! # Usage
+//!
+//! To use this module, you should enable `plot` feature in `Cargo.toml`
+//!
+//! ```
 //! use peroxide::fuga::*;
 //!
 //! fn main() {
-//!     let init_state = State::&lt;f64&gt;::new(0f64, c!(1), c!(0));
+//!     let x = linspace(0, 1, 100);
+//!     let y1 = x.fmap(|t| t.powi(2));
+//!     let y2 = x.fmap(|t| t.powi(3));
 //!
-//!     let mut ode_solver = ExplicitODE::new(test_fn);
+//!     let normal = Normal(0f64, 0.1);
+//!     let eps = normal.sample(100);
+//!     let y3 = y2.add_v(&amp;eps);
 //!
-//!     ode_solver
-//!         .set_method(ExMethod::RK4)
-//!         .set_initial_condition(init_state)
-//!         .set_step_size(0.01)
-//!         .set_times(1000);
-//!
-//!     let result = ode_solver.integrate();
-//!     result.write("example_data/test.csv");
-//! }
-//!
-//! fn test_fn(st: &amp;mut State&lt;f64&gt;, _: &amp;NoEnv) {
-//!     let x = st.param;
-//!     let y = &amp;st.value;
-//!     let dy = &amp;mut st.deriv;
-//!     dy[0] = (5f64*x.powi(2) - y[0]) / (x + y[0]).exp();
-//! }
-//! ```
-//!
-//! Now, let's modify this code to below. Then it works surprisingly!
-//!
-//! ```rust
-//! #[macro_use]
-//! extern crate peroxide;
-//! use peroxide::fuga::*;
-//!
-//! fn main() {
-//!     let init_state = State::&lt;f64&gt;::new(0f64, c!(1), c!(0));
-//!
-//!     let mut ode_solver = ExplicitODE::new(test_fn);
-//!
-//!     ode_solver
-//!         .set_method(ExMethod::RK4)
-//!         .set_initial_condition(init_state)
-//!         .set_step_size(0.01)
-//!         .set_times(1000);
-//!
-//!     let result = ode_solver.integrate();
-//!
-//!     let x = result.col(0);
-//!     let y = result.col(1);
-//!
-//!     // Remove below comments to execute
-//!     //let mut plt = Plot2D::new();
-//!     //plt.set_domain(x)
-//!     //    .insert_image(y)
-//!     //    .set_title("Test Figure")
-//!     //    .set_fig_size((10, 6))
-//!     //    .set_dpi(300)
-//!     //    .set_legend(vec!["RK4"])
-//!     //    .set_path("example_data/test_plot.png");
-//!
-//!     //plt.savefig();
-//! }
-//!
-//! fn test_fn(st: &amp;mut State&lt;f64&gt;, _: &amp;NoEnv) {
-//!     let x = st.param;
-//!     let y = &amp;st.value;
-//!     let dy = &amp;mut st.deriv;
-//!     dy[0] = (5f64 * x.powi(2) - y[0]) / (x + y[0]).exp();
+//!     let mut plt = Plot2D::new();
+//!     plt.set_domain(x)
+//!         .insert_image(y1)
+//!         .insert_image(y2)
+//!         .insert_image(y3)
+//!         .set_legend(vec![r"$y=x^2$", r"$y=x^3$", r"$y=x^2 + \epsilon$"])
+//!         .set_line_style(vec![(0, LineStyle::Dashed), (1, LineStyle::Dotted)])
+//!         .set_plot_type(vec![(2, PlotType::Scatter)])
+//!         .set_marker(vec![(2, Markers::Point)])
+//!         .set_color(vec![(0, "red"), (1, "darkblue"), (2, "olive")])
+//!         .set_xlabel(r"$x$")
+//!         .set_ylabel(r"$y$")
+//!         .set_style(PlotStyle::Nature) // if you want to use scienceplots
+//!         .set_dpi(600)
+//!         .tight_layout()
+//!         .set_path("example_data/test_plot.png")
+//!         .savefig().unwrap();
 //! }
 //! ```
 //!
-//! It draws next image
+//! This code will generate below plot
 //!
-//! ![test_plot](https://raw.githubusercontent.com/Axect/Peroxide/master/example_data/test_plot.png)
+//! ![test_plot](https://github.com/Axect/Peroxide/blob/master/example_data/test_plot.png?raw=true)
 //!
 //! # Available Plot Options
 //! - `set_domain` : Set x data
@@ -741,8 +751,9 @@
 //! - `set_style` : Set style of plot (`PlotStyle::Nature`, `PlotStyle::IEEE`, `PlotStyle::Default` (default), `PlotStyle::Science`)
 //! - `tight_layout` : Set tight layout of plot (optional)
 //! - `set_line_style` : Set line style of plot (optional; `LineStyle::{Solid, Dashed, Dotted, DashDot}`)
-//! - `set_color` : Set color of plot (optional; Vec&lt;&amp;str&gt;)
-//! - `set_alpha` : Set alpha of plot (optional; Vec&lt;f64&gt;)
+//! - `set_color` : Set color of plot (optional; Vec&lt;(usize, &amp;str)&gt;)
+//! - `set_alpha` : Set alpha of plot (optional; Vec&lt;(usize, f64)&gt;)
+//! - `set_plot_type` : Set plot type of plot (optional; `PlotType::{Scatter, Line, Bar}`)
 //! - `savefig` : Save plot with given path
 
 </span><span class="kw">extern crate </span>pyo3;
@@ -767,7 +778,6 @@
 <span class="attr">#[derive(Debug, Copy, Clone, Hash, PartialOrd, PartialEq, Eq)]
 </span><span class="kw">pub enum </span>Markers {
     Point,
-    Line,
     Circle,
     Pixel,
     TriangleDown,
@@ -791,7 +801,6 @@
     <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>std::fmt::Formatter&lt;<span class="lifetime">'_</span>&gt;) -&gt; std::fmt::Result {
         <span class="kw">let </span>str = <span class="kw">match </span><span class="self">self </span>{
             Markers::Point =&gt; <span class="string">"."</span>.to_string(),
-            Markers::Line =&gt; <span class="string">"-"</span>.to_string(),
             Markers::Circle =&gt; <span class="string">"o"</span>.to_string(),
             Markers::Pixel =&gt; <span class="string">","</span>.to_string(),
             Markers::TriangleDown =&gt; <span class="string">"v"</span>.to_string(),
@@ -860,6 +869,24 @@
     Log,
 }
 
+<span class="attr">#[derive(Debug, Copy, Clone, Hash, PartialOrd, PartialEq, Eq)]
+</span><span class="kw">pub enum </span>PlotType {
+    Scatter,
+    Line,
+    Bar,
+}
+
+<span class="kw">impl </span>Display <span class="kw">for </span>PlotType {
+    <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>std::fmt::Formatter&lt;<span class="lifetime">'_</span>&gt;) -&gt; std::fmt::Result {
+        <span class="kw">let </span>str = <span class="kw">match </span><span class="self">self </span>{
+            PlotType::Scatter =&gt; <span class="string">"scatter"</span>.to_string(),
+            PlotType::Line =&gt; <span class="string">"line"</span>.to_string(),
+            PlotType::Bar =&gt; <span class="string">"bar"</span>.to_string(),
+        };
+        <span class="macro">write!</span>(f, <span class="string">"{}"</span>, str)
+    }
+}
+
 <span class="kw">pub trait </span>Plot {
     <span class="kw">fn </span>set_domain(<span class="kw-2">&amp;mut </span><span class="self">self</span>, x: Vec&lt;f64&gt;) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self</span>;
     <span class="kw">fn </span>insert_image(<span class="kw-2">&amp;mut </span><span class="self">self</span>, y: Vec&lt;f64&gt;) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self</span>;
@@ -877,12 +904,13 @@
     <span class="kw">fn </span>set_fig_size(<span class="kw-2">&amp;mut </span><span class="self">self</span>, fig_size: (usize, usize)) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self</span>;
     <span class="kw">fn </span>set_dpi(<span class="kw-2">&amp;mut </span><span class="self">self</span>, dpi: usize) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self</span>;
     <span class="kw">fn </span>grid(<span class="kw-2">&amp;mut </span><span class="self">self</span>, grid: Grid) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self</span>;
-    <span class="kw">fn </span>set_marker(<span class="kw-2">&amp;mut </span><span class="self">self</span>, styles: Vec&lt;Markers&gt;) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self</span>;
+    <span class="kw">fn </span>set_marker(<span class="kw-2">&amp;mut </span><span class="self">self</span>, styles: Vec&lt;(usize, Markers)&gt;) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self</span>;
     <span class="kw">fn </span>set_style(<span class="kw-2">&amp;mut </span><span class="self">self</span>, style: PlotStyle) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self</span>;
     <span class="kw">fn </span>tight_layout(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self</span>;
-    <span class="kw">fn </span>set_line_style(<span class="kw-2">&amp;mut </span><span class="self">self</span>, style: Vec&lt;LineStyle&gt;) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self</span>;
-    <span class="kw">fn </span>set_color(<span class="kw-2">&amp;mut </span><span class="self">self</span>, color: Vec&lt;<span class="kw-2">&amp;</span>str&gt;) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self</span>;
-    <span class="kw">fn </span>set_alpha(<span class="kw-2">&amp;mut </span><span class="self">self</span>, alpha: Vec&lt;f64&gt;) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self</span>;
+    <span class="kw">fn </span>set_line_style(<span class="kw-2">&amp;mut </span><span class="self">self</span>, style: Vec&lt;(usize, LineStyle)&gt;) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self</span>;
+    <span class="kw">fn </span>set_color(<span class="kw-2">&amp;mut </span><span class="self">self</span>, color: Vec&lt;(usize, <span class="kw-2">&amp;</span>str)&gt;) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self</span>;
+    <span class="kw">fn </span>set_alpha(<span class="kw-2">&amp;mut </span><span class="self">self</span>, alpha: Vec&lt;(usize, f64)&gt;) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self</span>;
+    <span class="kw">fn </span>set_plot_type(<span class="kw-2">&amp;mut </span><span class="self">self</span>, plot_type: Vec&lt;(usize, PlotType)&gt;) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self</span>;
     <span class="kw">fn </span>savefig(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; PyResult&lt;()&gt;;
 }
 
@@ -899,16 +927,17 @@
     xlim: <span class="prelude-ty">Option</span>&lt;(f64, f64)&gt;,
     ylim: <span class="prelude-ty">Option</span>&lt;(f64, f64)&gt;,
     legends: Vec&lt;String&gt;,
-    markers: Vec&lt;Markers&gt;,
-    line_style: Vec&lt;LineStyle&gt;,
-    color: Vec&lt;String&gt;,
-    alpha: Vec&lt;f64&gt;,
+    markers: Vec&lt;(usize, Markers)&gt;,
+    line_style: Vec&lt;(usize, LineStyle)&gt;,
+    color: Vec&lt;(usize, String)&gt;,
+    alpha: Vec&lt;(usize, f64)&gt;,
     path: String,
     fig_size: <span class="prelude-ty">Option</span>&lt;(usize, usize)&gt;,
     dpi: usize,
     grid: Grid,
     style: PlotStyle,
     tight: bool,
+    plot_type: Vec&lt;(usize, PlotType)&gt;,
     options: HashMap&lt;PlotOptions, bool&gt;,
 }
 
@@ -942,6 +971,7 @@
             grid: On,
             style: PlotStyle::Default,
             tight: <span class="bool-val">false</span>,
+            plot_type: <span class="macro">vec!</span>[],
             options: default_options,
         }
     }
@@ -1042,7 +1072,7 @@
         <span class="self">self
     </span>}
 
-    <span class="kw">fn </span>set_marker(<span class="kw-2">&amp;mut </span><span class="self">self</span>, styles: Vec&lt;Markers&gt;) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+    <span class="kw">fn </span>set_marker(<span class="kw-2">&amp;mut </span><span class="self">self</span>, styles: Vec&lt;(usize, Markers)&gt;) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
         <span class="self">self</span>.markers = styles;
         <span class="self">self
     </span>}
@@ -1057,18 +1087,23 @@
         <span class="self">self
     </span>}
 
-    <span class="kw">fn </span>set_line_style(<span class="kw-2">&amp;mut </span><span class="self">self</span>, style: Vec&lt;LineStyle&gt;) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+    <span class="kw">fn </span>set_line_style(<span class="kw-2">&amp;mut </span><span class="self">self</span>, style: Vec&lt;(usize, LineStyle)&gt;) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
         <span class="self">self</span>.line_style = style;
         <span class="self">self
     </span>}
 
-    <span class="kw">fn </span>set_color(<span class="kw-2">&amp;mut </span><span class="self">self</span>, color: Vec&lt;<span class="kw-2">&amp;</span>str&gt;) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
-        <span class="self">self</span>.color = color.into_iter().map(|x| x.to_owned()).collect();
+    <span class="kw">fn </span>set_color(<span class="kw-2">&amp;mut </span><span class="self">self</span>, color: Vec&lt;(usize, <span class="kw-2">&amp;</span>str)&gt;) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="self">self</span>.color = color.into_iter().map(|(i, x)| (i, x.to_owned())).collect();
         <span class="self">self
     </span>}
 
-    <span class="kw">fn </span>set_alpha(<span class="kw-2">&amp;mut </span><span class="self">self</span>, alpha: Vec&lt;f64&gt;) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+    <span class="kw">fn </span>set_alpha(<span class="kw-2">&amp;mut </span><span class="self">self</span>, alpha: Vec&lt;(usize, f64)&gt;) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
         <span class="self">self</span>.alpha = alpha;
+        <span class="self">self
+    </span>}
+
+    <span class="kw">fn </span>set_plot_type(<span class="kw-2">&amp;mut </span><span class="self">self</span>, plot_type: Vec&lt;(usize, PlotType)&gt;) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="self">self</span>.plot_type = plot_type;
         <span class="self">self
     </span>}
 
@@ -1132,10 +1167,11 @@
             <span class="kw">let </span>ylabel = <span class="self">self</span>.ylabel.clone();
             <span class="kw">let </span>legends = <span class="self">self</span>.legends.clone();
             <span class="kw">let </span>path = <span class="self">self</span>.path.clone();
-            <span class="kw">let </span>markers = <span class="self">self</span>.markers.iter().map(|x| <span class="macro">format!</span>(<span class="string">"{}"</span>, x)).collect::&lt;Vec&lt;String&gt;&gt;();
-            <span class="kw">let </span>line_style = <span class="self">self</span>.line_style.iter().map(|x| <span class="macro">format!</span>(<span class="string">"{}"</span>, x)).collect::&lt;Vec&lt;String&gt;&gt;();
+            <span class="kw">let </span>markers = <span class="self">self</span>.markers.iter().map(|(i, x)| (i, <span class="macro">format!</span>(<span class="string">"{}"</span>, x))).collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;();
+            <span class="kw">let </span>line_style = <span class="self">self</span>.line_style.iter().map(|(i, x)| (i, <span class="macro">format!</span>(<span class="string">"{}"</span>, x))).collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;();
             <span class="kw">let </span>color = <span class="self">self</span>.color.clone();
             <span class="kw">let </span>alpha = <span class="self">self</span>.alpha.clone();
+            <span class="kw">let </span>plot_type = <span class="self">self</span>.plot_type.clone();
 
             <span class="comment">// Global variables to plot
             </span><span class="kw">let </span>globals = <span class="macro">vec!</span>[(<span class="string">"plt"</span>, py.import(<span class="string">"matplotlib.pyplot"</span>)<span class="question-mark">?</span>)].into_py_dict(py);
@@ -1210,41 +1246,89 @@
 
             <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..y_length {
                 <span class="kw">let </span><span class="kw-2">mut </span>inner_string = <span class="macro">format!</span>(<span class="string">"x,y[{}]"</span>, i);
-                <span class="kw">if </span>!markers.is_empty() {
-                    inner_string.push_str(<span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">",marker=\"{}\""</span>, markers[i])[..]);
+                <span class="kw">let </span>is_corresponding_marker = !markers.is_empty() &amp;&amp; (markers.iter().any(|(<span class="kw-2">&amp;</span>j, <span class="kw">_</span>)| j == i));
+                <span class="kw">if </span>is_corresponding_marker {
+                    <span class="kw">let </span>marker = markers.iter().find(|(<span class="kw-2">&amp;</span>j, <span class="kw">_</span>)| j == i).unwrap().<span class="number">1</span>.as_str();
+                    inner_string.push_str(<span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">",marker=\"{}\""</span>, marker)[..]);
                 }
-                <span class="kw">if </span>!line_style.is_empty() {
-                    inner_string.push_str(<span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">",linestyle=\"{}\""</span>, line_style[i])[..]);
+                <span class="kw">let </span>is_corresponding_line_style = !line_style.is_empty() &amp;&amp; (line_style.iter().any(|(<span class="kw-2">&amp;</span>j, <span class="kw">_</span>)| j == i));
+                <span class="kw">if </span>is_corresponding_line_style {
+                    <span class="kw">let </span>style = line_style.iter().find(|(<span class="kw-2">&amp;</span>j, <span class="kw">_</span>)| j == i).unwrap().<span class="number">1</span>.as_str();
+                    inner_string.push_str(<span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">",linestyle=\"{}\""</span>, style)[..]);
                 }
-                <span class="kw">if </span>!color.is_empty() {
-                    inner_string.push_str(<span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">",color=\"{}\""</span>, color[i])[..]);
+                <span class="kw">let </span>is_corresponding_color = !color.is_empty() &amp;&amp; (color.iter().any(|(j, <span class="kw">_</span>)| j == <span class="kw-2">&amp;</span>i));
+                <span class="kw">if </span>is_corresponding_color {
+                    <span class="kw">let </span>color = color.iter().find(|(j, <span class="kw">_</span>)| j == <span class="kw-2">&amp;</span>i).unwrap().<span class="number">1</span>.as_str();
+                    inner_string.push_str(<span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">",color=\"{}\""</span>, color)[..]);
                 }
                 <span class="kw">if </span>!legends.is_empty() {
                     inner_string.push_str(<span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">",label=r\"{}\""</span>, legends[i])[..]);
                 }
-                <span class="kw">if </span>!alpha.is_empty() {
-                    inner_string.push_str(<span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">",alpha={}"</span>, alpha[i])[..]);
+                <span class="kw">let </span>is_corresponding_alpha = !alpha.is_empty() &amp;&amp; (alpha.iter().any(|(j, <span class="kw">_</span>)| j == <span class="kw-2">&amp;</span>i));
+                <span class="kw">if </span>is_corresponding_alpha {
+                    <span class="kw">let </span>alpha = alpha.iter().find(|(j, <span class="kw">_</span>)| j == <span class="kw-2">&amp;</span>i).unwrap().<span class="number">1</span>;
+                    inner_string.push_str(<span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">",alpha={}"</span>, alpha)[..]);
                 }
-                plot_string.push_str(<span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">"plt.plot({})\n"</span>, inner_string)[..]);
+                <span class="kw">let </span>is_corresponding_plot_type = !plot_type.is_empty() &amp;&amp; (plot_type.iter().any(|(j, <span class="kw">_</span>)| j == <span class="kw-2">&amp;</span>i));
+                <span class="kw">if </span>is_corresponding_plot_type {
+                    <span class="kw">let </span>plot_type = plot_type.iter().find(|(j, <span class="kw">_</span>)| j == <span class="kw-2">&amp;</span>i).unwrap().<span class="number">1</span>;
+                    <span class="kw">match </span>plot_type {
+                        PlotType::Scatter =&gt; {
+                            plot_string.push_str(<span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">"plt.scatter({})\n"</span>, inner_string)[..]);
+                        }
+                        PlotType::Line =&gt; {
+                            plot_string.push_str(<span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">"plt.plot({})\n"</span>, inner_string)[..]);
+                        }
+                        PlotType::Bar =&gt; {
+                            plot_string.push_str(<span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">"plt.bar({})\n"</span>, inner_string)[..]);
+                        }
+                    }
+                } <span class="kw">else </span>{
+                    plot_string.push_str(<span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">"plt.plot({})\n"</span>, inner_string)[..]);
+                }
             }
             <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..pair_length {
                 <span class="kw">let </span><span class="kw-2">mut </span>inner_string = <span class="macro">format!</span>(<span class="string">"pair[{}][0],pair[{}][1]"</span>, i, i);
-                <span class="kw">if </span>!markers.is_empty() {
-                    inner_string.push_str(<span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">",marker=\"{}\""</span>, markers[i + y_length])[..]);
+                <span class="kw">let </span>is_corresponding_marker = !markers.is_empty() &amp;&amp; (markers.iter().any(|(<span class="kw-2">&amp;</span>j, <span class="kw">_</span>)| j == (i + y_length)));
+                <span class="kw">if </span>is_corresponding_marker {
+                    <span class="kw">let </span>marker = markers.iter().find(|(<span class="kw-2">&amp;</span>j, <span class="kw">_</span>)| j == (i + y_length)).unwrap().<span class="number">1</span>.as_str();
+                    inner_string.push_str(<span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">",marker=\"{}\""</span>, marker)[..]);
                 }
-                <span class="kw">if </span>!line_style.is_empty() {
-                    inner_string.push_str(<span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">",linestyle=\"{}\""</span>, line_style[i + y_length])[..]);
+                <span class="kw">let </span>is_corresponding_line_style = !line_style.is_empty() &amp;&amp; (line_style.iter().any(|(<span class="kw-2">&amp;</span>j, <span class="kw">_</span>)| j == (i + y_length)));
+                <span class="kw">if </span>is_corresponding_line_style {
+                    <span class="kw">let </span>style = line_style.iter().find(|(<span class="kw-2">&amp;</span>j, <span class="kw">_</span>)| j == (i + y_length)).unwrap().<span class="number">1</span>.as_str();
+                    inner_string.push_str(<span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">",linestyle=\"{}\""</span>, style)[..]);
                 }
-                <span class="kw">if </span>!color.is_empty() {
-                    inner_string.push_str(<span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">",color=\"{}\""</span>, color[i + y_length])[..]);
+                <span class="kw">let </span>is_corresponding_color = !color.is_empty() &amp;&amp; (color.iter().any(|(j, <span class="kw">_</span>)| j == <span class="kw-2">&amp;</span>(i + y_length)));
+                <span class="kw">if </span>is_corresponding_color {
+                    <span class="kw">let </span>color = color.iter().find(|(j, <span class="kw">_</span>)| j == <span class="kw-2">&amp;</span>(i + y_length)).unwrap().<span class="number">1</span>.as_str();
+                    inner_string.push_str(<span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">",color=\"{}\""</span>, color)[..]);
                 }
                 <span class="kw">if </span>!legends.is_empty() {
                     inner_string.push_str(<span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">",label=r\"{}\""</span>, legends[i + y_length])[..]);
                 }
-                <span class="kw">if </span>!alpha.is_empty() {
-                    inner_string.push_str(<span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">",alpha={}"</span>, alpha[i + y_length])[..]);
+                <span class="kw">let </span>is_corresponding_alpha = !alpha.is_empty() &amp;&amp; (alpha.iter().any(|(j, <span class="kw">_</span>)| j == <span class="kw-2">&amp;</span>(i + y_length)));
+                <span class="kw">if </span>is_corresponding_alpha {
+                    <span class="kw">let </span>alpha = alpha.iter().find(|(j, <span class="kw">_</span>)| j == <span class="kw-2">&amp;</span>(i + y_length)).unwrap().<span class="number">1</span>;
+                    inner_string.push_str(<span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">",alpha={}"</span>, alpha)[..]);
                 }
-                plot_string.push_str(<span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">"plt.plot({})\n"</span>, inner_string)[..]);
+                <span class="kw">let </span>is_corresponding_plot_type = !plot_type.is_empty() &amp;&amp; (plot_type.iter().any(|(j, <span class="kw">_</span>)| j == <span class="kw-2">&amp;</span>(i + y_length)));
+                <span class="kw">if </span>is_corresponding_plot_type {
+                    <span class="kw">let </span>plot_type = plot_type.iter().find(|(j, <span class="kw">_</span>)| j == <span class="kw-2">&amp;</span>(i + y_length)).unwrap().<span class="number">1</span>;
+                    <span class="kw">match </span>plot_type {
+                        PlotType::Scatter =&gt; {
+                            plot_string.push_str(<span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">"plt.scatter({})\n"</span>, inner_string)[..]);
+                        }
+                        PlotType::Line =&gt; {
+                            plot_string.push_str(<span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">"plt.plot({})\n"</span>, inner_string)[..]);
+                        }
+                        PlotType::Bar =&gt; {
+                            plot_string.push_str(<span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">"plt.bar({})\n"</span>, inner_string)[..]);
+                        }
+                    }
+                } <span class="kw">else </span>{
+                    plot_string.push_str(<span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">"plt.plot({})\n"</span>, inner_string)[..]);
+                }
             }
 
             <span class="kw">if </span><span class="self">self</span>.tight {
