@@ -845,6 +845,117 @@
 <a href="#827" id="827">827</a>
 <a href="#828" id="828">828</a>
 <a href="#829" id="829">829</a>
+<a href="#830" id="830">830</a>
+<a href="#831" id="831">831</a>
+<a href="#832" id="832">832</a>
+<a href="#833" id="833">833</a>
+<a href="#834" id="834">834</a>
+<a href="#835" id="835">835</a>
+<a href="#836" id="836">836</a>
+<a href="#837" id="837">837</a>
+<a href="#838" id="838">838</a>
+<a href="#839" id="839">839</a>
+<a href="#840" id="840">840</a>
+<a href="#841" id="841">841</a>
+<a href="#842" id="842">842</a>
+<a href="#843" id="843">843</a>
+<a href="#844" id="844">844</a>
+<a href="#845" id="845">845</a>
+<a href="#846" id="846">846</a>
+<a href="#847" id="847">847</a>
+<a href="#848" id="848">848</a>
+<a href="#849" id="849">849</a>
+<a href="#850" id="850">850</a>
+<a href="#851" id="851">851</a>
+<a href="#852" id="852">852</a>
+<a href="#853" id="853">853</a>
+<a href="#854" id="854">854</a>
+<a href="#855" id="855">855</a>
+<a href="#856" id="856">856</a>
+<a href="#857" id="857">857</a>
+<a href="#858" id="858">858</a>
+<a href="#859" id="859">859</a>
+<a href="#860" id="860">860</a>
+<a href="#861" id="861">861</a>
+<a href="#862" id="862">862</a>
+<a href="#863" id="863">863</a>
+<a href="#864" id="864">864</a>
+<a href="#865" id="865">865</a>
+<a href="#866" id="866">866</a>
+<a href="#867" id="867">867</a>
+<a href="#868" id="868">868</a>
+<a href="#869" id="869">869</a>
+<a href="#870" id="870">870</a>
+<a href="#871" id="871">871</a>
+<a href="#872" id="872">872</a>
+<a href="#873" id="873">873</a>
+<a href="#874" id="874">874</a>
+<a href="#875" id="875">875</a>
+<a href="#876" id="876">876</a>
+<a href="#877" id="877">877</a>
+<a href="#878" id="878">878</a>
+<a href="#879" id="879">879</a>
+<a href="#880" id="880">880</a>
+<a href="#881" id="881">881</a>
+<a href="#882" id="882">882</a>
+<a href="#883" id="883">883</a>
+<a href="#884" id="884">884</a>
+<a href="#885" id="885">885</a>
+<a href="#886" id="886">886</a>
+<a href="#887" id="887">887</a>
+<a href="#888" id="888">888</a>
+<a href="#889" id="889">889</a>
+<a href="#890" id="890">890</a>
+<a href="#891" id="891">891</a>
+<a href="#892" id="892">892</a>
+<a href="#893" id="893">893</a>
+<a href="#894" id="894">894</a>
+<a href="#895" id="895">895</a>
+<a href="#896" id="896">896</a>
+<a href="#897" id="897">897</a>
+<a href="#898" id="898">898</a>
+<a href="#899" id="899">899</a>
+<a href="#900" id="900">900</a>
+<a href="#901" id="901">901</a>
+<a href="#902" id="902">902</a>
+<a href="#903" id="903">903</a>
+<a href="#904" id="904">904</a>
+<a href="#905" id="905">905</a>
+<a href="#906" id="906">906</a>
+<a href="#907" id="907">907</a>
+<a href="#908" id="908">908</a>
+<a href="#909" id="909">909</a>
+<a href="#910" id="910">910</a>
+<a href="#911" id="911">911</a>
+<a href="#912" id="912">912</a>
+<a href="#913" id="913">913</a>
+<a href="#914" id="914">914</a>
+<a href="#915" id="915">915</a>
+<a href="#916" id="916">916</a>
+<a href="#917" id="917">917</a>
+<a href="#918" id="918">918</a>
+<a href="#919" id="919">919</a>
+<a href="#920" id="920">920</a>
+<a href="#921" id="921">921</a>
+<a href="#922" id="922">922</a>
+<a href="#923" id="923">923</a>
+<a href="#924" id="924">924</a>
+<a href="#925" id="925">925</a>
+<a href="#926" id="926">926</a>
+<a href="#927" id="927">927</a>
+<a href="#928" id="928">928</a>
+<a href="#929" id="929">929</a>
+<a href="#930" id="930">930</a>
+<a href="#931" id="931">931</a>
+<a href="#932" id="932">932</a>
+<a href="#933" id="933">933</a>
+<a href="#934" id="934">934</a>
+<a href="#935" id="935">935</a>
+<a href="#936" id="936">936</a>
+<a href="#937" id="937">937</a>
+<a href="#938" id="938">938</a>
+<a href="#939" id="939">939</a>
+<a href="#940" id="940">940</a>
 </pre></div><pre class="rust"><code><span class="doccomment">//! Probabilistic distributions
 //!
 //! ## Probability Distribution
@@ -871,14 +982,16 @@
 //!
 //! * `RNG` trait is composed of two fields
 //!     * `sample`: Extract samples
+//!     * `sample_with_rng`: Extract samples with specific rng
 //!     * `pdf` : Calculate pdf value at specific point
-//!     ```rust
-//!     extern crate rand;
-//!     use rand::distributions::uniform::SampleUniform;
-//!
+//!     ```no_run
+//!     use rand::{Rng, distributions::uniform::SampleUniform};
 //!     pub trait RNG {
 //!         /// Extract samples of distributions
 //!         fn sample(&amp;self, n: usize) -&gt; Vec&lt;f64&gt;;
+//!
+//!         /// Extract samples of distributions with rng
+//!         fn sample_with_rng&lt;R: Rng&gt;(&amp;self, rng: &amp;mut R, n: usize) -&gt; Vec&lt;f64&gt;;
 //!
 //!         /// Probability Distribution Function
 //!         ///
@@ -905,12 +1018,14 @@
 //!     use peroxide::fuga::*;
 //!
 //!     fn main() {
-//!         let b = Bernoulli(0.1); // Bern(x | 0.1)
-//!         b.sample(100).print();  // Generate 100 samples
-//!         b.pdf(0).print();       // 0.9
-//!         b.mean().print();       // 0.1
-//!         b.var().print();        // 0.09 (approximately)
-//!         b.sd().print();         // 0.3  (approximately)
+//!         let mut rng = smallrng_from_seed(42);
+//!         let b = Bernoulli(0.1);                   // Bern(x | 0.1)
+//!         b.sample(100).print();                    // Generate 100 samples
+//!         b.sample_with_rng(&amp;mut rng, 100).print(); // Generate 100 samples with specific rng
+//!         b.pdf(0).print();                         // 0.9
+//!         b.mean().print();                         // 0.1
+//!         b.var().print();                          // 0.09 (approximately)
+//!         b.sd().print();                           // 0.3  (approximately)
 //!     }
 //!     ```
 //!
@@ -966,14 +1081,102 @@
 //!         a.sd().print();
 //!     }
 //!     ```
-//!
+
 //! ### Beta Distribution
+//!
+//! * Definition
+//!     $$\text{Beta}(x | \alpha, \beta) = \frac{1}{\text{B}(\alpha, \beta)} x^{\alpha-1} (1-x)^{\beta-1}$$
+//!     where $\text{B}(\alpha, \beta) = \frac{\Gamma(\alpha)\Gamma(\beta)}{\Gamma(\alpha+\beta)}$ is the Beta function.
+//! * Representative value
+//!     * Mean: $\frac{\alpha}{\alpha+\beta}$
+//!     * Var: $\frac{\alpha\beta}{(\alpha+\beta)^2(\alpha+\beta+1)}$
+//! * To generate beta random samples, Peroxide uses the `rand_distr::Beta` distribution from the `rand_distr` crate.
+//!
+//!     ```rust
+//!     extern crate peroxide;
+//!     use peroxide::fuga::*;
+//!
+//!     fn main() {
+//!         // Beta(alpha, beta)
+//!         let a = Beta(2.0, 5.0);
+//!         a.sample(100).print();
+//!         a.pdf(0.3).print();
+//!         a.mean().print();
+//!         a.var().print();
+//!     }
+//!     ```
 //!
 //! ### Gamma Distribution
 //!
+//! * Definition
+//!     $$\text{Gamma}(x | \alpha, \beta) = \frac{\beta^\alpha}{\Gamma(\alpha)} x^{\alpha-1} e^{-\beta x}$$
+//!     where $\Gamma(\alpha) = \int_0^\infty x^{\alpha-1} e^{-x} dx$ is the Gamma function.
+//! * Representative value
+//!     * Mean: $\frac{\alpha}{\beta}$
+//!     * Var: $\frac{\alpha}{\beta^2}$
+//! * To generate gamma random samples, Peroxide uses the `rand_distr::Gamma` distribution from the `rand_distr` crate.
+//!
+//!     ```rust
+//!     extern crate peroxide;
+//!     use peroxide::fuga::*;
+//!
+//!     fn main() {
+//!         // Gamma(shape, scale)
+//!         let a = Gamma(2.0, 1.0);
+//!         a.sample(100).print();
+//!         a.pdf(1.5).print();
+//!         a.mean().print();
+//!         a.var().print();
+//!     }
+//!     ```
+//!
 //! ### Binomial Distribution
 //!
+//! * Definition
+//!     $$\text{Binom}(k | n, p) = \binom{n}{k} p^k (1-p)^{n-k}$$
+//!     where $\binom{n}{k} = \frac{n!}{k!(n-k)!}$ is the binomial coefficient.
+//! * Representative value
+//!     * Mean: $np$
+//!     * Var: $np(1-p)$
+//! * To generate binomial random samples, Peroxide uses the `rand_distr::Binomial` distribution from the `rand_distr` crate.
+//!
+//!     ```rust
+//!     extern crate peroxide;
+//!     use peroxide::fuga::*;
+//!
+//!     fn main() {
+//!         // Binomial(n, p)
+//!         let a = Binomial(10, 0.3);
+//!         a.sample(100).print();
+//!         a.pdf(3).print();
+//!         a.mean().print();
+//!         a.var().print();
+//!     }
+//!     ```
+//!
 //! ### Student's t Distribution
+//!
+//! * Definition
+//!     $$\text{StudentT}(x | \nu) = \frac{\Gamma(\frac{\nu+1}{2})}{\sqrt{\nu\pi}\,\Gamma(\frac{\nu}{2})} \left(1+\frac{x^2}{\nu} \right)^{-\frac{\nu+1}{2}}$$
+//!     where $\nu$ is the degrees of freedom and $\Gamma$ is the Gamma function.
+//! * Representative value
+//!     * Mean: 0 (for $\nu &gt; 1$)
+//!     * Var: $\frac{\nu}{\nu-2}$ (for $\nu &gt; 2$)
+//! * To generate Student's t random samples, Peroxide uses the `rand_distr::StudentT` distribution from the `rand_distr` crate.
+//!
+//!     ```rust
+//!     extern crate peroxide;
+//!     use peroxide::fuga::*;
+//!
+//!     fn main() {
+//!         // StudentT(nu)
+//!         let a = StudentT(5.0);
+//!         a.sample(100).print();
+//!         a.pdf(1.0).print();
+//!         a.mean().print(); // Undefined for nu &lt;= 1
+//!         a.var().print();  // Undefined for nu &lt;= 2
+//!     }
+//!     ```
 //!
 //! ### Weighted Uniform Distribution
 //!
@@ -994,7 +1197,6 @@
 
 <span class="kw">use </span><span class="self">self</span>::rand::distributions::uniform::SampleUniform;
 <span class="kw">use </span><span class="self">self</span>::rand::prelude::<span class="kw-2">*</span>;
-<span class="kw">use </span><span class="self">self</span>::rand_distr::Distribution;
 <span class="kw">pub use </span><span class="self">self</span>::OPDist::<span class="kw-2">*</span>;
 <span class="kw">pub use </span><span class="self">self</span>::TPDist::<span class="kw-2">*</span>;
 <span class="kw">use </span><span class="kw">crate</span>::traits::fp::FPVector;
@@ -1003,8 +1205,9 @@
 </span><span class="kw">use </span><span class="kw">crate</span>::statistics::{ops::C, stat::Statistics};
 <span class="kw">use </span><span class="kw">crate</span>::util::non_macro::{linspace, seq};
 <span class="kw">use </span><span class="kw">crate</span>::util::useful::{auto_zip, find_interval};
-<span class="kw">use </span>std::convert::Into;
 <span class="kw">use </span>std::f64::consts::E;
+<span class="kw">use </span>thiserror::Error;
+<span class="kw">use </span><span class="self">self</span>::WeightedUniformError::<span class="kw-2">*</span>;
 
 <span class="doccomment">/// One parameter distribution
 ///
@@ -1036,6 +1239,18 @@
     intervals: Vec&lt;(T, T)&gt;
 }
 
+<span class="attr">#[derive(Debug, Clone, Copy, Error)]
+</span><span class="kw">pub enum </span>WeightedUniformError {
+    <span class="attr">#[error(<span class="string">"all weights are zero"</span>)]
+    </span>AllZeroWeightError,
+    <span class="attr">#[error(<span class="string">"weights and intervals have different length"</span>)]
+    </span>LengthMismatchError,
+    <span class="attr">#[error(<span class="string">"no non-zero interval found"</span>)]
+    </span>NoNonZeroIntervalError,
+    <span class="attr">#[error(<span class="string">"weights are empty"</span>)]
+    </span>EmptyWeightError,
+}
+
 <span class="kw">impl </span>WeightedUniform&lt;f64&gt; {
     <span class="doccomment">/// Create a new weighted uniform distribution
     /// 
@@ -1044,17 +1259,28 @@
     /// extern crate peroxide;
     /// use peroxide::fuga::*;
     /// 
-    /// fn main() {
+    /// fn main() -&gt; Result&lt;(), Box&lt;dyn std::error::Error&gt;&gt; {
     ///     let weights = vec![1f64, 3f64, 0f64, 2f64];
     ///     let intervals = vec![0f64, 1f64, 2f64, 4f64, 5f64];
-    ///     let w = WeightedUniform::new(weights, intervals);
+    ///     let w = WeightedUniform::new(weights, intervals)?;
     ///     assert_eq!(w.weights(), &amp;vec![1f64, 3f64, 2f64]);
     ///     assert_eq!(w.intervals(), &amp;vec![(0f64, 1f64), (1f64, 2f64), (4f64, 5f64)]);
+    ///
+    ///     Ok(())
     /// }
     /// ```    
-    </span><span class="kw">pub fn </span>new(weights: Vec&lt;f64&gt;, intervals: Vec&lt;f64&gt;) -&gt; <span class="self">Self </span>{
+    </span><span class="kw">pub fn </span>new(weights: Vec&lt;f64&gt;, intervals: Vec&lt;f64&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, WeightedUniformError&gt; {
         <span class="kw">let </span><span class="kw-2">mut </span>weights = weights;
+        <span class="kw">if </span>weights.len() == <span class="number">0 </span>{
+            <span class="kw">return </span><span class="prelude-val">Err</span>(EmptyWeightError);
+        }
+        <span class="kw">if </span>weights.iter().all(|<span class="kw-2">&amp;</span>x| x == <span class="number">0f64</span>) {
+            <span class="kw">return </span><span class="prelude-val">Err</span>(AllZeroWeightError);
+        }
         <span class="kw">let </span><span class="kw-2">mut </span>intervals = auto_zip(<span class="kw-2">&amp;</span>intervals);
+        <span class="kw">if </span>weights.len() != intervals.len() {
+            <span class="kw">return </span><span class="prelude-val">Err</span>(LengthMismatchError);
+        }
 
         <span class="comment">// Remove zero weights &amp; corresponding intervals
         </span><span class="kw">let </span><span class="kw-2">mut </span>i = <span class="number">0</span>;
@@ -1072,12 +1298,14 @@
         <span class="kw">let </span>sum = weights.iter()
             .zip(intervals.iter())
             .fold(<span class="number">0f64</span>, |acc, (w, (a, b))| acc + w * (b - a));
-        
-        WeightedUniform {
-            weights,
-            sum,
-            intervals
-        }
+
+        <span class="prelude-val">Ok</span>(
+            WeightedUniform {
+                weights,
+                sum,
+                intervals
+            }
+        )
     }
 
     <span class="doccomment">/// Create WeightedUniform from max pooling
@@ -1087,9 +1315,11 @@
     /// extern crate peroxide;
     /// use peroxide::fuga::*;
     /// 
-    /// fn main() {
-    ///     let w = WeightedUniform::from_max_pool_1d(f, (-2f64, 3f64), 10, 1e-3);
+    /// fn main() -&gt; Result&lt;(), Box&lt;dyn std::error::Error&gt;&gt; {
+    ///     let w = WeightedUniform::from_max_pool_1d(f, (-2f64, 3f64), 10, 1e-3)?;
     ///     w.weights().print();
+    ///
+    ///     Ok(())
     /// }
     /// 
     /// fn f(x: f64) -&gt; f64 {
@@ -1100,8 +1330,8 @@
     ///     }
     /// }
     /// ```
-    </span><span class="kw">pub fn </span>from_max_pool_1d&lt;F&gt;(f: F, (a, b): (f64, f64), n: usize, eps: f64) -&gt; <span class="self">Self 
-    </span><span class="kw">where </span>F: Fn(f64) -&gt; f64 + Copy {
+    </span><span class="kw">pub fn </span>from_max_pool_1d&lt;F&gt;(f: F, (a, b): (f64, f64), n: usize, eps: f64) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, WeightedUniformError&gt;
+    <span class="kw">where </span>F: Fn(f64) -&gt; f64 + Copy {
         <span class="comment">// Find non-zero intervals
         </span><span class="kw">let </span><span class="kw-2">mut </span>a = a;
         <span class="kw">let </span><span class="kw-2">mut </span>b = b;
@@ -1120,7 +1350,9 @@
                 <span class="kw">break</span>;
             }
         }
-        <span class="macro">assert!</span>(a &lt; b, <span class="string">"No non-zero interval found"</span>);
+        <span class="kw">if </span>a &gt;= b {
+            <span class="kw">return </span><span class="prelude-val">Err</span>(NoNonZeroIntervalError);
+        }
         <span class="kw">let </span>domain = linspace(a, b, n+<span class="number">1</span>);
 
         <span class="comment">// Find intervals
@@ -1135,15 +1367,7 @@
             )
             .collect();
 
-        <span class="kw">let </span>sum = weights.iter()
-            .zip(intervals.iter())
-            .fold(<span class="number">0f64</span>, |acc, (w, (x, y))| acc + w * (y - x));
-        
-        WeightedUniform {
-            weights,
-            sum,
-            intervals
-        }
+        <span class="self">Self</span>::new(weights, domain)
     }
 
     <span class="kw">pub fn </span>weights(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>Vec&lt;f64&gt; {
@@ -1240,7 +1464,13 @@
 /// * `sample`: extract samples
 </span><span class="kw">pub trait </span>RNG {
     <span class="doccomment">/// Extract samples of distributions
-    </span><span class="kw">fn </span>sample(<span class="kw-2">&amp;</span><span class="self">self</span>, n: usize) -&gt; Vec&lt;f64&gt;;
+    </span><span class="kw">fn </span>sample(<span class="kw-2">&amp;</span><span class="self">self</span>, n: usize) -&gt; Vec&lt;f64&gt; {
+        <span class="kw">let </span><span class="kw-2">mut </span>rng = thread_rng();
+        <span class="self">self</span>.sample_with_rng(<span class="kw-2">&amp;mut </span>rng, n)
+    }
+
+    <span class="doccomment">/// Extract samples of distributions with rng
+    </span><span class="kw">fn </span>sample_with_rng&lt;R: Rng + Clone&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, rng: <span class="kw-2">&amp;mut </span>R, n: usize) -&gt; Vec&lt;f64&gt;;
 
     <span class="doccomment">/// Probability Distribution Function
     ///
@@ -1257,7 +1487,7 @@
 
 <span class="doccomment">/// RNG for OPDist
 </span><span class="kw">impl</span>&lt;T: PartialOrd + SampleUniform + Copy + Into&lt;f64&gt;&gt; RNG <span class="kw">for </span>OPDist&lt;T&gt; {
-    <span class="kw">fn </span>sample(<span class="kw-2">&amp;</span><span class="self">self</span>, n: usize) -&gt; Vec&lt;f64&gt; {
+    <span class="kw">fn </span>sample_with_rng&lt;R: Rng + Clone&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, rng: <span class="kw-2">&amp;mut </span>R, n: usize) -&gt; Vec&lt;f64&gt; {
         <span class="kw">match </span><span class="self">self </span>{
             Bernoulli(prob) =&gt; {
                 <span class="macro">assert!</span>(
@@ -1265,7 +1495,6 @@
                     <span class="string">"Probability should be smaller than 1"
                 </span>);
 
-                <span class="kw">let </span><span class="kw-2">mut </span>rng = thread_rng();
                 <span class="kw">let </span><span class="kw-2">mut </span>v = <span class="macro">vec!</span>[<span class="number">0f64</span>; n];
 
                 <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..n {
@@ -1279,9 +1508,8 @@
                 v
             }
             StudentT(nu) =&gt; {
-                <span class="kw">let </span><span class="kw-2">mut </span>rng = thread_rng();
                 <span class="kw">let </span>stud = rand_distr::StudentT::&lt;f64&gt;::new((<span class="kw-2">*</span>nu).into()).unwrap();
-                stud.sample_iter(<span class="kw-2">&amp;mut </span>rng).take(n).collect()
+                stud.sample_iter(rng).take(n).collect()
             }
         }
     }
@@ -1338,10 +1566,9 @@
 
 <span class="doccomment">/// RNG for TPDist
 </span><span class="kw">impl</span>&lt;T: PartialOrd + SampleUniform + Copy + Into&lt;f64&gt;&gt; RNG <span class="kw">for </span>TPDist&lt;T&gt; {
-    <span class="kw">fn </span>sample(<span class="kw-2">&amp;</span><span class="self">self</span>, n: usize) -&gt; Vec&lt;f64&gt; {
+    <span class="kw">fn </span>sample_with_rng&lt;R: Rng + Clone&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, rng: <span class="kw-2">&amp;mut </span>R, n: usize) -&gt; Vec&lt;f64&gt; {
         <span class="kw">match </span><span class="self">self </span>{
             Uniform(start, end) =&gt; {
-                <span class="kw">let </span><span class="kw-2">mut </span>rng = thread_rng();
                 <span class="kw">let </span><span class="kw-2">mut </span>v = <span class="macro">vec!</span>[<span class="number">0f64</span>; n];
 
                 <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..n {
@@ -1351,19 +1578,17 @@
             }
 
             Binomial(num, mu) =&gt; {
-                <span class="kw">let </span><span class="kw-2">mut </span>rng = thread_rng();
                 <span class="kw">let </span>binom = rand_distr::Binomial::new(<span class="kw-2">*</span>num <span class="kw">as </span>u64, (<span class="kw-2">*</span>mu).into()).unwrap();
                 binom
-                    .sample_iter(<span class="kw-2">&amp;mut </span>rng)
+                    .sample_iter(rng)
                     .take(n)
                     .map(|t| t <span class="kw">as </span>f64)
                     .collect()
             }
 
             Normal(m, s) =&gt; {
-                <span class="kw">let </span><span class="kw-2">mut </span>rng = thread_rng();
                 <span class="kw">let </span>normal = rand_distr::Normal::&lt;f64&gt;::new((<span class="kw-2">*</span>m).into(), (<span class="kw-2">*</span>s).into()).unwrap();
-                normal.sample_iter(<span class="kw-2">&amp;mut </span>rng).take(n).collect()
+                normal.sample_iter(rng).take(n).collect()
             }
             <span class="comment">//            Normal(m, s) =&gt; {
             //                let mut rng = thread_rng();
@@ -1375,9 +1600,8 @@
             //                v
             //            }
             </span>Beta(a, b) =&gt; {
-                <span class="kw">let </span><span class="kw-2">mut </span>rng = thread_rng();
                 <span class="kw">let </span>beta = rand_distr::Beta::&lt;f64&gt;::new((<span class="kw-2">*</span>a).into(), (<span class="kw-2">*</span>b).into()).unwrap();
-                beta.sample_iter(<span class="kw-2">&amp;mut </span>rng).take(n).collect()
+                beta.sample_iter(rng).take(n).collect()
             }
             <span class="comment">//            Beta(a, b) =&gt; {
             //                let mut rng1 = thread_rng();
@@ -1405,10 +1629,9 @@
             //                v
             //            }
             </span>Gamma(shape, scale) =&gt; {
-                <span class="kw">let </span><span class="kw-2">mut </span>rng = thread_rng();
                 <span class="kw">let </span>gamma =
                     rand_distr::Gamma::&lt;f64&gt;::new((<span class="kw-2">*</span>shape).into(), (<span class="kw-2">*</span>scale).into()).unwrap();
-                gamma.sample_iter(<span class="kw-2">&amp;mut </span>rng).take(n).collect()
+                gamma.sample_iter(rng).take(n).collect()
             } <span class="comment">//            Gamma(a, b) =&gt; {
               //                let a_f64 = (*a).into();
               //                let b_f64 = (*b).into();
@@ -1520,17 +1743,16 @@
 }
 
 <span class="kw">impl </span>RNG <span class="kw">for </span>WeightedUniform&lt;f64&gt; {
-    <span class="kw">fn </span>sample(<span class="kw-2">&amp;</span><span class="self">self</span>, n: usize) -&gt; Vec&lt;f64&gt; {
-        <span class="kw">let </span><span class="kw-2">mut </span>rng = thread_rng();
+    <span class="kw">fn </span>sample_with_rng&lt;R: Rng + Clone&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, rng: <span class="kw-2">&amp;mut </span>R, n: usize) -&gt; Vec&lt;f64&gt; {
         <span class="kw">let </span>w = WeightedAliasIndex::new(<span class="self">self</span>.weights.clone()).unwrap();
-        <span class="kw">let </span>ics: Vec&lt;usize&gt; = w.sample_iter(<span class="kw-2">&amp;mut </span>rng).take(n).collect();
+        <span class="kw">let </span><span class="kw-2">mut </span>rng_clip = rng.clone();
+        <span class="kw">let </span>ics: Vec&lt;usize&gt; = w.sample_iter(<span class="kw-2">&amp;mut </span>rng_clip).take(n).collect();
+        <span class="kw-2">*</span>rng = rng_clip;
 
-        <span class="kw">let </span><span class="kw-2">mut </span>result = <span class="macro">vec!</span>[<span class="number">0f64</span>; n];
-        <span class="kw">for </span>(i, idx) <span class="kw">in </span>ics.into_iter().enumerate() {
+        ics.into_iter().map(|idx| {
             <span class="kw">let </span>(l, r) = <span class="self">self</span>.intervals[idx];
-            result[i] = rng.gen_range(l ..=r);
-        }
-        result
+            rng.gen_range(l ..=r)
+        }).collect::&lt;Vec&lt;f64&gt;&gt;()
     }
 
     <span class="kw">fn </span>pdf&lt;S: PartialOrd + SampleUniform + Copy + Into&lt;f64&gt;&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, x: S) -&gt; f64 {

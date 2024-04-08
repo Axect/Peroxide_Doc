@@ -14,8 +14,8 @@
     });
 </script>
 
-</head><body class="rustdoc mod"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../../../peroxide/index.html">peroxide</a><span class="version">0.35.1</span></h2></div><h2 class="location"><a href="#">Module spline</a></h2><div class="sidebar-elems"><section><ul class="block"><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li><li><a href="#traits">Traits</a></li><li><a href="#functions">Functions</a></li></ul></section><h2><a href="../index.html">In peroxide::numerical</a></h2></div></nav><div class="sidebar-resizer"></div>
-    <main><div class="width-limiter"><nav class="sub"><form class="search-form"><span></span><div id="sidebar-button" tabindex="-1"><a href="../../../peroxide/all.html" title="show sidebar"></a></div><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" tabindex="-1"><a href="../../../help.html" title="help">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="main-heading"><h1>Module <a href="../../index.html">peroxide</a>::<wbr><a href="../index.html">numerical</a>::<wbr><a class="mod" href="#">spline</a><button id="copy-path" title="Copy item path to clipboard"><img src="../../../static.files/clipboard-7571035ce49a181d.svg" width="19" height="18" alt="Copy item path"></button></h1><span class="out-of-band"><a class="src" href="../../../src/peroxide/numerical/spline.rs.html#1-773">source</a> · <button id="toggle-all-docs" title="collapse all docs">[<span>&#x2212;</span>]</button></span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Spline interpolations</p>
+</head><body class="rustdoc mod"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../../../peroxide/index.html">peroxide</a><span class="version">0.36.0</span></h2></div><h2 class="location"><a href="#">Module spline</a></h2><div class="sidebar-elems"><section><ul class="block"><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li><li><a href="#traits">Traits</a></li><li><a href="#functions">Functions</a></li></ul></section><h2><a href="../index.html">In peroxide::numerical</a></h2></div></nav><div class="sidebar-resizer"></div>
+    <main><div class="width-limiter"><nav class="sub"><form class="search-form"><span></span><div id="sidebar-button" tabindex="-1"><a href="../../../peroxide/all.html" title="show sidebar"></a></div><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" tabindex="-1"><a href="../../../help.html" title="help">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="main-heading"><h1>Module <a href="../../index.html">peroxide</a>::<wbr><a href="../index.html">numerical</a>::<wbr><a class="mod" href="#">spline</a><button id="copy-path" title="Copy item path to clipboard"><img src="../../../static.files/clipboard-7571035ce49a181d.svg" width="19" height="18" alt="Copy item path"></button></h1><span class="out-of-band"><a class="src" href="../../../src/peroxide/numerical/spline.rs.html#1-838">source</a> · <button id="toggle-all-docs" title="collapse all docs">[<span>&#x2212;</span>]</button></span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Spline interpolations</p>
 <h2 id="available-splines"><a class="doc-anchor" href="#available-splines">§</a>Available splines</h2>
 <ul>
 <li>Cubic spline</li>
@@ -55,36 +55,36 @@
 </ul>
 <h3 id="usage"><a class="doc-anchor" href="#usage">§</a>Usage</h3>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
- 
-<span class="kw">fn </span>main() {
+
+<span class="kw">fn </span>main() -&gt; <span class="prelude-ty">Result</span>&lt;(), Box&lt;<span class="kw">dyn </span>std::error::Error&gt;&gt; {
     <span class="kw">let </span>x = seq(<span class="number">0</span>, <span class="number">10</span>, <span class="number">1</span>);
     <span class="kw">let </span>y = x.fmap(|t| t.sin());
      
-    <span class="kw">let </span>cs = CubicSpline::from_nodes(<span class="kw-2">&amp;</span>x, <span class="kw-2">&amp;</span>y);
-    <span class="kw">let </span>cs_akima = CubicHermiteSpline::from_nodes(<span class="kw-2">&amp;</span>x, <span class="kw-2">&amp;</span>y, SlopeMethod::Akima);
-    <span class="kw">let </span>cs_quad = CubicHermiteSpline::from_nodes(<span class="kw-2">&amp;</span>x, <span class="kw-2">&amp;</span>y, SlopeMethod::Quadratic);
- 
+    <span class="kw">let </span>cs = CubicSpline::from_nodes(<span class="kw-2">&amp;</span>x, <span class="kw-2">&amp;</span>y)<span class="question-mark">?</span>;
+    <span class="kw">let </span>cs_akima = CubicHermiteSpline::from_nodes(<span class="kw-2">&amp;</span>x, <span class="kw-2">&amp;</span>y, Akima)<span class="question-mark">?</span>;
+    <span class="kw">let </span>cs_quad = CubicHermiteSpline::from_nodes(<span class="kw-2">&amp;</span>x, <span class="kw-2">&amp;</span>y, Quadratic)<span class="question-mark">?</span>;
+
     cs.polynomial_at(<span class="number">0f64</span>).print();
     cs_akima.polynomial_at(<span class="number">0f64</span>).print();
     cs_quad.polynomial_at(<span class="number">0f64</span>).print();
     <span class="comment">// -0.1523x^3 + 0.9937x
     // 0.1259x^3 - 0.5127x^2 + 1.2283x
     // -0.0000x^3 - 0.3868x^2 + 1.2283x
- 
+
     </span><span class="kw">let </span>new_x = seq(<span class="number">4</span>, <span class="number">6</span>, <span class="number">0.1</span>);
     <span class="kw">let </span>new_y = new_x.fmap(|t| t.sin());
- 
+
     <span class="kw">let </span>y_cs = cs.eval_vec(<span class="kw-2">&amp;</span>new_x);
     <span class="kw">let </span>y_akima = cs_akima.eval_vec(<span class="kw-2">&amp;</span>new_x);
     <span class="kw">let </span>y_quad = cs_quad.eval_vec(<span class="kw-2">&amp;</span>new_x);
- 
+
     <span class="kw">let </span><span class="kw-2">mut </span>df = DataFrame::new(<span class="macro">vec!</span>[]);
     df.push(<span class="string">"x"</span>, Series::new(new_x));
     df.push(<span class="string">"y"</span>, Series::new(new_y));
     df.push(<span class="string">"y_cs"</span>, Series::new(y_cs));
     df.push(<span class="string">"y_akima"</span>, Series::new(y_akima));
     df.push(<span class="string">"y_quad"</span>, Series::new(y_quad));
- 
+
     df.print();
     <span class="comment">//          x       y    y_cs y_akima  y_quad
     //  r[0]    5 -0.9589 -0.9589 -0.9589 -0.9589
@@ -93,7 +93,9 @@
     //  r[3]  5.6 -0.6313 -0.6288 -0.5960 -0.6120
     //  r[4]  5.8 -0.4646 -0.4631 -0.4424 -0.4459
     //  r[5]    6 -0.2794 -0.2794 -0.2794 -0.2794
-</span>}</code></pre></div>
+
+    </span><span class="prelude-val">Ok</span>(())
+}</code></pre></div>
 <h2 id="high-level-interface"><a class="doc-anchor" href="#high-level-interface">§</a>High-level interface</h2><h3 id="functions"><a class="doc-anchor" href="#functions">§</a>Functions</h3>
 <ul>
 <li><code>fn cubic_spline(node_x: &amp;[f64], node_y: &amp;[f64]) -&gt; CubicSpline</code> : Create a cubic spline from nodes</li>
@@ -101,36 +103,36 @@
 </ul>
 <h3 id="usage-1"><a class="doc-anchor" href="#usage-1">§</a>Usage</h3>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
- 
-<span class="kw">fn </span>main() {
+
+<span class="kw">fn </span>main() -&gt; <span class="prelude-ty">Result</span>&lt;(), Box&lt;<span class="kw">dyn </span>std::error::Error&gt;&gt; {
     <span class="kw">let </span>x = seq(<span class="number">0</span>, <span class="number">10</span>, <span class="number">1</span>);
     <span class="kw">let </span>y = x.fmap(|t| t.sin());
      
-    <span class="kw">let </span>cs = cubic_spline(<span class="kw-2">&amp;</span>x, <span class="kw-2">&amp;</span>y);
-    <span class="kw">let </span>cs_akima = cubic_hermite_spline(<span class="kw-2">&amp;</span>x, <span class="kw-2">&amp;</span>y, SlopeMethod::Akima);
-    <span class="kw">let </span>cs_quad = cubic_hermite_spline(<span class="kw-2">&amp;</span>x, <span class="kw-2">&amp;</span>y, SlopeMethod::Quadratic);
- 
+    <span class="kw">let </span>cs = cubic_spline(<span class="kw-2">&amp;</span>x, <span class="kw-2">&amp;</span>y)<span class="question-mark">?</span>;
+    <span class="kw">let </span>cs_akima = cubic_hermite_spline(<span class="kw-2">&amp;</span>x, <span class="kw-2">&amp;</span>y, Akima)<span class="question-mark">?</span>;
+    <span class="kw">let </span>cs_quad = cubic_hermite_spline(<span class="kw-2">&amp;</span>x, <span class="kw-2">&amp;</span>y, Quadratic)<span class="question-mark">?</span>;
+
     cs.polynomial_at(<span class="number">0f64</span>).print();
     cs_akima.polynomial_at(<span class="number">0f64</span>).print();
     cs_quad.polynomial_at(<span class="number">0f64</span>).print();
     <span class="comment">// -0.1523x^3 + 0.9937x
     // 0.1259x^3 - 0.5127x^2 + 1.2283x
     // -0.0000x^3 - 0.3868x^2 + 1.2283x
- 
+
     </span><span class="kw">let </span>new_x = seq(<span class="number">4</span>, <span class="number">6</span>, <span class="number">0.1</span>);
     <span class="kw">let </span>new_y = new_x.fmap(|t| t.sin());
- 
+
     <span class="kw">let </span>y_cs = cs.eval_vec(<span class="kw-2">&amp;</span>new_x);
     <span class="kw">let </span>y_akima = cs_akima.eval_vec(<span class="kw-2">&amp;</span>new_x);
     <span class="kw">let </span>y_quad = cs_quad.eval_vec(<span class="kw-2">&amp;</span>new_x);
- 
+
     <span class="kw">let </span><span class="kw-2">mut </span>df = DataFrame::new(<span class="macro">vec!</span>[]);
     df.push(<span class="string">"x"</span>, Series::new(new_x));
     df.push(<span class="string">"y"</span>, Series::new(new_y));
     df.push(<span class="string">"y_cs"</span>, Series::new(y_cs));
     df.push(<span class="string">"y_akima"</span>, Series::new(y_akima));
     df.push(<span class="string">"y_quad"</span>, Series::new(y_quad));
- 
+
     df.print();
     <span class="comment">//          x       y    y_cs y_akima  y_quad
     //  r[0]    5 -0.9589 -0.9589 -0.9589 -0.9589
@@ -139,43 +141,45 @@
     //  r[3]  5.6 -0.6313 -0.6288 -0.5960 -0.6120
     //  r[4]  5.8 -0.4646 -0.4631 -0.4424 -0.4459
     //  r[5]    6 -0.2794 -0.2794 -0.2794 -0.2794
-</span>}</code></pre></div>
+
+    </span><span class="prelude-val">Ok</span>(())
+}</code></pre></div>
 <h2 id="calculus-with-splines"><a class="doc-anchor" href="#calculus-with-splines">§</a>Calculus with splines</h2><h3 id="usage-2"><a class="doc-anchor" href="#usage-2">§</a>Usage</h3>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
 <span class="kw">use </span>std::f64::consts::PI;
- 
-<span class="kw">fn </span>main() {
+
+<span class="kw">fn </span>main() -&gt; <span class="prelude-ty">Result</span>&lt;(), Box&lt;<span class="kw">dyn </span>std::error::Error&gt;&gt; {
     <span class="kw">let </span>x = seq(<span class="number">0</span>, <span class="number">10</span>, <span class="number">1</span>);
     <span class="kw">let </span>y = x.fmap(|t| t.sin());
      
-    <span class="kw">let </span>cs = cubic_spline(<span class="kw-2">&amp;</span>x, <span class="kw-2">&amp;</span>y);
-    <span class="kw">let </span>cs_akima = cubic_hermite_spline(<span class="kw-2">&amp;</span>x, <span class="kw-2">&amp;</span>y, SlopeMethod::Akima);
-    <span class="kw">let </span>cs_quad = cubic_hermite_spline(<span class="kw-2">&amp;</span>x, <span class="kw-2">&amp;</span>y, SlopeMethod::Quadratic);
- 
+    <span class="kw">let </span>cs = cubic_spline(<span class="kw-2">&amp;</span>x, <span class="kw-2">&amp;</span>y)<span class="question-mark">?</span>;
+    <span class="kw">let </span>cs_akima = cubic_hermite_spline(<span class="kw-2">&amp;</span>x, <span class="kw-2">&amp;</span>y, Akima)<span class="question-mark">?</span>;
+    <span class="kw">let </span>cs_quad = cubic_hermite_spline(<span class="kw-2">&amp;</span>x, <span class="kw-2">&amp;</span>y, Quadratic)<span class="question-mark">?</span>;
+
     <span class="macro">println!</span>(<span class="string">"============ Polynomial at x=0 ============"</span>);
- 
+
     cs.polynomial_at(<span class="number">0f64</span>).print();
     cs_akima.polynomial_at(<span class="number">0f64</span>).print();
     cs_quad.polynomial_at(<span class="number">0f64</span>).print();
- 
+
     <span class="macro">println!</span>(<span class="string">"============ Derivative at x=0 ============"</span>);
- 
+
     cs.derivative().polynomial_at(<span class="number">0f64</span>).print();
     cs_akima.derivative().polynomial_at(<span class="number">0f64</span>).print();
     cs_quad.derivative().polynomial_at(<span class="number">0f64</span>).print();
- 
+
     <span class="macro">println!</span>(<span class="string">"============ Integral at x=0 ============"</span>);
- 
+
     cs.integral().polynomial_at(<span class="number">0f64</span>).print();
     cs_akima.integral().polynomial_at(<span class="number">0f64</span>).print();
     cs_quad.integral().polynomial_at(<span class="number">0f64</span>).print();
- 
+
     <span class="macro">println!</span>(<span class="string">"============ Integrate from x=0 to x=pi ============"</span>);
- 
+
     cs.integrate((<span class="number">0f64</span>, PI)).print();
     cs_akima.integrate((<span class="number">0f64</span>, PI)).print();
     cs_quad.integrate((<span class="number">0f64</span>, PI)).print();
- 
+
     <span class="comment">// ============ Polynomial at x=0 ============
     // -0.1523x^3 + 0.9937x
     // 0.1259x^3 - 0.5127x^2 + 1.2283x
@@ -192,9 +196,11 @@
     // 1.9961861265456702
     // 2.0049920614062775
     // 2.004327391790717
-</span>}</code></pre></div>
+
+    </span><span class="prelude-val">Ok</span>(())
+}</code></pre></div>
 <h2 id="references"><a class="doc-anchor" href="#references">§</a>References</h2>
 <ul>
 <li>Gary D. Knott, <em>Interpolating Splines</em>, Birkhäuser Boston, MA, (2000).</li>
 </ul>
-</div></details><h2 id="structs" class="section-header">Structs<a href="#structs" class="anchor">§</a></h2><ul class="item-table"><li><div class="item-name"><a class="struct" href="struct.CubicHermiteSpline.html" title="struct peroxide::numerical::spline::CubicHermiteSpline">CubicHermiteSpline</a></div></li><li><div class="item-name"><a class="struct" href="struct.CubicSpline.html" title="struct peroxide::numerical::spline::CubicSpline">CubicSpline</a></div><div class="desc docblock-short">Cubic Spline (Natural)</div></li></ul><h2 id="enums" class="section-header">Enums<a href="#enums" class="anchor">§</a></h2><ul class="item-table"><li><div class="item-name"><a class="enum" href="enum.SlopeMethod.html" title="enum peroxide::numerical::spline::SlopeMethod">SlopeMethod</a></div></li></ul><h2 id="traits" class="section-header">Traits<a href="#traits" class="anchor">§</a></h2><ul class="item-table"><li><div class="item-name"><a class="trait" href="trait.Spline.html" title="trait peroxide::numerical::spline::Spline">Spline</a></div><div class="desc docblock-short">Trait for spline interpolation</div></li></ul><h2 id="functions-1" class="section-header">Functions<a href="#functions-1" class="anchor">§</a></h2><ul class="item-table"><li><div class="item-name"><a class="fn" href="fn.cubic_hermite_spline.html" title="fn peroxide::numerical::spline::cubic_hermite_spline">cubic_hermite_spline</a></div></li><li><div class="item-name"><a class="fn" href="fn.cubic_spline.html" title="fn peroxide::numerical::spline::cubic_spline">cubic_spline</a></div><div class="desc docblock-short">Cubic Spline (Natural)</div></li></ul></section></div></main></body></html>
+</div></details><h2 id="structs" class="section-header">Structs<a href="#structs" class="anchor">§</a></h2><ul class="item-table"><li><div class="item-name"><a class="struct" href="struct.CubicHermiteSpline.html" title="struct peroxide::numerical::spline::CubicHermiteSpline">CubicHermiteSpline</a></div></li><li><div class="item-name"><a class="struct" href="struct.CubicSpline.html" title="struct peroxide::numerical::spline::CubicSpline">CubicSpline</a></div><div class="desc docblock-short">Cubic Spline (Natural)</div></li></ul><h2 id="enums" class="section-header">Enums<a href="#enums" class="anchor">§</a></h2><ul class="item-table"><li><div class="item-name"><a class="enum" href="enum.SlopeMethod.html" title="enum peroxide::numerical::spline::SlopeMethod">SlopeMethod</a></div></li><li><div class="item-name"><a class="enum" href="enum.SplineError.html" title="enum peroxide::numerical::spline::SplineError">SplineError</a></div></li></ul><h2 id="traits" class="section-header">Traits<a href="#traits" class="anchor">§</a></h2><ul class="item-table"><li><div class="item-name"><a class="trait" href="trait.Spline.html" title="trait peroxide::numerical::spline::Spline">Spline</a></div><div class="desc docblock-short">Trait for spline interpolation</div></li></ul><h2 id="functions-1" class="section-header">Functions<a href="#functions-1" class="anchor">§</a></h2><ul class="item-table"><li><div class="item-name"><a class="fn" href="fn.cubic_hermite_spline.html" title="fn peroxide::numerical::spline::cubic_hermite_spline">cubic_hermite_spline</a></div></li><li><div class="item-name"><a class="fn" href="fn.cubic_spline.html" title="fn peroxide::numerical::spline::cubic_spline">cubic_spline</a></div><div class="desc docblock-short">Cubic Spline (Natural)</div></li></ul></section></div></main></body></html>

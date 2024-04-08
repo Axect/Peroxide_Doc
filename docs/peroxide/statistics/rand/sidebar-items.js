@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"fn":["marsaglia_polar","prs","rand_num","ziggurat"]};
+window.SIDEBAR_ITEMS = {"fn":["marsaglia_polar","prs","prs_with_rng","rand_num","smallrng_from_seed","stdrng_from_seed","ziggurat"]};

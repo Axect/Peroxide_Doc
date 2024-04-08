@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"enum":["BoundaryCondition","ExMethod","ImMethod","ODEOptions"],"struct":["ExplicitODE","ImplicitODE","NoEnv","State"],"trait":["Environment","ODE"]};
+window.SIDEBAR_ITEMS = {"enum":["ImplicitSolver","ODEError"],"struct":["BasicODESolver","GL4","RK4","RKF45"],"trait":["ODEIntegrator","ODEProblem","ODESolver"]};

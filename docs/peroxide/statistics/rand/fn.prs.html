@@ -14,13 +14,38 @@
     });
 </script>
 
-</head><body class="rustdoc fn"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../../../peroxide/index.html">peroxide</a><span class="version">0.35.1</span></h2></div><div class="sidebar-elems"><h2><a href="index.html">In peroxide::statistics::rand</a></h2></div></nav><div class="sidebar-resizer"></div>
-    <main><div class="width-limiter"><nav class="sub"><form class="search-form"><span></span><div id="sidebar-button" tabindex="-1"><a href="../../../peroxide/all.html" title="show sidebar"></a></div><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" tabindex="-1"><a href="../../../help.html" title="help">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="main-heading"><h1>Function <a href="../../index.html">peroxide</a>::<wbr><a href="../index.html">statistics</a>::<wbr><a href="index.html">rand</a>::<wbr><a class="fn" href="#">prs</a><button id="copy-path" title="Copy item path to clipboard"><img src="../../../static.files/clipboard-7571035ce49a181d.svg" width="19" height="18" alt="Copy item path"></button></h1><span class="out-of-band"><a class="src" href="../../../src/peroxide/statistics/rand.rs.html#413-447">source</a> · <button id="toggle-all-docs" title="collapse all docs">[<span>&#x2212;</span>]</button></span></div><pre class="rust item-decl"><code>pub fn prs&lt;F&gt;(
+</head><body class="rustdoc fn"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../../../peroxide/index.html">peroxide</a><span class="version">0.36.0</span></h2></div><div class="sidebar-elems"><h2><a href="index.html">In peroxide::statistics::rand</a></h2></div></nav><div class="sidebar-resizer"></div>
+    <main><div class="width-limiter"><nav class="sub"><form class="search-form"><span></span><div id="sidebar-button" tabindex="-1"><a href="../../../peroxide/all.html" title="show sidebar"></a></div><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" tabindex="-1"><a href="../../../help.html" title="help">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="main-heading"><h1>Function <a href="../../index.html">peroxide</a>::<wbr><a href="../index.html">statistics</a>::<wbr><a href="index.html">rand</a>::<wbr><a class="fn" href="#">prs</a><button id="copy-path" title="Copy item path to clipboard"><img src="../../../static.files/clipboard-7571035ce49a181d.svg" width="19" height="18" alt="Copy item path"></button></h1><span class="out-of-band"><a class="src" href="../../../src/peroxide/statistics/rand.rs.html#470-501">source</a> · <button id="toggle-all-docs" title="collapse all docs">[<span>&#x2212;</span>]</button></span></div><pre class="rust item-decl"><code>pub fn prs&lt;F&gt;(
     f: F,
     n: <a class="primitive" href="https://doc.rust-lang.org/1.77.1/std/primitive.usize.html">usize</a>,
     (a, b): (<a class="primitive" href="https://doc.rust-lang.org/1.77.1/std/primitive.f64.html">f64</a>, <a class="primitive" href="https://doc.rust-lang.org/1.77.1/std/primitive.f64.html">f64</a>),
     m: <a class="primitive" href="https://doc.rust-lang.org/1.77.1/std/primitive.usize.html">usize</a>,
     eps: <a class="primitive" href="https://doc.rust-lang.org/1.77.1/std/primitive.f64.html">f64</a>
-) -&gt; <a class="struct" href="https://doc.rust-lang.org/1.77.1/alloc/vec/struct.Vec.html" title="struct alloc::vec::Vec">Vec</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/1.77.1/std/primitive.f64.html">f64</a>&gt;<div class="where">where
+) -&gt; <a class="enum" href="https://doc.rust-lang.org/1.77.1/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;<a class="struct" href="https://doc.rust-lang.org/1.77.1/alloc/vec/struct.Vec.html" title="struct alloc::vec::Vec">Vec</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/1.77.1/std/primitive.f64.html">f64</a>&gt;, <a class="enum" href="../dist/enum.WeightedUniformError.html" title="enum peroxide::statistics::dist::WeightedUniformError">WeightedUniformError</a>&gt;<div class="where">where
     F: <a class="trait" href="https://doc.rust-lang.org/1.77.1/core/ops/function/trait.Fn.html" title="trait core::ops::function::Fn">Fn</a>(<a class="primitive" href="https://doc.rust-lang.org/1.77.1/std/primitive.f64.html">f64</a>) -&gt; <a class="primitive" href="https://doc.rust-lang.org/1.77.1/std/primitive.f64.html">f64</a> + <a class="trait" href="https://doc.rust-lang.org/1.77.1/core/marker/trait.Copy.html" title="trait core::marker::Copy">Copy</a>,</div></code></pre><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Piecewise Rejection Sampling</p>
+<h2 id="arguments"><a class="doc-anchor" href="#arguments">§</a>Arguments</h2>
+<ul>
+<li><code>f</code> - Function to sample (unnormalized function is allowed)</li>
+<li><code>n</code> - Number of samples</li>
+<li><code>(a, b)</code> - Range of sampling</li>
+<li><code>m</code> - Number of pieces</li>
+<li><code>eps</code> - Epsilon for max pooling</li>
+</ul>
+<h2 id="examples"><a class="doc-anchor" href="#examples">§</a>Examples</h2>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
+
+<span class="kw">fn </span>main() -&gt; <span class="prelude-ty">Result</span>&lt;(), Box&lt;<span class="kw">dyn </span>std::error::Error&gt;&gt; {
+    <span class="kw">let </span>f = |x: f64| {
+        <span class="kw">if </span>(<span class="number">0f64</span>..=<span class="number">2f64</span>).contains(<span class="kw-2">&amp;</span>x) {
+            -(x - <span class="number">1f64</span>).powi(<span class="number">2</span>) + <span class="number">1f64
+        </span>} <span class="kw">else </span>{
+            <span class="number">0f64
+        </span>}
+    };
+
+    <span class="kw">let </span>samples = prs(f, <span class="number">1000</span>, (-<span class="number">1f64</span>, <span class="number">3f64</span>), <span class="number">200</span>, <span class="number">1e-4</span>)<span class="question-mark">?</span>;
+    samples.mean().print(); <span class="comment">// near 1
+
+    </span><span class="prelude-val">Ok</span>(())
+}</code></pre></div>
 </div></details></section></div></main></body></html>

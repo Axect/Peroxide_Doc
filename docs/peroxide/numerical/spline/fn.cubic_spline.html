@@ -14,8 +14,11 @@
     });
 </script>
 
-</head><body class="rustdoc fn"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../../../peroxide/index.html">peroxide</a><span class="version">0.35.1</span></h2></div><div class="sidebar-elems"><h2><a href="index.html">In peroxide::numerical::spline</a></h2></div></nav><div class="sidebar-resizer"></div>
-    <main><div class="width-limiter"><nav class="sub"><form class="search-form"><span></span><div id="sidebar-button" tabindex="-1"><a href="../../../peroxide/all.html" title="show sidebar"></a></div><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" tabindex="-1"><a href="../../../help.html" title="help">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="main-heading"><h1>Function <a href="../../index.html">peroxide</a>::<wbr><a href="../index.html">numerical</a>::<wbr><a href="index.html">spline</a>::<wbr><a class="fn" href="#">cubic_spline</a><button id="copy-path" title="Copy item path to clipboard"><img src="../../../static.files/clipboard-7571035ce49a181d.svg" width="19" height="18" alt="Copy item path"></button></h1><span class="out-of-band"><a class="src" href="../../../src/peroxide/numerical/spline.rs.html#310-312">source</a> · <button id="toggle-all-docs" title="collapse all docs">[<span>&#x2212;</span>]</button></span></div><pre class="rust item-decl"><code>pub fn cubic_spline(node_x: &amp;[<a class="primitive" href="https://doc.rust-lang.org/1.77.1/std/primitive.f64.html">f64</a>], node_y: &amp;[<a class="primitive" href="https://doc.rust-lang.org/1.77.1/std/primitive.f64.html">f64</a>]) -&gt; <a class="struct" href="struct.CubicSpline.html" title="struct peroxide::numerical::spline::CubicSpline">CubicSpline</a></code></pre><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Cubic Spline (Natural)</p>
+</head><body class="rustdoc fn"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../../../peroxide/index.html">peroxide</a><span class="version">0.36.0</span></h2></div><div class="sidebar-elems"><h2><a href="index.html">In peroxide::numerical::spline</a></h2></div></nav><div class="sidebar-resizer"></div>
+    <main><div class="width-limiter"><nav class="sub"><form class="search-form"><span></span><div id="sidebar-button" tabindex="-1"><a href="../../../peroxide/all.html" title="show sidebar"></a></div><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" tabindex="-1"><a href="../../../help.html" title="help">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="main-heading"><h1>Function <a href="../../index.html">peroxide</a>::<wbr><a href="../index.html">numerical</a>::<wbr><a href="index.html">spline</a>::<wbr><a class="fn" href="#">cubic_spline</a><button id="copy-path" title="Copy item path to clipboard"><img src="../../../static.files/clipboard-7571035ce49a181d.svg" width="19" height="18" alt="Copy item path"></button></h1><span class="out-of-band"><a class="src" href="../../../src/peroxide/numerical/spline.rs.html#320-322">source</a> · <button id="toggle-all-docs" title="collapse all docs">[<span>&#x2212;</span>]</button></span></div><pre class="rust item-decl"><code>pub fn cubic_spline(
+    node_x: &amp;[<a class="primitive" href="https://doc.rust-lang.org/1.77.1/std/primitive.f64.html">f64</a>],
+    node_y: &amp;[<a class="primitive" href="https://doc.rust-lang.org/1.77.1/std/primitive.f64.html">f64</a>]
+) -&gt; <a class="enum" href="https://doc.rust-lang.org/1.77.1/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;<a class="struct" href="struct.CubicSpline.html" title="struct peroxide::numerical::spline::CubicSpline">CubicSpline</a>, <a class="enum" href="enum.SplineError.html" title="enum peroxide::numerical::spline::SplineError">SplineError</a>&gt;</code></pre><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Cubic Spline (Natural)</p>
 <h2 id="description"><a class="doc-anchor" href="#description">§</a>Description</h2>
 <p>Implement traits of Natural cubic splines, by Arne Morten Kvarving.</p>
 <h2 id="type"><a class="doc-anchor" href="#type">§</a>Type</h2>
@@ -25,11 +28,11 @@
 </span><span class="kw">extern crate </span>peroxide;
 <span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
 
-<span class="kw">fn </span>main() {
+<span class="kw">fn </span>main() -&gt; <span class="prelude-ty">Result</span>&lt;(), Box&lt;<span class="kw">dyn </span>std::error::Error&gt;&gt; {
     <span class="kw">let </span>x = <span class="macro">c!</span>(<span class="number">0.9</span>, <span class="number">1.3</span>, <span class="number">1.9</span>, <span class="number">2.1</span>);
     <span class="kw">let </span>y = <span class="macro">c!</span>(<span class="number">1.3</span>, <span class="number">1.5</span>, <span class="number">1.85</span>, <span class="number">2.1</span>);
 
-    <span class="kw">let </span>s = cubic_spline(<span class="kw-2">&amp;</span>x, <span class="kw-2">&amp;</span>y);
+    <span class="kw">let </span>s = cubic_spline(<span class="kw-2">&amp;</span>x, <span class="kw-2">&amp;</span>y)<span class="question-mark">?</span>;
 
     <span class="kw">let </span>new_x = <span class="macro">c!</span>(<span class="number">1</span>, <span class="number">1.5</span>, <span class="number">2.0</span>);
 
@@ -45,5 +48,7 @@
     </span><span class="kw">for </span>t <span class="kw">in </span>new_x.iter() {
         s.eval(<span class="kw-2">*</span>t).print();
     }
+
+    <span class="prelude-val">Ok</span>(())
 }</code></pre></div>
 </div></details></section></div></main></body></html>

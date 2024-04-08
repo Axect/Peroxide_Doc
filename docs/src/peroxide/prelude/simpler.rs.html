@@ -195,7 +195,7 @@
     integral,
     integral::Integral::G7K15R,
     spline,
-    spline::{CubicHermiteSpline, SlopeMethod::Quadratic},
+    spline::{CubicHermiteSpline, SlopeMethod::Quadratic, SplineError},
 };
 <span class="kw">use </span><span class="kw">crate</span>::structure::matrix::{<span class="self">self</span>, Matrix};
 <span class="kw">use </span><span class="kw">crate</span>::structure::polynomial;
@@ -276,16 +276,21 @@
         matrix::LinearAlgebra::lu(<span class="self">self</span>)
     }
 
-    <span class="kw">fn </span>waz(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;matrix::WAZD&gt; {
-        matrix::LinearAlgebra::waz(<span class="self">self</span>, matrix::Form::Identity)
-    }
-
     <span class="kw">fn </span>waz_diag(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;matrix::WAZD&gt; {
         matrix::LinearAlgebra::waz(<span class="self">self</span>, matrix::Form::Diagonal)
     }
 
+    <span class="kw">fn </span>waz(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;matrix::WAZD&gt; {
+        matrix::LinearAlgebra::waz(<span class="self">self</span>, matrix::Form::Identity)
+    }
+
     <span class="kw">fn </span>qr(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; matrix::QR {
         matrix::LinearAlgebra::qr(<span class="self">self</span>)
+    }
+
+    <span class="attr">#[cfg(feature=<span class="string">"O3"</span>)]
+    </span><span class="kw">fn </span>cholesky(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Matrix {
+        matrix::LinearAlgebra::cholesky(<span class="self">self</span>, matrix::UPLO::Lower)
     }
 
     <span class="kw">fn </span>rref(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Matrix {
@@ -316,11 +321,6 @@
         matrix::LinearAlgebra::solve_mat(<span class="self">self</span>, m, matrix::SolveKind::LU)
     }
 
-    <span class="attr">#[cfg(feature=<span class="string">"O3"</span>)]
-    </span><span class="kw">fn </span>cholesky(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Matrix {
-        matrix::LinearAlgebra::cholesky(<span class="self">self</span>, matrix::UPLO::Lower)
-    }
-
     <span class="kw">fn </span>is_symmetric(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
         matrix::LinearAlgebra::is_symmetric(<span class="self">self</span>)
     }
@@ -337,7 +337,7 @@
     polynomial::chebyshev_polynomial(n, polynomial::SpecialKind::First)
 }
 
-<span class="kw">pub fn </span>cubic_hermite_spline(node_x: <span class="kw-2">&amp;</span>[f64], node_y: <span class="kw-2">&amp;</span>[f64]) -&gt; CubicHermiteSpline {
+<span class="kw">pub fn </span>cubic_hermite_spline(node_x: <span class="kw-2">&amp;</span>[f64], node_y: <span class="kw-2">&amp;</span>[f64]) -&gt; <span class="prelude-ty">Result</span>&lt;CubicHermiteSpline, SplineError&gt; {
     spline::cubic_hermite_spline(node_x, node_y, Quadratic)
 }
 
