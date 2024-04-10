@@ -1303,10 +1303,8 @@
         <span class="kw">let </span>sqrt3 = <span class="number">3.0_f64</span>.sqrt();
         <span class="kw">let </span>c = <span class="number">0.5 </span>* (<span class="number">3.0 </span>- sqrt3) / <span class="number">6.0</span>;
         <span class="kw">let </span>d = <span class="number">0.5 </span>* (<span class="number">3.0 </span>+ sqrt3) / <span class="number">6.0</span>;
-
         <span class="kw">let </span><span class="kw-2">mut </span>k1 = <span class="macro">vec!</span>[<span class="number">0.0</span>; n];
         <span class="kw">let </span><span class="kw-2">mut </span>k2 = <span class="macro">vec!</span>[<span class="number">0.0</span>; n];
-
         <span class="kw">let </span><span class="kw-2">mut </span>y1 = <span class="macro">vec!</span>[<span class="number">0.0</span>; n];
         <span class="kw">let </span><span class="kw-2">mut </span>y2 = <span class="macro">vec!</span>[<span class="number">0.0</span>; n];
 
@@ -1314,16 +1312,18 @@
             ImplicitSolver::FixedPoint =&gt; {
                 <span class="comment">// Fixed-point iteration
                 </span><span class="kw">for _ in </span><span class="number">0</span>..<span class="self">self</span>.max_step_iter {
+                    <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..n {
+                        y1[i] = y[i] + dt * (c * k1[i] + d * k2[i] - sqrt3 * (k2[i] - k1[i]) / <span class="number">2.0</span>);
+                        y2[i] = y[i] + dt * (c * k1[i] + d * k2[i] + sqrt3 * (k2[i] - k1[i]) / <span class="number">2.0</span>);
+                    }
+
                     problem.rhs(t + c * dt, <span class="kw-2">&amp;</span>y1, <span class="kw-2">&amp;mut </span>k1)<span class="question-mark">?</span>;
                     problem.rhs(t + d * dt, <span class="kw-2">&amp;</span>y2, <span class="kw-2">&amp;mut </span>k2)<span class="question-mark">?</span>;
 
                     <span class="kw">let </span><span class="kw-2">mut </span>max_diff = <span class="number">0f64</span>;
                     <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..n {
-                        <span class="kw">let </span>y1_new = y[i] + dt * (c * k1[i] + d * k2[i] - sqrt3 * (k2[i] - k1[i]) / <span class="number">2.0</span>);
-                        <span class="kw">let </span>y2_new = y[i] + dt * (c * k1[i] + d * k2[i] + sqrt3 * (k2[i] - k1[i]) / <span class="number">2.0</span>);
-                        max_diff = max_diff.max((y1_new - y1[i]).abs()).max((y2_new - y2[i]).abs());
-                        y1[i] = y1_new;
-                        y2[i] = y2_new;
+                        max_diff = max_diff.max((y1[i] - y[i] - dt * (c * k1[i] + d * k2[i] - sqrt3 * (k2[i] - k1[i]) / <span class="number">2.0</span>)).abs())
+                                            .max((y2[i] - y[i] - dt * (c * k1[i] + d * k2[i] + sqrt3 * (k2[i] - k1[i]) / <span class="number">2.0</span>)).abs());
                     }
 
                     <span class="kw">if </span>max_diff &lt; <span class="self">self</span>.tol {
