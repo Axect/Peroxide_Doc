@@ -4846,20 +4846,6 @@
 <a href="#4828" id="4828">4828</a>
 <a href="#4829" id="4829">4829</a>
 <a href="#4830" id="4830">4830</a>
-<a href="#4831" id="4831">4831</a>
-<a href="#4832" id="4832">4832</a>
-<a href="#4833" id="4833">4833</a>
-<a href="#4834" id="4834">4834</a>
-<a href="#4835" id="4835">4835</a>
-<a href="#4836" id="4836">4836</a>
-<a href="#4837" id="4837">4837</a>
-<a href="#4838" id="4838">4838</a>
-<a href="#4839" id="4839">4839</a>
-<a href="#4840" id="4840">4840</a>
-<a href="#4841" id="4841">4841</a>
-<a href="#4842" id="4842">4842</a>
-<a href="#4843" id="4843">4843</a>
-<a href="#4844" id="4844">4844</a>
 </pre></div><pre class="rust"><code><span class="doccomment">//! Matrix for Scientific computation
 //!
 //! ## Declare matrix
@@ -4902,7 +4888,6 @@
 //! * Type: `ml_matrix(&amp;str)`
 //!
 //!     ```rust
-//!     extern crate peroxide;
 //!     use peroxide::fuga::*;
 //!
 //!     fn main() {
@@ -4920,7 +4905,6 @@
 //! * Type: `py_matrix(Vec&lt;Vec&lt;T&gt;&gt;) where T: std::convert::Into&lt;f64&gt; + Copy`
 //!
 //!     ```rust
-//!     extern crate peroxide;
 //!     use peroxide::fuga::*;
 //!
 //!     fn main() {
@@ -5013,7 +4997,6 @@
 //! * `write_with_header(&amp;self, file_path, header: Vec&lt;&amp;str&gt;)`: Write with header
 //!
 //!     ```rust
-//!     extern crate peroxide;
 //!     use peroxide::fuga::*;
 //!
 //!     fn main() {
@@ -5036,7 +5019,6 @@
 //! * Description: `read(file_path, is_header, delimiter)`
 //!
 //!     ```no_run
-//!     extern crate peroxide;
 //!     use peroxide::fuga::*;
 //!
 //!     fn main() {
@@ -5095,27 +5077,28 @@
 //! * `cbind`: Concatenate two matrices by column direction.
 //! * `rbind`: Concatenate two matrices by row direction.
 //!
-//!     ```rust
-//!     extern crate peroxide;
-//!     use peroxide::fuga::*;
+//! ```rust
+//! use peroxide::fuga::*;
 //!
-//!     fn main() {
-//!         let a = ml_matrix("1 2;3 4");
-//!         let b = ml_matrix("5 6;7 8");
+//! fn main() -&gt; Result&lt;(), Box&lt;dyn Error&gt;&gt; {
+//!     let a = ml_matrix("1 2;3 4");
+//!     let b = ml_matrix("5 6;7 8");
 //!
-//!         cbind(a.clone(), b.clone()).print();
-//!         //      c[0] c[1] c[2] c[3]
-//!         // r[0]    1    2    5    7
-//!         // r[1]    3    4    6    8
+//!     cbind(a.clone(), b.clone())?.print();
+//!     //      c[0] c[1] c[2] c[3]
+//!     // r[0]    1    2    5    7
+//!     // r[1]    3    4    6    8
 //!
-//!         rbind(a, b).print();
-//!         //      c[0] c[1]
-//!         // r[0]    1    2
-//!         // r[1]    3    4
-//!         // r[2]    5    6
-//!         // r[3]    7    8
-//!     }
-//!     ```
+//!     rbind(a, b)?.print();
+//!     //      c[0] c[1]
+//!     // r[0]    1    2
+//!     // r[1]    3    4
+//!     // r[2]    5    6
+//!     // r[3]    7    8
+//!
+//!     Ok(())
+//! }
+//! ```
 //!
 //! ## Matrix operations
 //!
@@ -5149,8 +5132,8 @@
 //! * `clone` is too annoying - We can use reference operations!
 //!
 //!     ```rust
-//!     extern crate peroxide;
 //!     use peroxide::fuga::*;
+//!
 //!     fn main() {
 //!         let a = ml_matrix("1 2;3 4");
 //!         let b = ml_matrix("5 6;7 8");
@@ -5204,9 +5187,9 @@
 //! * `zeros(usize, usize)`: Construct matrix which elements are all zero
 //! * `eye(usize)`: Identity matrix
 //! * `rand(usize, usize)`: Construct random uniform matrix (from 0 to 1)
+//! * `rand_with_rng(usize, usize, &amp;mut Rng)`: Construct random matrix with user-defined RNG
 //!
 //!     ```rust
-//!     extern crate peroxide;
 //!     use peroxide::fuga::*;
 //!
 //!     fn main() {
@@ -5255,7 +5238,6 @@
 //! * The structure of `PQLU` is as follows:
 //!
 //!     ```rust
-//!     extern crate peroxide;
 //!     use peroxide::fuga::*;
 //!
 //!     #[derive(Debug, Clone)]
@@ -5332,7 +5314,6 @@
 //! can get better performance (via memoization)
 //!
 //! ```rust
-//! extern crate peroxide;
 //! use peroxide::fuga::*;
 //!
 //! fn main() {
@@ -5358,7 +5339,6 @@
 //! * Example
 //!     
 //!     ```ignore
-//!     extern crate peroxide;
 //!     use peroxide::fuga::*;
 //!
 //!     let a = ml_matrix("
@@ -5391,7 +5371,6 @@
 //! * Return `SVD` structure
 //!
 //!     ```no_run
-//!     extern crate peroxide;
 //!     use peroxide::fuga::*;
 //!
 //!     pub struct SVD {
@@ -5404,7 +5383,6 @@
 //! * Example
 //!
 //!     ```
-//!     extern crate peroxide;
 //!     use peroxide::fuga::*;
 //!
 //!     fn main() {
@@ -5480,9 +5458,6 @@
 </span><span class="kw">use </span>blas::{daxpy, dgemm, dgemv};
 <span class="attr">#[cfg(feature = <span class="string">"O3"</span>)]
 </span><span class="kw">use </span>lapack::{dgecon, dgeqrf, dgetrf, dgetri, dgetrs, dorgqr, dgesvd, dpotrf};
-<span class="attr">#[cfg(feature = <span class="string">"O3"</span>)]
-</span><span class="kw">use </span>std::f64::NAN;
-
 <span class="attr">#[cfg(feature = <span class="string">"serde"</span>)]
 </span><span class="kw">use </span>serde::{Deserialize, Serialize};
 
@@ -5501,7 +5476,6 @@
 };
 <span class="kw">use </span><span class="kw">crate</span>::structure::dataframe::{Series, TypedVector};
 <span class="kw">use </span>std::cmp::{max, min};
-<span class="kw">use </span>std::convert;
 <span class="kw">pub use </span>std::error::Error;
 <span class="kw">use </span>std::fmt;
 <span class="kw">use </span>std::ops::{Add, Div, Index, IndexMut, Mul, Neg, Sub};
@@ -5517,7 +5491,6 @@
 ///
 /// # Examples
 /// ```
-/// extern crate peroxide;
 /// use peroxide::fuga::*;
 ///
 /// let a = matrix(vec![1,2,3,4], 2, 2, Row);
@@ -5549,7 +5522,6 @@
 /// # Examples
 ///
 /// ```
-/// extern crate peroxide;
 /// use peroxide::fuga::*;
 ///
 /// let a = Matrix {
@@ -5587,7 +5559,7 @@
 /// ```
 </span><span class="kw">pub fn </span>matrix&lt;T&gt;(v: Vec&lt;T&gt;, r: usize, c: usize, shape: Shape) -&gt; Matrix
 <span class="kw">where
-    </span>T: convert::Into&lt;f64&gt;,
+    </span>T: Into&lt;f64&gt;,
 {
     Matrix {
         data: v.into_iter().map(|t| t.into()).collect::&lt;Vec&lt;f64&gt;&gt;(),
@@ -5600,7 +5572,7 @@
 <span class="doccomment">/// R-like matrix constructor (Explicit ver.)
 </span><span class="kw">pub fn </span>r_matrix&lt;T&gt;(v: Vec&lt;T&gt;, r: usize, c: usize, shape: Shape) -&gt; Matrix
 <span class="kw">where
-    </span>T: convert::Into&lt;f64&gt;,
+    </span>T: Into&lt;f64&gt;,
 {
     matrix(v, r, c, shape)
 }
@@ -5621,7 +5593,7 @@
 /// ```
 </span><span class="kw">pub fn </span>py_matrix&lt;T&gt;(v: Vec&lt;Vec&lt;T&gt;&gt;) -&gt; Matrix
 <span class="kw">where
-    </span>T: convert::Into&lt;f64&gt; + Copy,
+    </span>T: Into&lt;f64&gt; + Copy,
 {
     <span class="kw">let </span>r = v.len();
     <span class="kw">let </span>c = v[<span class="number">0</span>].len();
@@ -5708,14 +5680,13 @@
     ///
     /// # Examples
     /// ```
-    /// extern crate peroxide;
     /// use peroxide::fuga::*;
     ///
     /// let a = matrix(vec![1,2,3,4], 2, 2, Col);
     /// let b = a.as_slice();
     /// assert_eq!(b, &amp;[1f64,2f64,3f64,4f64]);
     /// ```
-    </span><span class="kw">pub fn </span>as_slice&lt;<span class="lifetime">'a</span>&gt;(<span class="kw-2">&amp;</span><span class="lifetime">'a </span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">'a </span>[f64] {
+    </span><span class="kw">pub fn </span>as_slice(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[f64] {
         <span class="kw-2">&amp;</span><span class="self">self</span>.data[..]
     }
 
@@ -5723,7 +5694,6 @@
     ///
     /// # Examples
     /// ```
-    /// extern crate peroxide;
     /// use peroxide::fuga::*;
     ///
     /// let mut a = matrix(vec![1,2,3,4], 2, 2, Col);
@@ -5732,7 +5702,7 @@
     /// assert_eq!(b, &amp;[5f64, 2f64, 3f64, 4f64]);
     /// assert_eq!(a, matrix(vec![5,2,3,4], 2, 2, Col));
     /// ```
-    </span><span class="kw">pub fn </span>as_mut_slice&lt;<span class="lifetime">'a</span>&gt;(<span class="kw-2">&amp;</span><span class="lifetime">'a </span><span class="kw-2">mut </span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">'a </span><span class="kw-2">mut </span>[f64] {
+    </span><span class="kw">pub fn </span>as_mut_slice(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut </span>[f64] {
         <span class="kw-2">&amp;mut </span><span class="self">self</span>.data[..]
     }
 
@@ -5742,7 +5712,6 @@
     ///
     /// # Examples
     /// ```
-    /// extern crate peroxide;
     /// use peroxide::fuga::*;
     ///
     /// let a = matrix(vec![1,2,3,4],2,2,Row);
@@ -5784,7 +5753,6 @@
     ///
     /// # Examples
     /// ```
-    /// extern crate peroxide;
     /// use peroxide::fuga::*;
     ///
     /// let a = matrix(vec![1,2,3,4],2,2,Row);
@@ -5823,7 +5791,6 @@
     ///
     /// # Examples
     /// ```
-    /// extern crate peroxide;
     /// use peroxide::fuga::*;
     ///
     /// let a = matrix(vec![1,2,3,4],2,2,Row);
@@ -5980,7 +5947,6 @@
     ///
     /// # Examples
     /// ```
-    /// extern crate peroxide;
     /// use peroxide::fuga::*;
     ///
     /// let a = matrix(vec![1,2,3,4], 2, 2, Row);
@@ -6018,9 +5984,11 @@
     /// extern crate peroxide;
     /// use peroxide::fuga::*;
     ///
-    /// fn main() {
+    /// fn main() -&gt; Result&lt;(), Box&lt;dyn Error&gt;&gt; {
     ///     let a = matrix(c!(1,2,3,3,2,1), 3, 2, Col);
-    ///     a.write("example_data/test.csv");
+    ///     a.write("example_data/test.csv")?;
+    ///
+    ///     Ok(())
     /// }
     /// ```
     </span><span class="attr">#[cfg(feature=<span class="string">"csv"</span>)]
@@ -6047,9 +6015,11 @@
     /// extern crate peroxide;
     /// use peroxide::fuga::*;
     ///
-    /// fn main() {
+    /// fn main() -&gt; Result&lt;(), Box&lt;dyn Error&gt;&gt; {
     ///     let a = matrix(c!(1,2,3,3,2,1), 3, 2, Col);
-    ///     a.write_round("example_data/test.csv", 0);
+    ///     a.write_round("example_data/test.csv", 0)?;
+    ///
+    ///     Ok(())
     /// }
     /// ```
     </span><span class="attr">#[cfg(feature=<span class="string">"csv"</span>)]
@@ -6122,9 +6092,9 @@
     /// use peroxide::fuga::*;
     /// use std::process;
     ///
-    /// fn main() {
+    /// fn main() -&gt; Result&lt;(), Box&lt;dyn Error&gt;&gt; {
     ///     let a = matrix(c!(1,2,3,3,2,1), 3, 2, Col);
-    ///     a.write_round("example_data/test.csv", 0);
+    ///     a.write_round("example_data/test.csv", 0)?;
     ///
     ///     let b = Matrix::read("example_data/test.csv", false, ','); // header = false, delimiter = ','
     ///     match b {
@@ -6134,6 +6104,8 @@
     ///             process::exit(1);
     ///         }
     ///     }
+    ///
+    ///     Ok(())
     /// }
     /// ```
     </span><span class="attr">#[cfg(feature=<span class="string">"csv"</span>)]
@@ -6228,7 +6200,7 @@
     }
 
     <span class="kw">pub fn </span>to_diag(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Matrix {
-        <span class="macro">assert!</span>(<span class="self">self</span>.row == <span class="self">self</span>.col, <span class="string">"Should be square matrix"</span>);
+        <span class="macro">assert_eq!</span>(<span class="self">self</span>.row, <span class="self">self</span>.col, <span class="string">"Should be square matrix"</span>);
         <span class="kw">let </span><span class="kw-2">mut </span>result = matrix(<span class="macro">vec!</span>[<span class="number">0f64</span>; <span class="self">self</span>.row * <span class="self">self</span>.col], <span class="self">self</span>.row, <span class="self">self</span>.col, Row);
         <span class="kw">let </span>diag = <span class="self">self</span>.diag();
         <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..<span class="self">self</span>.row {
@@ -6442,12 +6414,12 @@
                     <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..<span class="self">self</span>.row {
                         s_row += <span class="self">self</span>[(i, j)].powi(p <span class="kw">as </span>i32);
                     }
-                    s += s_row.powf(q <span class="kw">as </span>f64 / (p <span class="kw">as </span>f64));
+                    s += s_row.powf(q / p);
                 }
-                s.powf(<span class="number">1f64 </span>/ (q <span class="kw">as </span>f64))
+                s.powf(<span class="number">1f64 </span>/ q)
             }
             Norm::L1 =&gt; {
-                <span class="kw">let </span><span class="kw-2">mut </span>m = std::f64::MIN;
+                <span class="kw">let </span><span class="kw-2">mut </span>m = f64::MIN;
                 <span class="kw">match </span><span class="self">self</span>.shape {
                     Row =&gt; <span class="self">self</span>.change_shape().norm(Norm::L1),
                     Col =&gt; {
@@ -6462,7 +6434,7 @@
                 }
             }
             Norm::LInf =&gt; {
-                <span class="kw">let </span><span class="kw-2">mut </span>m = std::f64::MIN;
+                <span class="kw">let </span><span class="kw-2">mut </span>m = f64::MIN;
                 <span class="kw">match </span><span class="self">self</span>.shape {
                     Col =&gt; <span class="self">self</span>.change_shape().norm(Norm::LInf),
                     Row =&gt; {
@@ -6546,16 +6518,16 @@
 
         <span class="kw">for </span>j <span class="kw">in </span><span class="number">1</span>..c1 {
             <span class="kw">let </span>n = <span class="self">self</span>[(<span class="number">0</span>, j)] * other;
-            result = cbind(result, n);
+            result = cbind(result, n).unwrap();
         }
 
         <span class="kw">for </span>i <span class="kw">in </span><span class="number">1</span>..r1 {
             <span class="kw">let </span><span class="kw-2">mut </span>m = <span class="self">self</span>[(i, <span class="number">0</span>)] * other;
             <span class="kw">for </span>j <span class="kw">in </span><span class="number">1</span>..c1 {
                 <span class="kw">let </span>n = <span class="self">self</span>[(i, j)] * other;
-                m = cbind(m, n);
+                m = cbind(m, n).unwrap();
             }
-            result = rbind(result, m);
+            result = rbind(result, m).unwrap();
         }
         result
     }
@@ -6676,7 +6648,7 @@
 /// ```
 </span><span class="kw">impl</span>&lt;T&gt; Add&lt;T&gt; <span class="kw">for </span>Matrix
 <span class="kw">where
-    </span>T: convert::Into&lt;f64&gt; + Copy,
+    </span>T: Into&lt;f64&gt; + Copy,
 {
     <span class="kw">type </span>Output = <span class="self">Self</span>;
     <span class="kw">fn </span>add(<span class="self">self</span>, other: T) -&gt; <span class="self">Self </span>{
@@ -6699,7 +6671,7 @@
 <span class="doccomment">/// Element-wise addition between &amp;Matrix &amp; f64
 </span><span class="kw">impl</span>&lt;<span class="lifetime">'a</span>, T&gt; Add&lt;T&gt; <span class="kw">for </span><span class="kw-2">&amp;</span><span class="lifetime">'a </span>Matrix
 <span class="kw">where
-    </span>T: convert::Into&lt;f64&gt; + Copy,
+    </span>T: Into&lt;f64&gt; + Copy,
 {
     <span class="kw">type </span>Output = Matrix;
     <span class="kw">fn </span>add(<span class="self">self</span>, other: T) -&gt; <span class="self">Self</span>::Output {
@@ -6789,7 +6761,7 @@
 ///
 /// fn main() {
 ///     let a = matrix!(1;4;1, 2, 2, Row);
-///     assert_eq!(1 as usize + a, matrix!(2;5;1, 2, 2, Row));
+///     assert_eq!(1usize + a, matrix!(2;5;1, 2, 2, Row));
 /// }
 /// ```
 </span><span class="kw">impl </span>Add&lt;Matrix&gt; <span class="kw">for </span>usize {
@@ -6936,7 +6908,7 @@
 <span class="doccomment">/// Subtraction between Matrix &amp; f64
 </span><span class="kw">impl</span>&lt;T&gt; Sub&lt;T&gt; <span class="kw">for </span>Matrix
 <span class="kw">where
-    </span>T: convert::Into&lt;f64&gt; + Copy,
+    </span>T: Into&lt;f64&gt; + Copy,
 {
     <span class="kw">type </span>Output = <span class="self">Self</span>;
 
@@ -6960,7 +6932,7 @@
 <span class="doccomment">/// Subtraction between &amp;Matrix &amp; f64
 </span><span class="kw">impl</span>&lt;<span class="lifetime">'a</span>, T&gt; Sub&lt;T&gt; <span class="kw">for </span><span class="kw-2">&amp;</span><span class="lifetime">'a </span>Matrix
 <span class="kw">where
-    </span>T: convert::Into&lt;f64&gt; + Copy,
+    </span>T: Into&lt;f64&gt; + Copy,
 {
     <span class="kw">type </span>Output = Matrix;
 
@@ -7598,7 +7570,7 @@
     <span class="kw">fn </span>reduce&lt;F, T&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, init: T, f: F) -&gt; f64
     <span class="kw">where
         </span>F: Fn(f64, f64) -&gt; f64,
-        T: convert::Into&lt;f64&gt;,
+        T: Into&lt;f64&gt;,
     {
         <span class="self">self</span>.data.iter().fold(init.into(), |x, y| f(x, <span class="kw-2">*</span>y))
     }
@@ -8222,7 +8194,7 @@
             </span>() =&gt; {
                 <span class="kw">let </span>opt_dgrf = lapack_dgetrf(<span class="self">self</span>);
                 <span class="kw">match </span>opt_dgrf {
-                    <span class="prelude-val">None </span>=&gt; NAN,
+                    <span class="prelude-val">None </span>=&gt; f64::NAN,
                     <span class="prelude-val">Some</span>(dgrf) =&gt; <span class="kw">match </span>dgrf.status {
                         LAPACK_STATUS::Singular =&gt; <span class="number">0f64</span>,
                         LAPACK_STATUS::NonSingular =&gt; {
@@ -8516,7 +8488,7 @@
     <span class="kw">unsafe fn </span>col_mut(<span class="kw-2">&amp;mut </span><span class="self">self</span>, idx: usize) -&gt; Vec&lt;<span class="kw-2">*mut </span>f64&gt; {
         <span class="macro">assert!</span>(idx &lt; <span class="self">self</span>.col, <span class="string">"Index out of range"</span>);
         <span class="kw">match </span><span class="self">self</span>.shape {
-            Shape::Col =&gt; {
+            Col =&gt; {
                 <span class="kw">let </span><span class="kw-2">mut </span>v: Vec&lt;<span class="kw-2">*mut </span>f64&gt; = <span class="macro">vec!</span>[<span class="kw-2">&amp;mut </span><span class="number">0f64</span>; <span class="self">self</span>.row];
                 <span class="kw">let </span>start_idx = idx * <span class="self">self</span>.row;
                 <span class="kw">let </span>p = <span class="self">self</span>.mut_ptr();
@@ -8525,7 +8497,7 @@
                 }
                 v
             }
-            Shape::Row =&gt; {
+            Row =&gt; {
                 <span class="kw">let </span><span class="kw-2">mut </span>v: Vec&lt;<span class="kw-2">*mut </span>f64&gt; = <span class="macro">vec!</span>[<span class="kw-2">&amp;mut </span><span class="number">0f64</span>; <span class="self">self</span>.row];
                 <span class="kw">let </span>p = <span class="self">self</span>.mut_ptr();
                 <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..v.len() {
@@ -8539,7 +8511,7 @@
     <span class="kw">unsafe fn </span>row_mut(<span class="kw-2">&amp;mut </span><span class="self">self</span>, idx: usize) -&gt; Vec&lt;<span class="kw-2">*mut </span>f64&gt; {
         <span class="macro">assert!</span>(idx &lt; <span class="self">self</span>.row, <span class="string">"Index out of range"</span>);
         <span class="kw">match </span><span class="self">self</span>.shape {
-            Shape::Row =&gt; {
+            Row =&gt; {
                 <span class="kw">let </span><span class="kw-2">mut </span>v: Vec&lt;<span class="kw-2">*mut </span>f64&gt; = <span class="macro">vec!</span>[<span class="kw-2">&amp;mut </span><span class="number">0f64</span>; <span class="self">self</span>.col];
                 <span class="kw">let </span>start_idx = idx * <span class="self">self</span>.col;
                 <span class="kw">let </span>p = <span class="self">self</span>.mut_ptr();
@@ -8548,7 +8520,7 @@
                 }
                 v
             }
-            Shape::Col =&gt; {
+            Col =&gt; {
                 <span class="kw">let </span><span class="kw-2">mut </span>v: Vec&lt;<span class="kw-2">*mut </span>f64&gt; = <span class="macro">vec!</span>[<span class="kw-2">&amp;mut </span><span class="number">0f64</span>; <span class="self">self</span>.col];
                 <span class="kw">let </span>p = <span class="self">self</span>.mut_ptr();
                 <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..v.len() {
@@ -8561,8 +8533,8 @@
 
     <span class="kw">unsafe fn </span>swap(<span class="kw-2">&amp;mut </span><span class="self">self</span>, idx1: usize, idx2: usize, shape: Shape) {
         <span class="kw">match </span>shape {
-            Shape::Col =&gt; swap_vec_ptr(<span class="kw-2">&amp;mut </span><span class="self">self</span>.col_mut(idx1), <span class="kw-2">&amp;mut </span><span class="self">self</span>.col_mut(idx2)),
-            Shape::Row =&gt; swap_vec_ptr(<span class="kw-2">&amp;mut </span><span class="self">self</span>.row_mut(idx1), <span class="kw-2">&amp;mut </span><span class="self">self</span>.row_mut(idx2)),
+            Col =&gt; swap_vec_ptr(<span class="kw-2">&amp;mut </span><span class="self">self</span>.col_mut(idx1), <span class="kw-2">&amp;mut </span><span class="self">self</span>.col_mut(idx2)),
+            Row =&gt; swap_vec_ptr(<span class="kw-2">&amp;mut </span><span class="self">self</span>.row_mut(idx1), <span class="kw-2">&amp;mut </span><span class="self">self</span>.row_mut(idx2)),
         }
     }
 
@@ -8639,6 +8611,14 @@
 }
 
 <span class="kw">impl </span>TrigOps <span class="kw">for </span>Matrix {
+    <span class="kw">fn </span>sin_cos(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; (<span class="self">Self</span>, <span class="self">Self</span>) {
+        <span class="kw">let </span>(sin, cos) = <span class="self">self</span>.data.iter().map(|x| x.sin_cos()).unzip();
+        (
+            matrix(sin, <span class="self">self</span>.row, <span class="self">self</span>.col, <span class="self">self</span>.shape),
+            matrix(cos, <span class="self">self</span>.row, <span class="self">self</span>.col, <span class="self">self</span>.shape),
+        )
+    }
+
     <span class="kw">fn </span>sin(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
         <span class="self">self</span>.fmap(|x| x.sin())
     }
@@ -8673,14 +8653,6 @@
 
     <span class="kw">fn </span>atan(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
         <span class="self">self</span>.fmap(|x| x.atan())
-    }
-
-    <span class="kw">fn </span>sin_cos(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; (<span class="self">Self</span>, <span class="self">Self</span>) {
-        <span class="kw">let </span>(sin, cos) = <span class="self">self</span>.data.iter().map(|x| x.sin_cos()).unzip();
-        (
-            matrix(sin, <span class="self">self</span>.row, <span class="self">self</span>.col, <span class="self">self</span>.shape),
-            matrix(cos, <span class="self">self</span>.row, <span class="self">self</span>.col, <span class="self">self</span>.shape),
-        )
     }
 
     <span class="kw">fn </span>asinh(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
@@ -9180,7 +9152,7 @@
     };
 
     <span class="kw">let </span><span class="kw-2">mut </span>info = <span class="number">0i32</span>;
-    <span class="kw">let </span><span class="kw-2">mut </span>ipiv: Vec&lt;i32&gt; = <span class="macro">vec!</span>[<span class="number">0i32</span>; std::cmp::min(m, n)];
+    <span class="kw">let </span><span class="kw-2">mut </span>ipiv: Vec&lt;i32&gt; = <span class="macro">vec!</span>[<span class="number">0i32</span>; min(m, n)];
 
     <span class="kw">unsafe </span>{
         dgetrf(m_i32, n_i32, <span class="kw-2">&amp;mut </span>a, m_i32, <span class="kw-2">&amp;mut </span>ipiv, <span class="kw-2">&amp;mut </span>info);
@@ -9377,7 +9349,7 @@
 
             <span class="kw">if </span>info == <span class="number">0 </span>{
                 <span class="prelude-val">Some</span>(DGESVD {
-                    s: s,
+                    s,
                     u: matrix(u, m <span class="kw">as </span>usize, m <span class="kw">as </span>usize, Col),
                     vt: matrix(vt, n <span class="kw">as </span>usize, n <span class="kw">as </span>usize, Col),
                     status: SVD_STATUS::Success,
@@ -9386,7 +9358,7 @@
                 <span class="prelude-val">None
             </span>} <span class="kw">else </span>{
                 <span class="prelude-val">Some</span>(DGESVD {
-                    s: s,
+                    s,
                     u: matrix(u, m <span class="kw">as </span>usize, m <span class="kw">as </span>usize, Col),
                     vt: matrix(vt, n <span class="kw">as </span>usize, n <span class="kw">as </span>usize, Col),
                     status: SVD_STATUS::Diverge(info),

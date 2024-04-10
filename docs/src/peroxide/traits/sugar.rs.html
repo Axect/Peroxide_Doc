@@ -514,14 +514,14 @@
 
 <span class="kw">pub trait </span>Scalable {
     <span class="kw">type </span>Vec;
-    <span class="kw">fn </span>resize(<span class="kw-2">&amp;</span><span class="self">self</span>, size: (usize, usize), shape: Shape) -&gt; Matrix;
+    <span class="kw">fn </span>reshape(<span class="kw-2">&amp;</span><span class="self">self</span>, size: (usize, usize), shape: Shape) -&gt; Matrix;
     <span class="kw">fn </span>add_col(<span class="kw-2">&amp;</span><span class="self">self</span>, v: <span class="kw-2">&amp;</span><span class="self">Self</span>::Vec) -&gt; Matrix;
     <span class="kw">fn </span>add_row(<span class="kw-2">&amp;</span><span class="self">self</span>, v: <span class="kw-2">&amp;</span><span class="self">Self</span>::Vec) -&gt; Matrix;
 }
 
 <span class="kw">pub trait </span>ScalableMut {
     <span class="kw">type </span>Vec;
-    <span class="kw">fn </span>resize_mut(<span class="kw-2">&amp;mut </span><span class="self">self</span>, size: (usize, usize), shape: Shape);
+    <span class="kw">fn </span>reshape_mut(<span class="kw-2">&amp;mut </span><span class="self">self</span>, size: (usize, usize), shape: Shape);
     <span class="kw">fn </span>add_col_mut(<span class="kw-2">&amp;mut </span><span class="self">self</span>, v: <span class="kw-2">&amp;</span><span class="self">Self</span>::Vec);
     <span class="kw">fn </span>add_row_mut(<span class="kw-2">&amp;mut </span><span class="self">self</span>, v: <span class="kw-2">&amp;</span><span class="self">Self</span>::Vec);
 }
@@ -684,13 +684,13 @@
     ///
     /// fn main() {
     ///     let a = c!(1,2,3,4,5,6);
-    ///     let b1 = a.resize((3,2), Row);
-    ///     let b2 = a.resize((3,2), Col);
+    ///     let b1 = a.reshape((3,2), Row);
+    ///     let b2 = a.reshape((3,2), Col);
     ///     assert_eq!(b1, ml_matrix("1 2;3 4;5 6"));
     ///     assert_eq!(b2, ml_matrix("1 4;2 5;3 6"));
     /// }
     /// ```
-    </span><span class="kw">fn </span>resize(<span class="kw-2">&amp;</span><span class="self">self</span>, (r, c): (usize, usize), shape: Shape) -&gt; Matrix {
+    </span><span class="kw">fn </span>reshape(<span class="kw-2">&amp;</span><span class="self">self</span>, (r, c): (usize, usize), shape: Shape) -&gt; Matrix {
         <span class="macro">assert_eq!</span>(<span class="self">self</span>.len(), r * c);
         <span class="kw">let </span><span class="kw-2">mut </span>m = zeros_shape(r, c, shape);
         m.data = <span class="self">self</span>[..].to_vec();
@@ -713,11 +713,11 @@
     ///     assert_eq!(c2, ml_matrix("1 4;2 5;3 6"));
     /// }
     /// ```
-    </span><span class="kw">fn </span>add_row(<span class="kw-2">&amp;</span><span class="self">self</span>, v: <span class="kw-2">&amp;</span><span class="self">Self</span>::Vec) -&gt; Matrix {
+    </span><span class="kw">fn </span>add_col(<span class="kw-2">&amp;</span><span class="self">self</span>, v: <span class="kw-2">&amp;</span><span class="self">Self</span>::Vec) -&gt; Matrix {
         <span class="macro">assert_eq!</span>(<span class="self">self</span>.len(), v.len());
         <span class="kw">let </span><span class="kw-2">mut </span>x = <span class="self">self</span>[..].to_vec();
         x.extend_from_slice(<span class="kw-2">&amp;</span>v[..]);
-        x.resize((<span class="number">2</span>, <span class="self">self</span>.len()), Shape::Row)
+        x.reshape((<span class="self">self</span>.len(), <span class="number">2</span>), Shape::Col)
     }
 
     <span class="doccomment">/// Vector + Vector = Matrix
@@ -736,11 +736,11 @@
     ///     assert_eq!(c2, ml_matrix("1 4;2 5;3 6"));
     /// }
     /// ```
-    </span><span class="kw">fn </span>add_col(<span class="kw-2">&amp;</span><span class="self">self</span>, v: <span class="kw-2">&amp;</span><span class="self">Self</span>::Vec) -&gt; Matrix {
+    </span><span class="kw">fn </span>add_row(<span class="kw-2">&amp;</span><span class="self">self</span>, v: <span class="kw-2">&amp;</span><span class="self">Self</span>::Vec) -&gt; Matrix {
         <span class="macro">assert_eq!</span>(<span class="self">self</span>.len(), v.len());
         <span class="kw">let </span><span class="kw-2">mut </span>x = <span class="self">self</span>[..].to_vec();
         x.extend_from_slice(<span class="kw-2">&amp;</span>v[..]);
-        x.resize((<span class="self">self</span>.len(), <span class="number">2</span>), Shape::Col)
+        x.reshape((<span class="number">2</span>, <span class="self">self</span>.len()), Shape::Row)
     }
 }
 
@@ -757,49 +757,17 @@
     ///
     /// fn main() {
     ///     let a = ml_matrix("1 2 3;4 5 6"); // ml_matrix has shape `Col`
-    ///     let b1 = a.resize((3, 2), Row);
-    ///     let b2 = a.resize((3, 2), Col);
+    ///     let b1 = a.reshape((3, 2), Row);
+    ///     let b2 = a.reshape((3, 2), Col);
     ///     assert_eq!(b1, ml_matrix("1 2;3 4;5 6"));
     ///     assert_eq!(b2, ml_matrix("1 4;2 5;3 6"));
     /// }
     /// ```
-    </span><span class="kw">fn </span>resize(<span class="kw-2">&amp;</span><span class="self">self</span>, (r, c): (usize, usize), shape: Shape) -&gt; Matrix {
+    </span><span class="kw">fn </span>reshape(<span class="kw-2">&amp;</span><span class="self">self</span>, (r, c): (usize, usize), shape: Shape) -&gt; Matrix {
         <span class="macro">assert_eq!</span>(<span class="self">self</span>.row * <span class="self">self</span>.col, r * c);
         <span class="kw">let </span><span class="kw-2">mut </span>m = zeros_shape(r, c, shape);
         m.data = <span class="self">self</span>.data[..].to_vec();
         m
-    }
-
-    <span class="doccomment">/// Add row
-    ///
-    /// ```
-    /// #[macro_use]
-    /// extern crate peroxide;
-    /// use peroxide::fuga::*;
-    ///
-    /// fn main() {
-    ///     let a = ml_matrix("1 2 3;4 5 6");
-    ///     let b = c!(7,8,9);
-    ///     let c = a.add_row(&amp;b);
-    ///     assert_eq!(c, ml_matrix("1 2 3;4 5 6;7 8 9"));
-    /// }
-    /// ```
-    </span><span class="kw">fn </span>add_row(<span class="kw-2">&amp;</span><span class="self">self</span>, v: <span class="kw-2">&amp;</span><span class="self">Self</span>::Vec) -&gt; Matrix {
-        <span class="macro">assert_eq!</span>(<span class="self">self</span>.col, v.len());
-        <span class="kw">match </span><span class="self">self</span>.shape {
-            Shape::Row =&gt; {
-                <span class="kw">let </span><span class="kw-2">mut </span>m = <span class="self">self</span>.clone();
-                m.data.extend_from_slice(<span class="kw-2">&amp;</span>v[..]);
-                m.row += <span class="number">1</span>;
-                m
-            }
-            Shape::Col =&gt; {
-                <span class="kw">let </span><span class="kw-2">mut </span>m = <span class="self">self</span>.change_shape();
-                m.data.extend_from_slice(<span class="kw-2">&amp;</span>v[..]);
-                m.row += <span class="number">1</span>;
-                m
-            }
-        }
     }
 
     <span class="doccomment">/// Add column
@@ -833,6 +801,38 @@
             }
         }
     }
+
+    <span class="doccomment">/// Add row
+    ///
+    /// ```
+    /// #[macro_use]
+    /// extern crate peroxide;
+    /// use peroxide::fuga::*;
+    ///
+    /// fn main() {
+    ///     let a = ml_matrix("1 2 3;4 5 6");
+    ///     let b = c!(7,8,9);
+    ///     let c = a.add_row(&amp;b);
+    ///     assert_eq!(c, ml_matrix("1 2 3;4 5 6;7 8 9"));
+    /// }
+    /// ```
+    </span><span class="kw">fn </span>add_row(<span class="kw-2">&amp;</span><span class="self">self</span>, v: <span class="kw-2">&amp;</span><span class="self">Self</span>::Vec) -&gt; Matrix {
+        <span class="macro">assert_eq!</span>(<span class="self">self</span>.col, v.len());
+        <span class="kw">match </span><span class="self">self</span>.shape {
+            Shape::Row =&gt; {
+                <span class="kw">let </span><span class="kw-2">mut </span>m = <span class="self">self</span>.clone();
+                m.data.extend_from_slice(<span class="kw-2">&amp;</span>v[..]);
+                m.row += <span class="number">1</span>;
+                m
+            }
+            Shape::Col =&gt; {
+                <span class="kw">let </span><span class="kw-2">mut </span>m = <span class="self">self</span>.change_shape();
+                m.data.extend_from_slice(<span class="kw-2">&amp;</span>v[..]);
+                m.row += <span class="number">1</span>;
+                m
+            }
+        }
+    }
 }
 
 <span class="kw">impl </span>ScalableMut <span class="kw">for </span>Matrix {
@@ -847,46 +847,17 @@
     ///
     /// fn main() {
     ///     let mut a = ml_matrix("1 2 3;4 5 6"); // ml_matrix has shape `Row`
-    ///     a.resize_mut((3, 2), Row);
+    ///     a.reshape_mut((3, 2), Row);
     ///     assert_eq!(a, ml_matrix("1 2;3 4;5 6"));
-    ///     a.resize_mut((3, 2), Col);
+    ///     a.reshape_mut((3, 2), Col);
     ///     assert_eq!(a, ml_matrix("1 4;2 5;3 6"));
     /// }
     /// ```
-    </span><span class="kw">fn </span>resize_mut(<span class="kw-2">&amp;mut </span><span class="self">self</span>, (r, c): (usize, usize), shape: Shape) {
+    </span><span class="kw">fn </span>reshape_mut(<span class="kw-2">&amp;mut </span><span class="self">self</span>, (r, c): (usize, usize), shape: Shape) {
         <span class="macro">assert_eq!</span>(<span class="self">self</span>.row * <span class="self">self</span>.col, r * c);
         <span class="self">self</span>.row = r;
         <span class="self">self</span>.col = c;
         <span class="self">self</span>.shape = shape;
-    }
-
-    <span class="doccomment">/// Add row (Mutable)
-    ///
-    /// ```
-    /// #[macro_use]
-    /// extern crate peroxide;
-    /// use peroxide::fuga::*;
-    ///
-    /// fn main() {
-    ///     let mut a = ml_matrix("1 2 3;4 5 6");
-    ///     let b = c!(7,8,9);
-    ///     a.add_row_mut(&amp;b);
-    ///     assert_eq!(a, ml_matrix("1 2 3;4 5 6;7 8 9"));
-    /// }
-    /// ```
-    </span><span class="kw">fn </span>add_row_mut(<span class="kw-2">&amp;mut </span><span class="self">self</span>, v: <span class="kw-2">&amp;</span><span class="self">Self</span>::Vec) {
-        <span class="macro">assert_eq!</span>(<span class="self">self</span>.col, v.len());
-        <span class="kw">match </span><span class="self">self</span>.shape {
-            Shape::Row =&gt; {
-                <span class="self">self</span>.data.extend_from_slice(<span class="kw-2">&amp;</span>v[..]);
-                <span class="self">self</span>.row += <span class="number">1</span>;
-            }
-            Shape::Col =&gt; {
-                <span class="self">self</span>.change_shape_mut();
-                <span class="self">self</span>.data.extend_from_slice(<span class="kw-2">&amp;</span>v[..]);
-                <span class="self">self</span>.row += <span class="number">1</span>;
-            }
-        }
     }
 
     <span class="doccomment">/// Add column (Mutable)
@@ -914,6 +885,35 @@
                 <span class="self">self</span>.change_shape_mut();
                 <span class="self">self</span>.data.extend_from_slice(<span class="kw-2">&amp;</span>v[..]);
                 <span class="self">self</span>.col += <span class="number">1</span>;
+            }
+        }
+    }
+
+    <span class="doccomment">/// Add row (Mutable)
+    ///
+    /// ```
+    /// #[macro_use]
+    /// extern crate peroxide;
+    /// use peroxide::fuga::*;
+    ///
+    /// fn main() {
+    ///     let mut a = ml_matrix("1 2 3;4 5 6");
+    ///     let b = c!(7,8,9);
+    ///     a.add_row_mut(&amp;b);
+    ///     assert_eq!(a, ml_matrix("1 2 3;4 5 6;7 8 9"));
+    /// }
+    /// ```
+    </span><span class="kw">fn </span>add_row_mut(<span class="kw-2">&amp;mut </span><span class="self">self</span>, v: <span class="kw-2">&amp;</span><span class="self">Self</span>::Vec) {
+        <span class="macro">assert_eq!</span>(<span class="self">self</span>.col, v.len());
+        <span class="kw">match </span><span class="self">self</span>.shape {
+            Shape::Row =&gt; {
+                <span class="self">self</span>.data.extend_from_slice(<span class="kw-2">&amp;</span>v[..]);
+                <span class="self">self</span>.row += <span class="number">1</span>;
+            }
+            Shape::Col =&gt; {
+                <span class="self">self</span>.change_shape_mut();
+                <span class="self">self</span>.data.extend_from_slice(<span class="kw-2">&amp;</span>v[..]);
+                <span class="self">self</span>.row += <span class="number">1</span>;
             }
         }
     }

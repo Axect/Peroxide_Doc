@@ -65,12 +65,12 @@
     <span class="kw">let </span><span class="kw-2">mut </span>x_next = init_cond;
     <span class="kw">let </span><span class="kw-2">mut </span>x = x_next.clone();
     update(<span class="kw-2">&amp;mut </span>x_next, f);
-    <span class="kw">let </span><span class="kw-2">mut </span>err = (x_next.sub_vec(<span class="kw-2">&amp;</span>x)).norm(Norm::L2);
+    <span class="kw">let </span><span class="kw-2">mut </span>err = x_next.sub_vec(<span class="kw-2">&amp;</span>x).norm(Norm::L2);
 
     <span class="kw">while </span>err &gt;= rtol {
         x = x_next.clone();
         update(<span class="kw-2">&amp;mut </span>x_next, f);
-        err = (x_next.sub_vec(<span class="kw-2">&amp;</span>x)).norm(Norm::L2);
+        err = x_next.sub_vec(<span class="kw-2">&amp;</span>x).norm(Norm::L2);
     }
 
     x_next

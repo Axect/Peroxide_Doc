@@ -893,7 +893,7 @@
 //! ```rust
 //! use peroxide::fuga::*;
 //!
-//! fn main() -&gt; Result&lt;(), Box&lt;dyn std::error::Error&gt;&gt; {
+//! fn main() -&gt; Result&lt;(), Box&lt;dyn Error&gt;&gt; {
 //!     let x = seq(0, 10, 1);
 //!     let y = x.fmap(|t| t.sin());
 //!     
@@ -947,7 +947,7 @@
 //! ```rust
 //! use peroxide::fuga::*;
 //!
-//! fn main() -&gt; Result&lt;(), Box&lt;dyn std::error::Error&gt;&gt; {
+//! fn main() -&gt; Result&lt;(), Box&lt;dyn Error&gt;&gt; {
 //!     let x = seq(0, 10, 1);
 //!     let y = x.fmap(|t| t.sin());
 //!     
@@ -997,7 +997,7 @@
 //! use peroxide::fuga::*;
 //! use std::f64::consts::PI;
 //!
-//! fn main() -&gt; Result&lt;(), Box&lt;dyn std::error::Error&gt;&gt; {
+//! fn main() -&gt; Result&lt;(), Box&lt;dyn Error&gt;&gt; {
 //!     let x = seq(0, 10, 1);
 //!     let y = x.fmap(|t| t.sin());
 //!     
@@ -1149,7 +1149,7 @@
 /// extern crate peroxide;
 /// use peroxide::fuga::*;
 ///
-/// fn main() -&gt; Result&lt;(), Box&lt;dyn std::error::Error&gt;&gt; {
+/// fn main() -&gt; Result&lt;(), Box&lt;dyn Error&gt;&gt; {
 ///     let x = c!(0.9, 1.3, 1.9, 2.1);
 ///     let y = c!(1.3, 1.5, 1.85, 2.1);
 ///
@@ -1203,7 +1203,7 @@
 /// extern crate peroxide;
 /// use peroxide::fuga::*;
 ///
-/// fn main() -&gt; Result&lt;(), Box&lt;dyn std::error::Error&gt;&gt; {
+/// fn main() -&gt; Result&lt;(), Box&lt;dyn Error&gt;&gt; {
 ///     let x = c!(0.9, 1.3, 1.9, 2.1);
 ///     let y = c!(1.3, 1.5, 1.85, 2.1);
 ///
@@ -1258,7 +1258,7 @@
     /// extern crate peroxide;
     /// use peroxide::fuga::*;
     ///
-    /// fn main() -&gt; Result&lt;(), Box&lt;dyn std::error::Error&gt;&gt; {
+    /// fn main() -&gt; Result&lt;(), Box&lt;dyn Error&gt;&gt; {
     ///     let x = c!(0.9, 1.3, 1.9, 2.1);
     ///     let y = c!(1.3, 1.5, 1.85, 2.1);
     ///

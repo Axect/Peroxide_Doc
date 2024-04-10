@@ -14,9 +14,9 @@
     });
 </script>
 
-</head><body class="rustdoc mod crate"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../peroxide/index.html">peroxide</a><span class="version">0.36.0</span></h2></div><div class="sidebar-elems"><ul class="block">
+</head><body class="rustdoc mod crate"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../peroxide/index.html">peroxide</a><span class="version">0.36.2</span></h2></div><div class="sidebar-elems"><ul class="block">
             <li><a id="all-types" href="all.html">All Items</a></li></ul><section><ul class="block"><li><a href="#modules">Modules</a></li><li><a href="#macros">Macros</a></li></ul></section></div></nav><div class="sidebar-resizer"></div>
-    <main><div class="width-limiter"><nav class="sub"><form class="search-form"><span></span><div id="sidebar-button" tabindex="-1"><a href="../peroxide/all.html" title="show sidebar"></a></div><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" tabindex="-1"><a href="../help.html" title="help">?</a></div><div id="settings-menu" tabindex="-1"><a href="../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="main-heading"><h1>Crate <a class="mod" href="#">peroxide</a><button id="copy-path" title="Copy item path to clipboard"><img src="../static.files/clipboard-7571035ce49a181d.svg" width="19" height="18" alt="Copy item path"></button></h1><span class="out-of-band"><a class="src" href="../src/peroxide/lib.rs.html#1-198">source</a> · <button id="toggle-all-docs" title="collapse all docs">[<span>&#x2212;</span>]</button></span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p><code>peroxide</code> is comprehensive numerical library for Rust.</p>
+    <main><div class="width-limiter"><nav class="sub"><form class="search-form"><span></span><div id="sidebar-button" tabindex="-1"><a href="../peroxide/all.html" title="show sidebar"></a></div><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" tabindex="-1"><a href="../help.html" title="help">?</a></div><div id="settings-menu" tabindex="-1"><a href="../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="main-heading"><h1>Crate <a class="mod" href="#">peroxide</a><button id="copy-path" title="Copy item path to clipboard"><img src="../static.files/clipboard-7571035ce49a181d.svg" width="19" height="18" alt="Copy item path"></button></h1><span class="out-of-band"><a class="src" href="../src/peroxide/lib.rs.html#1-201">source</a> · <button id="toggle-all-docs" title="collapse all docs">[<span>&#x2212;</span>]</button></span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p><code>peroxide</code> is comprehensive numerical library for Rust.</p>
 <h3 id="components"><a class="doc-anchor" href="#components">§</a>Components</h3>
 <p><code>peroxide</code> has various components for scientific computation.</p>
 <ul>
@@ -196,15 +196,21 @@
 </span>}</code></pre></div>
 <h3 id="useful-tips-for-features"><a class="doc-anchor" href="#useful-tips-for-features">§</a>Useful tips for features</h3>
 <ul>
-<li>After <code>0.28.0</code>, <code>dataframe</code> feature is replaced by <code>nc</code> feature.</li>
-<li>If you want to use <em>QR</em> or <em>SVD</em> or <em>Cholesky Decomposition</em> then should use <code>O3</code> feature (there are no implementations for these decompositions in <code>default</code>)</li>
-<li>If you want to write your numerical results, then use <code>parquet</code> or <code>nc</code> features (corresponding to <code>parquet</code> or <code>netcdf</code> format. (It is much more effective than <code>csv</code> and <code>json</code>.)</li>
-<li>After <code>0.23.0</code>, there are two options - <code>fuga</code>, <code>prelude</code>. Choose proper option for your computations.</li>
-<li>To plot, use <code>parquet</code> or <code>nc</code> feature to export data as parquet or netcdf format and use python to draw plot.
+<li>
+<p>If you want to use <em>QR</em>, <em>SVD</em>, or <em>Cholesky Decomposition</em>, you should use the <code>O3</code> feature. These decompositions are not implemented in the <code>default</code> feature.</p>
+</li>
+<li>
+<p>If you want to save your numerical results, consider using the <code>parquet</code> or <code>nc</code> features, which correspond to the <code>parquet</code> and <code>netcdf</code> file formats, respectively. These formats are much more efficient than <code>csv</code> and <code>json</code>.</p>
+</li>
+<li>
+<p>For plotting, it is recommended to use the <code>plot</code> feature. However, if you require more customization, you can use the <code>parquet</code> or <code>nc</code> feature to export your data in the parquet or netcdf format and then use Python to create the plots.</p>
 <ul>
-<li><code>plot</code> feature has limited plot abilities.</li>
-<li>To read parquet file in python, use <code>pandas</code> &amp; <code>pyarrow</code> libraries.</li>
-<li>There is a template of python code for netcdf. - <a href="https://github.com/Axect/Socialst/blob/master/Templates/PyPlot_Template/nc_plot.py">Socialst</a></li>
+<li>
+<p>To read parquet files in Python, you can use the <code>pandas</code> and <code>pyarrow</code> libraries.</p>
+</li>
+<li>
+<p>A template for Python code that works with netcdf files can be found in the <a href="https://github.com/Axect/Socialst/blob/master/Templates/PyPlot_Template/nc_plot.py">Socialst</a> repository.</p>
+</li>
 </ul>
 </li>
 </ul>

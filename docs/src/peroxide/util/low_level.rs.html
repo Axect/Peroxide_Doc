@@ -34,20 +34,20 @@
 <a href="#16" id="16">16</a>
 <a href="#17" id="17">17</a>
 </pre></div><pre class="rust"><code><span class="kw">pub unsafe fn </span>copy_vec_ptr(dst: <span class="kw-2">&amp;mut </span>Vec&lt;<span class="kw-2">*mut </span>f64&gt;, src: <span class="kw-2">&amp;</span>Vec&lt;f64&gt;) {
-    <span class="macro">assert!</span>(dst.len() == src.len(), <span class="string">"Should use same length vectors"</span>);
+    <span class="macro">assert_eq!</span>(dst.len(), src.len(), <span class="string">"Should use same length vectors"</span>);
     <span class="kw">for </span>(<span class="kw-2">&amp;mut </span>p, <span class="kw-2">&amp;</span>s) <span class="kw">in </span>dst.iter_mut().zip(src) {
         <span class="kw-2">*</span>p = s;
     }
 }
 
 <span class="kw">pub unsafe fn </span>swap_vec_ptr(lhs: <span class="kw-2">&amp;mut </span>Vec&lt;<span class="kw-2">*mut </span>f64&gt;, rhs: <span class="kw-2">&amp;mut </span>Vec&lt;<span class="kw-2">*mut </span>f64&gt;) {
-    <span class="macro">assert!</span>(lhs.len() == rhs.len(), <span class="string">"Should use same length vectors"</span>);
+    <span class="macro">assert_eq!</span>(lhs.len(), rhs.len(), <span class="string">"Should use same length vectors"</span>);
     <span class="kw">for </span>(<span class="kw-2">&amp;mut </span>l, <span class="kw-2">&amp;mut </span>r) <span class="kw">in </span>lhs.iter_mut().zip(rhs.iter_mut()) {
         std::ptr::swap(l, r);
     }
 }
 
-<span class="kw">pub unsafe fn </span>ptr_to_vec&lt;<span class="lifetime">'a</span>&gt;(pv: <span class="kw-2">&amp;</span><span class="lifetime">'a </span>Vec&lt;<span class="kw-2">*const </span>f64&gt;) -&gt; Vec&lt;f64&gt; {
+<span class="kw">pub unsafe fn </span>ptr_to_vec(pv: <span class="kw-2">&amp;</span>Vec&lt;<span class="kw-2">*const </span>f64&gt;) -&gt; Vec&lt;f64&gt; {
     pv.iter().map(|<span class="kw-2">&amp;</span>x| <span class="kw-2">*</span>x).collect()
 }
 </code></pre></div></section></main></body></html>

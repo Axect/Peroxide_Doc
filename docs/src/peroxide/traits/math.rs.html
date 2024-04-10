@@ -124,8 +124,8 @@
 /// And a space of the vector should closed for that operations.
 </span><span class="kw">pub trait </span>Vector {
     <span class="kw">type </span>Scalar;
-    <span class="kw">fn </span>add_vec&lt;<span class="lifetime">'a</span>, <span class="lifetime">'b</span>&gt;(<span class="kw-2">&amp;</span><span class="lifetime">'a </span><span class="self">self</span>, rhs: <span class="kw-2">&amp;</span><span class="lifetime">'b </span><span class="self">Self</span>) -&gt; <span class="self">Self</span>;
-    <span class="kw">fn </span>sub_vec&lt;<span class="lifetime">'a</span>, <span class="lifetime">'b</span>&gt;(<span class="kw-2">&amp;</span><span class="lifetime">'a </span><span class="self">self</span>, rhs: <span class="kw-2">&amp;</span><span class="lifetime">'b </span><span class="self">Self</span>) -&gt; <span class="self">Self</span>;
+    <span class="kw">fn </span>add_vec(<span class="kw-2">&amp;</span><span class="self">self</span>, rhs: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; <span class="self">Self</span>;
+    <span class="kw">fn </span>sub_vec(<span class="kw-2">&amp;</span><span class="self">self</span>, rhs: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; <span class="self">Self</span>;
     <span class="kw">fn </span>mul_scalar(<span class="kw-2">&amp;</span><span class="self">self</span>, rhs: <span class="self">Self</span>::Scalar) -&gt; <span class="self">Self</span>;
 }
 
@@ -188,11 +188,11 @@
 </span><span class="kw">impl </span>Vector <span class="kw">for </span>f64 {
     <span class="kw">type </span>Scalar = <span class="self">Self</span>;
 
-    <span class="kw">fn </span>add_vec&lt;<span class="lifetime">'a</span>, <span class="lifetime">'b</span>&gt;(<span class="kw-2">&amp;</span><span class="lifetime">'a </span><span class="self">self</span>, rhs: <span class="kw-2">&amp;</span><span class="lifetime">'b </span><span class="self">Self</span>) -&gt; <span class="self">Self </span>{
+    <span class="kw">fn </span>add_vec(<span class="kw-2">&amp;</span><span class="self">self</span>, rhs: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; <span class="self">Self </span>{
         <span class="self">self </span>+ rhs
     }
 
-    <span class="kw">fn </span>sub_vec&lt;<span class="lifetime">'a</span>, <span class="lifetime">'b</span>&gt;(<span class="kw-2">&amp;</span><span class="lifetime">'a </span><span class="self">self</span>, rhs: <span class="kw-2">&amp;</span><span class="lifetime">'b </span><span class="self">Self</span>) -&gt; <span class="self">Self </span>{
+    <span class="kw">fn </span>sub_vec(<span class="kw-2">&amp;</span><span class="self">self</span>, rhs: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; <span class="self">Self </span>{
         <span class="self">self </span>- rhs
     }
 

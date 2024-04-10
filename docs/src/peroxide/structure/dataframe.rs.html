@@ -2909,19 +2909,19 @@
 <span class="attr">#[cfg(feature=<span class="string">"parquet"</span>)]
 </span><span class="kw">fn </span>arrow_to_dtype(dt: DataType) -&gt; DType {
     <span class="kw">match </span>dt {
-        DataType::Boolean =&gt; DType::Bool,
-        DataType::Int8 =&gt; DType::I8,
-        DataType::Int16 =&gt; DType::I16,
-        DataType::Int32 =&gt; DType::I32,
-        DataType::Int64 =&gt; DType::I64,
-        DataType::UInt8 =&gt; DType::U8,
-        DataType::UInt16 =&gt; DType::U16,
-        DataType::UInt32 =&gt; DType::U32,
-        DataType::UInt64 =&gt; DType::U64,
+        DataType::Boolean =&gt; Bool,
+        DataType::Int8 =&gt; I8,
+        DataType::Int16 =&gt; I16,
+        DataType::Int32 =&gt; I32,
+        DataType::Int64 =&gt; I64,
+        DataType::UInt8 =&gt; U8,
+        DataType::UInt16 =&gt; U16,
+        DataType::UInt32 =&gt; U32,
+        DataType::UInt64 =&gt; U64,
         <span class="comment">// DataType::Float16 =&gt; DType::F16,
-        </span>DataType::Float32 =&gt; DType::F32,
-        DataType::Float64 =&gt; DType::F64,
-        DataType::Utf8 =&gt; DType::Str,
+        </span>DataType::Float32 =&gt; F32,
+        DataType::Float64 =&gt; F64,
+        DataType::Utf8 =&gt; Str,
         <span class="kw">_ </span>=&gt; <span class="macro">unimplemented!</span>()
     }
 }
@@ -3151,7 +3151,7 @@
     ///     assert_eq!(c, Series::new(vec![4,4,4]));
     /// }
     /// ```
-    </span><span class="kw">fn </span>add_vec&lt;<span class="lifetime">'a</span>, <span class="lifetime">'b</span>&gt;(<span class="kw-2">&amp;</span><span class="lifetime">'a </span><span class="self">self</span>, rhs: <span class="kw-2">&amp;</span><span class="lifetime">'b </span><span class="self">Self</span>) -&gt; <span class="self">Self </span>{
+    </span><span class="kw">fn </span>add_vec(<span class="kw-2">&amp;</span><span class="self">self</span>, rhs: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; <span class="self">Self </span>{
         <span class="macro">assert_eq!</span>(<span class="self">self</span>.dtype, rhs.dtype, <span class="string">"DTypes are not same (add_vec)"</span>);
         <span class="macro">dtype_match!</span>(
             N;
@@ -3177,7 +3177,7 @@
     ///     assert_eq!(c, Series::new(vec![3,3,3]));
     /// }
     /// ```
-    </span><span class="kw">fn </span>sub_vec&lt;<span class="lifetime">'a</span>, <span class="lifetime">'b</span>&gt;(<span class="kw-2">&amp;</span><span class="lifetime">'a </span><span class="self">self</span>, rhs: <span class="kw-2">&amp;</span><span class="lifetime">'b </span><span class="self">Self</span>) -&gt; <span class="self">Self </span>{
+    </span><span class="kw">fn </span>sub_vec(<span class="kw-2">&amp;</span><span class="self">self</span>, rhs: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; <span class="self">Self </span>{
         <span class="macro">assert_eq!</span>(<span class="self">self</span>.dtype, rhs.dtype, <span class="string">"DTypes are not same (add_vec)"</span>);
         <span class="macro">dtype_match!</span>(
             N;

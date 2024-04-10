@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"enum":["ImplicitSolver","ODEError"],"struct":["BasicODESolver","GL4","RK4","RKF45"],"trait":["ODEIntegrator","ODEProblem","ODESolver"]};
+window.SIDEBAR_ITEMS = {"enum":["ImplicitSolver","ODEError"],"struct":["BasicODESolver","DP45","GL4","RK4","RKF45","TSIT45"],"trait":["ButcherTableau","ODEIntegrator","ODEProblem","ODESolver"]};

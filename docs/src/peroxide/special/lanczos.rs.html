@@ -187,7 +187,7 @@
 
 <span class="doccomment">/// Lanczos Approximation Coefficient
 </span><span class="kw">pub fn </span>tlg1(g: f64, n: usize) -&gt; Vec&lt;f64&gt; {
-    (lanczos_coeff(g, n - <span class="number">1</span>).ox() * g.exp() / (<span class="number">2f64 </span>* std::f64::consts::PI).sqrt()).red()
+    (lanczos_coeff(g, n - <span class="number">1</span>).ox() * g.exp() / (<span class="number">2f64 </span>* PI).sqrt()).red()
 }
 
 <span class="kw">fn </span>lanczos_coeff(g: f64, n: usize) -&gt; Vec&lt;f64&gt; {

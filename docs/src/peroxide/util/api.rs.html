@@ -92,11 +92,9 @@
 <a href="#74" id="74">74</a>
 <a href="#75" id="75">75</a>
 <a href="#76" id="76">76</a>
-<a href="#77" id="77">77</a>
 </pre></div><pre class="rust"><code><span class="doccomment">//! Choose api - MATLAB, R, Python
 
 </span><span class="kw">use </span><span class="kw">crate</span>::structure::matrix::<span class="kw-2">*</span>;
-<span class="kw">use </span>std::convert;
 
 <span class="kw">pub trait </span>MATLAB {
     <span class="kw">fn </span>new(s: <span class="kw-2">&amp;</span>str) -&gt; <span class="self">Self</span>;
@@ -105,13 +103,13 @@
 <span class="kw">pub trait </span>PYTHON {
     <span class="kw">fn </span>new&lt;T&gt;(v: Vec&lt;Vec&lt;T&gt;&gt;) -&gt; <span class="self">Self
     </span><span class="kw">where
-        </span>T: convert::Into&lt;f64&gt; + Copy;
+        </span>T: Into&lt;f64&gt; + Copy;
 }
 
 <span class="kw">pub trait </span>R {
     <span class="kw">fn </span>new&lt;T&gt;(v: Vec&lt;T&gt;, x: usize, y: usize, shape: Shape) -&gt; <span class="self">Self
     </span><span class="kw">where
-        </span>T: convert::Into&lt;f64&gt;;
+        </span>T: Into&lt;f64&gt;;
 }
 
 <span class="kw">impl </span>MATLAB <span class="kw">for </span>Matrix {
@@ -142,7 +140,7 @@
 <span class="kw">impl </span>PYTHON <span class="kw">for </span>Matrix {
     <span class="kw">fn </span>new&lt;T&gt;(v: Vec&lt;Vec&lt;T&gt;&gt;) -&gt; <span class="self">Self
     </span><span class="kw">where
-        </span>T: convert::Into&lt;f64&gt; + Copy,
+        </span>T: Into&lt;f64&gt; + Copy,
     {
         <span class="kw">let </span>r = v.len();
         <span class="kw">let </span>c = v[<span class="number">0</span>].len();
@@ -160,7 +158,7 @@
 <span class="kw">impl </span>R <span class="kw">for </span>Matrix {
     <span class="kw">fn </span>new&lt;T&gt;(v: Vec&lt;T&gt;, x: usize, y: usize, shape: Shape) -&gt; <span class="self">Self
     </span><span class="kw">where
-        </span>T: convert::Into&lt;f64&gt;,
+        </span>T: Into&lt;f64&gt;,
     {
         matrix(
             v.into_iter().map(|t| t.into()).collect::&lt;Vec&lt;f64&gt;&gt;(),

@@ -576,7 +576,6 @@
 <a href="#558" id="558">558</a>
 <a href="#559" id="559">559</a>
 <a href="#560" id="560">560</a>
-<a href="#561" id="561">561</a>
 </pre></div><pre class="rust"><code><span class="doccomment">//! Random number generator
 //!
 //! ## Uniform random number generator
@@ -602,7 +601,6 @@
 </span><span class="kw">extern crate </span>rand;
 <span class="kw">use </span><span class="self">self</span>::rand::distributions::uniform::SampleUniform;
 <span class="kw">use </span><span class="self">self</span>::rand::prelude::<span class="kw-2">*</span>;
-<span class="kw">use </span>std::u32;
 
 <span class="attr">#[allow(unused_imports)]
 </span><span class="kw">use </span><span class="kw">crate</span>::structure::matrix::<span class="kw-2">*</span>;
@@ -648,7 +646,7 @@
 /// use peroxide::fuga::*;
 ///
 /// let mut rng = thread_rng();
-/// println!("{}", rand_num(&amp;mut rng, 1, 7));       // Roll a dice
+/// println!("{}", rand_num(&amp;mut rng, 1, 7));       // Roll a die
 /// println!("{}", rand_num(&amp;mut rng, 0f64, 1f64)); // Uniform [0,1)
 /// ```
 </span><span class="kw">pub fn </span>rand_num&lt;T&gt;(rng: <span class="kw-2">&amp;mut </span>ThreadRng, start: T, end: T) -&gt; T
@@ -1032,7 +1030,7 @@
 /// ```
 /// use peroxide::fuga::*;
 ///
-/// fn main() -&gt; Result&lt;(), Box&lt;dyn std::error::Error&gt;&gt; {
+/// fn main() -&gt; Result&lt;(), Box&lt;dyn Error&gt;&gt; {
 ///     let f = |x: f64| {
 ///         if (0f64..=2f64).contains(&amp;x) {
 ///             -(x - 1f64).powi(2) + 1f64
@@ -1093,7 +1091,7 @@
 /// ```
 /// use peroxide::fuga::*;
 ///
-/// fn main() -&gt; Result&lt;(), Box&lt;dyn std::error::Error&gt;&gt; {
+/// fn main() -&gt; Result&lt;(), Box&lt;dyn Error&gt;&gt; {
 ///     let mut rng = smallrng_from_seed(42);
 ///     let f = |x: f64| {
 ///         if (0f64..=2f64).contains(&amp;x) {

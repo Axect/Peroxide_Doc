@@ -14,8 +14,8 @@
     });
 </script>
 
-</head><body class="rustdoc mod"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../../../peroxide/index.html">peroxide</a><span class="version">0.36.0</span></h2></div><h2 class="location"><a href="#">Module matrix</a></h2><div class="sidebar-elems"><section><ul class="block"><li><a href="#reexports">Re-exports</a></li><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li><li><a href="#traits">Traits</a></li><li><a href="#functions">Functions</a></li><li><a href="#types">Type Aliases</a></li></ul></section><h2><a href="../index.html">In peroxide::structure</a></h2></div></nav><div class="sidebar-resizer"></div>
-    <main><div class="width-limiter"><nav class="sub"><form class="search-form"><span></span><div id="sidebar-button" tabindex="-1"><a href="../../../peroxide/all.html" title="show sidebar"></a></div><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" tabindex="-1"><a href="../../../help.html" title="help">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="main-heading"><h1>Module <a href="../../index.html">peroxide</a>::<wbr><a href="../index.html">structure</a>::<wbr><a class="mod" href="#">matrix</a><button id="copy-path" title="Copy item path to clipboard"><img src="../../../static.files/clipboard-7571035ce49a181d.svg" width="19" height="18" alt="Copy item path"></button></h1><span class="out-of-band"><a class="src" href="../../../src/peroxide/structure/matrix.rs.html#1-4844">source</a> · <button id="toggle-all-docs" title="collapse all docs">[<span>&#x2212;</span>]</button></span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Matrix for Scientific computation</p>
+</head><body class="rustdoc mod"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../../../peroxide/index.html">peroxide</a><span class="version">0.36.2</span></h2></div><h2 class="location"><a href="#">Module matrix</a></h2><div class="sidebar-elems"><section><ul class="block"><li><a href="#reexports">Re-exports</a></li><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li><li><a href="#traits">Traits</a></li><li><a href="#functions">Functions</a></li><li><a href="#types">Type Aliases</a></li></ul></section><h2><a href="../index.html">In peroxide::structure</a></h2></div></nav><div class="sidebar-resizer"></div>
+    <main><div class="width-limiter"><nav class="sub"><form class="search-form"><span></span><div id="sidebar-button" tabindex="-1"><a href="../../../peroxide/all.html" title="show sidebar"></a></div><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" tabindex="-1"><a href="../../../help.html" title="help">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="main-heading"><h1>Module <a href="../../index.html">peroxide</a>::<wbr><a href="../index.html">structure</a>::<wbr><a class="mod" href="#">matrix</a><button id="copy-path" title="Copy item path to clipboard"><img src="../../../static.files/clipboard-7571035ce49a181d.svg" width="19" height="18" alt="Copy item path"></button></h1><span class="out-of-band"><a class="src" href="../../../src/peroxide/structure/matrix.rs.html#1-4830">source</a> · <button id="toggle-all-docs" title="collapse all docs">[<span>&#x2212;</span>]</button></span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Matrix for Scientific computation</p>
 <h3 id="declare-matrix"><a class="doc-anchor" href="#declare-matrix">§</a>Declare matrix</h3>
 <ul>
 <li>You can declare matrix by various ways.
@@ -65,8 +65,7 @@
 <li>
 <p>Type: <code>ml_matrix(&amp;str)</code></p>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern crate </span>peroxide;
-<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
 
 <span class="kw">fn </span>main() {
     <span class="kw">let </span>a = ml_matrix(<span class="string">"1 2; 3 4"</span>);
@@ -85,8 +84,7 @@
 <li>
 <p>Type: <code>py_matrix(Vec&lt;Vec&lt;T&gt;&gt;) where T: std::convert::Into&lt;f64&gt; + Copy</code></p>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern crate </span>peroxide;
-<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
 
 <span class="kw">fn </span>main() {
     <span class="kw">let </span>a = py_matrix(<span class="macro">vec!</span>[<span class="macro">vec!</span>[<span class="number">1</span>, <span class="number">2</span>], <span class="macro">vec!</span>[<span class="number">3</span>, <span class="number">4</span>]]);
@@ -189,8 +187,7 @@ print(a)
 <li>
 <p><code>write_with_header(&amp;self, file_path, header: Vec&lt;&amp;str&gt;)</code>: Write with header</p>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern crate </span>peroxide;
-<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
 
 <span class="kw">fn </span>main() {
     <span class="kw">let </span>a = ml_matrix(<span class="string">"1 2;3 4"</span>);
@@ -211,8 +208,7 @@ print(a)
 <li>
 <p>Description: <code>read(file_path, is_header, delimiter)</code></p>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern crate </span>peroxide;
-<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
 
 <span class="kw">fn </span>main() {
     <span class="comment">// `csv` feature should be required
@@ -257,33 +253,30 @@ print(a)
 <h3 id="concatenation"><a class="doc-anchor" href="#concatenation">§</a>Concatenation</h3>
 <p>There are two options to concatenate matrices.</p>
 <ul>
-<li>
-<p><code>cbind</code>: Concatenate two matrices by column direction.</p>
-</li>
-<li>
-<p><code>rbind</code>: Concatenate two matrices by row direction.</p>
+<li><code>cbind</code>: Concatenate two matrices by column direction.</li>
+<li><code>rbind</code>: Concatenate two matrices by row direction.</li>
+</ul>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern crate </span>peroxide;
-<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
 
-<span class="kw">fn </span>main() {
+<span class="kw">fn </span>main() -&gt; <span class="prelude-ty">Result</span>&lt;(), Box&lt;<span class="kw">dyn </span>Error&gt;&gt; {
     <span class="kw">let </span>a = ml_matrix(<span class="string">"1 2;3 4"</span>);
     <span class="kw">let </span>b = ml_matrix(<span class="string">"5 6;7 8"</span>);
 
-    cbind(a.clone(), b.clone()).print();
+    cbind(a.clone(), b.clone())<span class="question-mark">?</span>.print();
     <span class="comment">//      c[0] c[1] c[2] c[3]
     // r[0]    1    2    5    7
     // r[1]    3    4    6    8
 
-    </span>rbind(a, b).print();
+    </span>rbind(a, b)<span class="question-mark">?</span>.print();
     <span class="comment">//      c[0] c[1]
     // r[0]    1    2
     // r[1]    3    4
     // r[2]    5    6
     // r[3]    7    8
-</span>}</code></pre></div>
-</li>
-</ul>
+
+    </span><span class="prelude-val">Ok</span>(())
+}</code></pre></div>
 <h3 id="matrix-operations"><a class="doc-anchor" href="#matrix-operations">§</a>Matrix operations</h3>
 <ul>
 <li>
@@ -315,8 +308,8 @@ print(a)
 <li>
 <p><code>clone</code> is too annoying - We can use reference operations!</p>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern crate </span>peroxide;
-<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
+
 <span class="kw">fn </span>main() {
     <span class="kw">let </span>a = ml_matrix(<span class="string">"1 2;3 4"</span>);
     <span class="kw">let </span>b = ml_matrix(<span class="string">"5 6;7 8"</span>);
@@ -377,9 +370,11 @@ print(a)
 </li>
 <li>
 <p><code>rand(usize, usize)</code>: Construct random uniform matrix (from 0 to 1)</p>
+</li>
+<li>
+<p><code>rand_with_rng(usize, usize, &amp;mut Rng)</code>: Construct random matrix with user-defined RNG</p>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern crate </span>peroxide;
-<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
 
 <span class="kw">fn </span>main() {
     <span class="kw">let </span>a = zeros(<span class="number">2</span>, <span class="number">2</span>);
@@ -434,8 +429,7 @@ print(a)
 <li>
 <p>The structure of <code>PQLU</code> is as follows:</p>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern crate </span>peroxide;
-<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
 
 <span class="attr">#[derive(Debug, Clone)]
 </span><span class="kw">pub struct </span>PQLU {
@@ -512,8 +506,7 @@ $$ \begin{aligned} L &amp;= \begin{pmatrix} L_1 &amp; \mathbf{0} \\ L_2 &amp; L_
 can get better performance (via memoization)</li>
 </ul>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern crate </span>peroxide;
-<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
 
 <span class="kw">fn </span>main() {
     <span class="kw">let </span>a = ml_matrix(<span class="string">"1 2;3 4"</span>);
@@ -537,8 +530,7 @@ can get better performance (via memoization)</li>
 <li>
 <p>Example</p>
 
-<div class="example-wrap ignore"><a href="#" class="tooltip" title="This example is not tested">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="kw">extern crate </span>peroxide;
-<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
+<div class="example-wrap ignore"><a href="#" class="tooltip" title="This example is not tested">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
 
 <span class="kw">let </span>a = ml_matrix(<span class="string">"
     1 -1 4;
@@ -572,8 +564,7 @@ qr.q().print();
 <li>
 <p>Return <code>SVD</code> structure</p>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern crate </span>peroxide;
-<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
 
 <span class="kw">pub struct </span>SVD {
     <span class="kw">pub </span>s: Vec&lt;f64&gt;,
@@ -584,8 +575,7 @@ qr.q().print();
 <li>
 <p>Example</p>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern crate </span>peroxide;
-<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
 
 <span class="kw">fn </span>main() {
     <span class="kw">let </span>a = ml_matrix(<span class="string">"3 2 2;2 3 -2"</span>);

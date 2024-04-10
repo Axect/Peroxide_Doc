@@ -210,21 +210,13 @@
 <a href="#192" id="192">192</a>
 <a href="#193" id="193">193</a>
 <a href="#194" id="194">194</a>
-<a href="#195" id="195">195</a>
-<a href="#196" id="196">196</a>
-<a href="#197" id="197">197</a>
-<a href="#198" id="198">198</a>
 </pre></div><pre class="rust"><code><span class="doccomment">//! To find Eigenvalue &amp; Eigenvector
 //!
 //! * Reference : Press, William H., and William T. Vetterling. *Numerical Recipes.* Cambridge: Cambridge Univ. Press, 2007.
 
-</span><span class="attr">#[cfg(feature = <span class="string">"O3"</span>)]
-</span><span class="kw">use </span>lapack::{dorgtr, dsteqr, dsytrd};
-
-<span class="kw">pub use </span><span class="self">self</span>::EigenMethod::<span class="kw-2">*</span>;
+</span><span class="kw">pub use </span><span class="self">self</span>::EigenMethod::<span class="kw-2">*</span>;
 <span class="kw">use </span><span class="kw">crate</span>::structure::matrix::Matrix;
 <span class="kw">use </span><span class="kw">crate</span>::util::non_macro::eye_shape;
-<span class="kw">use </span>std::f64::EPSILON;
 
 <span class="attr">#[derive(Debug, Copy, Clone)]
 </span><span class="kw">pub enum </span>EigenMethod {
@@ -330,11 +322,11 @@
             <span class="kw">for </span>ip <span class="kw">in </span><span class="number">0</span>..n - <span class="number">1 </span>{
                 <span class="kw">for </span>iq <span class="kw">in </span>ip + <span class="number">1</span>..n {
                     <span class="kw">let </span>g = <span class="number">100f64 </span>* a[(ip, iq)].abs();
-                    <span class="kw">if </span>i &gt; <span class="number">4 </span>&amp;&amp; g &lt;= EPSILON * d[ip].abs() &amp;&amp; g &lt;= EPSILON * d[iq].abs() {
+                    <span class="kw">if </span>i &gt; <span class="number">4 </span>&amp;&amp; g &lt;= f64::EPSILON * d[ip].abs() &amp;&amp; g &lt;= f64::EPSILON * d[iq].abs() {
                         a[(ip, iq)] = <span class="number">0f64</span>;
                     } <span class="kw">else if </span>a[(ip, iq)].abs() &gt; tresh {
                         h = d[iq] - d[ip];
-                        <span class="kw">let </span>t = <span class="kw">if </span>g &lt;= EPSILON * h.abs() {
+                        <span class="kw">let </span>t = <span class="kw">if </span>g &lt;= f64::EPSILON * h.abs() {
                             a[(ip, iq)] / h
                         } <span class="kw">else </span>{
                             <span class="kw">let </span>theta = <span class="number">0.5 </span>* h / a[(ip, iq)];

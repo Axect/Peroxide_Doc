@@ -1009,7 +1009,7 @@
     tol: f64,
 ) -&gt; <span class="prelude-ty">Result</span>&lt;f64, RootError&gt; {
     <span class="kw">let </span>(a, b) = interval;
-    <span class="kw">let </span><span class="kw-2">mut </span>root_finder = RootFinder::new(RootState::I(a, b), RootFind::Bisection, f)<span class="question-mark">?</span>;
+    <span class="kw">let </span><span class="kw-2">mut </span>root_finder = RootFinder::new(I(a, b), RootFind::Bisection, f)<span class="question-mark">?</span>;
     root_finder.set_tol(tol);
     root_finder.set_times(times);
     root_finder.find_root()
@@ -1039,7 +1039,7 @@
     tol: f64,
 ) -&gt; <span class="prelude-ty">Result</span>&lt;f64, RootError&gt; {
     <span class="kw">let </span>(a, b) = interval;
-    <span class="kw">let </span><span class="kw-2">mut </span>root_finder = RootFinder::new(RootState::I(a, b), RootFind::FalsePosition, f)<span class="question-mark">?</span>;
+    <span class="kw">let </span><span class="kw-2">mut </span>root_finder = RootFinder::new(I(a, b), RootFind::FalsePosition, f)<span class="question-mark">?</span>;
     root_finder.set_tol(tol);
     root_finder.set_times(times);
     root_finder.find_root()
@@ -1068,7 +1068,7 @@
     times: usize,
     tol: f64,
 ) -&gt; <span class="prelude-ty">Result</span>&lt;f64, RootError&gt; {
-    <span class="kw">let </span><span class="kw-2">mut </span>root_finder = RootFinder::new(RootState::P(initial_guess), RootFind::Newton, f)<span class="question-mark">?</span>;
+    <span class="kw">let </span><span class="kw-2">mut </span>root_finder = RootFinder::new(P(initial_guess), RootFind::Newton, f)<span class="question-mark">?</span>;
     root_finder.set_tol(tol);
     root_finder.set_times(times);
     root_finder.find_root()
@@ -1098,7 +1098,7 @@
     tol: f64,
 ) -&gt; <span class="prelude-ty">Result</span>&lt;f64, RootError&gt; {
     <span class="kw">let </span>(a, b) = initial_guess;
-    <span class="kw">let </span><span class="kw-2">mut </span>root_finder = RootFinder::new(RootState::I(a, b), RootFind::Secant, f)<span class="question-mark">?</span>;
+    <span class="kw">let </span><span class="kw-2">mut </span>root_finder = RootFinder::new(I(a, b), RootFind::Secant, f)<span class="question-mark">?</span>;
     root_finder.set_tol(tol);
     root_finder.set_times(times);
     root_finder.find_root()

@@ -407,6 +407,19 @@
         <span class="self">self</span>.to_dense().qr()
     }
 
+    <span class="kw">fn </span>svd(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; SVD {
+        <span class="macro">unimplemented!</span>()
+    }
+
+    <span class="attr">#[cfg(feature=<span class="string">"O3"</span>)]
+    </span><span class="kw">fn </span>cholesky(<span class="kw-2">&amp;</span><span class="self">self</span>, _uplo: UPLO) -&gt; Matrix {
+        <span class="macro">unimplemented!</span>()
+    }
+
+    <span class="kw">fn </span>rref(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Matrix {
+        <span class="self">self</span>.to_dense().rref()
+    }
+
     <span class="kw">fn </span>det(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; f64 {
         <span class="self">self</span>.to_dense().det()
     }
@@ -423,24 +436,11 @@
         <span class="self">self</span>.to_dense().pseudo_inv()
     }
 
-    <span class="kw">fn </span>rref(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Matrix {
-        <span class="self">self</span>.to_dense().rref()
-    }
-
     <span class="kw">fn </span>solve(<span class="kw-2">&amp;</span><span class="self">self</span>, _b: <span class="kw-2">&amp;</span>Vec&lt;f64&gt;, _sk: SolveKind) -&gt; Vec&lt;f64&gt; {
         <span class="macro">unimplemented!</span>()
     }
 
     <span class="kw">fn </span>solve_mat(<span class="kw-2">&amp;</span><span class="self">self</span>, _m: <span class="kw-2">&amp;</span>Matrix, _sk: SolveKind) -&gt; Matrix {
-        <span class="macro">unimplemented!</span>()
-    }
-
-    <span class="kw">fn </span>svd(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; SVD {
-        <span class="macro">unimplemented!</span>()
-    }
-
-    <span class="attr">#[cfg(feature=<span class="string">"O3"</span>)]
-    </span><span class="kw">fn </span>cholesky(<span class="kw-2">&amp;</span><span class="self">self</span>, uplo: UPLO) -&gt; Matrix {
         <span class="macro">unimplemented!</span>()
     }
 
