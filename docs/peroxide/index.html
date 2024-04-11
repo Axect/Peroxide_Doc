@@ -14,9 +14,9 @@
     });
 </script>
 
-</head><body class="rustdoc mod crate"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../peroxide/index.html">peroxide</a><span class="version">0.36.3</span></h2></div><div class="sidebar-elems"><ul class="block">
+</head><body class="rustdoc mod crate"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../peroxide/index.html">peroxide</a><span class="version">0.36.4</span></h2></div><div class="sidebar-elems"><ul class="block">
             <li><a id="all-types" href="all.html">All Items</a></li></ul><section><ul class="block"><li><a href="#modules">Modules</a></li><li><a href="#macros">Macros</a></li></ul></section></div></nav><div class="sidebar-resizer"></div>
-    <main><div class="width-limiter"><nav class="sub"><form class="search-form"><span></span><div id="sidebar-button" tabindex="-1"><a href="../peroxide/all.html" title="show sidebar"></a></div><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" tabindex="-1"><a href="../help.html" title="help">?</a></div><div id="settings-menu" tabindex="-1"><a href="../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="main-heading"><h1>Crate <a class="mod" href="#">peroxide</a><button id="copy-path" title="Copy item path to clipboard"><img src="../static.files/clipboard-7571035ce49a181d.svg" width="19" height="18" alt="Copy item path"></button></h1><span class="out-of-band"><a class="src" href="../src/peroxide/lib.rs.html#1-201">source</a> · <button id="toggle-all-docs" title="collapse all docs">[<span>&#x2212;</span>]</button></span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p><code>peroxide</code> is comprehensive numerical library for Rust.</p>
+    <main><div class="width-limiter"><nav class="sub"><form class="search-form"><span></span><div id="sidebar-button" tabindex="-1"><a href="../peroxide/all.html" title="show sidebar"></a></div><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" tabindex="-1"><a href="../help.html" title="help">?</a></div><div id="settings-menu" tabindex="-1"><a href="../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="main-heading"><h1>Crate <a class="mod" href="#">peroxide</a><button id="copy-path" title="Copy item path to clipboard"><img src="../static.files/clipboard-7571035ce49a181d.svg" width="19" height="18" alt="Copy item path"></button></h1><span class="out-of-band"><a class="src" href="../src/peroxide/lib.rs.html#1-206">source</a> · <button id="toggle-all-docs" title="collapse all docs">[<span>&#x2212;</span>]</button></span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p><code>peroxide</code> is comprehensive numerical library for Rust.</p>
 <h3 id="components"><a class="doc-anchor" href="#components">§</a>Components</h3>
 <p><code>peroxide</code> has various components for scientific computation.</p>
 <ul>
@@ -96,17 +96,26 @@
 <li>Newton</li>
 </ul>
 </li>
-<li><a href="numerical/ode/index.html">Differential Equations</a>
+<li><a href="numerical/ode/index.html">Ordinary Differential Equations</a>
 <ul>
 <li>Explicit
 <ul>
+<li>Ralston’s 3rd order</li>
 <li>Runge-Kutta 4th order</li>
-<li>Euler methods</li>
+<li>Ralston’s 4th order</li>
+<li>Runge-Kutta 5th order</li>
+</ul>
+</li>
+<li>Embedded
+<ul>
+<li>Bogacki-Shampine 3(2)</li>
+<li>Runge-Kutta-Fehlberg 4(5)</li>
+<li>Dormand-Prince 5(4)</li>
+<li>Tsitouras 5(4)</li>
 </ul>
 </li>
 <li>Implicit
 <ul>
-<li>Backward Euler</li>
 <li>Gauss-Legendre 4th order</li>
 </ul>
 </li>
