@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/util/non_macro.rs`."><title>non_macro.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-5bc39a1768837dd0.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="peroxide" data-themes="" data-resource-suffix="" data-rustdoc-version="1.77.1 (7cf61ebde 2024-03-27)" data-channel="1.77.1" data-search-js="search-dd67cee4cfa65049.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../static.files/storage-4c98445ec4002617.js"></script><script defer src="../../../static.files/src-script-e66d777a5a92e9b2.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-48f368f3872407c8.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-04d5337699b92874.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/util/non_macro.rs`."><title>non_macro.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-5bc39a1768837dd0.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="peroxide" data-themes="" data-resource-suffix="" data-rustdoc-version="1.77.2 (25ef9e3d8 2024-04-09)" data-channel="1.77.2" data-search-js="search-dd67cee4cfa65049.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../static.files/storage-4c98445ec4002617.js"></script><script defer src="../../../static.files/src-script-e66d777a5a92e9b2.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-48f368f3872407c8.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-04d5337699b92874.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js"                  integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js"    integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
 <script>
@@ -433,6 +433,13 @@
 <a href="#415" id="415">415</a>
 <a href="#416" id="416">416</a>
 <a href="#417" id="417">417</a>
+<a href="#418" id="418">418</a>
+<a href="#419" id="419">419</a>
+<a href="#420" id="420">420</a>
+<a href="#421" id="421">421</a>
+<a href="#422" id="422">422</a>
+<a href="#423" id="423">423</a>
+<a href="#424" id="424">424</a>
 </pre></div><pre class="rust"><code><span class="doccomment">//! Macro to non macro function
 //!
 //! # R like non-macro functions
@@ -470,13 +477,20 @@
     matrix::Shape::{Col, Row},
     matrix::{matrix, Matrix, Shape},
 };
-<span class="kw">use </span>thiserror::Error;
 <span class="kw">use </span><span class="kw">crate</span>::traits::float::FloatWithPrecision;
+<span class="kw">use </span>anyhow::{<span class="prelude-ty">Result</span>, bail};
 
-<span class="attr">#[derive(Debug, Copy, Clone, Error)]
+<span class="attr">#[derive(Debug, Copy, Clone)]
 </span><span class="kw">pub enum </span>ConcatenateError {
-    <span class="attr">#[error(<span class="string">"To concatenate, vectors or matrices must have the same length"</span>)]
-    </span>DifferentLength,
+    DifferentLength,
+}
+
+<span class="kw">impl </span>std::fmt::Display <span class="kw">for </span>ConcatenateError {
+    <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>std::fmt::Formatter) -&gt; std::fmt::Result {
+        <span class="kw">match </span><span class="kw-2">*</span><span class="self">self </span>{
+            ConcatenateError::DifferentLength =&gt; <span class="macro">write!</span>(f, <span class="string">"To concatenate, vectors or matrices must have the same length"</span>),
+        }
+    }
 }
 
 <span class="comment">// ┌─────────────────────────────────────────────────────────┐
@@ -566,7 +580,7 @@
 ///     Ok(())
 /// }
 /// ```
-</span><span class="kw">pub fn </span>cbind(m1: Matrix, m2: Matrix) -&gt; <span class="prelude-ty">Result</span>&lt;Matrix, ConcatenateError&gt; {
+</span><span class="kw">pub fn </span>cbind(m1: Matrix, m2: Matrix) -&gt; <span class="prelude-ty">Result</span>&lt;Matrix&gt; {
     <span class="kw">let </span><span class="kw-2">mut </span>temp = m1;
     <span class="kw">if </span>temp.shape != Col {
         temp = temp.change_shape();
@@ -582,7 +596,7 @@
     <span class="kw">let </span>r = temp.row;
 
     <span class="kw">if </span>r != temp2.row {
-        <span class="kw">return </span><span class="prelude-val">Err</span>(ConcatenateError::DifferentLength);
+        <span class="macro">bail!</span>(ConcatenateError::DifferentLength);
     }
     v.extend_from_slice(<span class="kw-2">&amp;</span>temp2.data[..]);
     c += temp2.col;
@@ -605,7 +619,7 @@
 ///     Ok(())
 /// }
 /// ```
-</span><span class="kw">pub fn </span>rbind(m1: Matrix, m2: Matrix) -&gt; <span class="prelude-ty">Result</span>&lt;Matrix, ConcatenateError&gt; {
+</span><span class="kw">pub fn </span>rbind(m1: Matrix, m2: Matrix) -&gt; <span class="prelude-ty">Result</span>&lt;Matrix&gt; {
     <span class="kw">let </span><span class="kw-2">mut </span>temp = m1;
     <span class="kw">if </span>temp.shape != Row {
         temp = temp.change_shape();
@@ -621,7 +635,7 @@
     <span class="kw">let </span><span class="kw-2">mut </span>r = temp.row;
 
     <span class="kw">if </span>c != temp2.col {
-        <span class="kw">return </span><span class="prelude-val">Err</span>(ConcatenateError::DifferentLength);
+        <span class="macro">bail!</span>(ConcatenateError::DifferentLength);
     }
     v.extend_from_slice(<span class="kw-2">&amp;</span>temp2.data[..]);
     r += temp2.row;
@@ -813,20 +827,20 @@
 }
 
 <span class="doccomment">/// Numpy like column_stack
-</span><span class="kw">pub fn </span>column_stack(v: <span class="kw-2">&amp;</span>[Vec&lt;f64&gt;]) -&gt; <span class="prelude-ty">Result</span>&lt;Matrix, ConcatenateError&gt; {
+</span><span class="kw">pub fn </span>column_stack(v: <span class="kw-2">&amp;</span>[Vec&lt;f64&gt;]) -&gt; <span class="prelude-ty">Result</span>&lt;Matrix&gt; {
     <span class="kw">let </span>row = v[<span class="number">0</span>].len();
     <span class="kw">if </span>v.iter().any(|x| x.len() != row) {
-        <span class="kw">return </span><span class="prelude-val">Err</span>(ConcatenateError::DifferentLength);
+        <span class="macro">bail!</span>(ConcatenateError::DifferentLength);
     }
     <span class="kw">let </span>data = v.iter().flatten().copied().collect();
     <span class="prelude-val">Ok</span>(matrix(data, row, v.len(), Col))
 }
 
 <span class="doccomment">/// Numpy like row_stack
-</span><span class="kw">pub fn </span>row_stack(v: <span class="kw-2">&amp;</span>[Vec&lt;f64&gt;]) -&gt; <span class="prelude-ty">Result</span>&lt;Matrix, ConcatenateError&gt; {
+</span><span class="kw">pub fn </span>row_stack(v: <span class="kw-2">&amp;</span>[Vec&lt;f64&gt;]) -&gt; <span class="prelude-ty">Result</span>&lt;Matrix&gt; {
     <span class="kw">let </span>col = v[<span class="number">0</span>].len();
     <span class="kw">if </span>v.iter().any(|x| x.len() != col) {
-        <span class="kw">return </span><span class="prelude-val">Err</span>(ConcatenateError::DifferentLength);
+        <span class="macro">bail!</span>(ConcatenateError::DifferentLength);
     }
     <span class="kw">let </span>data = v.iter().flatten().copied().collect();
     <span class="prelude-val">Ok</span>(matrix(data, v.len(), col, Row))

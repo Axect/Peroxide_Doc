@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/numerical/spline.rs`."><title>spline.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-5bc39a1768837dd0.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="peroxide" data-themes="" data-resource-suffix="" data-rustdoc-version="1.77.1 (7cf61ebde 2024-03-27)" data-channel="1.77.1" data-search-js="search-dd67cee4cfa65049.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../static.files/storage-4c98445ec4002617.js"></script><script defer src="../../../static.files/src-script-e66d777a5a92e9b2.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-48f368f3872407c8.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-04d5337699b92874.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/numerical/spline.rs`."><title>spline.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-5bc39a1768837dd0.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="peroxide" data-themes="" data-resource-suffix="" data-rustdoc-version="1.77.2 (25ef9e3d8 2024-04-09)" data-channel="1.77.2" data-search-js="search-dd67cee4cfa65049.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../static.files/storage-4c98445ec4002617.js"></script><script defer src="../../../static.files/src-script-e66d777a5a92e9b2.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-48f368f3872407c8.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-04d5337699b92874.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js"                  integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js"    integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
 <script>
@@ -854,6 +854,13 @@
 <a href="#836" id="836">836</a>
 <a href="#837" id="837">837</a>
 <a href="#838" id="838">838</a>
+<a href="#839" id="839">839</a>
+<a href="#840" id="840">840</a>
+<a href="#841" id="841">841</a>
+<a href="#842" id="842">842</a>
+<a href="#843" id="843">843</a>
+<a href="#844" id="844">844</a>
+<a href="#845" id="845">845</a>
 </pre></div><pre class="rust"><code><span class="doccomment">//! Spline interpolations
 //!
 //! # Available splines
@@ -879,11 +886,11 @@
 //! ## Members
 //!
 //! * `CubicSpline`: Structure for cubic spline
-//!     * `fn from_nodes(node_x: &amp;[f64], node_y: &amp;[f64]) -&gt; Self` : Create a cubic spline from nodes
-//!     * `fn extend_with_nodes(&amp;mut self, node_x: Vec&lt;f64&gt;, node_y: Vec&lt;f64&gt;)` : Extend the spline with nodes
+//!     * `fn from_nodes(node_x: &amp;[f64], node_y: &amp;[f64]) -&gt; Result&lt;Self&gt;` : Create a cubic spline from nodes
+//!     * `fn extend_with_nodes(&amp;mut self, node_x: Vec&lt;f64&gt;, node_y: Vec&lt;f64&gt;) -&gt; Result&lt;()&gt;` : Extend the spline with nodes
 //! * `CubicHermiteSpline`: Structure for cubic Hermite spline
-//!     * `fn from_nodes_with_slopes(node_x: &amp;[f64], node_y: &amp;[f64], m: &amp;[f64]) -&gt; Self` : Create a Cubic Hermite spline from nodes with slopes
-//!     * `fn from_nodes(node_x: &amp;[f64], node_y: &amp;[f64], slope_method: SlopeMethod) -&gt; Self` : Create a Cubic Hermite spline from nodes with slope estimation methods
+//!     * `fn from_nodes_with_slopes(node_x: &amp;[f64], node_y: &amp;[f64], m: &amp;[f64]) -&gt; Result&lt;Self&gt;` : Create a Cubic Hermite spline from nodes with slopes
+//!     * `fn from_nodes(node_x: &amp;[f64], node_y: &amp;[f64], slope_method: SlopeMethod) -&gt; Result&lt;Self&gt;` : Create a Cubic Hermite spline from nodes with slope estimation methods
 //! * `SlopeMethod`: Enum for slope estimation methods
 //!     * `Akima`: Akima's method to estimate slopes ([Akima (1970)](https://dl.acm.org/doi/abs/10.1145/321607.321609))
 //!     * `Quadratic`: Using quadratic interpolation to estimate slopes
@@ -1070,7 +1077,7 @@
 <span class="kw">use </span>std::cmp::{max, min};
 <span class="kw">use </span>std::convert::From;
 <span class="kw">use </span>std::ops::{Index, Range};
-<span class="kw">use </span>thiserror::Error;
+<span class="kw">use </span>anyhow::{<span class="prelude-ty">Result</span>, bail};
 
 <span class="doccomment">/// Trait for spline interpolation
 ///
@@ -1173,7 +1180,7 @@
 ///     Ok(())
 /// }
 /// ```
-</span><span class="kw">pub fn </span>cubic_spline(node_x: <span class="kw-2">&amp;</span>[f64], node_y: <span class="kw-2">&amp;</span>[f64]) -&gt; <span class="prelude-ty">Result</span>&lt;CubicSpline, SplineError&gt; {
+</span><span class="kw">pub fn </span>cubic_spline(node_x: <span class="kw-2">&amp;</span>[f64], node_y: <span class="kw-2">&amp;</span>[f64]) -&gt; <span class="prelude-ty">Result</span>&lt;CubicSpline&gt; {
     CubicSpline::from_nodes(node_x, node_y)
 }
 
@@ -1181,7 +1188,7 @@
     node_x: <span class="kw-2">&amp;</span>[f64],
     node_y: <span class="kw-2">&amp;</span>[f64],
     slope_method: SlopeMethod,
-) -&gt; <span class="prelude-ty">Result</span>&lt;CubicHermiteSpline, SplineError&gt; {
+) -&gt; <span class="prelude-ty">Result</span>&lt;CubicHermiteSpline&gt; {
     CubicHermiteSpline::from_nodes(node_x, node_y, slope_method)
 }
 
@@ -1239,16 +1246,23 @@
     }
 }
 
-<span class="attr">#[derive(Debug, Copy, Clone, Error)]
+<span class="attr">#[derive(Debug, Copy, Clone)]
 </span><span class="kw">pub enum </span>SplineError {
-    <span class="attr">#[error(<span class="string">"node_x has less than 3 elements"</span>)]
-    </span>NotEnoughNodes,
-    <span class="attr">#[error(<span class="string">"node_x and node_y have different lengths"</span>)]
-    </span>NotEqualNodes,
-    <span class="attr">#[error(<span class="string">"nodes and slopes have different lengths"</span>)]
-    </span>NotEqualSlopes,
-    <span class="attr">#[error(<span class="string">"there are redundant nodes in node_x"</span>)]
-    </span>RedundantNodeX,
+    NotEnoughNodes,
+    NotEqualNodes,
+    NotEqualSlopes,
+    RedundantNodeX,
+}
+
+<span class="kw">impl </span>std::fmt::Display <span class="kw">for </span>SplineError {
+    <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>std::fmt::Formatter&lt;<span class="lifetime">'_</span>&gt;) -&gt; std::fmt::Result {
+        <span class="kw">match </span><span class="self">self </span>{
+            SplineError::NotEnoughNodes =&gt; <span class="macro">write!</span>(f, <span class="string">"node_x has less than 3 elements"</span>),
+            SplineError::NotEqualNodes =&gt; <span class="macro">write!</span>(f, <span class="string">"node_x and node_y have different lengths"</span>),
+            SplineError::NotEqualSlopes =&gt; <span class="macro">write!</span>(f, <span class="string">"nodes and slopes have different lengths"</span>),
+            SplineError::RedundantNodeX =&gt; <span class="macro">write!</span>(f, <span class="string">"there are redundant nodes in node_x"</span>),
+        }
+    }
 }
 
 <span class="kw">impl </span>CubicSpline {
@@ -1271,14 +1285,14 @@
     ///     Ok(())
     /// }
     /// ```
-    </span><span class="kw">pub fn </span>from_nodes(node_x: <span class="kw-2">&amp;</span>[f64], node_y: <span class="kw-2">&amp;</span>[f64]) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, SplineError&gt; {
+    </span><span class="kw">pub fn </span>from_nodes(node_x: <span class="kw-2">&amp;</span>[f64], node_y: <span class="kw-2">&amp;</span>[f64]) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>&gt; {
         <span class="kw">let </span>polynomials = CubicSpline::cubic_spline(node_x, node_y)<span class="question-mark">?</span>;
         <span class="prelude-val">Ok</span>(CubicSpline {
             polynomials: zip_range(node_x, <span class="kw-2">&amp;</span>polynomials),
         })
     }
 
-    <span class="kw">fn </span>cubic_spline(node_x: <span class="kw-2">&amp;</span>[f64], node_y: <span class="kw-2">&amp;</span>[f64]) -&gt; <span class="prelude-ty">Result</span>&lt;Vec&lt;Polynomial&gt;, SplineError&gt; {
+    <span class="kw">fn </span>cubic_spline(node_x: <span class="kw-2">&amp;</span>[f64], node_y: <span class="kw-2">&amp;</span>[f64]) -&gt; <span class="prelude-ty">Result</span>&lt;Vec&lt;Polynomial&gt;&gt; {
         <span class="doccomment">//! Pre calculated variables
         //! node_x: n+1
         //! node_y: n+1
@@ -1289,10 +1303,10 @@
         //! z     : n+1
         </span><span class="kw">let </span>n = node_x.len() - <span class="number">1</span>;
         <span class="kw">if </span>n &lt; <span class="number">2 </span>{
-            <span class="kw">return </span><span class="prelude-val">Err</span>(NotEnoughNodes);
+            <span class="macro">bail!</span>(NotEnoughNodes);
         }
         <span class="kw">if </span>n != node_y.len() - <span class="number">1 </span>{
-            <span class="kw">return </span><span class="prelude-val">Err</span>(NotEqualNodes);
+            <span class="macro">bail!</span>(NotEqualNodes);
         }
 
         <span class="comment">// Pre-calculations
@@ -1360,7 +1374,7 @@
     /// The method ensures that the transition between each polynomial is smooth and that the spline
     /// interpolation of the new nodes is calculated around `x = 0` in order to avoid that
     /// successive spline extensions with large x values become inaccurate.
-    </span><span class="kw">pub fn </span>extend_with_nodes(<span class="kw-2">&amp;mut </span><span class="self">self</span>, node_x: Vec&lt;f64&gt;, node_y: Vec&lt;f64&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;(), SplineError&gt; {
+    </span><span class="kw">pub fn </span>extend_with_nodes(<span class="kw-2">&amp;mut </span><span class="self">self</span>, node_x: Vec&lt;f64&gt;, node_y: Vec&lt;f64&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;()&gt; {
         <span class="kw">let </span><span class="kw-2">mut </span>ext_node_x = Vec::with_capacity(node_x.len() + <span class="number">1</span>);
         <span class="kw">let </span><span class="kw-2">mut </span>ext_node_y = Vec::with_capacity(node_x.len() + <span class="number">1</span>);
 
@@ -1487,16 +1501,16 @@
         node_x: <span class="kw-2">&amp;</span>[f64],
         node_y: <span class="kw-2">&amp;</span>[f64],
         m: <span class="kw-2">&amp;</span>[f64],
-    ) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, SplineError&gt; {
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>&gt; {
         <span class="kw">let </span>n = node_x.len();
         <span class="kw">if </span>n &lt; <span class="number">3 </span>{
-            <span class="kw">return </span><span class="prelude-val">Err</span>(NotEnoughNodes);
+            <span class="macro">bail!</span>(NotEnoughNodes);
         }
         <span class="kw">if </span>n != node_y.len() {
-            <span class="kw">return </span><span class="prelude-val">Err</span>(NotEqualNodes);
+            <span class="macro">bail!</span>(NotEqualNodes);
         }
         <span class="kw">if </span>n != m.len() {
-            <span class="kw">return </span><span class="prelude-val">Err</span>(NotEqualSlopes);
+            <span class="macro">bail!</span>(NotEqualSlopes);
         }
 
         <span class="kw">let </span><span class="kw-2">mut </span>r = <span class="macro">vec!</span>[Range::default(); node_x.len() - <span class="number">1</span>];
@@ -1529,7 +1543,7 @@
         node_x: <span class="kw-2">&amp;</span>[f64],
         node_y: <span class="kw-2">&amp;</span>[f64],
         slope_method: SlopeMethod,
-    ) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, SplineError&gt; {
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>&gt; {
         <span class="kw">match </span>slope_method {
             SlopeMethod::Akima =&gt; CubicHermiteSpline::from_nodes_with_slopes(
                 node_x,
@@ -1628,9 +1642,9 @@
     Quadratic,
 }
 
-<span class="kw">fn </span>akima_slopes(x: <span class="kw-2">&amp;</span>[f64], y: <span class="kw-2">&amp;</span>[f64]) -&gt; <span class="prelude-ty">Result</span>&lt;Vec&lt;f64&gt;, SplineError&gt; {
+<span class="kw">fn </span>akima_slopes(x: <span class="kw-2">&amp;</span>[f64], y: <span class="kw-2">&amp;</span>[f64]) -&gt; <span class="prelude-ty">Result</span>&lt;Vec&lt;f64&gt;&gt; {
     <span class="kw">if </span>x.len() &lt; <span class="number">3 </span>{
-        <span class="kw">return </span><span class="prelude-val">Err</span>(NotEnoughNodes);
+        <span class="macro">bail!</span>(NotEnoughNodes);
     }
 
     <span class="kw">let </span><span class="kw-2">mut </span>m = <span class="macro">vec!</span>[<span class="number">0f64</span>; x.len()];
@@ -1655,7 +1669,7 @@
     <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..new_x.len() - <span class="number">1 </span>{
         <span class="kw">let </span>dx = new_x[i + <span class="number">1</span>] - new_x[i];
         <span class="kw">if </span>dx == <span class="number">0f64 </span>{
-            <span class="kw">return </span><span class="prelude-val">Err</span>(RedundantNodeX);
+            <span class="macro">bail!</span>(RedundantNodeX);
         }
         s[i] = (new_y[i + <span class="number">1</span>] - new_y[i]) / dx;
     }
@@ -1674,9 +1688,9 @@
     <span class="prelude-val">Ok</span>(m)
 }
 
-<span class="kw">fn </span>quadratic_slopes(x: <span class="kw-2">&amp;</span>[f64], y: <span class="kw-2">&amp;</span>[f64]) -&gt; <span class="prelude-ty">Result</span>&lt;Vec&lt;f64&gt;, SplineError&gt; {
+<span class="kw">fn </span>quadratic_slopes(x: <span class="kw-2">&amp;</span>[f64], y: <span class="kw-2">&amp;</span>[f64]) -&gt; <span class="prelude-ty">Result</span>&lt;Vec&lt;f64&gt;&gt; {
     <span class="kw">if </span>x.len() &lt; <span class="number">3 </span>{
-        <span class="kw">return </span><span class="prelude-val">Err</span>(NotEnoughNodes);
+        <span class="macro">bail!</span>(NotEnoughNodes);
     }
     <span class="kw">let </span><span class="kw-2">mut </span>m = <span class="macro">vec!</span>[<span class="number">0f64</span>; x.len()];
     <span class="kw">let </span>q_i = lagrange_polynomial(x[<span class="number">0</span>..<span class="number">3</span>].to_vec(), y[<span class="number">0</span>..<span class="number">3</span>].to_vec());

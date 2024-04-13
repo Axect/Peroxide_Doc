@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/numerical/root.rs`."><title>root.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-5bc39a1768837dd0.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="peroxide" data-themes="" data-resource-suffix="" data-rustdoc-version="1.77.1 (7cf61ebde 2024-03-27)" data-channel="1.77.1" data-search-js="search-dd67cee4cfa65049.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../static.files/storage-4c98445ec4002617.js"></script><script defer src="../../../static.files/src-script-e66d777a5a92e9b2.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-48f368f3872407c8.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-04d5337699b92874.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/numerical/root.rs`."><title>root.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-5bc39a1768837dd0.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="peroxide" data-themes="" data-resource-suffix="" data-rustdoc-version="1.77.2 (25ef9e3d8 2024-04-09)" data-channel="1.77.2" data-search-js="search-dd67cee4cfa65049.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../static.files/storage-4c98445ec4002617.js"></script><script defer src="../../../static.files/src-script-e66d777a5a92e9b2.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-48f368f3872407c8.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-04d5337699b92874.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js"                  integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js"    integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
 <script>
@@ -572,560 +572,642 @@
 <a href="#554" id="554">554</a>
 <a href="#555" id="555">555</a>
 <a href="#556" id="556">556</a>
-</pre></div><pre class="rust"><code><span class="doccomment">//! Root Finding
+<a href="#557" id="557">557</a>
+<a href="#558" id="558">558</a>
+<a href="#559" id="559">559</a>
+<a href="#560" id="560">560</a>
+<a href="#561" id="561">561</a>
+<a href="#562" id="562">562</a>
+<a href="#563" id="563">563</a>
+<a href="#564" id="564">564</a>
+<a href="#565" id="565">565</a>
+<a href="#566" id="566">566</a>
+<a href="#567" id="567">567</a>
+<a href="#568" id="568">568</a>
+<a href="#569" id="569">569</a>
+<a href="#570" id="570">570</a>
+<a href="#571" id="571">571</a>
+<a href="#572" id="572">572</a>
+<a href="#573" id="573">573</a>
+<a href="#574" id="574">574</a>
+<a href="#575" id="575">575</a>
+<a href="#576" id="576">576</a>
+<a href="#577" id="577">577</a>
+<a href="#578" id="578">578</a>
+<a href="#579" id="579">579</a>
+<a href="#580" id="580">580</a>
+<a href="#581" id="581">581</a>
+<a href="#582" id="582">582</a>
+<a href="#583" id="583">583</a>
+<a href="#584" id="584">584</a>
+<a href="#585" id="585">585</a>
+<a href="#586" id="586">586</a>
+<a href="#587" id="587">587</a>
+<a href="#588" id="588">588</a>
+<a href="#589" id="589">589</a>
+<a href="#590" id="590">590</a>
+<a href="#591" id="591">591</a>
+<a href="#592" id="592">592</a>
+<a href="#593" id="593">593</a>
+<a href="#594" id="594">594</a>
+<a href="#595" id="595">595</a>
+<a href="#596" id="596">596</a>
+<a href="#597" id="597">597</a>
+</pre></div><pre class="rust"><code><span class="doccomment">//! # Root Finding Methods
 //!
-//! # Implemented Algorithms
+//! This module provides a collection of root finding algorithms for solving nonlinear equations.
+//! It defines traits for representing root finding problems and root finding methods, and provides implementations of several common algorithms.
 //!
-//! * Bisection
-//! * False Position (Regula Falsi)
-//! * Secant
-//! * Newton
+//! ## Traits
 //!
-//! # Low-level API
+//! - `RootFindingProblem&lt;const I: usize, const O: usize, T&gt;`: Defines the interface for a root finding problem.
+//!   It requires implementing the `function` method to evaluate the function at a given point, and the `initial_guess` method to provide an initial guess for the root.
+//!   Optionally, the `derivative` and `hessian` methods can be implemented to provide the derivative and Hessian of the function, respectively.
 //!
-//! ## Members
+//!   - `I`: Input dimension
+//!   - `O`: Output dimension
+//!   - `T`: State type (e.g. `f64`, `(f64, f64)`, or etc.)
 //!
-//! * `RootState`
-//!     * `P(f64)` : For point-like initial guess
-//!     * `I(f64, f64)` : For interval-like initial guess
-//!     * `fn get_point(&amp;self) -&gt; Option&lt;f64&gt;` : Returns the point
-//!     * `fn get_interval(&amp;self) -&gt; Option&lt;(f64, f64)&gt;` : Returns the interval
-//! * `RootFind` : Algorithms for root finding
-//!     * `Bisection`
-//!     * `FalsePosition`
-//!     * `Newton`
-//!     * `Secant`
-//! * `RootError` : Error for root finding
-//!     * `MismatchedState` : Mismatched state and method (ex: Point vs Bisection)
-//!     * `TimesUp` : No root until `self.times`
-//!     * `NaNRoot` : NaN
-//! * `RootFinder` : Main structure for root finding
-//!     * `fn new(RootState, RootFind, f)` : Create RootFinder (times: 100, tol: 1e-10)
-//!     * `fn condition_number(&amp;self) -&gt; f64` : Compute condition number
-//!     * `fn set_tol(&amp;mut self, f64) -&gt; &amp;mut Self` : Set tolerance
-//!     * `fn set_times(&amp;mut self, usize) -&gt; &amp;mut Self` : Set max iteration times
-//!     * `fn get_tol(&amp;self) -&gt; f64` : Get tolerance
-//!     * `fn get_times(&amp;self) -&gt; usize` : Get max iteration times
-//!     * `fn get_method(&amp;self) -&gt; RootFind` : Get method
-//!     * `fn get_curr(&amp;self) -&gt; &amp;RootState` : Get current state
-//!     * `fn check_find(&amp;self) -&gt; RootBool` : Check if find root
-//!     * `fn update(&amp;mut self)` : Update one step
-//!     * `fn find_root(&amp;mut self) -&gt; Result&lt;f64, RootError&gt;` : Find root
+//! - `RootFinder&lt;const I: usize, const O: usize, T&gt;`: Defines the interface for a root finding method.
+//!   It requires implementing the `find` method, which takes a `RootFindingProblem` and returns the root of the function.
+//!   The `max_iter` and `tol` methods provide the maximum number of iterations and the tolerance for the root finding algorithm.
 //!
-//! ## Usage
+//! ## Root Finding Methods
 //!
-//! ```
-//! extern crate peroxide;
+//! - `BisectionMethod`: Implements the bisection method for finding roots of continuous functions.
+//!   It requires an initial interval that brackets the root.
+//!
+//!  - Type Parameters: `I=1, O=1, T=(f64, f64)`
+//!
+//! - `NewtonMethod`: Implements Newton's method for finding roots of differentiable functions.
+//!   It requires an initial guess for the root and the derivative of the function.
+//!
+//!   - Type Parameters: `I=1, O=1, T=f64`
+//!
+//! - `SecantMethod`: Implements the secant method for finding roots of differentiable functions.
+//!   It requires two initial guesses for the root.
+//!
+//!   - Type Parameters: `I=1, O=1, T=f64`
+//!
+//! - `FalsePositionMethod`: Implements the false position method for finding roots of continuous functions.
+//!   It requires an initial interval that brackets the root.
+//!
+//!   - Type Parameters: `I=1, O=1, T=(f64, f64)`
+//!
+//! - `BroydenMethod` (unimplemented): Implements Broyden's method for finding roots of systems of nonlinear equations.
+//!
+//!   - Type Parameters: `I&gt;=1, O&gt;=1, T=([f64; I], [f64; I])`
+//!
+//! ## Convenient type aliases
+//!
+//! - `Pt&lt;const N: usize&gt;`: Represents a point in N-dimensional space. (`[f64; N]`)
+//! - `Intv&lt;const N: usize&gt;`: Represents an interval in I-dimensional space. (`([f64; N], [f64; N])`)
+//! - `Jaco&lt;const R: usize, const C: usize&gt;`: Represents the Jacobian matrix of a function. (`[[f64; C]; R]`)
+//! - `Hess&lt;const R: usize, const C: usize&gt;`: Represents the Hessian matrix of a function. (`[[[f64; C]; C]; R]`)
+//!
+//! ## Examples
+//!
+//! ### Finding the root of a cubic function
+//!
+//! ```rust
 //! use peroxide::fuga::*;
+//! use anyhow::Result;
 //!
-//! fn main() -&gt; Result&lt;(), RootError&gt; {
-//!     let init = RootState::I(1f64, 4f64);
-//!     let mut rf = RootFinder::new(init, Bisection, f)?;
-//!     rf.set_tol(1e-15)       // Default: 1e-10
-//!         .set_times(200);    // Default: 100
-//!     let root = rf.find_root()?;
-//!     root.print();
+//! fn main() -&gt; Result&lt;()&gt; {
+//!     let problem = Cubic;
+//!
+//!     let bisect = BisectionMethod { max_iter: 100, tol: 1e-6 };
+//!     let newton = NewtonMethod { max_iter: 100, tol: 1e-6 };
+//!     let false_pos = FalsePositionMethod { max_iter: 100, tol: 1e-6 };
+//!
+//!     let root_bisect = bisect.find(&amp;problem)?;
+//!     let root_newton = newton.find(&amp;problem)?;
+//!     let root_false_pos = false_pos.find(&amp;problem)?;
+//!
+//!     let result_bisect = problem.eval(root_bisect)?[0];
+//!     let result_newton = problem.eval(root_newton)?[0];
+//!     let result_false_pos = problem.eval(root_false_pos)?[0];
+//!
+//!     assert!(result_bisect.abs() &lt; 1e-6);
+//!     assert!(result_newton.abs() &lt; 1e-6);
+//!     assert!(result_false_pos.abs() &lt; 1e-6);
+//!
 //!     Ok(())
 //! }
 //!
-//! fn f(x: AD) -&gt; AD {
-//!     x.sin()
+//! struct Cubic;
+//!
+//! impl Cubic {
+//!     fn eval(&amp;self, x: [f64; 1]) -&gt; Result&lt;[f64; 1]&gt; {
+//!         Ok([(x[0] - 1f64).powi(3)])
+//!     }
+//! }
+//!
+//! impl RootFindingProblem&lt;1, 1, (f64, f64)&gt; for Cubic {
+//!     fn function(&amp;self, x: [f64; 1]) -&gt; Result&lt;[f64; 1]&gt; {
+//!         self.eval(x)
+//!     }
+//!
+//!     fn initial_guess(&amp;self) -&gt; (f64, f64) {
+//!         (0.0, 2.0)
+//!     }
+//! }
+//!
+//! impl RootFindingProblem&lt;1, 1, f64&gt; for Cubic {
+//!     fn function(&amp;self, x: [f64; 1]) -&gt; Result&lt;[f64; 1]&gt; {
+//!         self.eval(x)
+//!     }
+//!
+//!     fn initial_guess(&amp;self) -&gt; f64 {
+//!         0.0
+//!     }
+//!
+//!     fn derivative(&amp;self, x: [f64; 1]) -&gt; Result&lt;Jaco&lt;1, 1&gt;&gt; {
+//!         Ok([[3.0 * (x[0] - 1f64).powi(2)]])
+//!     }
 //! }
 //! ```
 //!
-//! # High-level API
+//! This example demonstrates how to find the root of a cubic function `(x - 1)^3` using various root finding methods.
+//! The `Cubic` struct implements the `RootFindingProblem` trait for both `(f64, f64)` and `f64` initial guess types, allowing the use of different root finding methods.
 //!
-//! ## Members
+//! ### Finding the root of the cosine function (error handling example)
 //!
-//! All output type is `Result&lt;f64, RootError&gt;`
-//!
-//! * `bisection(f, interval: (f64, f64), times: usize, tol: f64)`
-//! * `false_position(f, interval: (f64, f64), times: usize, tol: f64)`
-//! * `secant(f, initial_guess: (f64, f64), times: usize, tol: f64)`
-//! * `newton(f, initial_guess: f64, times: usize, tol: f64)`
-//!
-//! ## Usage
-//!
-//! ```
-//! extern crate peroxide;
+//! ```rust
 //! use peroxide::fuga::*;
+//! use anyhow::Result;
 //!
-//! fn main() -&gt; Result&lt;(), RootError&gt; {
-//!     let root = bisection(f, (1f64, 4f64), 100, 1e-15)?;
-//!     root.print();
+//! fn main() -&gt; Result&lt;()&gt; {
+//!     let problem = Cosine;
+//!     let newton = NewtonMethod { max_iter: 100, tol: 1e-6 };
+//!
+//!     let root_newton = match newton.find(&amp;problem) {
+//!         Ok(x) =&gt; x,
+//!         Err(e) =&gt; {
+//!             println!("{:?}", e);
+//!             match e.downcast::&lt;RootError&lt;1&gt;&gt;() {
+//!                 Ok(RootError::ZeroDerivative(x)) =&gt; x,
+//!                 Ok(e) =&gt; panic!("ok but {:?}", e),
+//!                 Err(e) =&gt; panic!("err {:?}", e),
+//!             }
+//!         }
+//!     };
+//!
+//!     assert_eq!(root_newton[0], 0.0);
+//!
 //!     Ok(())
 //! }
 //!
-//! fn f(x: AD) -&gt; AD {
-//!     x.sin()
+//! struct Cosine;
+//!
+//! impl Cosine {
+//!     fn eval(&amp;self, x: [f64; 1]) -&gt; Result&lt;[f64; 1]&gt; {
+//!         Ok([x[0].cos()])
+//!     }
+//! }
+//!
+//! impl RootFindingProblem&lt;1, 1, f64&gt; for Cosine {
+//!     fn function(&amp;self, x: [f64; 1]) -&gt; Result&lt;[f64; 1]&gt; {
+//!         self.eval(x)
+//!     }
+//!
+//!     fn initial_guess(&amp;self) -&gt; f64 {
+//!         0.0 // should fail in newton (derivative is 0)
+//!     }
+//!
+//!     fn derivative(&amp;self, x: [f64; 1]) -&gt; Result&lt;Jaco&lt;1, 1&gt;&gt; {
+//!         Ok([[-x[0].sin()]])
+//!     }
 //! }
 //! ```
 //!
-//! # Reference
-//!
-//! * Walter Gautschi, *Numerical Analysis*, Springer (2012)
+//! This example shows how to find the root of the cosine function using Newton's method.
+//! The `Cosine` struct implements the `RootFindingProblem` trait for the `f64` initial guess type.
+//! The initial guess is set to `0.0`, which is a point where the derivative of the cosine function is 0.
+//! This leads to the `NewtonMethod` returning a `RootError::ZeroDerivative` error, which is handled in the example.
+</span><span class="kw">use </span>anyhow::{<span class="prelude-ty">Result</span>, bail};
 
-</span><span class="kw">use </span><span class="kw">crate</span>::structure::ad::{AD, AD::AD1, ADFn};
-<span class="kw">use </span>std::fmt::Display;
-<span class="kw">use </span>RootState::{I, P};
-<span class="kw">use </span><span class="kw">crate</span>::traits::stable::StableFn;
-<span class="comment">//use std::collections::HashMap;
-//use std::marker::PhantomData;
+<span class="doccomment">/// Point alias (`[f64; N]`)
+</span><span class="kw">pub type </span>Pt&lt;<span class="kw">const </span>N: usize&gt; = [f64; N];
+<span class="doccomment">/// Interval alias (`([f64; N], [f64; N])`)
+</span><span class="kw">pub type </span>Intv&lt;<span class="kw">const </span>N: usize&gt; = (Pt&lt;N&gt;, Pt&lt;N&gt;);
+<span class="doccomment">/// Jacobian alias (`[[f64; C]; R]`)
+</span><span class="kw">pub type </span>Jaco&lt;<span class="kw">const </span>R: usize, <span class="kw">const </span>C: usize&gt; = [[f64; C]; R];
+<span class="doccomment">/// Hessian alias (`[[[f64; C]; C]; R]`)
+</span><span class="kw">pub type </span>Hess&lt;<span class="kw">const </span>R: usize, <span class="kw">const </span>C: usize&gt; = [[[f64; C]; C]; R];
 
-</span><span class="attr">#[derive(Debug, Copy, Clone)]
-</span><span class="kw">pub enum </span>RootState {
-    P(f64),
-    I(f64, f64),
+<span class="doccomment">/// Trait to define a root finding problem
+///
+/// # Type Parameters
+///
+/// - `I`: Input type (e.g. `f64`, `[f64; N]`, or etc.)
+/// - `O`: Output type (e.g. `f64`, `[f64; N]`, or etc.)
+/// - `T`: State type (e.g. `f64`, `(f64, f64)`, or etc.)
+///
+/// # Methods
+///
+/// - `function`: Function
+/// - `initial_guess`: Initial guess
+/// - `derivative`: Derivative (optional)
+/// - `hessian`: Hessian (optional)
+</span><span class="kw">pub trait </span>RootFindingProblem&lt;<span class="kw">const </span>I: usize, <span class="kw">const </span>O: usize, T&gt; {
+    <span class="kw">fn </span>function(<span class="kw-2">&amp;</span><span class="self">self</span>, x: Pt&lt;I&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;Pt&lt;O&gt;&gt;;
+    <span class="kw">fn </span>initial_guess(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; T;
+    <span class="attr">#[allow(unused_variables)]
+    </span><span class="kw">fn </span>derivative(<span class="kw-2">&amp;</span><span class="self">self</span>, x: Pt&lt;I&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;Jaco&lt;O, I&gt;&gt; {
+        <span class="macro">unimplemented!</span>()
+    }
+    <span class="attr">#[allow(unused_variables)]
+    </span><span class="kw">fn </span>hessian(<span class="kw-2">&amp;</span><span class="self">self</span>, x: Pt&lt;I&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;Hess&lt;O, I&gt;&gt; {
+        <span class="macro">unimplemented!</span>()
+    }
 }
 
-<span class="attr">#[derive(Debug, Copy, Clone, PartialEq, Eq)]
-</span><span class="kw">pub enum </span>RootFind {
-    Bisection,
-    Newton,
-    Secant,
-    FalsePosition,
-}
-
-<span class="doccomment">/// Structure for Root finding
-</span><span class="attr">#[derive(Debug, Clone)]
-#[allow(dead_code)]
-</span><span class="kw">pub struct </span>RootFinder&lt;F: Fn(AD) -&gt; AD&gt; {
-    init: RootState,
-    curr: RootState,
-    method: RootFind,
-    f: Box&lt;F&gt;,
-    find: RootBool,
-    times: usize,
-    tol: f64,
-    root: f64,
+<span class="doccomment">/// Trait to define a root finder
+///
+/// # Type Parameters
+///
+/// - `I`: Input type (e.g. `f64`, `[f64; N]`, or etc.)
+/// - `O`: Output type (e.g. `f64`, `[f64; N]`, or etc.)
+/// - `T`: State type (e.g. `f64`, `(f64, f64)`, or etc.)
+///
+/// # Methods
+///
+/// - `max_iter`: Maximum number of iterations
+/// - `tol`: Absolute tolerance
+/// - `find`: Find root
+///
+/// # Available root finders
+///
+/// - `BisectionMethod`: `I=1, O=1, T=(f64, f64)`
+/// - `FalsePositionMethod`: `I=1, O=1, T=(f64, f64)`
+/// - `NewtonMethod`: `I=1, O=1, T=f64`
+/// - `SecantMethod`: `I=1, O=1, T=(f64, f64)`
+</span><span class="kw">pub trait </span>RootFinder&lt;<span class="kw">const </span>I: usize, <span class="kw">const </span>O: usize, T&gt; {
+    <span class="kw">fn </span>max_iter(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; usize;
+    <span class="kw">fn </span>tol(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; f64;
+    <span class="kw">fn </span>find&lt;P: RootFindingProblem&lt;I, O, T&gt;&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, problem: <span class="kw-2">&amp;</span>P) -&gt; <span class="prelude-ty">Result</span>&lt;Pt&lt;I&gt;&gt;;
 }
 
 <span class="attr">#[derive(Debug, Copy, Clone)]
-</span><span class="kw">pub enum </span>RootError {
-    MismatchedState,
-    TimesUp,
-    NaNRoot,
+</span><span class="kw">pub enum </span>RootError&lt;<span class="kw">const </span>I: usize&gt; {
+    NotConverge(Pt&lt;I&gt;),
+    NoRoot,
+    ZeroDerivative(Pt&lt;I&gt;),
+    ZeroSecant(Pt&lt;I&gt;, Pt&lt;I&gt;),
 }
 
-<span class="attr">#[derive(Debug, Copy, Clone, PartialEq, Eq)]
-</span><span class="kw">pub enum </span>RootBool {
-    Find,
-    NotYet,
-    Error,
-}
-
-<span class="kw">impl </span>Display <span class="kw">for </span>RootError {
-    <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>std::fmt::Formatter) -&gt; std::fmt::Result {
+<span class="kw">impl </span>std::fmt::Display <span class="kw">for </span>RootError&lt;<span class="number">1</span>&gt; {
+    <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>std::fmt::Formatter&lt;<span class="lifetime">'_</span>&gt;) -&gt; std::fmt::Result {
         <span class="kw">match </span><span class="self">self </span>{
-            RootError::MismatchedState =&gt; <span class="macro">writeln!</span>(f, <span class="string">"Mismatched RootState with RootFind method"</span>),
-            RootError::TimesUp =&gt; <span class="macro">writeln!</span>(f, <span class="string">"No root until set times - More times required"</span>),
-            RootError::NaNRoot =&gt; <span class="macro">writeln!</span>(f, <span class="string">"Root is NaN - Should modify initial states"</span>),
+            RootError::NoRoot =&gt; <span class="macro">write!</span>(f, <span class="string">"There is no root in the interval"</span>),
+            RootError::NotConverge(a) =&gt; <span class="macro">write!</span>(f, <span class="string">"Not yet converge. Our guess is {:?}"</span>, a),
+            RootError::ZeroDerivative(a) =&gt; <span class="macro">write!</span>(f, <span class="string">"Zero derivative in {:?}"</span>, a),
+            RootError::ZeroSecant(a,b) =&gt; <span class="macro">write!</span>(f, <span class="string">"Zero secant in ({:?}, {:?})"</span>, a, b),
         }
     }
 }
 
-<span class="kw">impl </span>std::error::Error <span class="kw">for </span>RootError {}
-
-<span class="kw">impl </span>RootState {
-    <span class="kw">pub fn </span>get_point(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;f64&gt; {
-        <span class="kw">match </span><span class="self">self </span>{
-            P(x) =&gt; <span class="prelude-val">Some</span>(<span class="kw-2">*</span>x),
-            <span class="kw">_ </span>=&gt; <span class="prelude-val">None</span>,
-        }
-    }
-
-    <span class="kw">pub fn </span>get_interval(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;(f64, f64)&gt; {
-        <span class="kw">match </span><span class="self">self </span>{
-            I(x, y) =&gt; <span class="prelude-val">Some</span>((<span class="kw-2">*</span>x, <span class="kw-2">*</span>y)),
-            <span class="kw">_ </span>=&gt; <span class="prelude-val">None</span>,
-        }
-    }
+<span class="doccomment">/// Macro for single function
+///
+/// # Description
+///
+/// For I=1, O=1, it is bother to write below code.
+///
+/// ```ignore
+/// let fx = problem.function([x])?[0];
+/// ```
+///
+/// This macro solve this problem as follows.
+///
+/// ```ignore
+/// let fx = single_function!(problem, x);
+/// ```
+</span><span class="attr">#[macro_export]
+</span><span class="macro">macro_rules! </span>single_function {
+    (<span class="macro-nonterminal">$problem</span>:expr, <span class="macro-nonterminal">$x</span>:expr) =&gt; {{
+        <span class="macro-nonterminal">$problem</span>.function([<span class="macro-nonterminal">$x</span>])<span class="question-mark">?</span>[<span class="number">0</span>]
+    }}
 }
 
-<span class="kw">impl</span>&lt;F: Fn(AD) -&gt; AD&gt; RootFinder&lt;F&gt; {
-    <span class="doccomment">/// Create RootFinder
-    ///
-    /// # Default Options
-    ///
-    /// * Times: 100
-    /// * Tolerance: 1e-10
-    ///
-    /// # Usage
-    /// ```
-    /// extern crate peroxide;
-    /// use peroxide::fuga::*;
-    ///
-    /// fn main() -&gt; Result&lt;(), RootError&gt; {
-    ///     let init = RootState::I(1f64, 3f64);
-    ///     let mut a = RootFinder::new(init, Bisection, f)?;
-    ///     let x = a.find_root()?;
-    ///     x.print();
-    ///     Ok(())
-    /// }
-    ///
-    /// fn f(x: AD) -&gt; AD {
-    ///     x.powi(2) - 4f64
-    /// }
-    /// ```
-    </span><span class="kw">pub fn </span>new(init: RootState, method: RootFind, f: F) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, RootError&gt; {
-        <span class="kw">match </span>method {
-            RootFind::Bisection =&gt; <span class="kw">match </span>init {
-                P(<span class="kw">_</span>) =&gt; <span class="prelude-val">Err</span>(RootError::MismatchedState),
-                <span class="kw">_ </span>=&gt; <span class="prelude-val">Ok</span>(RootFinder {
-                    init,
-                    curr: init,
-                    method,
-                    f: Box::new(f),
-                    find: RootBool::NotYet,
-                    times: <span class="number">100</span>,
-                    tol: <span class="number">1e-10</span>,
-                    root: <span class="number">0f64</span>,
-                }),
-            },
-            RootFind::Newton =&gt; <span class="kw">match </span>init {
-                P(<span class="kw">_</span>) =&gt; <span class="prelude-val">Ok</span>(RootFinder {
-                    init,
-                    curr: init,
-                    method,
-                    f: Box::new(f),
-                    find: RootBool::NotYet,
-                    times: <span class="number">100</span>,
-                    tol: <span class="number">1e-10</span>,
-                    root: <span class="number">0f64</span>,
-                }),
-                <span class="kw">_ </span>=&gt; <span class="prelude-val">Err</span>(RootError::MismatchedState),
-            },
-            RootFind::Secant =&gt; <span class="kw">match </span>init {
-                P(<span class="kw">_</span>) =&gt; <span class="prelude-val">Err</span>(RootError::MismatchedState),
-                <span class="kw">_ </span>=&gt; <span class="prelude-val">Ok</span>(RootFinder {
-                    init,
-                    curr: init,
-                    method,
-                    f: Box::new(f),
-                    find: RootBool::NotYet,
-                    times: <span class="number">100</span>,
-                    tol: <span class="number">1e-10</span>,
-                    root: <span class="number">0f64</span>,
-                }),
-            },
-            RootFind::FalsePosition =&gt; <span class="kw">match </span>init {
-                I(<span class="kw">_</span>, <span class="kw">_</span>) =&gt; <span class="prelude-val">Ok</span>(RootFinder {
-                    init,
-                    curr: init,
-                    method,
-                    f: Box::new(f),
-                    find: RootBool::NotYet,
-                    times: <span class="number">100</span>,
-                    tol: <span class="number">1e-10</span>,
-                    root: <span class="number">0f64</span>,
-                }),
-                <span class="kw">_ </span>=&gt; <span class="prelude-val">Err</span>(RootError::MismatchedState),
-            },
-        }
+<span class="doccomment">/// Macro for single derivative
+///
+/// # Description
+///
+/// For I=1, O=1, it is bother to write below code.
+///
+/// ```ignore
+/// let fx = problem.derivative([x])?[0][0];
+/// ```
+///
+/// This macro solve this problem as follows.
+///
+/// ```ignore
+/// let fx = single_derivative!(problem, x);
+/// ```
+</span><span class="attr">#[macro_export]
+</span><span class="macro">macro_rules! </span>single_derivative {
+    (<span class="macro-nonterminal">$problem</span>:expr, <span class="macro-nonterminal">$x</span>:expr) =&gt; {{
+        <span class="macro-nonterminal">$problem</span>.derivative([<span class="macro-nonterminal">$x</span>])<span class="question-mark">?</span>[<span class="number">0</span>][<span class="number">0</span>]
+    }}
+}
+
+<span class="comment">// ┌─────────────────────────────────────────────────────────┐
+//  Bisection method
+// └─────────────────────────────────────────────────────────┘
+</span><span class="doccomment">/// Bisection method
+///
+/// # Type for `RootFinder`
+///
+/// - `I`: 1
+/// - `O`: 1
+/// - `T`: `(f64, f64)`
+///
+/// # Arguments
+///
+/// - `max_iter`: Maximum number of iterations
+/// - `tol`: tol
+///
+/// # Caution
+///
+/// - The function should be continuous
+/// - The function should have a root in the initial interval
+</span><span class="kw">pub struct </span>BisectionMethod {
+    <span class="kw">pub </span>max_iter: usize,
+    <span class="kw">pub </span>tol: f64,
+}
+
+<span class="kw">impl </span>RootFinder&lt;<span class="number">1</span>, <span class="number">1</span>, (f64, f64)&gt; <span class="kw">for </span>BisectionMethod {
+    <span class="kw">fn </span>max_iter(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; usize {
+        <span class="self">self</span>.max_iter
     }
 
-    <span class="kw">pub fn </span>f(<span class="kw-2">&amp;</span><span class="self">self</span>, x: AD) -&gt; AD {
-        (<span class="self">self</span>.f)(x)
-    }
-
-    <span class="doccomment">/// Condition number
-    </span><span class="kw">pub fn </span>condition_number(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; f64 {
-        <span class="kw">match </span><span class="self">self</span>.curr {
-            P(p) =&gt; {
-                <span class="kw">let </span>z = AD1(p, <span class="number">1f64</span>);
-                <span class="kw">let </span>fz = <span class="self">self</span>.f(z);
-                p * fz.dx() / fz.x()
-            }
-            I(a, b) =&gt; {
-                <span class="kw">let </span>p = (a + b) / <span class="number">2f64</span>;
-                <span class="kw">let </span>z = AD1(p, <span class="number">1f64</span>);
-                <span class="kw">let </span>fz = <span class="self">self</span>.f(z);
-                p * fz.dx() / fz.x()
-            }
-        }
-    }
-
-    <span class="doccomment">/// Set max iteration times
-    </span><span class="kw">pub fn </span>set_times(<span class="kw-2">&amp;mut </span><span class="self">self</span>, times: usize) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
-        <span class="self">self</span>.times = times;
-        <span class="self">self
-    </span>}
-
-    <span class="doccomment">/// Set tolerance
-    </span><span class="kw">pub fn </span>set_tol(<span class="kw-2">&amp;mut </span><span class="self">self</span>, tol: f64) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
-        <span class="self">self</span>.tol = tol;
-        <span class="self">self
-    </span>}
-
-    <span class="doccomment">/// Get max iteration times
-    </span><span class="kw">pub fn </span>get_times(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; usize {
-        <span class="self">self</span>.times
-    }
-
-    <span class="doccomment">/// Get tolerance
-    </span><span class="kw">pub fn </span>get_tol(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; f64 {
+    <span class="kw">fn </span>tol(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; f64 {
         <span class="self">self</span>.tol
     }
 
-    <span class="doccomment">/// Get method
-    </span><span class="kw">pub fn </span>get_method(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; RootFind {
-        <span class="self">self</span>.method
-    }
+    <span class="kw">fn </span>find&lt;P: RootFindingProblem&lt;<span class="number">1</span>, <span class="number">1</span>, (f64, f64)&gt;&gt;(
+        <span class="kw-2">&amp;</span><span class="self">self</span>,
+        problem: <span class="kw-2">&amp;</span>P,
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;[f64; <span class="number">1</span>]&gt; {
+        <span class="kw">let </span>state = problem.initial_guess();
+        <span class="kw">let </span>(<span class="kw-2">mut </span>a, <span class="kw-2">mut </span>b) = state;
+        <span class="kw">let </span><span class="kw-2">mut </span>fa = <span class="macro">single_function!</span>(problem, a);
+        <span class="kw">let </span><span class="kw-2">mut </span>fb = <span class="macro">single_function!</span>(problem, b);
 
-    <span class="doccomment">/// Get current RootState
-    </span><span class="kw">pub fn </span>get_curr(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>RootState {
-        <span class="kw-2">&amp;</span><span class="self">self</span>.curr
-    }
-
-    <span class="doccomment">/// Check if find root
-    </span><span class="kw">pub fn </span>check_find(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; RootBool {
-        <span class="self">self</span>.find
-    }
-
-    <span class="doccomment">/// Update RootFinder
-    </span><span class="attr">#[inline]
-    </span><span class="kw">pub fn </span>update(<span class="kw-2">&amp;mut </span><span class="self">self</span>) {
-        <span class="kw">match </span><span class="self">self</span>.method {
-            RootFind::Bisection =&gt; <span class="kw">match </span><span class="self">self</span>.curr {
-                I(a, b) =&gt; {
-                    <span class="kw">let </span>f_ad = ADFn::new(|x| <span class="self">self</span>.f(x));
-                    <span class="kw">let </span>x = <span class="number">0.5 </span>* (a + b);
-                    <span class="kw">let </span>fa = f_ad.call_stable(a);
-                    <span class="kw">let </span>fx = f_ad.call_stable(x);
-                    <span class="kw">let </span>fb = f_ad.call_stable(b);
-                    <span class="kw">if </span>(a - b).abs() &lt;= <span class="self">self</span>.tol {
-                        <span class="self">self</span>.find = RootBool::Find;
-                        <span class="self">self</span>.root = x;
-                    } <span class="kw">else </span>{
-                        <span class="kw">if </span>fa * fx &lt; <span class="number">0f64 </span>{
-                            <span class="self">self</span>.curr = I(a, x);
-                        } <span class="kw">else if </span>fx * fb &lt; <span class="number">0f64 </span>{
-                            <span class="self">self</span>.curr = I(x, b);
-                        } <span class="kw">else if </span>fx == <span class="number">0f64 </span>{
-                            <span class="self">self</span>.find = RootBool::Find;
-                            <span class="self">self</span>.root = x;
-                        } <span class="kw">else </span>{
-                            <span class="self">self</span>.find = RootBool::Error;
-                        }
-                    }
-                }
-                <span class="kw">_ </span>=&gt; <span class="macro">unreachable!</span>(),
-            },
-            RootFind::FalsePosition =&gt; <span class="kw">match </span><span class="self">self</span>.curr {
-                I(a, b) =&gt; {
-                    <span class="kw">let </span>f_ad = ADFn::new(|x| <span class="self">self</span>.f(x));
-                    <span class="kw">let </span>fa = f_ad.call_stable(a);
-                    <span class="kw">let </span>fb = f_ad.call_stable(b);
-                    <span class="kw">let </span>x = (a * fb - b * fa) / (fb - fa);
-                    <span class="kw">let </span>fx = f_ad.call_stable(x);
-                    <span class="kw">if </span>(a - b).abs() &lt;= <span class="self">self</span>.tol || fx.abs() &lt;= <span class="self">self</span>.tol {
-                        <span class="self">self</span>.find = RootBool::Find;
-                        <span class="self">self</span>.root = x;
-                    } <span class="kw">else </span>{
-                        <span class="kw">if </span>fx * fa &lt; <span class="number">0f64 </span>{
-                            <span class="self">self</span>.curr = I(a, x);
-                        } <span class="kw">else if </span>fx * fb &lt; <span class="number">0f64 </span>{
-                            <span class="self">self</span>.curr = I(x, b);
-                        } <span class="kw">else if </span>fx == <span class="number">0f64 </span>{
-                            <span class="self">self</span>.find = RootBool::Find;
-                            <span class="self">self</span>.root = x;
-                        } <span class="kw">else </span>{
-                            <span class="self">self</span>.find = RootBool::Error;
-                        }
-                    }
-                }
-                <span class="kw">_ </span>=&gt; <span class="macro">unreachable!</span>(),
-            },
-            RootFind::Newton =&gt; <span class="kw">match </span><span class="self">self</span>.curr {
-                P(xn) =&gt; {
-                    <span class="kw">let </span>z = AD1(xn, <span class="number">1f64</span>);
-                    <span class="kw">let </span>fz = <span class="self">self</span>.f(z);
-                    <span class="kw">let </span>x = xn - (fz.x() / fz.dx());
-                    <span class="kw">if </span>(x - xn).abs() &lt;= <span class="self">self</span>.tol {
-                        <span class="self">self</span>.find = RootBool::Find;
-                        <span class="self">self</span>.root = x;
-                    }
-                    <span class="self">self</span>.curr = P(x);
-                }
-                <span class="kw">_ </span>=&gt; <span class="macro">unreachable!</span>(),
-            },
-            RootFind::Secant =&gt; <span class="kw">match </span><span class="self">self</span>.curr {
-                I(xn_1, xn) =&gt; {
-                    <span class="kw">let </span>f_ad = ADFn::new(|x| <span class="self">self</span>.f(x));
-                    <span class="kw">let </span>fxn_1 = f_ad.call_stable(xn_1);
-                    <span class="kw">let </span>fxn = f_ad.call_stable(xn);
-                    <span class="kw">let </span>x = xn - (xn - xn_1) / (fxn - fxn_1) * fxn;
-                    <span class="kw">if </span>(x - xn).abs() &lt;= <span class="self">self</span>.tol {
-                        <span class="self">self</span>.find = RootBool::Find;
-                        <span class="self">self</span>.root = x;
-                    }
-                    <span class="self">self</span>.curr = I(xn, x);
-                }
-                <span class="kw">_ </span>=&gt; <span class="macro">unreachable!</span>(),
-            },
+        <span class="kw">if </span>fa.abs() &lt; <span class="self">self</span>.tol {
+            <span class="kw">return </span><span class="prelude-val">Ok</span>([a]);
+        } <span class="kw">else if </span>fb.abs() &lt; <span class="self">self</span>.tol {
+            <span class="kw">return </span><span class="prelude-val">Ok</span>([b]);
+        } <span class="kw">else if </span>fa * fb &gt; <span class="number">0.0 </span>{
+            <span class="macro">bail!</span>(RootError::NoRoot);
         }
-    }
 
-    <span class="doccomment">/// Find Root
-    </span><span class="kw">pub fn </span>find_root(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;f64, RootError&gt; {
-        <span class="kw">for </span>_i <span class="kw">in </span><span class="number">0</span>..<span class="self">self</span>.times {
-            <span class="self">self</span>.update();
-            <span class="kw">match </span><span class="self">self</span>.find {
-                RootBool::Find =&gt; {
-                    <span class="comment">//println!("{}", i+1);
-                    </span><span class="kw">return </span><span class="prelude-val">Ok</span>(<span class="self">self</span>.root);
-                }
-                RootBool::Error =&gt; {
-                    <span class="kw">return </span><span class="prelude-val">Err</span>(RootError::NaNRoot);
-                }
-                <span class="kw">_ </span>=&gt; (),
+        <span class="kw">for _ in </span><span class="number">0</span>..<span class="self">self</span>.max_iter {
+            <span class="kw">let </span>c = (a + b) / <span class="number">2.0</span>;
+            <span class="kw">let </span>fc = <span class="macro">single_function!</span>(problem, c);
+
+            <span class="kw">if </span>fc.abs() &lt; <span class="self">self</span>.tol {
+                <span class="kw">return </span><span class="prelude-val">Ok</span>([c]);
+            } <span class="kw">else if </span>fa * fc &lt; <span class="number">0.0 </span>{
+                b = c;
+                fb = fc;
+            } <span class="kw">else if </span>fb * fc &lt; <span class="number">0.0 </span>{
+                a = c;
+                fa = fc;
+            } <span class="kw">else </span>{
+                <span class="macro">bail!</span>(RootError::NoRoot);
             }
         }
-        <span class="prelude-val">Err</span>(RootError::TimesUp)
+        <span class="kw">let </span>c = (a + b) / <span class="number">2.0</span>;
+        <span class="macro">bail!</span>(RootError::NotConverge([c]));
     }
 }
 
-<span class="doccomment">/// Bisection method to find root
+<span class="comment">// ┌─────────────────────────────────────────────────────────┐
+//  Newton method
+// └─────────────────────────────────────────────────────────┘
+</span><span class="doccomment">/// Newton method
 ///
-/// # Usage
-/// ```
-/// extern crate peroxide;
-/// use peroxide::fuga::*;
+/// # Type for `RootFinder`
 ///
-/// fn main() -&gt; Result&lt;(), RootError&gt; {
-///     let x = bisection(f, (0f64, 4f64), 100, 1e-15)?;
-///     assert!((x - 3f64).abs() &lt; 1e-15);
-///     Ok(())
-/// }
+/// - `I`: 1
+/// - `O`: 1
+/// - `T`: `f64`
 ///
-/// fn f(x: AD) -&gt; AD {
-///     x.powi(2) - x * 2f64 - 3f64
-/// }
-/// ```
-</span><span class="kw">pub fn </span>bisection&lt;F: Fn(AD) -&gt; AD&gt;(
-    f: F,
-    interval: (f64, f64),
-    times: usize,
-    tol: f64,
-) -&gt; <span class="prelude-ty">Result</span>&lt;f64, RootError&gt; {
-    <span class="kw">let </span>(a, b) = interval;
-    <span class="kw">let </span><span class="kw-2">mut </span>root_finder = RootFinder::new(I(a, b), RootFind::Bisection, f)<span class="question-mark">?</span>;
-    root_finder.set_tol(tol);
-    root_finder.set_times(times);
-    root_finder.find_root()
+/// # Arguments
+///
+/// - `max_iter`: Maximum number of iterations
+/// - `tol`: Absolute tolerance
+///
+/// # Caution
+///
+/// - The function should be differentiable
+/// - This method highly depends on the initial guess
+/// - This method is not guaranteed to converge
+</span><span class="kw">pub struct </span>NewtonMethod {
+    <span class="kw">pub </span>max_iter: usize,
+    <span class="kw">pub </span>tol: f64,
 }
 
-<span class="doccomment">/// False position method to find root
-///
-/// # Usage
-/// ```
-/// extern crate peroxide;
-/// use peroxide::fuga::*;
-///
-/// fn main() -&gt; Result&lt;(), RootError&gt; {
-///     let x = false_position(f, (0f64, 4f64), 1000, 1e-15)?;
-///     assert!((x - 3f64).abs() &lt; 1e-15);
-///     Ok(())
-/// }
-///
-/// fn f(x: AD) -&gt; AD {
-///     x.powi(2) - x * 2f64 - 3f64
-/// }
-/// ```
-</span><span class="kw">pub fn </span>false_position&lt;F: Fn(AD) -&gt; AD&gt;(
-    f: F,
-    interval: (f64, f64),
-    times: usize,
-    tol: f64,
-) -&gt; <span class="prelude-ty">Result</span>&lt;f64, RootError&gt; {
-    <span class="kw">let </span>(a, b) = interval;
-    <span class="kw">let </span><span class="kw-2">mut </span>root_finder = RootFinder::new(I(a, b), RootFind::FalsePosition, f)<span class="question-mark">?</span>;
-    root_finder.set_tol(tol);
-    root_finder.set_times(times);
-    root_finder.find_root()
+<span class="kw">impl </span>RootFinder&lt;<span class="number">1</span>, <span class="number">1</span>, f64&gt; <span class="kw">for </span>NewtonMethod {
+    <span class="kw">fn </span>max_iter(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; usize {
+        <span class="self">self</span>.max_iter
+    }
+    <span class="kw">fn </span>tol(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; f64 {
+        <span class="self">self</span>.tol
+    }
+    <span class="kw">fn </span>find&lt;P: RootFindingProblem&lt;<span class="number">1</span>, <span class="number">1</span>, f64&gt;&gt;(
+        <span class="kw-2">&amp;</span><span class="self">self</span>,
+        problem: <span class="kw-2">&amp;</span>P,
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;[f64; <span class="number">1</span>]&gt; {
+        <span class="kw">let </span><span class="kw-2">mut </span>x = problem.initial_guess();
+
+        <span class="kw">for _ in </span><span class="number">0</span>..<span class="self">self</span>.max_iter {
+            <span class="kw">let </span>f = <span class="macro">single_function!</span>(problem, x);
+            <span class="kw">let </span>df = <span class="macro">single_derivative!</span>(problem, x);
+
+            <span class="kw">if </span>f.abs() &lt; <span class="self">self</span>.tol {
+                <span class="kw">return </span><span class="prelude-val">Ok</span>([x]);
+            } <span class="kw">else if </span>df == <span class="number">0.0 </span>{
+                <span class="macro">bail!</span>(RootError::ZeroDerivative([x]));
+            } <span class="kw">else </span>{
+                x -= f / df;
+            }
+        }
+        <span class="macro">bail!</span>(RootError::NotConverge([x]));
+    }
 }
 
-<span class="doccomment">/// Newton method to find root
+<span class="comment">// ┌─────────────────────────────────────────────────────────┐
+//  Secant method
+// └─────────────────────────────────────────────────────────┘
+</span><span class="doccomment">/// Secant method
 ///
-/// # Usage
-/// ```
-/// extern crate peroxide;
-/// use peroxide::fuga::*;
+/// # Type for `RootFinder`
 ///
-/// fn main() -&gt; Result&lt;(), RootError&gt; {
-///     let x = newton(f, 2f64, 100, 1e-15)?;
-///     assert!((x - 3f64).abs() &lt; 1e-15);
-///     Ok(())
-/// }
+/// - `I`: 1
+/// - `O`: 1
+/// - `T`: `(f64, f64)`
 ///
-/// fn f(x: AD) -&gt; AD {
-///     x.powi(2) - x * 2f64 - 3f64
-/// }
-/// ```
-</span><span class="kw">pub fn </span>newton&lt;F: Fn(AD) -&gt; AD&gt;(
-    f: F,
-    initial_guess: f64,
-    times: usize,
-    tol: f64,
-) -&gt; <span class="prelude-ty">Result</span>&lt;f64, RootError&gt; {
-    <span class="kw">let </span><span class="kw-2">mut </span>root_finder = RootFinder::new(P(initial_guess), RootFind::Newton, f)<span class="question-mark">?</span>;
-    root_finder.set_tol(tol);
-    root_finder.set_times(times);
-    root_finder.find_root()
+/// # Arguments
+///
+/// - `max_iter`: Maximum number of iterations
+/// - `tol`: Absolute tolerance
+///
+/// # Caution
+///
+/// - The function should be differentiable
+/// - This method is not guaranteed to converge
+</span><span class="kw">pub struct </span>SecantMethod {
+    <span class="kw">pub </span>max_iter: usize,
+    <span class="kw">pub </span>tol: f64,
 }
 
-<span class="doccomment">/// Secant method to find root
-///
-/// # Usage
-/// ```
-/// extern crate peroxide;
-/// use peroxide::fuga::*;
-///
-/// fn main() -&gt; Result&lt;(), RootError&gt; {
-///     let x = secant(f, (2f64, 2.1f64), 100, 1e-15)?;
-///     assert!((x - 3f64).abs() &lt; 1e-15);
-///     Ok(())
-/// }
-///
-/// fn f(x: AD) -&gt; AD {
-///     x.powi(2) - x * 2f64 - 3f64
-/// }
-/// ```
-</span><span class="kw">pub fn </span>secant&lt;F: Fn(AD) -&gt; AD&gt;(
-    f: F,
-    initial_guess: (f64, f64),
-    times: usize,
-    tol: f64,
-) -&gt; <span class="prelude-ty">Result</span>&lt;f64, RootError&gt; {
-    <span class="kw">let </span>(a, b) = initial_guess;
-    <span class="kw">let </span><span class="kw-2">mut </span>root_finder = RootFinder::new(I(a, b), RootFind::Secant, f)<span class="question-mark">?</span>;
-    root_finder.set_tol(tol);
-    root_finder.set_times(times);
-    root_finder.find_root()
+<span class="kw">impl </span>RootFinder&lt;<span class="number">1</span>, <span class="number">1</span>, (f64, f64)&gt; <span class="kw">for </span>SecantMethod {
+    <span class="kw">fn </span>max_iter(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; usize {
+        <span class="self">self</span>.max_iter
+    }
+    <span class="kw">fn </span>tol(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; f64 {
+        <span class="self">self</span>.tol
+    }
+    <span class="kw">fn </span>find&lt;P: RootFindingProblem&lt;<span class="number">1</span>, <span class="number">1</span>, (f64, f64)&gt;&gt;(
+        <span class="kw-2">&amp;</span><span class="self">self</span>,
+        problem: <span class="kw-2">&amp;</span>P,
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;[f64; <span class="number">1</span>]&gt; {
+        <span class="kw">let </span>state = problem.initial_guess();
+        <span class="kw">let </span>(<span class="kw-2">mut </span>x0, <span class="kw-2">mut </span>x1) = state;
+        <span class="kw">let </span><span class="kw-2">mut </span>f0 = <span class="macro">single_function!</span>(problem, x0);
+
+        <span class="kw">if </span>f0.abs() &lt; <span class="self">self</span>.tol {
+            <span class="kw">return </span><span class="prelude-val">Ok</span>([x0]);
+        }
+
+        <span class="kw">for _ in </span><span class="number">0</span>..<span class="self">self</span>.max_iter {
+            <span class="kw">let </span>f1 = <span class="macro">single_function!</span>(problem, x1);
+
+            <span class="kw">if </span>f1.abs() &lt; <span class="self">self</span>.tol {
+                <span class="kw">return </span><span class="prelude-val">Ok</span>([x1]);
+            }
+
+            <span class="kw">if </span>f0 == f1 {
+                <span class="macro">bail!</span>(RootError::ZeroSecant([x0], [x1]));
+            }
+
+            f0 = f1;
+            (x0, x1) = (x1, x1 - f1 * (x1 - x0) / (f1 - f0))
+        }
+        <span class="macro">bail!</span>(RootError::NotConverge([x1]));
+    }
 }
 
-<span class="comment">//pub trait RootFinder {
-//    type InitialState;
-//    type RootType;
-//
-//    fn mut_update(&amp;mut self);
-//    fn find_root(&amp;mut self) -&gt; Option&lt;Self::RootType&gt;;
-//    fn set_initial_condition(&amp;mut self, init: Self::InitialState) -&gt; &amp;mut Self;
-//    fn set_times(&amp;mut self) -&gt; &amp;mut Self;
-//    fn check_enough(&amp;self) -&gt; bool;
-//}
-//
-//#[derive(Debug, Clone, Copy, Hash, PartialOrd, PartialEq, Eq)]
-//enum RootOptions {
-//    InitCondition,
-//    Times,
-//}
-//
-//pub struct Bisection&lt;F: Fn(f64) -&gt; f64&gt; {
-//    init: (f64, f64),
-//    curr: (f64, f64),
-//    func: Box&lt;F&gt;,
-//    times: usize,
-//    options: HashMap&lt;RootOptions, bool&gt;,
-//}
-</span></code></pre></div></section></main></body></html>
+<span class="comment">// ┌─────────────────────────────────────────────────────────┐
+//  False position method
+// └─────────────────────────────────────────────────────────┘
+</span><span class="doccomment">/// False position method
+///
+/// # Type for `RootFinder`
+///
+/// - `I`: 1
+/// - `O`: 1
+/// - `T`: `(f64, f64)`
+///
+/// # Arguments
+///
+/// - `max_iter`: Maximum number of iterations
+/// - `tol`: Absolute tolerance
+///
+/// # Caution
+///
+/// - The function should be continuous
+</span><span class="kw">pub struct </span>FalsePositionMethod {
+    <span class="kw">pub </span>max_iter: usize,
+    <span class="kw">pub </span>tol: f64,
+}
+
+<span class="kw">impl </span>RootFinder&lt;<span class="number">1</span>, <span class="number">1</span>, (f64, f64)&gt; <span class="kw">for </span>FalsePositionMethod {
+    <span class="kw">fn </span>max_iter(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; usize {
+        <span class="self">self</span>.max_iter
+    }
+    <span class="kw">fn </span>tol(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; f64 {
+        <span class="self">self</span>.tol
+    }
+    <span class="kw">fn </span>find&lt;P: RootFindingProblem&lt;<span class="number">1</span>, <span class="number">1</span>, (f64, f64)&gt;&gt;(
+        <span class="kw-2">&amp;</span><span class="self">self</span>,
+        problem: <span class="kw-2">&amp;</span>P,
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;[f64; <span class="number">1</span>]&gt; {
+        <span class="kw">let </span>state = problem.initial_guess();
+        <span class="kw">let </span>(<span class="kw-2">mut </span>a, <span class="kw-2">mut </span>b) = state;
+        <span class="kw">let </span><span class="kw-2">mut </span>fa = <span class="macro">single_function!</span>(problem, a);
+        <span class="kw">let </span><span class="kw-2">mut </span>fb = <span class="macro">single_function!</span>(problem, b);
+
+        <span class="kw">if </span>fa.abs() &lt; <span class="self">self</span>.tol {
+            <span class="kw">return </span><span class="prelude-val">Ok</span>([a]);
+        } <span class="kw">else if </span>fb.abs() &lt; <span class="self">self</span>.tol {
+            <span class="kw">return </span><span class="prelude-val">Ok</span>([b]);
+        } <span class="kw">else if </span>fa * fb &gt; <span class="number">0.0 </span>{
+            <span class="macro">bail!</span>(RootError::NoRoot);
+        }
+
+        <span class="kw">for _ in </span><span class="number">0</span>..<span class="self">self</span>.max_iter {
+            <span class="kw">let </span>c = (a * fb - b * fa) / (fb - fa);
+            <span class="kw">let </span>fc = <span class="macro">single_function!</span>(problem, c);
+
+            <span class="kw">if </span>fc.abs() &lt; <span class="self">self</span>.tol {
+                <span class="kw">return </span><span class="prelude-val">Ok</span>([c]);
+            } <span class="kw">else if </span>fa * fc &lt; <span class="number">0.0 </span>{
+                b = c;
+                fb = fc;
+            } <span class="kw">else if </span>fb * fc &lt; <span class="number">0.0 </span>{
+                a = c;
+                fa = fc;
+            } <span class="kw">else </span>{
+                <span class="macro">bail!</span>(RootError::NoRoot);
+            }
+        }
+        <span class="kw">let </span>c = (a * fb - b * fa) / (fb - fa);
+        <span class="macro">bail!</span>(RootError::NotConverge([c]));
+    }
+}
+
+<span class="comment">// ┌─────────────────────────────────────────────────────────┐
+//  Broyden method
+// └─────────────────────────────────────────────────────────┘
+</span><span class="doccomment">/// Broyden method
+///
+/// # Type for `RootFinder`
+///
+/// - `I`: free
+/// - `O`: free
+/// - `T`: `Intv&lt;I&gt;` (=`([f64; I], [f64; I])`)
+///
+/// # Arguments
+///
+/// - `max_iter`: Maximum number of iterations
+/// - `tol`: Absolute tolerance
+///
+/// # Caution
+///
+/// - The function should be differentiable
+</span><span class="kw">pub struct </span>BroydenMethod {
+    <span class="kw">pub </span>max_iter: usize,
+    <span class="kw">pub </span>tol: f64,
+}
+
+
+<span class="attr">#[allow(unused_variables)]
+</span><span class="kw">impl</span>&lt;<span class="kw">const </span>I: usize, <span class="kw">const </span>O: usize&gt; RootFinder&lt;I, O, Intv&lt;I&gt;&gt; <span class="kw">for </span>BroydenMethod {
+    <span class="kw">fn </span>max_iter(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; usize {
+        <span class="self">self</span>.max_iter
+    }
+    <span class="kw">fn </span>tol(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; f64 {
+        <span class="self">self</span>.tol
+    }
+    <span class="kw">fn </span>find&lt;P: RootFindingProblem&lt;I, O, Intv&lt;I&gt;&gt;&gt;(
+        <span class="kw-2">&amp;</span><span class="self">self</span>,
+        problem: <span class="kw-2">&amp;</span>P,
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;Pt&lt;I&gt;&gt; {
+        <span class="macro">unimplemented!</span>()
+    }
+}
+</code></pre></div></section></main></body></html>

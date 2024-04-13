@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/statistics/dist.rs`."><title>dist.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-5bc39a1768837dd0.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="peroxide" data-themes="" data-resource-suffix="" data-rustdoc-version="1.77.1 (7cf61ebde 2024-03-27)" data-channel="1.77.1" data-search-js="search-dd67cee4cfa65049.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../static.files/storage-4c98445ec4002617.js"></script><script defer src="../../../static.files/src-script-e66d777a5a92e9b2.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-48f368f3872407c8.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-04d5337699b92874.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/statistics/dist.rs`."><title>dist.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-5bc39a1768837dd0.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="peroxide" data-themes="" data-resource-suffix="" data-rustdoc-version="1.77.2 (25ef9e3d8 2024-04-09)" data-channel="1.77.2" data-search-js="search-dd67cee4cfa65049.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../static.files/storage-4c98445ec4002617.js"></script><script defer src="../../../static.files/src-script-e66d777a5a92e9b2.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-48f368f3872407c8.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-04d5337699b92874.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js"                  integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js"    integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
 <script>
@@ -954,8 +954,6 @@
 <a href="#936" id="936">936</a>
 <a href="#937" id="937">937</a>
 <a href="#938" id="938">938</a>
-<a href="#939" id="939">939</a>
-<a href="#940" id="940">940</a>
 </pre></div><pre class="rust"><code><span class="doccomment">//! Probabilistic distributions
 //!
 //! ## Probability Distribution
@@ -1014,7 +1012,6 @@
 //! * Usage is very simple
 //!
 //!     ```rust
-//!     extern crate peroxide;
 //!     use peroxide::fuga::*;
 //!
 //!     fn main() {
@@ -1040,7 +1037,6 @@
 //! * **Caution**: `Uniform(T, T)` generates `T` type samples (only for `Uniform`)
 //!
 //!     ```rust
-//!     extern crate peroxide;
 //!     use peroxide::fuga::*;
 //!
 //!     fn main() {
@@ -1068,7 +1064,6 @@
 //! * &lt;del&gt;In peroxide, main traits is Ziggurat - most efficient traits to generate random normal samples.&lt;/del&gt;
 //!     * &lt;del&gt;Code is based on a [C implementation](https://www.seehuhn.de/pages/ziggurat.html) by Jochen Voss.&lt;/del&gt;
 //!     ```rust
-//!     extern crate peroxide;
 //!     use peroxide::fuga::*;
 //!
 //!     fn main() {
@@ -1093,7 +1088,6 @@
 //! * To generate beta random samples, Peroxide uses the `rand_distr::Beta` distribution from the `rand_distr` crate.
 //!
 //!     ```rust
-//!     extern crate peroxide;
 //!     use peroxide::fuga::*;
 //!
 //!     fn main() {
@@ -1117,7 +1111,6 @@
 //! * To generate gamma random samples, Peroxide uses the `rand_distr::Gamma` distribution from the `rand_distr` crate.
 //!
 //!     ```rust
-//!     extern crate peroxide;
 //!     use peroxide::fuga::*;
 //!
 //!     fn main() {
@@ -1141,7 +1134,6 @@
 //! * To generate binomial random samples, Peroxide uses the `rand_distr::Binomial` distribution from the `rand_distr` crate.
 //!
 //!     ```rust
-//!     extern crate peroxide;
 //!     use peroxide::fuga::*;
 //!
 //!     fn main() {
@@ -1165,7 +1157,6 @@
 //! * To generate Student's t random samples, Peroxide uses the `rand_distr::StudentT` distribution from the `rand_distr` crate.
 //!
 //!     ```rust
-//!     extern crate peroxide;
 //!     use peroxide::fuga::*;
 //!
 //!     fn main() {
@@ -1206,8 +1197,8 @@
 <span class="kw">use </span><span class="kw">crate</span>::util::non_macro::{linspace, seq};
 <span class="kw">use </span><span class="kw">crate</span>::util::useful::{auto_zip, find_interval};
 <span class="kw">use </span>std::f64::consts::E;
-<span class="kw">use </span>thiserror::Error;
 <span class="kw">use </span><span class="self">self</span>::WeightedUniformError::<span class="kw-2">*</span>;
+<span class="kw">use </span>anyhow::{<span class="prelude-ty">Result</span>, bail};
 
 <span class="doccomment">/// One parameter distribution
 ///
@@ -1239,16 +1230,23 @@
     intervals: Vec&lt;(T, T)&gt;
 }
 
-<span class="attr">#[derive(Debug, Clone, Copy, Error)]
+<span class="attr">#[derive(Debug, Clone, Copy)]
 </span><span class="kw">pub enum </span>WeightedUniformError {
-    <span class="attr">#[error(<span class="string">"all weights are zero"</span>)]
-    </span>AllZeroWeightError,
-    <span class="attr">#[error(<span class="string">"weights and intervals have different length"</span>)]
-    </span>LengthMismatchError,
-    <span class="attr">#[error(<span class="string">"no non-zero interval found"</span>)]
-    </span>NoNonZeroIntervalError,
-    <span class="attr">#[error(<span class="string">"weights are empty"</span>)]
-    </span>EmptyWeightError,
+    AllZeroWeightError,
+    LengthMismatchError,
+    NoNonZeroIntervalError,
+    EmptyWeightError,
+}
+
+<span class="kw">impl </span>std::fmt::Display <span class="kw">for </span>WeightedUniformError {
+    <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>std::fmt::Formatter&lt;<span class="lifetime">'_</span>&gt;) -&gt; std::fmt::Result {
+        <span class="kw">match </span><span class="self">self </span>{
+            WeightedUniformError::AllZeroWeightError =&gt; <span class="macro">write!</span>(f, <span class="string">"all weights are zero"</span>),
+            WeightedUniformError::LengthMismatchError =&gt; <span class="macro">write!</span>(f, <span class="string">"weights and intervals have different length"</span>),
+            WeightedUniformError::NoNonZeroIntervalError =&gt; <span class="macro">write!</span>(f, <span class="string">"no non-zero interval found"</span>),
+            WeightedUniformError::EmptyWeightError =&gt; <span class="macro">write!</span>(f, <span class="string">"weights are empty"</span>),
+        }
+    }
 }
 
 <span class="kw">impl </span>WeightedUniform&lt;f64&gt; {
@@ -1256,7 +1254,6 @@
     /// 
     /// # Examples
     /// ```
-    /// extern crate peroxide;
     /// use peroxide::fuga::*;
     /// 
     /// fn main() -&gt; Result&lt;(), Box&lt;dyn Error&gt;&gt; {
@@ -1269,17 +1266,17 @@
     ///     Ok(())
     /// }
     /// ```    
-    </span><span class="kw">pub fn </span>new(weights: Vec&lt;f64&gt;, intervals: Vec&lt;f64&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, WeightedUniformError&gt; {
+    </span><span class="kw">pub fn </span>new(weights: Vec&lt;f64&gt;, intervals: Vec&lt;f64&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>&gt; {
         <span class="kw">let </span><span class="kw-2">mut </span>weights = weights;
         <span class="kw">if </span>weights.len() == <span class="number">0 </span>{
-            <span class="kw">return </span><span class="prelude-val">Err</span>(EmptyWeightError);
+            <span class="macro">bail!</span>(EmptyWeightError);
         }
         <span class="kw">if </span>weights.iter().all(|<span class="kw-2">&amp;</span>x| x == <span class="number">0f64</span>) {
-            <span class="kw">return </span><span class="prelude-val">Err</span>(AllZeroWeightError);
+            <span class="macro">bail!</span>(AllZeroWeightError);
         }
         <span class="kw">let </span><span class="kw-2">mut </span>intervals = auto_zip(<span class="kw-2">&amp;</span>intervals);
         <span class="kw">if </span>weights.len() != intervals.len() {
-            <span class="kw">return </span><span class="prelude-val">Err</span>(LengthMismatchError);
+            <span class="macro">bail!</span>(LengthMismatchError);
         }
 
         <span class="comment">// Remove zero weights &amp; corresponding intervals
@@ -1312,7 +1309,6 @@
     /// 
     /// # Examples
     /// ```
-    /// extern crate peroxide;
     /// use peroxide::fuga::*;
     /// 
     /// fn main() -&gt; Result&lt;(), Box&lt;dyn Error&gt;&gt; {
@@ -1330,7 +1326,7 @@
     ///     }
     /// }
     /// ```
-    </span><span class="kw">pub fn </span>from_max_pool_1d&lt;F&gt;(f: F, (a, b): (f64, f64), n: usize, eps: f64) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, WeightedUniformError&gt;
+    </span><span class="kw">pub fn </span>from_max_pool_1d&lt;F&gt;(f: F, (a, b): (f64, f64), n: usize, eps: f64) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>&gt;
     <span class="kw">where </span>F: Fn(f64) -&gt; f64 + Copy {
         <span class="comment">// Find non-zero intervals
         </span><span class="kw">let </span><span class="kw-2">mut </span>a = a;
@@ -1351,7 +1347,7 @@
             }
         }
         <span class="kw">if </span>a &gt;= b {
-            <span class="kw">return </span><span class="prelude-val">Err</span>(NoNonZeroIntervalError);
+            <span class="macro">bail!</span>(NoNonZeroIntervalError);
         }
         <span class="kw">let </span>domain = linspace(a, b, n+<span class="number">1</span>);
 

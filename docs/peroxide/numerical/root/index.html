@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Root Finding"><title>peroxide::numerical::root - Rust</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-5bc39a1768837dd0.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="peroxide" data-themes="" data-resource-suffix="" data-rustdoc-version="1.77.1 (7cf61ebde 2024-03-27)" data-channel="1.77.1" data-search-js="search-dd67cee4cfa65049.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../static.files/storage-4c98445ec4002617.js"></script><script defer src="../sidebar-items.js"></script><script defer src="../../../static.files/main-48f368f3872407c8.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-04d5337699b92874.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Root Finding Methods"><title>peroxide::numerical::root - Rust</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-5bc39a1768837dd0.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="peroxide" data-themes="" data-resource-suffix="" data-rustdoc-version="1.77.2 (25ef9e3d8 2024-04-09)" data-channel="1.77.2" data-search-js="search-dd67cee4cfa65049.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../static.files/storage-4c98445ec4002617.js"></script><script defer src="../sidebar-items.js"></script><script defer src="../../../static.files/main-48f368f3872407c8.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-04d5337699b92874.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js"                  integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js"    integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
 <script>
@@ -14,96 +14,179 @@
     });
 </script>
 
-</head><body class="rustdoc mod"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../../../peroxide/index.html">peroxide</a><span class="version">0.36.4</span></h2></div><h2 class="location"><a href="#">Module root</a></h2><div class="sidebar-elems"><section><ul class="block"><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li><li><a href="#functions">Functions</a></li></ul></section><h2><a href="../index.html">In peroxide::numerical</a></h2></div></nav><div class="sidebar-resizer"></div>
-    <main><div class="width-limiter"><nav class="sub"><form class="search-form"><span></span><div id="sidebar-button" tabindex="-1"><a href="../../../peroxide/all.html" title="show sidebar"></a></div><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" tabindex="-1"><a href="../../../help.html" title="help">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="main-heading"><h1>Module <a href="../../index.html">peroxide</a>::<wbr><a href="../index.html">numerical</a>::<wbr><a class="mod" href="#">root</a><button id="copy-path" title="Copy item path to clipboard"><img src="../../../static.files/clipboard-7571035ce49a181d.svg" width="19" height="18" alt="Copy item path"></button></h1><span class="out-of-band"><a class="src" href="../../../src/peroxide/numerical/root.rs.html#1-531">source</a> · <button id="toggle-all-docs" title="collapse all docs">[<span>&#x2212;</span>]</button></span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Root Finding</p>
-<h2 id="implemented-algorithms"><a class="doc-anchor" href="#implemented-algorithms">§</a>Implemented Algorithms</h2>
+</head><body class="rustdoc mod"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../../../peroxide/index.html">peroxide</a><span class="version">0.37.0</span></h2></div><h2 class="location"><a href="#">Module root</a></h2><div class="sidebar-elems"><section><ul class="block"><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li><li><a href="#traits">Traits</a></li><li><a href="#types">Type Aliases</a></li></ul></section><h2><a href="../index.html">In peroxide::numerical</a></h2></div></nav><div class="sidebar-resizer"></div>
+    <main><div class="width-limiter"><nav class="sub"><form class="search-form"><span></span><div id="sidebar-button" tabindex="-1"><a href="../../../peroxide/all.html" title="show sidebar"></a></div><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" tabindex="-1"><a href="../../../help.html" title="help">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="main-heading"><h1>Module <a href="../../index.html">peroxide</a>::<wbr><a href="../index.html">numerical</a>::<wbr><a class="mod" href="#">root</a><button id="copy-path" title="Copy item path to clipboard"><img src="../../../static.files/clipboard-7571035ce49a181d.svg" width="19" height="18" alt="Copy item path"></button></h1><span class="out-of-band"><a class="src" href="../../../src/peroxide/numerical/root.rs.html#1-597">source</a> · <button id="toggle-all-docs" title="collapse all docs">[<span>&#x2212;</span>]</button></span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><h2 id="root-finding-methods"><a class="doc-anchor" href="#root-finding-methods">§</a>Root Finding Methods</h2>
+<p>This module provides a collection of root finding algorithms for solving nonlinear equations.
+It defines traits for representing root finding problems and root finding methods, and provides implementations of several common algorithms.</p>
+<h3 id="traits"><a class="doc-anchor" href="#traits">§</a>Traits</h3>
 <ul>
-<li>Bisection</li>
-<li>False Position (Regula Falsi)</li>
-<li>Secant</li>
-<li>Newton</li>
-</ul>
-<h2 id="low-level-api"><a class="doc-anchor" href="#low-level-api">§</a>Low-level API</h2><h3 id="members"><a class="doc-anchor" href="#members">§</a>Members</h3>
+<li>
+<p><code>RootFindingProblem&lt;const I: usize, const O: usize, T&gt;</code>: Defines the interface for a root finding problem.
+It requires implementing the <code>function</code> method to evaluate the function at a given point, and the <code>initial_guess</code> method to provide an initial guess for the root.
+Optionally, the <code>derivative</code> and <code>hessian</code> methods can be implemented to provide the derivative and Hessian of the function, respectively.</p>
 <ul>
-<li><code>RootState</code>
-<ul>
-<li><code>P(f64)</code> : For point-like initial guess</li>
-<li><code>I(f64, f64)</code> : For interval-like initial guess</li>
-<li><code>fn get_point(&amp;self) -&gt; Option&lt;f64&gt;</code> : Returns the point</li>
-<li><code>fn get_interval(&amp;self) -&gt; Option&lt;(f64, f64)&gt;</code> : Returns the interval</li>
+<li><code>I</code>: Input dimension</li>
+<li><code>O</code>: Output dimension</li>
+<li><code>T</code>: State type (e.g. <code>f64</code>, <code>(f64, f64)</code>, or etc.)</li>
 </ul>
 </li>
-<li><code>RootFind</code> : Algorithms for root finding
-<ul>
-<li><code>Bisection</code></li>
-<li><code>FalsePosition</code></li>
-<li><code>Newton</code></li>
-<li><code>Secant</code></li>
-</ul>
-</li>
-<li><code>RootError</code> : Error for root finding
-<ul>
-<li><code>MismatchedState</code> : Mismatched state and method (ex: Point vs Bisection)</li>
-<li><code>TimesUp</code> : No root until <code>self.times</code></li>
-<li><code>NaNRoot</code> : NaN</li>
-</ul>
-</li>
-<li><code>RootFinder</code> : Main structure for root finding
-<ul>
-<li><code>fn new(RootState, RootFind, f)</code> : Create RootFinder (times: 100, tol: 1e-10)</li>
-<li><code>fn condition_number(&amp;self) -&gt; f64</code> : Compute condition number</li>
-<li><code>fn set_tol(&amp;mut self, f64) -&gt; &amp;mut Self</code> : Set tolerance</li>
-<li><code>fn set_times(&amp;mut self, usize) -&gt; &amp;mut Self</code> : Set max iteration times</li>
-<li><code>fn get_tol(&amp;self) -&gt; f64</code> : Get tolerance</li>
-<li><code>fn get_times(&amp;self) -&gt; usize</code> : Get max iteration times</li>
-<li><code>fn get_method(&amp;self) -&gt; RootFind</code> : Get method</li>
-<li><code>fn get_curr(&amp;self) -&gt; &amp;RootState</code> : Get current state</li>
-<li><code>fn check_find(&amp;self) -&gt; RootBool</code> : Check if find root</li>
-<li><code>fn update(&amp;mut self)</code> : Update one step</li>
-<li><code>fn find_root(&amp;mut self) -&gt; Result&lt;f64, RootError&gt;</code> : Find root</li>
-</ul>
+<li>
+<p><code>RootFinder&lt;const I: usize, const O: usize, T&gt;</code>: Defines the interface for a root finding method.
+It requires implementing the <code>find</code> method, which takes a <code>RootFindingProblem</code> and returns the root of the function.
+The <code>max_iter</code> and <code>tol</code> methods provide the maximum number of iterations and the tolerance for the root finding algorithm.</p>
 </li>
 </ul>
-<h3 id="usage"><a class="doc-anchor" href="#usage">§</a>Usage</h3>
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern crate </span>peroxide;
-<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
+<h3 id="root-finding-methods-1"><a class="doc-anchor" href="#root-finding-methods-1">§</a>Root Finding Methods</h3>
+<ul>
+<li>
+<p><code>BisectionMethod</code>: Implements the bisection method for finding roots of continuous functions.
+It requires an initial interval that brackets the root.</p>
+</li>
+<li>
+<p>Type Parameters: <code>I=1, O=1, T=(f64, f64)</code></p>
+</li>
+<li>
+<p><code>NewtonMethod</code>: Implements Newton’s method for finding roots of differentiable functions.
+It requires an initial guess for the root and the derivative of the function.</p>
+<ul>
+<li>Type Parameters: <code>I=1, O=1, T=f64</code></li>
+</ul>
+</li>
+<li>
+<p><code>SecantMethod</code>: Implements the secant method for finding roots of differentiable functions.
+It requires two initial guesses for the root.</p>
+<ul>
+<li>Type Parameters: <code>I=1, O=1, T=f64</code></li>
+</ul>
+</li>
+<li>
+<p><code>FalsePositionMethod</code>: Implements the false position method for finding roots of continuous functions.
+It requires an initial interval that brackets the root.</p>
+<ul>
+<li>Type Parameters: <code>I=1, O=1, T=(f64, f64)</code></li>
+</ul>
+</li>
+<li>
+<p><code>BroydenMethod</code> (unimplemented): Implements Broyden’s method for finding roots of systems of nonlinear equations.</p>
+<ul>
+<li>Type Parameters: <code>I&gt;=1, O&gt;=1, T=([f64; I], [f64; I])</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="convenient-type-aliases"><a class="doc-anchor" href="#convenient-type-aliases">§</a>Convenient type aliases</h3>
+<ul>
+<li><code>Pt&lt;const N: usize&gt;</code>: Represents a point in N-dimensional space. (<code>[f64; N]</code>)</li>
+<li><code>Intv&lt;const N: usize&gt;</code>: Represents an interval in I-dimensional space. (<code>([f64; N], [f64; N])</code>)</li>
+<li><code>Jaco&lt;const R: usize, const C: usize&gt;</code>: Represents the Jacobian matrix of a function. (<code>[[f64; C]; R]</code>)</li>
+<li><code>Hess&lt;const R: usize, const C: usize&gt;</code>: Represents the Hessian matrix of a function. (<code>[[[f64; C]; C]; R]</code>)</li>
+</ul>
+<h3 id="examples"><a class="doc-anchor" href="#examples">§</a>Examples</h3><h4 id="finding-the-root-of-a-cubic-function"><a class="doc-anchor" href="#finding-the-root-of-a-cubic-function">§</a>Finding the root of a cubic function</h4>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
+<span class="kw">use </span>anyhow::Result;
 
-<span class="kw">fn </span>main() -&gt; <span class="prelude-ty">Result</span>&lt;(), RootError&gt; {
-    <span class="kw">let </span>init = RootState::I(<span class="number">1f64</span>, <span class="number">4f64</span>);
-    <span class="kw">let </span><span class="kw-2">mut </span>rf = RootFinder::new(init, Bisection, f)<span class="question-mark">?</span>;
-    rf.set_tol(<span class="number">1e-15</span>)       <span class="comment">// Default: 1e-10
-        </span>.set_times(<span class="number">200</span>);    <span class="comment">// Default: 100
-    </span><span class="kw">let </span>root = rf.find_root()<span class="question-mark">?</span>;
-    root.print();
+<span class="kw">fn </span>main() -&gt; <span class="prelude-ty">Result</span>&lt;()&gt; {
+    <span class="kw">let </span>problem = Cubic;
+
+    <span class="kw">let </span>bisect = BisectionMethod { max_iter: <span class="number">100</span>, tol: <span class="number">1e-6 </span>};
+    <span class="kw">let </span>newton = NewtonMethod { max_iter: <span class="number">100</span>, tol: <span class="number">1e-6 </span>};
+    <span class="kw">let </span>false_pos = FalsePositionMethod { max_iter: <span class="number">100</span>, tol: <span class="number">1e-6 </span>};
+
+    <span class="kw">let </span>root_bisect = bisect.find(<span class="kw-2">&amp;</span>problem)<span class="question-mark">?</span>;
+    <span class="kw">let </span>root_newton = newton.find(<span class="kw-2">&amp;</span>problem)<span class="question-mark">?</span>;
+    <span class="kw">let </span>root_false_pos = false_pos.find(<span class="kw-2">&amp;</span>problem)<span class="question-mark">?</span>;
+
+    <span class="kw">let </span>result_bisect = problem.eval(root_bisect)<span class="question-mark">?</span>[<span class="number">0</span>];
+    <span class="kw">let </span>result_newton = problem.eval(root_newton)<span class="question-mark">?</span>[<span class="number">0</span>];
+    <span class="kw">let </span>result_false_pos = problem.eval(root_false_pos)<span class="question-mark">?</span>[<span class="number">0</span>];
+
+    <span class="macro">assert!</span>(result_bisect.abs() &lt; <span class="number">1e-6</span>);
+    <span class="macro">assert!</span>(result_newton.abs() &lt; <span class="number">1e-6</span>);
+    <span class="macro">assert!</span>(result_false_pos.abs() &lt; <span class="number">1e-6</span>);
+
     <span class="prelude-val">Ok</span>(())
 }
 
-<span class="kw">fn </span>f(x: AD) -&gt; AD {
-    x.sin()
-}</code></pre></div>
-<h2 id="high-level-api"><a class="doc-anchor" href="#high-level-api">§</a>High-level API</h2><h3 id="members-1"><a class="doc-anchor" href="#members-1">§</a>Members</h3>
-<p>All output type is <code>Result&lt;f64, RootError&gt;</code></p>
-<ul>
-<li><code>bisection(f, interval: (f64, f64), times: usize, tol: f64)</code></li>
-<li><code>false_position(f, interval: (f64, f64), times: usize, tol: f64)</code></li>
-<li><code>secant(f, initial_guess: (f64, f64), times: usize, tol: f64)</code></li>
-<li><code>newton(f, initial_guess: f64, times: usize, tol: f64)</code></li>
-</ul>
-<h3 id="usage-1"><a class="doc-anchor" href="#usage-1">§</a>Usage</h3>
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern crate </span>peroxide;
-<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
+<span class="kw">struct </span>Cubic;
 
-<span class="kw">fn </span>main() -&gt; <span class="prelude-ty">Result</span>&lt;(), RootError&gt; {
-    <span class="kw">let </span>root = bisection(f, (<span class="number">1f64</span>, <span class="number">4f64</span>), <span class="number">100</span>, <span class="number">1e-15</span>)<span class="question-mark">?</span>;
-    root.print();
+<span class="kw">impl </span>Cubic {
+    <span class="kw">fn </span>eval(<span class="kw-2">&amp;</span><span class="self">self</span>, x: [f64; <span class="number">1</span>]) -&gt; <span class="prelude-ty">Result</span>&lt;[f64; <span class="number">1</span>]&gt; {
+        <span class="prelude-val">Ok</span>([(x[<span class="number">0</span>] - <span class="number">1f64</span>).powi(<span class="number">3</span>)])
+    }
+}
+
+<span class="kw">impl </span>RootFindingProblem&lt;<span class="number">1</span>, <span class="number">1</span>, (f64, f64)&gt; <span class="kw">for </span>Cubic {
+    <span class="kw">fn </span>function(<span class="kw-2">&amp;</span><span class="self">self</span>, x: [f64; <span class="number">1</span>]) -&gt; <span class="prelude-ty">Result</span>&lt;[f64; <span class="number">1</span>]&gt; {
+        <span class="self">self</span>.eval(x)
+    }
+
+    <span class="kw">fn </span>initial_guess(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; (f64, f64) {
+        (<span class="number">0.0</span>, <span class="number">2.0</span>)
+    }
+}
+
+<span class="kw">impl </span>RootFindingProblem&lt;<span class="number">1</span>, <span class="number">1</span>, f64&gt; <span class="kw">for </span>Cubic {
+    <span class="kw">fn </span>function(<span class="kw-2">&amp;</span><span class="self">self</span>, x: [f64; <span class="number">1</span>]) -&gt; <span class="prelude-ty">Result</span>&lt;[f64; <span class="number">1</span>]&gt; {
+        <span class="self">self</span>.eval(x)
+    }
+
+    <span class="kw">fn </span>initial_guess(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; f64 {
+        <span class="number">0.0
+    </span>}
+
+    <span class="kw">fn </span>derivative(<span class="kw-2">&amp;</span><span class="self">self</span>, x: [f64; <span class="number">1</span>]) -&gt; <span class="prelude-ty">Result</span>&lt;Jaco&lt;<span class="number">1</span>, <span class="number">1</span>&gt;&gt; {
+        <span class="prelude-val">Ok</span>([[<span class="number">3.0 </span>* (x[<span class="number">0</span>] - <span class="number">1f64</span>).powi(<span class="number">2</span>)]])
+    }
+}</code></pre></div>
+<p>This example demonstrates how to find the root of a cubic function <code>(x - 1)^3</code> using various root finding methods.
+The <code>Cubic</code> struct implements the <code>RootFindingProblem</code> trait for both <code>(f64, f64)</code> and <code>f64</code> initial guess types, allowing the use of different root finding methods.</p>
+<h4 id="finding-the-root-of-the-cosine-function-error-handling-example"><a class="doc-anchor" href="#finding-the-root-of-the-cosine-function-error-handling-example">§</a>Finding the root of the cosine function (error handling example)</h4>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
+<span class="kw">use </span>anyhow::Result;
+
+<span class="kw">fn </span>main() -&gt; <span class="prelude-ty">Result</span>&lt;()&gt; {
+    <span class="kw">let </span>problem = Cosine;
+    <span class="kw">let </span>newton = NewtonMethod { max_iter: <span class="number">100</span>, tol: <span class="number">1e-6 </span>};
+
+    <span class="kw">let </span>root_newton = <span class="kw">match </span>newton.find(<span class="kw-2">&amp;</span>problem) {
+        <span class="prelude-val">Ok</span>(x) =&gt; x,
+        <span class="prelude-val">Err</span>(e) =&gt; {
+            <span class="macro">println!</span>(<span class="string">"{:?}"</span>, e);
+            <span class="kw">match </span>e.downcast::&lt;RootError&lt;<span class="number">1</span>&gt;&gt;() {
+                <span class="prelude-val">Ok</span>(RootError::ZeroDerivative(x)) =&gt; x,
+                <span class="prelude-val">Ok</span>(e) =&gt; <span class="macro">panic!</span>(<span class="string">"ok but {:?}"</span>, e),
+                <span class="prelude-val">Err</span>(e) =&gt; <span class="macro">panic!</span>(<span class="string">"err {:?}"</span>, e),
+            }
+        }
+    };
+
+    <span class="macro">assert_eq!</span>(root_newton[<span class="number">0</span>], <span class="number">0.0</span>);
+
     <span class="prelude-val">Ok</span>(())
 }
 
-<span class="kw">fn </span>f(x: AD) -&gt; AD {
-    x.sin()
+<span class="kw">struct </span>Cosine;
+
+<span class="kw">impl </span>Cosine {
+    <span class="kw">fn </span>eval(<span class="kw-2">&amp;</span><span class="self">self</span>, x: [f64; <span class="number">1</span>]) -&gt; <span class="prelude-ty">Result</span>&lt;[f64; <span class="number">1</span>]&gt; {
+        <span class="prelude-val">Ok</span>([x[<span class="number">0</span>].cos()])
+    }
+}
+
+<span class="kw">impl </span>RootFindingProblem&lt;<span class="number">1</span>, <span class="number">1</span>, f64&gt; <span class="kw">for </span>Cosine {
+    <span class="kw">fn </span>function(<span class="kw-2">&amp;</span><span class="self">self</span>, x: [f64; <span class="number">1</span>]) -&gt; <span class="prelude-ty">Result</span>&lt;[f64; <span class="number">1</span>]&gt; {
+        <span class="self">self</span>.eval(x)
+    }
+
+    <span class="kw">fn </span>initial_guess(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; f64 {
+        <span class="number">0.0 </span><span class="comment">// should fail in newton (derivative is 0)
+    </span>}
+
+    <span class="kw">fn </span>derivative(<span class="kw-2">&amp;</span><span class="self">self</span>, x: [f64; <span class="number">1</span>]) -&gt; <span class="prelude-ty">Result</span>&lt;Jaco&lt;<span class="number">1</span>, <span class="number">1</span>&gt;&gt; {
+        <span class="prelude-val">Ok</span>([[-x[<span class="number">0</span>].sin()]])
+    }
 }</code></pre></div>
-<h2 id="reference"><a class="doc-anchor" href="#reference">§</a>Reference</h2>
-<ul>
-<li>Walter Gautschi, <em>Numerical Analysis</em>, Springer (2012)</li>
-</ul>
-</div></details><h2 id="structs" class="section-header">Structs<a href="#structs" class="anchor">§</a></h2><ul class="item-table"><li><div class="item-name"><a class="struct" href="struct.RootFinder.html" title="struct peroxide::numerical::root::RootFinder">RootFinder</a></div><div class="desc docblock-short">Structure for Root finding</div></li></ul><h2 id="enums" class="section-header">Enums<a href="#enums" class="anchor">§</a></h2><ul class="item-table"><li><div class="item-name"><a class="enum" href="enum.RootBool.html" title="enum peroxide::numerical::root::RootBool">RootBool</a></div></li><li><div class="item-name"><a class="enum" href="enum.RootError.html" title="enum peroxide::numerical::root::RootError">RootError</a></div></li><li><div class="item-name"><a class="enum" href="enum.RootFind.html" title="enum peroxide::numerical::root::RootFind">RootFind</a></div></li><li><div class="item-name"><a class="enum" href="enum.RootState.html" title="enum peroxide::numerical::root::RootState">RootState</a></div></li></ul><h2 id="functions" class="section-header">Functions<a href="#functions" class="anchor">§</a></h2><ul class="item-table"><li><div class="item-name"><a class="fn" href="fn.bisection.html" title="fn peroxide::numerical::root::bisection">bisection</a></div><div class="desc docblock-short">Bisection method to find root</div></li><li><div class="item-name"><a class="fn" href="fn.false_position.html" title="fn peroxide::numerical::root::false_position">false_position</a></div><div class="desc docblock-short">False position method to find root</div></li><li><div class="item-name"><a class="fn" href="fn.newton.html" title="fn peroxide::numerical::root::newton">newton</a></div><div class="desc docblock-short">Newton method to find root</div></li><li><div class="item-name"><a class="fn" href="fn.secant.html" title="fn peroxide::numerical::root::secant">secant</a></div><div class="desc docblock-short">Secant method to find root</div></li></ul></section></div></main></body></html>
+<p>This example shows how to find the root of the cosine function using Newton’s method.
+The <code>Cosine</code> struct implements the <code>RootFindingProblem</code> trait for the <code>f64</code> initial guess type.
+The initial guess is set to <code>0.0</code>, which is a point where the derivative of the cosine function is 0.
+This leads to the <code>NewtonMethod</code> returning a <code>RootError::ZeroDerivative</code> error, which is handled in the example.</p>
+</div></details><h2 id="structs" class="section-header">Structs<a href="#structs" class="anchor">§</a></h2><ul class="item-table"><li><div class="item-name"><a class="struct" href="struct.BisectionMethod.html" title="struct peroxide::numerical::root::BisectionMethod">BisectionMethod</a></div><div class="desc docblock-short">Bisection method</div></li><li><div class="item-name"><a class="struct" href="struct.BroydenMethod.html" title="struct peroxide::numerical::root::BroydenMethod">BroydenMethod</a></div><div class="desc docblock-short">Broyden method</div></li><li><div class="item-name"><a class="struct" href="struct.FalsePositionMethod.html" title="struct peroxide::numerical::root::FalsePositionMethod">FalsePositionMethod</a></div><div class="desc docblock-short">False position method</div></li><li><div class="item-name"><a class="struct" href="struct.NewtonMethod.html" title="struct peroxide::numerical::root::NewtonMethod">NewtonMethod</a></div><div class="desc docblock-short">Newton method</div></li><li><div class="item-name"><a class="struct" href="struct.SecantMethod.html" title="struct peroxide::numerical::root::SecantMethod">SecantMethod</a></div><div class="desc docblock-short">Secant method</div></li></ul><h2 id="enums" class="section-header">Enums<a href="#enums" class="anchor">§</a></h2><ul class="item-table"><li><div class="item-name"><a class="enum" href="enum.RootError.html" title="enum peroxide::numerical::root::RootError">RootError</a></div></li></ul><h2 id="traits-1" class="section-header">Traits<a href="#traits-1" class="anchor">§</a></h2><ul class="item-table"><li><div class="item-name"><a class="trait" href="trait.RootFinder.html" title="trait peroxide::numerical::root::RootFinder">RootFinder</a></div><div class="desc docblock-short">Trait to define a root finder</div></li><li><div class="item-name"><a class="trait" href="trait.RootFindingProblem.html" title="trait peroxide::numerical::root::RootFindingProblem">RootFindingProblem</a></div><div class="desc docblock-short">Trait to define a root finding problem</div></li></ul><h2 id="types" class="section-header">Type Aliases<a href="#types" class="anchor">§</a></h2><ul class="item-table"><li><div class="item-name"><a class="type" href="type.Hess.html" title="type peroxide::numerical::root::Hess">Hess</a></div><div class="desc docblock-short">Hessian alias (<code>[[[f64; C]; C]; R]</code>)</div></li><li><div class="item-name"><a class="type" href="type.Intv.html" title="type peroxide::numerical::root::Intv">Intv</a></div><div class="desc docblock-short">Interval alias (<code>([f64; N], [f64; N])</code>)</div></li><li><div class="item-name"><a class="type" href="type.Jaco.html" title="type peroxide::numerical::root::Jaco">Jaco</a></div><div class="desc docblock-short">Jacobian alias (<code>[[f64; C]; R]</code>)</div></li><li><div class="item-name"><a class="type" href="type.Pt.html" title="type peroxide::numerical::root::Pt">Pt</a></div><div class="desc docblock-short">Point alias (<code>[f64; N]</code>)</div></li></ul></section></div></main></body></html>

@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/numerical/ode.rs`."><title>ode.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-5bc39a1768837dd0.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="peroxide" data-themes="" data-resource-suffix="" data-rustdoc-version="1.77.1 (7cf61ebde 2024-03-27)" data-channel="1.77.1" data-search-js="search-dd67cee4cfa65049.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../static.files/storage-4c98445ec4002617.js"></script><script defer src="../../../static.files/src-script-e66d777a5a92e9b2.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-48f368f3872407c8.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-04d5337699b92874.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/numerical/ode.rs`."><title>ode.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-5bc39a1768837dd0.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="peroxide" data-themes="" data-resource-suffix="" data-rustdoc-version="1.77.2 (25ef9e3d8 2024-04-09)" data-channel="1.77.2" data-search-js="search-dd67cee4cfa65049.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../static.files/storage-4c98445ec4002617.js"></script><script defer src="../../../static.files/src-script-e66d777a5a92e9b2.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-48f368f3872407c8.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-04d5337699b92874.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js"                  integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js"    integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
 <script>
@@ -802,6 +802,13 @@
 <a href="#784" id="784">784</a>
 <a href="#785" id="785">785</a>
 <a href="#786" id="786">786</a>
+<a href="#787" id="787">787</a>
+<a href="#788" id="788">788</a>
+<a href="#789" id="789">789</a>
+<a href="#790" id="790">790</a>
+<a href="#791" id="791">791</a>
+<a href="#792" id="792">792</a>
+<a href="#793" id="793">793</a>
 </pre></div><pre class="rust"><code><span class="doccomment">//! # Ordinary Differential Equation (ODE) Solvers
 //!
 //! This module provides traits and structs for solving ordinary differential equations (ODEs).
@@ -814,6 +821,7 @@
 //! - `ODEError`: Enum for ODE errors.
 //!   - `ReachedMaxStepIter`: Reached maximum number of steps per step. (internal error)
 //!   - `ConstraintViolation(f64, Vec&lt;f64&gt;, Vec&lt;f64&gt;)`: Constraint violation. (user-defined error)
+//!   - ODE uses `anyhow` for error handling. So, you can customize your errors.
 //!
 //! ## Available integrators
 //!
@@ -877,14 +885,13 @@
 //!         vec![1f64]
 //!     }
 //!
-//!     fn rhs(&amp;self, t: f64, y: &amp;[f64], dy: &amp;mut [f64]) -&gt; Result&lt;(), ODEError&gt; {
+//!     fn rhs(&amp;self, t: f64, y: &amp;[f64], dy: &amp;mut [f64]) -&gt; anyhow::Result&lt;()&gt; {
 //!         Ok(dy[0] = (5f64 * t.powi(2) - y[0]) / (t + y[0]).exp())
 //!     }
 //! }
 //! ```
 
-</span><span class="kw">use </span>thiserror::Error;
-<span class="kw">use </span>ODEError::<span class="kw-2">*</span>;
+</span><span class="kw">use </span>anyhow::{<span class="prelude-ty">Result</span>, bail};
 
 <span class="doccomment">/// Trait for defining an ODE problem.
 ///
@@ -902,7 +909,7 @@
 ///         vec![1.0, 2.0]
 ///     }
 ///
-///     fn rhs(&amp;self, t: f64, y: &amp;[f64], dy: &amp;mut [f64]) -&gt; Result&lt;(), ODEError&gt; {
+///     fn rhs(&amp;self, t: f64, y: &amp;[f64], dy: &amp;mut [f64]) -&gt; anyhow::Result&lt;()&gt; {
 ///         dy[0] = -0.5 * y[0];
 ///         dy[1] = y[0] - y[1];
 ///         Ok(())
@@ -911,7 +918,7 @@
 /// ```
 </span><span class="kw">pub trait </span>ODEProblem {
     <span class="kw">fn </span>initial_conditions(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Vec&lt;f64&gt;;
-    <span class="kw">fn </span>rhs(<span class="kw-2">&amp;</span><span class="self">self</span>, t: f64, y: <span class="kw-2">&amp;</span>[f64], dy: <span class="kw-2">&amp;mut </span>[f64]) -&gt; <span class="prelude-ty">Result</span>&lt;(), ODEError&gt;;
+    <span class="kw">fn </span>rhs(<span class="kw-2">&amp;</span><span class="self">self</span>, t: f64, y: <span class="kw-2">&amp;</span>[f64], dy: <span class="kw-2">&amp;mut </span>[f64]) -&gt; <span class="prelude-ty">Result</span>&lt;()&gt;;
 }
 
 
@@ -919,7 +926,7 @@
 ///
 /// Implement this trait to define your own ODE integrator.
 </span><span class="kw">pub trait </span>ODEIntegrator {
-    <span class="kw">fn </span>step&lt;P: ODEProblem&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, problem: <span class="kw-2">&amp;</span>P, t: f64, y: <span class="kw-2">&amp;mut </span>[f64], dt: f64) -&gt; <span class="prelude-ty">Result</span>&lt;f64, ODEError&gt;;
+    <span class="kw">fn </span>step&lt;P: ODEProblem&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, problem: <span class="kw-2">&amp;</span>P, t: f64, y: <span class="kw-2">&amp;mut </span>[f64], dt: f64) -&gt; <span class="prelude-ty">Result</span>&lt;f64&gt;;
 }
 
 
@@ -943,9 +950,9 @@
 ///
 /// impl ODEProblem for ConstrainedProblem {
 ///     fn initial_conditions(&amp;self) -&gt; Vec&lt;f64&gt; { vec![0.0] } // y_0 = 0
-///     fn rhs(&amp;self, t: f64, y: &amp;[f64], dy: &amp;mut [f64]) -&gt; Result&lt;(), ODEError&gt; {
+///     fn rhs(&amp;self, t: f64, y: &amp;[f64], dy: &amp;mut [f64]) -&gt; anyhow::Result&lt;()&gt; {
 ///         if y[0] &lt; self.y_constraint {
-///             return Err(ODEError::ConstraintViolation(t, y.to_vec(), dy.to_vec()));
+///             anyhow::bail!(ODEError::ConstraintViolation(t, y.to_vec(), dy.to_vec()));
 ///         } else {
 ///             // some function
 ///             Ok(())
@@ -953,19 +960,26 @@
 ///     }
 /// }
 /// ```
-</span><span class="attr">#[derive(Debug, Clone, Error)]
+</span><span class="attr">#[derive(Debug, Clone)]
 </span><span class="kw">pub enum </span>ODEError {
-    <span class="attr">#[error(<span class="string">"constraint violation"</span>)]
-    </span>ConstraintViolation(f64, Vec&lt;f64&gt;, Vec&lt;f64&gt;), <span class="comment">// t, y, dy
-    </span><span class="attr">#[error(<span class="string">"reached maximum number of iterations per step"</span>)]
+    ConstraintViolation(f64, Vec&lt;f64&gt;, Vec&lt;f64&gt;), <span class="comment">// t, y, dy
     </span>ReachedMaxStepIter,
+}
+
+<span class="kw">impl </span>std::fmt::Display <span class="kw">for </span>ODEError {
+    <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>std::fmt::Formatter&lt;<span class="lifetime">'_</span>&gt;) -&gt; std::fmt::Result {
+        <span class="kw">match </span><span class="self">self </span>{
+            ODEError::ConstraintViolation(t, y, dy) =&gt; <span class="macro">write!</span>(f, <span class="string">"Constraint violation at t = {}, y = {:?}, dy = {:?}"</span>, t, y, dy),
+            ODEError::ReachedMaxStepIter =&gt; <span class="macro">write!</span>(f, <span class="string">"Reached maximum number of steps per step"</span>),
+        }
+    }
 }
 
 <span class="doccomment">/// Trait for ODE solvers.
 ///
 /// Implement this trait to define your own ODE solver.
 </span><span class="kw">pub trait </span>ODESolver {
-    <span class="kw">fn </span>solve&lt;P: ODEProblem&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, problem: <span class="kw-2">&amp;</span>P, t_span: (f64, f64), dt: f64) -&gt; <span class="prelude-ty">Result</span>&lt;(Vec&lt;f64&gt;, Vec&lt;Vec&lt;f64&gt;&gt;), ODEError&gt;;
+    <span class="kw">fn </span>solve&lt;P: ODEProblem&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, problem: <span class="kw-2">&amp;</span>P, t_span: (f64, f64), dt: f64) -&gt; <span class="prelude-ty">Result</span>&lt;(Vec&lt;f64&gt;, Vec&lt;Vec&lt;f64&gt;&gt;)&gt;;
 }
 
 <span class="doccomment">/// A basic ODE solver using a specified integrator.
@@ -995,7 +1009,7 @@
 ///         vec![1f64]
 ///     }
 ///
-///     fn rhs(&amp;self, t: f64, y: &amp;[f64], dy: &amp;mut [f64]) -&gt; Result&lt;(), ODEError&gt; {
+///     fn rhs(&amp;self, t: f64, y: &amp;[f64], dy: &amp;mut [f64]) -&gt; anyhow::Result&lt;()&gt; {
 ///         dy[0] = (5f64 * t.powi(2) - y[0]) / (t + y[0]).exp();
 ///         Ok(())
 ///     }
@@ -1012,7 +1026,7 @@
 }
 
 <span class="kw">impl</span>&lt;I: ODEIntegrator&gt; ODESolver <span class="kw">for </span>BasicODESolver&lt;I&gt; {
-    <span class="kw">fn </span>solve&lt;P: ODEProblem&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, problem: <span class="kw-2">&amp;</span>P, t_span: (f64, f64), dt: f64) -&gt; <span class="prelude-ty">Result</span>&lt;(Vec&lt;f64&gt;, Vec&lt;Vec&lt;f64&gt;&gt;), ODEError&gt; {
+    <span class="kw">fn </span>solve&lt;P: ODEProblem&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, problem: <span class="kw-2">&amp;</span>P, t_span: (f64, f64), dt: f64) -&gt; <span class="prelude-ty">Result</span>&lt;(Vec&lt;f64&gt;, Vec&lt;Vec&lt;f64&gt;&gt;)&gt; {
         <span class="kw">let </span><span class="kw-2">mut </span>t = t_span.<span class="number">0</span>;
         <span class="kw">let </span><span class="kw-2">mut </span>dt = dt;
         <span class="kw">let </span><span class="kw-2">mut </span>y = problem.initial_conditions();
@@ -1075,7 +1089,7 @@
 }
 
 <span class="kw">impl</span>&lt;BU: ButcherTableau&gt; ODEIntegrator <span class="kw">for </span>BU {
-    <span class="kw">fn </span>step&lt;P: ODEProblem&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, problem: <span class="kw-2">&amp;</span>P, t: f64, y: <span class="kw-2">&amp;mut </span>[f64], dt: f64) -&gt; <span class="prelude-ty">Result</span>&lt;f64, ODEError&gt; {
+    <span class="kw">fn </span>step&lt;P: ODEProblem&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, problem: <span class="kw-2">&amp;</span>P, t: f64, y: <span class="kw-2">&amp;mut </span>[f64], dt: f64) -&gt; <span class="prelude-ty">Result</span>&lt;f64&gt; {
         <span class="kw">let </span>n = y.len();
         <span class="kw">let </span><span class="kw-2">mut </span>iter_count = <span class="number">0usize</span>;
         <span class="kw">let </span><span class="kw-2">mut </span>dt = dt;
@@ -1124,7 +1138,7 @@
                 } <span class="kw">else </span>{
                     iter_count += <span class="number">1</span>;
                     <span class="kw">if </span>iter_count &gt;= <span class="self">self</span>.max_step_iter() {
-                        <span class="kw">return </span><span class="prelude-val">Err</span>(ReachedMaxStepIter);
+                        <span class="macro">bail!</span>(ODEError::ReachedMaxStepIter);
                     }
                     <span class="comment">//let new_dt = self.safety_factor() * dt * (self.tol() / error).powf(0.2);
                     //let new_dt = new_dt.max(self.min_step_size()).min(self.max_step_size());
@@ -1546,7 +1560,7 @@
 
 <span class="kw">impl </span>ODEIntegrator <span class="kw">for </span>GL4 {
     <span class="attr">#[inline]
-    </span><span class="kw">fn </span>step&lt;P: ODEProblem&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, problem: <span class="kw-2">&amp;</span>P, t: f64, y: <span class="kw-2">&amp;mut </span>[f64], dt: f64) -&gt; <span class="prelude-ty">Result</span>&lt;f64, ODEError&gt; {
+    </span><span class="kw">fn </span>step&lt;P: ODEProblem&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, problem: <span class="kw-2">&amp;</span>P, t: f64, y: <span class="kw-2">&amp;mut </span>[f64], dt: f64) -&gt; <span class="prelude-ty">Result</span>&lt;f64&gt; {
         <span class="kw">let </span>n = y.len();
         <span class="kw">let </span>sqrt3 = <span class="number">3.0_f64</span>.sqrt();
         <span class="kw">let </span>c = <span class="number">0.5 </span>* (<span class="number">3.0 </span>- sqrt3) / <span class="number">6.0</span>;
