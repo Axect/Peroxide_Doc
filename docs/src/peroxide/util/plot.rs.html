@@ -680,6 +680,10 @@
 <a href="#662" id="662">662</a>
 <a href="#663" id="663">663</a>
 <a href="#664" id="664">664</a>
+<a href="#665" id="665">665</a>
+<a href="#666" id="666">666</a>
+<a href="#667" id="667">667</a>
+<a href="#668" id="668">668</a>
 </pre></div><pre class="rust"><code><span class="doccomment">//! Plotting module for peroxide
 //!
 //! For Rust, there are some plot libraries but, still difficult to use.
@@ -1333,10 +1337,14 @@
                 }
             }
 
+            <span class="kw">if </span>!legends.is_empty() {
+                plot_string.push_str(<span class="string">"plt.legend()\n"</span>);
+            }
+
             <span class="kw">if </span><span class="self">self</span>.tight {
-                plot_string.push_str(<span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">"plt.legend()\nplt.savefig(pa, dpi={}, bbox_inches='tight')"</span>, dpi)[..]);
+                plot_string.push_str(<span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">"plt.savefig(pa, dpi={}, bbox_inches='tight')"</span>, dpi)[..]);
             } <span class="kw">else </span>{
-                plot_string.push_str(<span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">"plt.legend()\nplt.savefig(pa, dpi={})"</span>, dpi)[..]);
+                plot_string.push_str(<span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">"plt.savefig(pa, dpi={})"</span>, dpi)[..]);
             }
 
             py.run(<span class="kw-2">&amp;</span>plot_string[..], <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span>globals), <span class="prelude-val">None</span>)<span class="question-mark">?</span>;

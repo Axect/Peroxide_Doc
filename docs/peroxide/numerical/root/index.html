@@ -14,8 +14,8 @@
     });
 </script>
 
-</head><body class="rustdoc mod"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../../../peroxide/index.html">peroxide</a><span class="version">0.37.1</span></h2></div><h2 class="location"><a href="#">Module root</a></h2><div class="sidebar-elems"><section><ul class="block"><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li><li><a href="#traits">Traits</a></li><li><a href="#types">Type Aliases</a></li></ul></section><h2><a href="../index.html">In peroxide::numerical</a></h2></div></nav><div class="sidebar-resizer"></div>
-    <main><div class="width-limiter"><nav class="sub"><form class="search-form"><span></span><div id="sidebar-button" tabindex="-1"><a href="../../../peroxide/all.html" title="show sidebar"></a></div><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" tabindex="-1"><a href="../../../help.html" title="help">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="main-heading"><h1>Module <a href="../../index.html">peroxide</a>::<wbr><a href="../index.html">numerical</a>::<wbr><a class="mod" href="#">root</a><button id="copy-path" title="Copy item path to clipboard"><img src="../../../static.files/clipboard-7571035ce49a181d.svg" width="19" height="18" alt="Copy item path"></button></h1><span class="out-of-band"><a class="src" href="../../../src/peroxide/numerical/root.rs.html#1-676">source</a> · <button id="toggle-all-docs" title="collapse all docs">[<span>&#x2212;</span>]</button></span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><h2 id="root-finding-methods"><a class="doc-anchor" href="#root-finding-methods">§</a>Root Finding Methods</h2>
+</head><body class="rustdoc mod"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../../../peroxide/index.html">peroxide</a><span class="version">0.37.2</span></h2></div><h2 class="location"><a href="#">Module root</a></h2><div class="sidebar-elems"><section><ul class="block"><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li><li><a href="#traits">Traits</a></li><li><a href="#types">Type Aliases</a></li></ul></section><h2><a href="../index.html">In peroxide::numerical</a></h2></div></nav><div class="sidebar-resizer"></div>
+    <main><div class="width-limiter"><nav class="sub"><form class="search-form"><span></span><div id="sidebar-button" tabindex="-1"><a href="../../../peroxide/all.html" title="show sidebar"></a></div><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" tabindex="-1"><a href="../../../help.html" title="help">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="main-heading"><h1>Module <a href="../../index.html">peroxide</a>::<wbr><a href="../index.html">numerical</a>::<wbr><a class="mod" href="#">root</a><button id="copy-path" title="Copy item path to clipboard"><img src="../../../static.files/clipboard-7571035ce49a181d.svg" width="19" height="18" alt="Copy item path"></button></h1><span class="out-of-band"><a class="src" href="../../../src/peroxide/numerical/root.rs.html#1-869">source</a> · <button id="toggle-all-docs" title="collapse all docs">[<span>&#x2212;</span>]</button></span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><h2 id="root-finding-methods"><a class="doc-anchor" href="#root-finding-methods">§</a>Root Finding Methods</h2>
 <p>This module provides a collection of root finding algorithms for solving nonlinear equations.
 It defines traits for representing root finding problems and root finding methods, and provides implementations of several common algorithms.</p>
 <h3 id="traits"><a class="doc-anchor" href="#traits">§</a>Traits</h3>
@@ -81,6 +81,44 @@ It requires an two initial guesses for the first step. (not an interval, just tw
 <li><code>Jaco&lt;const R: usize, const C: usize&gt;</code>: Represents the Jacobian matrix of a function. (<code>[[f64; C]; R]</code>)</li>
 <li><code>Hess&lt;const R: usize, const C: usize&gt;</code>: Represents the Hessian matrix of a function. (<code>[[[f64; C]; C]; R]</code>)</li>
 </ul>
+<h3 id="high-level-macros"><a class="doc-anchor" href="#high-level-macros">§</a>High-level macros</h3>
+<p>Peroxide also provides high-level macros for root finding.
+Assume <code>f: fn(f64) -&gt; f64</code>.</p>
+<ul>
+<li><code>bisection!(f, (a,b), max_iter, tol)</code></li>
+<li><code>newton!(f, x0, max_iter, tol)</code>: (<strong>Caution</strong>: newton macro requires <code>#[ad_function]</code> attribute)</li>
+<li><code>secant!(f, (x0, x1), max_iter, tol)</code></li>
+<li><code>false_position!(f, (a,b), max_iter, tol)</code></li>
+</ul>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attr">#[macro_use]
+</span><span class="kw">extern crate </span>peroxide;
+<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
+<span class="kw">use </span>anyhow::Result;
+ 
+<span class="kw">fn </span>main() -&gt; <span class="prelude-ty">Result</span>&lt;()&gt; {
+    <span class="kw">let </span>root_bisect = <span class="macro">bisection!</span>(f, (<span class="number">0.0</span>, <span class="number">2.0</span>), <span class="number">100</span>, <span class="number">1e-6</span>);
+    <span class="kw">let </span>root_newton = <span class="macro">newton!</span>(f, <span class="number">0.0</span>, <span class="number">100</span>, <span class="number">1e-6</span>);
+    <span class="kw">let </span>root_false_pos = <span class="macro">false_position!</span>(f, (<span class="number">0.0</span>, <span class="number">2.0</span>), <span class="number">100</span>, <span class="number">1e-6</span>);
+    <span class="kw">let </span>root_secant = <span class="macro">secant!</span>(f, (<span class="number">0.0</span>, <span class="number">2.0</span>), <span class="number">100</span>, <span class="number">1e-6</span>);
+ 
+    <span class="macro">println!</span>(<span class="string">"root_bisect: {}"</span>, root_bisect);
+    <span class="macro">println!</span>(<span class="string">"root_newton: {}"</span>, root_newton);
+    <span class="macro">println!</span>(<span class="string">"root_false_pos: {}"</span>, root_false_pos);
+    <span class="macro">println!</span>(<span class="string">"root_secant: {}"</span>, root_secant);
+ 
+    <span class="macro">assert!</span>(f(root_bisect).abs() &lt; <span class="number">1e-6</span>);
+    <span class="macro">assert!</span>(f(root_newton).abs() &lt; <span class="number">1e-6</span>);
+    <span class="macro">assert!</span>(f(root_false_pos).abs() &lt; <span class="number">1e-6</span>);
+    <span class="macro">assert!</span>(f(root_secant).abs() &lt; <span class="number">1e-6</span>);
+ 
+    <span class="prelude-val">Ok</span>(())
+}
+ 
+<span class="attr">#[ad_function]
+</span><span class="kw">fn </span>f(x: f64) -&gt; f64 {
+    (x - <span class="number">1f64</span>).powi(<span class="number">3</span>)
+}</code></pre></div>
 <h3 id="examples"><a class="doc-anchor" href="#examples">§</a>Examples</h3><h4 id="finding-the-root-of-a-cubic-function"><a class="doc-anchor" href="#finding-the-root-of-a-cubic-function">§</a>Finding the root of a cubic function</h4>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
 <span class="kw">use </span>anyhow::Result;
