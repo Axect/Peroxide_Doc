@@ -1285,6 +1285,9 @@
 <a href="#1267" id="1267">1267</a>
 <a href="#1268" id="1268">1268</a>
 <a href="#1269" id="1269">1269</a>
+<a href="#1270" id="1270">1270</a>
+<a href="#1271" id="1271">1271</a>
+<a href="#1272" id="1272">1272</a>
 </pre></div><pre class="rust"><code><span class="kw">use </span><span class="kw">crate</span>::structure::polynomial::{lagrange_polynomial, Calculus};
 <span class="kw">use </span><span class="kw">crate</span>::traits::fp::FPVector;
 <span class="kw">use </span><span class="kw">crate</span>::util::non_macro::seq;
@@ -1527,6 +1530,9 @@
                     tol
                 };
                 <span class="kw">if </span>(G - K).abs() &lt; tol_curr || a == b || max_iter == <span class="number">0 </span>{
+                    <span class="kw">if </span>! G.is_finite() {
+                        <span class="kw">return </span>G;
+                    }
                     I += G;
                 } <span class="kw">else </span>{
                     S.push((a, c, tol / <span class="number">2f64</span>, max_iter - <span class="number">1</span>));
