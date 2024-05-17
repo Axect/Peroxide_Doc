@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/structure/dataframe.rs`."><title>dataframe.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-5bc39a1768837dd0.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="peroxide" data-themes="" data-resource-suffix="" data-rustdoc-version="1.77.2 (25ef9e3d8 2024-04-09)" data-channel="1.77.2" data-search-js="search-dd67cee4cfa65049.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../static.files/storage-4c98445ec4002617.js"></script><script defer src="../../../static.files/src-script-e66d777a5a92e9b2.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-48f368f3872407c8.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-04d5337699b92874.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/structure/dataframe.rs`."><title>dataframe.rs - source</title><script> if (window.location.protocol !== "file:") document.write(`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2">`)</script><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-e935ef01ae1c1829.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="peroxide" data-themes="" data-resource-suffix="" data-rustdoc-version="1.78.0 (9b00956e5 2024-04-29)" data-channel="1.78.0" data-search-js="search-42d8da7a6b9792c2.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../static.files/storage-4c98445ec4002617.js"></script><script defer src="../../../static.files/src-script-e66d777a5a92e9b2.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-12cf3b4f4f9dc36d.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-04d5337699b92874.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js"                  integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js"    integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
 <script>
@@ -2432,7 +2432,7 @@
 <span class="comment">// =============================================================================
 // Macros &amp; Private functions
 // =============================================================================
-</span><span class="macro">macro_rules! </span>impl_typed_scalar {
+</span><span class="macro">macro_rules!</span> impl_typed_scalar {
     (<span class="macro-nonterminal">$</span><span class="kw">type</span>:<span class="macro-nonterminal">ty</span>, <span class="macro-nonterminal">$dtype</span>:ident) =&gt; {
         <span class="kw">impl </span>TypedScalar&lt;<span class="macro-nonterminal">$</span><span class="kw">type</span>&gt; <span class="kw">for </span><span class="macro-nonterminal">Scalar </span>{
             <span class="kw">fn </span>new(s: <span class="macro-nonterminal">$</span><span class="kw">type</span>) -&gt; <span class="macro-nonterminal">Self </span>{
@@ -2452,7 +2452,7 @@
     }
 }
 
-<span class="macro">macro_rules! </span>impl_typed_vector {
+<span class="macro">macro_rules!</span> impl_typed_vector {
     (<span class="macro-nonterminal">$</span><span class="kw">type</span>:<span class="macro-nonterminal">ty</span>, <span class="macro-nonterminal">$dtype</span>:ident) =&gt; {
         <span class="kw">impl </span>TypedVector&lt;<span class="macro-nonterminal">$</span><span class="kw">type</span>&gt; <span class="kw">for </span><span class="macro-nonterminal">Series </span>{
             <span class="kw">fn </span>new(v: Vec&lt;<span class="macro-nonterminal">$</span><span class="kw">type</span>&gt;) -&gt; <span class="macro-nonterminal">Self </span>{
@@ -2546,14 +2546,14 @@
     }
 }
 
-<span class="macro">macro_rules! </span><span class="macro-nonterminal">dtype_case </span>{
+<span class="macro">macro_rules!</span> <span class="macro-nonterminal">dtype_case </span>{
     (<span class="macro-nonterminal">$</span><span class="kw">type</span>:<span class="macro-nonterminal">ty</span>, <span class="macro-nonterminal">$value</span>:expr, <span class="macro-nonterminal">$wrapper</span>: expr) =&gt; {{
         <span class="kw">let </span>x: <span class="macro-nonterminal">$</span><span class="kw">type </span>= <span class="macro-nonterminal">$value</span>;
         <span class="macro-nonterminal">$wrapper</span>(x)
     }};
 }
 
-<span class="macro">macro_rules! </span>dtype_match {
+<span class="macro">macro_rules!</span> dtype_match {
     (<span class="macro-nonterminal">$dtype</span>:expr, <span class="macro-nonterminal">$value</span>:expr, <span class="macro-nonterminal">$wrapper</span>:expr) =&gt; {{
         <span class="kw">match </span><span class="macro-nonterminal">$dtype </span>{
             USIZE =&gt; <span class="macro">dtype_case!</span>(usize, <span class="macro-nonterminal">$value</span>, <span class="macro-nonterminal">$wrapper</span>),
@@ -2627,7 +2627,7 @@
     }};
 }
 
-<span class="macro">macro_rules! </span>set_space {
+<span class="macro">macro_rules!</span> set_space {
     (<span class="macro-nonterminal">$elem</span>:expr) =&gt; {{
         <span class="kw">match </span><span class="macro-nonterminal">$elem</span>.dtype {
             F32 =&gt; {
@@ -2679,7 +2679,7 @@
     }};
 }
 
-<span class="macro">macro_rules! </span>format_float_vec {
+<span class="macro">macro_rules!</span> format_float_vec {
     (<span class="macro-nonterminal">$self</span>:expr) =&gt; {{
         <span class="kw">let </span><span class="kw-2">mut </span>result = String::new();
         result.push_str(<span class="string">"["</span>);
@@ -2703,7 +2703,7 @@
 }
 
 <span class="doccomment">/// ty1 -&gt; ty2
-</span><span class="macro">macro_rules! </span>type_cast_vec {
+</span><span class="macro">macro_rules!</span> type_cast_vec {
     (<span class="macro-nonterminal">$ty1</span>:ty, <span class="macro-nonterminal">$ty2</span>:ty, <span class="macro-nonterminal">$to_vec</span>:expr, <span class="macro-nonterminal">$wrapper</span>:expr) =&gt; {{
         <span class="kw">let </span>y: Vec&lt;<span class="macro-nonterminal">$ty1</span>&gt; = <span class="macro-nonterminal">$to_vec</span>;
         <span class="kw">let </span>x: Vec&lt;<span class="macro-nonterminal">$ty2</span>&gt; = y.into_iter().map(|x| x <span class="kw">as </span><span class="macro-nonterminal">$ty2</span>).collect();
@@ -2711,7 +2711,7 @@
     }};
 }
 
-<span class="macro">macro_rules! </span>string_cast_vec {
+<span class="macro">macro_rules!</span> string_cast_vec {
     (<span class="macro-nonterminal">$ty1</span>:ty, <span class="macro-nonterminal">$to_vec</span>:expr, <span class="macro-nonterminal">$wrapper</span>:expr) =&gt; {{
         <span class="kw">let </span>y: Vec&lt;<span class="macro-nonterminal">$ty1</span>&gt; = <span class="macro-nonterminal">$to_vec</span>;
         <span class="kw">let </span>x: Vec&lt;String&gt; = y.into_iter().map(|x| x.to_string()).collect();
@@ -2719,7 +2719,7 @@
     }}
 }
 
-<span class="macro">macro_rules! </span>type_parse_vec {
+<span class="macro">macro_rules!</span> type_parse_vec {
     (<span class="macro-nonterminal">$ty2</span>:ty, <span class="macro-nonterminal">$to_vec</span>:expr, <span class="macro-nonterminal">$wrapper</span>:expr) =&gt; {{
         <span class="kw">let </span>y: Vec&lt;String&gt; = <span class="macro-nonterminal">$to_vec</span>.to_vec();
         <span class="kw">let </span>x: Vec&lt;<span class="macro-nonterminal">$ty2</span>&gt; = y.into_iter().map(|x| x.parse().unwrap()).collect();
@@ -2727,7 +2727,7 @@
     }};
 }
 
-<span class="macro">macro_rules! </span>dtype_parse_vec_part {
+<span class="macro">macro_rules!</span> dtype_parse_vec_part {
     (<span class="macro-nonterminal">$dt2</span>:expr, <span class="macro-nonterminal">$to_vec</span>:expr, <span class="macro-nonterminal">$wrapper</span>:expr) =&gt; {{
         <span class="kw">match </span><span class="macro-nonterminal">$dt2 </span>{
             USIZE =&gt; <span class="macro">type_parse_vec!</span>(usize, <span class="macro-nonterminal">$to_vec</span>, <span class="macro-nonterminal">$wrapper</span>),
@@ -2749,7 +2749,7 @@
     }};
 }
 
-<span class="macro">macro_rules! </span>dtype_cast_vec_part {
+<span class="macro">macro_rules!</span> dtype_cast_vec_part {
     (<span class="macro-nonterminal">$ty1</span>:ty, <span class="macro-nonterminal">$dt2</span>:expr, <span class="macro-nonterminal">$to_vec</span>:expr, <span class="macro-nonterminal">$wrapper</span>:expr) =&gt; {{
         <span class="kw">match </span><span class="macro-nonterminal">$dt2 </span>{
             USIZE =&gt; <span class="macro">type_cast_vec!</span>(<span class="macro-nonterminal">$ty1</span>, usize, <span class="macro-nonterminal">$to_vec</span>, <span class="macro-nonterminal">$wrapper</span>),
@@ -2770,7 +2770,7 @@
     }};
 }
 
-<span class="macro">macro_rules! </span>dtype_cast_vec {
+<span class="macro">macro_rules!</span> dtype_cast_vec {
     (<span class="macro-nonterminal">$dt1</span>:expr, <span class="macro-nonterminal">$dt2</span>:expr, <span class="macro-nonterminal">$to_vec</span>:expr, <span class="macro-nonterminal">$wrapper</span>:expr) =&gt; {{
         <span class="kw">match </span><span class="macro-nonterminal">$dt1 </span>{
             USIZE =&gt; <span class="macro">dtype_cast_vec_part!</span>(usize, <span class="macro-nonterminal">$dt2</span>, <span class="macro-nonterminal">$to_vec</span>, <span class="macro-nonterminal">$wrapper</span>),
@@ -2927,7 +2927,7 @@
 }
 
 <span class="attr">#[cfg(feature=<span class="string">"parquet"</span>)]
-</span><span class="macro">macro_rules! </span>dtype_case_to_arrow {
+</span><span class="macro">macro_rules!</span> dtype_case_to_arrow {
     (<span class="macro-nonterminal">$ty</span>:ty, <span class="macro-nonterminal">$to_arr</span>:expr, <span class="macro-nonterminal">$value</span>:expr, <span class="macro-nonterminal">$chunk_vec</span>:expr; <span class="macro-nonterminal">$length</span>:expr) =&gt; {{
         <span class="kw">let </span>v: Vec&lt;<span class="macro-nonterminal">$ty</span>&gt; = <span class="macro-nonterminal">$value</span>;
         <span class="kw">let </span>v_wrap = (<span class="number">0usize</span>..<span class="macro-nonterminal">$length</span>).map(|i| {
@@ -2943,7 +2943,7 @@
 }
 
 <span class="attr">#[cfg(feature=<span class="string">"parquet"</span>)]
-</span><span class="macro">macro_rules! </span>dtype_match_to_arrow {
+</span><span class="macro">macro_rules!</span> dtype_match_to_arrow {
     (<span class="macro-nonterminal">$dtype</span>:expr, <span class="macro-nonterminal">$value</span>:expr, <span class="macro-nonterminal">$chunk_vec</span>:expr; <span class="macro-nonterminal">$length</span>:expr) =&gt; {{
         <span class="kw">match </span><span class="macro-nonterminal">$dtype </span>{
             Bool =&gt; <span class="macro">dtype_case_to_arrow!</span>(bool, BooleanArray::from, <span class="macro-nonterminal">$value</span>, <span class="macro-nonterminal">$chunk_vec</span>; <span class="macro-nonterminal">$length</span>),
