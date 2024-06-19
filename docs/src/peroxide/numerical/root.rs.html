@@ -885,6 +885,20 @@
 <a href="#867" id="867">867</a>
 <a href="#868" id="868">868</a>
 <a href="#869" id="869">869</a>
+<a href="#870" id="870">870</a>
+<a href="#871" id="871">871</a>
+<a href="#872" id="872">872</a>
+<a href="#873" id="873">873</a>
+<a href="#874" id="874">874</a>
+<a href="#875" id="875">875</a>
+<a href="#876" id="876">876</a>
+<a href="#877" id="877">877</a>
+<a href="#878" id="878">878</a>
+<a href="#879" id="879">879</a>
+<a href="#880" id="880">880</a>
+<a href="#881" id="881">881</a>
+<a href="#882" id="882">882</a>
+<a href="#883" id="883">883</a>
 </pre></div><pre class="rust"><code><span class="doccomment">//! # Root Finding Methods
 //!
 //! This module provides a collection of root finding algorithms for solving nonlinear equations.
@@ -955,10 +969,10 @@
 //! use anyhow::Result;
 //! 
 //! fn main() -&gt; Result&lt;()&gt; {
-//!     let root_bisect = bisection!(f, (0.0, 2.0), 100, 1e-6);
-//!     let root_newton = newton!(f, 0.0, 100, 1e-6);
-//!     let root_false_pos = false_position!(f, (0.0, 2.0), 100, 1e-6);
-//!     let root_secant = secant!(f, (0.0, 2.0), 100, 1e-6);
+//!     let root_bisect = bisection!(f, (0.0, 2.0), 100, 1e-6)?;
+//!     let root_newton = newton!(f, 0.0, 100, 1e-6)?;
+//!     let root_false_pos = false_position!(f, (0.0, 2.0), 100, 1e-6)?;
+//!     let root_secant = secant!(f, (0.0, 2.0), 100, 1e-6)?;
 //! 
 //!     println!("root_bisect: {}", root_bisect);
 //!     println!("root_newton: {}", root_newton);
@@ -1112,29 +1126,33 @@
 ///
 /// # Arguments
 ///
-/// - `f`: `fn(f64) -&gt; f64`
+/// - `f`: `Fn(f64) -&gt; f64` (allow closure)
 /// - `(a, b)`: `(f64, f64)`
 /// - `max_iter`: `usize`
 /// - `tol`: `f64`
 </span><span class="attr">#[macro_export]
 </span><span class="macro">macro_rules!</span> bisection {
-    (<span class="macro-nonterminal">$f</span>:ident, (<span class="macro-nonterminal">$a</span>:expr, <span class="macro-nonterminal">$b</span>:expr), <span class="macro-nonterminal">$max_iter</span>:expr, <span class="macro-nonterminal">$tol</span>:expr) =&gt; {{
-        <span class="kw">struct </span>BisectionProblem;
+    (<span class="macro-nonterminal">$f</span>:expr, (<span class="macro-nonterminal">$a</span>:expr, <span class="macro-nonterminal">$b</span>:expr), <span class="macro-nonterminal">$max_iter</span>:expr, <span class="macro-nonterminal">$tol</span>:expr) =&gt; {{
+        <span class="kw">struct </span>BisectionProblem&lt;F: Fn(f64) -&gt; f64&gt; {
+            f: F,
+        };
 
-        <span class="kw">impl </span>RootFindingProblem&lt;<span class="number">1</span>, <span class="number">1</span>, (f64, f64)&gt; <span class="kw">for </span>BisectionProblem {
+        <span class="kw">impl</span>&lt;F: Fn(f64) -&gt; f64&gt; RootFindingProblem&lt;<span class="number">1</span>, <span class="number">1</span>, (f64, f64)&gt; <span class="kw">for </span>BisectionProblem&lt;F&gt; {
             <span class="kw">fn </span>initial_guess(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; (f64, f64) {
                 (<span class="macro-nonterminal">$a</span>, <span class="macro-nonterminal">$b</span>)
             }
 
             <span class="kw">fn </span>function(<span class="kw-2">&amp;</span><span class="self">self</span>, x: [f64; <span class="number">1</span>]) -&gt; <span class="prelude-ty">Result</span>&lt;[f64; <span class="number">1</span>]&gt; {
-                <span class="prelude-val">Ok</span>([<span class="macro-nonterminal">$f</span>(x[<span class="number">0</span>])])
+                <span class="prelude-val">Ok</span>([(<span class="self">self</span>.f)(x[<span class="number">0</span>])])
             }
         }
 
-        <span class="kw">let </span>problem = BisectionProblem;
+        <span class="kw">let </span>problem = BisectionProblem { f: <span class="macro-nonterminal">$f </span>};
         <span class="kw">let </span>bisection = BisectionMethod { max_iter: <span class="macro-nonterminal">$max_iter</span>, tol: <span class="macro-nonterminal">$tol </span>};
-        <span class="kw">let </span>root = bisection.find(<span class="kw-2">&amp;</span>problem)<span class="question-mark">?</span>;
-        root[<span class="number">0</span>]
+        <span class="kw">match </span>bisection.find(<span class="kw-2">&amp;</span>problem) {
+            <span class="prelude-val">Ok</span>(root) =&gt; <span class="prelude-val">Ok</span>(root[<span class="number">0</span>]),
+            <span class="prelude-val">Err</span>(e) =&gt; <span class="prelude-val">Err</span>(e),
+        }
     }}
 }
 
@@ -1155,7 +1173,7 @@
 ///
 /// # Arguments
 ///
-/// - `f`: `fn(f64) -&gt; f64`
+/// - `f`: `fn(f64) -&gt; f64` (not allow closure)
 /// - `x`: `f64`
 /// - `max_iter`: `usize`
 /// - `tol`: `f64`
@@ -1184,8 +1202,10 @@
 
         <span class="kw">let </span>problem = NewtonProblem;
         <span class="kw">let </span>newton = NewtonMethod { max_iter: <span class="macro-nonterminal">$max_iter</span>, tol: <span class="macro-nonterminal">$tol </span>};
-        <span class="kw">let </span>root = newton.find(<span class="kw-2">&amp;</span>problem)<span class="question-mark">?</span>;
-        root[<span class="number">0</span>]
+        <span class="kw">match </span>newton.find(<span class="kw-2">&amp;</span>problem) {
+            <span class="prelude-val">Ok</span>(root) =&gt; <span class="prelude-val">Ok</span>(root[<span class="number">0</span>]),
+            <span class="prelude-val">Err</span>(e) =&gt; <span class="prelude-val">Err</span>(e),
+        }
     }}
 }
 
@@ -1193,29 +1213,33 @@
 ///
 /// # Arguments
 ///
-/// - `f`: `fn(f64) -&gt; f64`
+/// - `f`: `Fn(f64) -&gt; f64` (allow closure)
 /// - `(a, b)`: `(f64, f64)`
 /// - `max_iter`: `usize`
 /// - `tol`: `f64`
 </span><span class="attr">#[macro_export]
 </span><span class="macro">macro_rules!</span> false_position {
-    (<span class="macro-nonterminal">$f</span>:ident, (<span class="macro-nonterminal">$a</span>:expr, <span class="macro-nonterminal">$b</span>:expr), <span class="macro-nonterminal">$max_iter</span>:expr, <span class="macro-nonterminal">$tol</span>:expr) =&gt; {{
-        <span class="kw">struct </span>FalsePositionProblem;
+    (<span class="macro-nonterminal">$f</span>:expr, (<span class="macro-nonterminal">$a</span>:expr, <span class="macro-nonterminal">$b</span>:expr), <span class="macro-nonterminal">$max_iter</span>:expr, <span class="macro-nonterminal">$tol</span>:expr) =&gt; {{
+        <span class="kw">struct </span>FalsePositionProblem&lt;F: Fn(f64) -&gt; f64&gt; {
+            f: F,
+        };
 
-        <span class="kw">impl </span>RootFindingProblem&lt;<span class="number">1</span>, <span class="number">1</span>, (f64, f64)&gt; <span class="kw">for </span>FalsePositionProblem {
+        <span class="kw">impl</span>&lt;F: Fn(f64) -&gt; f64&gt; RootFindingProblem&lt;<span class="number">1</span>, <span class="number">1</span>, (f64, f64)&gt; <span class="kw">for </span>FalsePositionProblem&lt;F&gt; {
             <span class="kw">fn </span>initial_guess(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; (f64, f64) {
                 (<span class="macro-nonterminal">$a</span>, <span class="macro-nonterminal">$b</span>)
             }
 
             <span class="kw">fn </span>function(<span class="kw-2">&amp;</span><span class="self">self</span>, x: [f64; <span class="number">1</span>]) -&gt; <span class="prelude-ty">Result</span>&lt;[f64; <span class="number">1</span>]&gt; {
-                <span class="prelude-val">Ok</span>([<span class="macro-nonterminal">$f</span>(x[<span class="number">0</span>])])
+                <span class="prelude-val">Ok</span>([(<span class="self">self</span>.f)(x[<span class="number">0</span>])])
             }
         }
 
-        <span class="kw">let </span>problem = FalsePositionProblem;
+        <span class="kw">let </span>problem = FalsePositionProblem { f: <span class="macro-nonterminal">$f </span>};
         <span class="kw">let </span>false_position = FalsePositionMethod { max_iter: <span class="macro-nonterminal">$max_iter</span>, tol: <span class="macro-nonterminal">$tol </span>};
-        <span class="kw">let </span>root = false_position.find(<span class="kw-2">&amp;</span>problem)<span class="question-mark">?</span>;
-        root[<span class="number">0</span>]
+        <span class="kw">match </span>false_position.find(<span class="kw-2">&amp;</span>problem) {
+            <span class="prelude-val">Ok</span>(root) =&gt; <span class="prelude-val">Ok</span>(root[<span class="number">0</span>]),
+            <span class="prelude-val">Err</span>(e) =&gt; <span class="prelude-val">Err</span>(e),
+        }
     }}
 }
 
@@ -1223,29 +1247,33 @@
 ///
 /// # Arguments
 ///
-/// - `f`: `fn(f64) -&gt; f64`
+/// - `f`: `Fn(f64) -&gt; f64` (allow closure)
 /// - `(a, b)`: `(f64, f64)`
 /// - `max_iter`: `usize`
 /// - `tol`: `f64`
 </span><span class="attr">#[macro_export]
 </span><span class="macro">macro_rules!</span> secant {
-    (<span class="macro-nonterminal">$f</span>:ident, (<span class="macro-nonterminal">$a</span>:expr, <span class="macro-nonterminal">$b</span>:expr), <span class="macro-nonterminal">$max_iter</span>:expr, <span class="macro-nonterminal">$tol</span>:expr) =&gt; {{
-        <span class="kw">struct </span>SecantProblem;
+    (<span class="macro-nonterminal">$f</span>:expr, (<span class="macro-nonterminal">$a</span>:expr, <span class="macro-nonterminal">$b</span>:expr), <span class="macro-nonterminal">$max_iter</span>:expr, <span class="macro-nonterminal">$tol</span>:expr) =&gt; {{
+        <span class="kw">struct </span>SecantProblem&lt;F: Fn(f64) -&gt; f64&gt; {
+            f: F,
+        };
 
-        <span class="kw">impl </span>RootFindingProblem&lt;<span class="number">1</span>, <span class="number">1</span>, (f64, f64)&gt; <span class="kw">for </span>SecantProblem {
+        <span class="kw">impl</span>&lt;F: Fn(f64) -&gt; f64&gt; RootFindingProblem&lt;<span class="number">1</span>, <span class="number">1</span>, (f64, f64)&gt; <span class="kw">for </span>SecantProblem&lt;F&gt; {
             <span class="kw">fn </span>initial_guess(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; (f64, f64) {
                 (<span class="macro-nonterminal">$a</span>, <span class="macro-nonterminal">$b</span>)
             }
 
             <span class="kw">fn </span>function(<span class="kw-2">&amp;</span><span class="self">self</span>, x: [f64; <span class="number">1</span>]) -&gt; <span class="prelude-ty">Result</span>&lt;[f64; <span class="number">1</span>]&gt; {
-                <span class="prelude-val">Ok</span>([<span class="macro-nonterminal">$f</span>(x[<span class="number">0</span>])])
+                <span class="prelude-val">Ok</span>([(<span class="self">self</span>.f)(x[<span class="number">0</span>])])
             }
         }
 
-        <span class="kw">let </span>problem = SecantProblem;
+        <span class="kw">let </span>problem = SecantProblem { f: <span class="macro-nonterminal">$f </span>};
         <span class="kw">let </span>secant = SecantMethod { max_iter: <span class="macro-nonterminal">$max_iter</span>, tol: <span class="macro-nonterminal">$tol </span>};
-        <span class="kw">let </span>root = secant.find(<span class="kw-2">&amp;</span>problem)<span class="question-mark">?</span>;
-        root[<span class="number">0</span>]
+        <span class="kw">match </span>secant.find(<span class="kw-2">&amp;</span>problem) {
+            <span class="prelude-val">Ok</span>(root) =&gt; <span class="prelude-val">Ok</span>(root[<span class="number">0</span>]),
+            <span class="prelude-val">Err</span>(e) =&gt; <span class="prelude-val">Err</span>(e),
+        }
     }}
 }
 

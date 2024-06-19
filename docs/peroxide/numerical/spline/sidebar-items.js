@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"enum":["SlopeMethod","SplineError"],"fn":["cubic_hermite_spline","cubic_spline"],"struct":["CubicBSplineBases","CubicHermiteSpline","CubicSpline","UnitCubicBasis"],"trait":["Spline"]};
+window.SIDEBAR_ITEMS = {"enum":["SlopeMethod","SplineError"],"fn":["cubic_hermite_spline","cubic_spline"],"struct":["BSpline","CubicBSplineBases","CubicHermiteSpline","CubicSpline","UnitCubicBasis"],"trait":["PolynomialSpline","Spline"]};
