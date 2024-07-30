@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"fn":["chebyshev_polynomial","cubic_hermite_spline","eigen","integrate","lambert_w0","lambert_w_m1","solve"],"trait":["SimpleNorm","SimpleParquet","SimplerLinearAlgebra"]};
+window.SIDEBAR_ITEMS = {"fn":["chebyshev_polynomial","cubic_hermite_spline","eigen","integrate","lambert_w0","lambert_wm1","solve"],"trait":["SimpleNorm","SimpleParquet","SimplerLinearAlgebra"]};
