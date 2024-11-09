@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/numerical/spline.rs`."><title>spline.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-46f98efaafac5295.ttf.woff2,FiraSans-Regular-018c141bf0843ffd.woff2,FiraSans-Medium-8f9a781e4970d388.woff2,SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2,SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-dd39b87e5fcfba68.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="peroxide" data-themes="" data-resource-suffix="" data-rustdoc-version="1.80.0 (051478957 2024-07-21)" data-channel="1.80.0" data-search-js="search-d52510db62a78183.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../static.files/storage-118b08c4c78b968e.js"></script><script defer src="../../../static.files/src-script-e66d777a5a92e9b2.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-20a3ad099b048cf2.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-df360f571f6edeae.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/numerical/spline.rs`."><title>spline.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-46f98efaafac5295.ttf.woff2,FiraSans-Regular-018c141bf0843ffd.woff2,FiraSans-Medium-8f9a781e4970d388.woff2,SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2,SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-492a78a4a87dcc01.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="peroxide" data-themes="" data-resource-suffix="" data-rustdoc-version="1.82.0 (f6e511eec 2024-10-15)" data-channel="1.82.0" data-search-js="search-a99f1315e7cc5121.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../static.files/storage-118b08c4c78b968e.js"></script><script defer src="../../../static.files/src-script-e66d777a5a92e9b2.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-921df33f47b8780c.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-3b12f09e550e0385.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js"                  integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js"    integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
 <script>
@@ -1207,6 +1207,19 @@
 <a href="#1191" id="1191">1191</a>
 <a href="#1192" id="1192">1192</a>
 <a href="#1193" id="1193">1193</a>
+<a href="#1194" id="1194">1194</a>
+<a href="#1195" id="1195">1195</a>
+<a href="#1196" id="1196">1196</a>
+<a href="#1197" id="1197">1197</a>
+<a href="#1198" id="1198">1198</a>
+<a href="#1199" id="1199">1199</a>
+<a href="#1200" id="1200">1200</a>
+<a href="#1201" id="1201">1201</a>
+<a href="#1202" id="1202">1202</a>
+<a href="#1203" id="1203">1203</a>
+<a href="#1204" id="1204">1204</a>
+<a href="#1205" id="1205">1205</a>
+<a href="#1206" id="1206">1206</a>
 </pre></div><pre class="rust"><code><span class="doccomment">//! Spline interpolations
 //!
 //! # Available splines
@@ -1305,7 +1318,7 @@
 //!
 //! ```rust
 //! use peroxide::fuga::*;
-//! 
+//!
 //! fn main() -&gt; Result&lt;(), Box&lt;dyn Error&gt;&gt; {
 //!     let knots = vec![0f64, 1f64, 2f64, 3f64];
 //!     let degree = 3;
@@ -1317,17 +1330,17 @@
 //!         vec![0.8, 1f64],
 //!         vec![1f64, 2f64],
 //!     ];
-//! 
+//!
 //!  
 //!     let spline = BSpline::clamped(degree, knots, control_points.clone())?;
 //!     let t = linspace(0f64, 3f64, 200);
 //!     let (x, y): (Vec&lt;f64&gt;, Vec&lt;f64&gt;) = spline.eval_vec(&amp;t).into_iter().unzip();
-//! 
+//!
 //!     # #[cfg(feature = "plot")]
 //!     # {
 //!         let control_x = control_points.iter().map(|v| v[0]).collect::&lt;Vec&lt;f64&gt;&gt;();
 //!         let control_y = control_points.iter().map(|v| v[1]).collect::&lt;Vec&lt;f64&gt;&gt;();
-//! 
+//!
 //!         let mut plt = Plot2D::new();
 //!         plt
 //!             .insert_pair((x.clone(), y.clone()))
@@ -1341,13 +1354,13 @@
 //!             .set_path("example_data/b_spline_test.png")
 //!             .savefig()?;
 //!     # }
-//! 
+//!
 //!     let mut df = DataFrame::new(vec![]);
 //!     df.push("t", Series::new(t));
 //!     df.push("x", Series::new(x));
 //!     df.push("y", Series::new(y));
 //!     df.print();
-//! 
+//!
 //!     Ok(())
 //! }
 //! ```
@@ -1479,7 +1492,6 @@
 //!
 //! - Gary D. Knott, *Interpolating Splines*, Birkhäuser Boston, MA, (2000).
 /// - [Wikipedia - Irwin-Hall distribution](https://en.wikipedia.org/wiki/Irwin%E2%80%93Hall_distribution#Special_cases)
-
 </span><span class="kw">use </span><span class="self">self</span>::SplineError::{NotEnoughNodes, NotEqualNodes, NotEqualSlopes, RedundantNodeX};
 <span class="attr">#[allow(unused_imports)]
 </span><span class="kw">use </span><span class="kw">crate</span>::structure::matrix::<span class="kw-2">*</span>;
@@ -1487,16 +1499,17 @@
 </span><span class="kw">use </span><span class="kw">crate</span>::structure::polynomial::<span class="kw-2">*</span>;
 <span class="attr">#[allow(unused_imports)]
 </span><span class="kw">use </span><span class="kw">crate</span>::structure::vector::<span class="kw-2">*</span>;
+<span class="kw">use </span><span class="kw">crate</span>::traits::matrix::LinearAlgebra;
 <span class="attr">#[allow(unused_imports)]
 </span><span class="kw">use </span><span class="kw">crate</span>::util::non_macro::<span class="kw-2">*</span>;
 <span class="kw">use </span><span class="kw">crate</span>::util::useful::zip_range;
+<span class="kw">use </span>anyhow::{bail, <span class="prelude-ty">Result</span>};
 <span class="kw">use </span>peroxide_num::PowOps;
 <span class="attr">#[cfg(feature = <span class="string">"serde"</span>)]
 </span><span class="kw">use </span>serde::{Deserialize, Serialize};
 <span class="kw">use </span>std::cmp::{max, min};
 <span class="kw">use </span>std::convert::From;
 <span class="kw">use </span>std::ops::{Index, Range};
-<span class="kw">use </span>anyhow::{<span class="prelude-ty">Result</span>, bail};
 
 <span class="kw">pub trait </span>Spline&lt;T&gt; {
     <span class="kw">fn </span>eval(<span class="kw-2">&amp;</span><span class="self">self</span>, t: f64) -&gt; T;
@@ -1911,11 +1924,7 @@
 }
 
 <span class="kw">impl </span>CubicHermiteSpline {
-    <span class="kw">pub fn </span>from_nodes_with_slopes(
-        node_x: <span class="kw-2">&amp;</span>[f64],
-        node_y: <span class="kw-2">&amp;</span>[f64],
-        m: <span class="kw-2">&amp;</span>[f64],
-    ) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>&gt; {
+    <span class="kw">pub fn </span>from_nodes_with_slopes(node_x: <span class="kw-2">&amp;</span>[f64], node_y: <span class="kw-2">&amp;</span>[f64], m: <span class="kw-2">&amp;</span>[f64]) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>&gt; {
         <span class="kw">let </span>n = node_x.len();
         <span class="kw">if </span>n &lt; <span class="number">3 </span>{
             <span class="macro">bail!</span>(NotEnoughNodes);
@@ -1953,11 +1962,7 @@
         })
     }
 
-    <span class="kw">pub fn </span>from_nodes(
-        node_x: <span class="kw-2">&amp;</span>[f64],
-        node_y: <span class="kw-2">&amp;</span>[f64],
-        slope_method: SlopeMethod,
-    ) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>&gt; {
+    <span class="kw">pub fn </span>from_nodes(node_x: <span class="kw-2">&amp;</span>[f64], node_y: <span class="kw-2">&amp;</span>[f64], slope_method: SlopeMethod) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>&gt; {
         <span class="kw">match </span>slope_method {
             SlopeMethod::Akima =&gt; CubicHermiteSpline::from_nodes_with_slopes(
                 node_x,
@@ -2142,7 +2147,11 @@
 
 <span class="kw">impl </span>UnitCubicBasis {
     <span class="kw">pub fn </span>new(x_min: f64, x_max: f64, scale: f64) -&gt; <span class="self">Self </span>{
-        <span class="self">Self </span>{ x_min, x_max, scale }
+        <span class="self">Self </span>{
+            x_min,
+            x_max,
+            scale,
+        }
     }
 
     <span class="kw">pub fn </span>eval(<span class="kw-2">&amp;</span><span class="self">self</span>, x: f64) -&gt; f64 {
@@ -2175,17 +2184,17 @@
 /// ```rust
 /// use peroxide::fuga::*;
 /// use core::ops::Range;
-/// 
+///
 /// # #[allow(unused_variables)]
 /// fn main() -&gt; anyhow::Result&lt;()&gt; {
 ///     let cubic_b_spline = CubicBSplineBases::from_interval((0f64, 1f64), 5);
 ///     let x = linspace(0f64, 1f64, 1000);
 ///     let y = cubic_b_spline.eval_vec(&amp;x);
-/// 
+///
 /// #   #[cfg(feature = "plot")] {
 ///     let mut plt = Plot2D::new();
 ///     plt.set_domain(x.clone());
-/// 
+///
 ///     for basis in &amp;cubic_b_spline.bases {
 ///         plt.insert_image(basis.eval_vec(&amp;x));
 ///     }
@@ -2222,9 +2231,14 @@
         <span class="kw">let </span>(ranges, bases) = nodes
             .iter()
             .zip(nodes.iter().skip(<span class="number">4</span>))
-            .map(|(a, b)| (Range { start: <span class="kw-2">*</span>a, end: <span class="kw-2">*</span>b }, UnitCubicBasis::new(<span class="kw-2">*</span>a, <span class="kw-2">*</span>b, <span class="number">1f64</span>)))
+            .map(|(a, b)| {
+                (
+                    Range { start: <span class="kw-2">*</span>a, end: <span class="kw-2">*</span>b },
+                    UnitCubicBasis::new(<span class="kw-2">*</span>a, <span class="kw-2">*</span>b, <span class="number">1f64</span>),
+                )
+            })
             .unzip();
-        
+
         <span class="self">Self</span>::new(ranges, bases)
     }
 
@@ -2245,7 +2259,8 @@
     }
 
     <span class="kw">pub fn </span>eval(<span class="kw-2">&amp;</span><span class="self">self</span>, x: f64) -&gt; f64 {
-        <span class="self">self</span>.ranges.iter()
+        <span class="self">self</span>.ranges
+            .iter()
             .enumerate()
             .filter(|(<span class="kw">_</span>, range)| range.contains(<span class="kw-2">&amp;</span>x))
             .fold(<span class="number">0f64</span>, |acc, (i, <span class="kw">_</span>)| {
@@ -2317,7 +2332,11 @@
             <span class="macro">bail!</span>(<span class="string">"The number of knots ({}) should be equal to the number of control points ({}) + degree ({}) + 1"</span>, knots.len(), control_points.len(), degree);
         }
 
-        <span class="prelude-val">Ok</span>(<span class="self">Self </span>{ degree, knots, control_points })
+        <span class="prelude-val">Ok</span>(<span class="self">Self </span>{
+            degree,
+            knots,
+            control_points,
+        })
     }
 
     <span class="doccomment">/// Create new clamped B-Spline
@@ -2343,7 +2362,11 @@
             <span class="macro">bail!</span>(<span class="string">"The number of knots ({}) should be equal to the number of control points ({}) + degree ({}) + 1"</span>, knots.len(), control_points.len(), degree);
         }
 
-        <span class="prelude-val">Ok</span>(<span class="self">Self </span>{ degree, knots, control_points })
+        <span class="prelude-val">Ok</span>(<span class="self">Self </span>{
+            degree,
+            knots,
+            control_points,
+        })
     }
 
     <span class="doccomment">/// Obtain basis function via Cox-de Boor algorithm
@@ -2354,7 +2377,9 @@
 
         <span class="comment">// Initialize 0th degree basis functions
         </span><span class="kw">for </span>(j, B_j) <span class="kw">in </span>B.iter_mut().enumerate() {
-            <span class="kw">if </span>(<span class="self">self</span>.knots[i + j] &lt;= t &amp;&amp; t &lt; <span class="self">self</span>.knots[i + j + <span class="number">1</span>]) || (i + j == <span class="self">self</span>.knots.len() - (p + <span class="number">2</span>) &amp;&amp; t == <span class="self">self</span>.knots[i + j + <span class="number">1</span>]) {
+            <span class="kw">if </span>(<span class="self">self</span>.knots[i + j] &lt;= t &amp;&amp; t &lt; <span class="self">self</span>.knots[i + j + <span class="number">1</span>])
+                || (i + j == <span class="self">self</span>.knots.len() - (p + <span class="number">2</span>) &amp;&amp; t == <span class="self">self</span>.knots[i + j + <span class="number">1</span>])
+            {
                 B_j[<span class="number">0</span>] = <span class="number">1f64</span>;
             } <span class="kw">else </span>{
                 B_j[<span class="number">0</span>] = <span class="number">0f64</span>;
@@ -2363,20 +2388,21 @@
 
         <span class="comment">// Compute the basis functions for higher degree
         </span><span class="kw">for </span>k <span class="kw">in </span><span class="number">1</span>..=p {
-            <span class="kw">for </span>j <span class="kw">in </span><span class="number">0</span>..=(p-k) {
-                <span class="kw">let </span>a = <span class="kw">if </span><span class="self">self</span>.knots[i + j + k] == <span class="self">self</span>.knots[i+j] {
+            <span class="kw">for </span>j <span class="kw">in </span><span class="number">0</span>..=(p - k) {
+                <span class="kw">let </span>a = <span class="kw">if </span><span class="self">self</span>.knots[i + j + k] == <span class="self">self</span>.knots[i + j] {
                     <span class="number">0f64
                 </span>} <span class="kw">else </span>{
-                    (t - <span class="self">self</span>.knots[i+j]) / (<span class="self">self</span>.knots[i+j+k] - <span class="self">self</span>.knots[i+j])
+                    (t - <span class="self">self</span>.knots[i + j]) / (<span class="self">self</span>.knots[i + j + k] - <span class="self">self</span>.knots[i + j])
                 };
 
-                <span class="kw">let </span>b = <span class="kw">if </span><span class="self">self</span>.knots[i + j + k + <span class="number">1</span>] == <span class="self">self</span>.knots[i+j+<span class="number">1</span>] {
+                <span class="kw">let </span>b = <span class="kw">if </span><span class="self">self</span>.knots[i + j + k + <span class="number">1</span>] == <span class="self">self</span>.knots[i + j + <span class="number">1</span>] {
                     <span class="number">0f64
                 </span>} <span class="kw">else </span>{
-                    (<span class="self">self</span>.knots[i+j+k+<span class="number">1</span>] - t) / (<span class="self">self</span>.knots[i+j+k+<span class="number">1</span>] - <span class="self">self</span>.knots[i+j+<span class="number">1</span>])
+                    (<span class="self">self</span>.knots[i + j + k + <span class="number">1</span>] - t)
+                        / (<span class="self">self</span>.knots[i + j + k + <span class="number">1</span>] - <span class="self">self</span>.knots[i + j + <span class="number">1</span>])
                 };
 
-                B[j][k] = a * B[j][k-<span class="number">1</span>] + b * B[j+<span class="number">1</span>][k-<span class="number">1</span>];
+                B[j][k] = a * B[j][k - <span class="number">1</span>] + b * B[j + <span class="number">1</span>][k - <span class="number">1</span>];
             }
         }
 
@@ -2391,7 +2417,7 @@
 
         <span class="kw">let </span><span class="kw-2">mut </span>x = <span class="number">0f64</span>;
         <span class="kw">let </span><span class="kw-2">mut </span>y = <span class="number">0f64</span>;
-        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0 </span>.. n {
+        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..n {
             <span class="kw">let </span>B = <span class="self">self</span>.cox_de_boor(t, i);
             x += B * <span class="self">self</span>.control_points[i][<span class="number">0</span>];
             y += B * <span class="self">self</span>.control_points[i][<span class="number">1</span>];

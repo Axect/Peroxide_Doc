@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/structure/matrix.rs`."><title>matrix.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-46f98efaafac5295.ttf.woff2,FiraSans-Regular-018c141bf0843ffd.woff2,FiraSans-Medium-8f9a781e4970d388.woff2,SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2,SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-dd39b87e5fcfba68.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="peroxide" data-themes="" data-resource-suffix="" data-rustdoc-version="1.80.0 (051478957 2024-07-21)" data-channel="1.80.0" data-search-js="search-d52510db62a78183.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../static.files/storage-118b08c4c78b968e.js"></script><script defer src="../../../static.files/src-script-e66d777a5a92e9b2.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-20a3ad099b048cf2.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-df360f571f6edeae.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/structure/matrix.rs`."><title>matrix.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-46f98efaafac5295.ttf.woff2,FiraSans-Regular-018c141bf0843ffd.woff2,FiraSans-Medium-8f9a781e4970d388.woff2,SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2,SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-492a78a4a87dcc01.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="peroxide" data-themes="" data-resource-suffix="" data-rustdoc-version="1.82.0 (f6e511eec 2024-10-15)" data-channel="1.82.0" data-search-js="search-a99f1315e7cc5121.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../static.files/storage-118b08c4c78b968e.js"></script><script defer src="../../../static.files/src-script-e66d777a5a92e9b2.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-921df33f47b8780c.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-3b12f09e550e0385.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js"                  integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js"    integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
 <script>
@@ -4836,14 +4836,6 @@
 <a href="#4820" id="4820">4820</a>
 <a href="#4821" id="4821">4821</a>
 <a href="#4822" id="4822">4822</a>
-<a href="#4823" id="4823">4823</a>
-<a href="#4824" id="4824">4824</a>
-<a href="#4825" id="4825">4825</a>
-<a href="#4826" id="4826">4826</a>
-<a href="#4827" id="4827">4827</a>
-<a href="#4828" id="4828">4828</a>
-<a href="#4829" id="4829">4829</a>
-<a href="#4830" id="4830">4830</a>
 </pre></div><pre class="rust"><code><span class="doccomment">//! Matrix for Scientific computation
 //!
 //! ## Declare matrix
@@ -5038,7 +5030,7 @@
 //! To write columns or rows, `DataFrame` and `nc` feature could be the best choice.
 //!
 //! * `nc` feature should be required - `netcdf` or `libnetcdf` are prerequisites.
-//! 
+//!
 //! ```no_run
 //! #[macro_use]
 //! extern crate peroxide;
@@ -5308,8 +5300,7 @@
 //!
 //! ## Tips for LU, Det, Inverse
 //!
-//! * If you save `self.lu()` rather than the direct use of `self.det()` or `self.lu()` then you
-//! can get better performance (via memoization)
+//! * If you save `self.lu()` rather than the direct use of `self.det()` or `self.lu()` then you can get better performance (via memoization)
 //!
 //! ```rust
 //! use peroxide::fuga::*;
@@ -5442,10 +5433,10 @@
 //!     }
 //!     ```
 
-</span><span class="attr">#[cfg(feature=<span class="string">"csv"</span>)]
+</span><span class="attr">#[cfg(feature = <span class="string">"csv"</span>)]
 </span><span class="kw">extern crate </span>csv;
 
-<span class="attr">#[cfg(feature=<span class="string">"csv"</span>)]
+<span class="attr">#[cfg(feature = <span class="string">"csv"</span>)]
 </span><span class="kw">use </span><span class="self">self</span>::csv::{ReaderBuilder, StringRecord, WriterBuilder};
 
 <span class="attr">#[cfg(feature = <span class="string">"O3"</span>)]
@@ -5455,30 +5446,36 @@
 <span class="attr">#[cfg(feature = <span class="string">"O3"</span>)]
 </span><span class="kw">use </span>blas::{daxpy, dgemm, dgemv};
 <span class="attr">#[cfg(feature = <span class="string">"O3"</span>)]
-</span><span class="kw">use </span>lapack::{dgecon, dgeqrf, dgetrf, dgetri, dgetrs, dorgqr, dgesvd, dpotrf};
+</span><span class="kw">use </span>lapack::{dgecon, dgeqrf, dgesvd, dgetrf, dgetri, dgetrs, dorgqr, dpotrf};
+<span class="attr">#[cfg(feature = <span class="string">"parallel"</span>)]
+</span><span class="kw">use </span>rayon::iter::{IntoParallelIterator, IntoParallelRefIterator, ParallelIterator};
 <span class="attr">#[cfg(feature = <span class="string">"serde"</span>)]
 </span><span class="kw">use </span>serde::{Deserialize, Serialize};
 
 <span class="kw">pub use </span><span class="self">self</span>::Shape::{Col, Row};
 <span class="kw">use </span><span class="kw">crate</span>::numerical::eigen::{eigen, EigenMethod};
+<span class="kw">use </span><span class="kw">crate</span>::structure::dataframe::{Series, TypedVector};
+<span class="attr">#[cfg(feature = <span class="string">"parallel"</span>)]
+</span><span class="kw">use </span><span class="kw">crate</span>::traits::math::{ParallelInnerProduct, ParallelNormed};
+<span class="kw">use </span><span class="kw">crate</span>::traits::sugar::ScalableMut;
 <span class="kw">use </span><span class="kw">crate</span>::traits::{
-    general::Algorithm,
     fp::{FPMatrix, FPVector},
+    general::Algorithm,
     math::{InnerProduct, LinearOp, MatrixProduct, Norm, Normed, Vector},
+    matrix::{Form, LinearAlgebra, MatrixTrait, SolveKind, PQLU, QR, SVD, WAZD, UPLO},
     mutable::MutMatrix,
 };
-<span class="kw">use </span><span class="kw">crate</span>::util::{
-    low_level::{swap_vec_ptr, copy_vec_ptr},
+<span class="attr">#[allow(unused_imports)]
+</span><span class="kw">use </span><span class="kw">crate</span>::util::{
+    low_level::{copy_vec_ptr, swap_vec_ptr},
     non_macro::{cbind, eye, rbind, zeros},
     useful::{nearly_eq, tab},
 };
-<span class="kw">use </span><span class="kw">crate</span>::structure::dataframe::{Series, TypedVector};
+<span class="kw">use </span>peroxide_num::{ExpLogOps, Numeric, PowOps, TrigOps};
 <span class="kw">use </span>std::cmp::{max, min};
 <span class="kw">pub use </span>std::error::Error;
 <span class="kw">use </span>std::fmt;
 <span class="kw">use </span>std::ops::{Add, Div, Index, IndexMut, Mul, Neg, Sub};
-<span class="kw">use </span><span class="kw">crate</span>::traits::sugar::ScalableMut;
-<span class="kw">use </span>peroxide_num::{ExpLogOps, PowOps, TrigOps, Numeric};
 
 <span class="kw">pub type </span>Perms = Vec&lt;(usize, usize)&gt;;
 
@@ -5663,14 +5660,16 @@
 
 <span class="doccomment">/// Main matrix structure
 </span><span class="attr">#[allow(dead_code)]
-</span><span class="kw">impl </span>Matrix {
+</span><span class="kw">impl </span>MatrixTrait <span class="kw">for </span>Matrix {
+    <span class="kw">type </span>Scalar = f64;
+
     <span class="doccomment">/// Raw pointer for `self.data`
-    </span><span class="kw">pub fn </span>ptr(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">*const </span>f64 {
+    </span><span class="kw">fn </span>ptr(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">*const </span>f64 {
         <span class="kw-2">&amp;</span><span class="self">self</span>.data[<span class="number">0</span>] <span class="kw">as </span><span class="kw-2">*const </span>f64
     }
 
     <span class="doccomment">/// Raw mutable pointer for `self.data`
-    </span><span class="kw">pub fn </span>mut_ptr(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="kw-2">*mut </span>f64 {
+    </span><span class="kw">fn </span>mut_ptr(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="kw-2">*mut </span>f64 {
         <span class="kw-2">&amp;mut </span><span class="self">self</span>.data[<span class="number">0</span>] <span class="kw">as </span><span class="kw-2">*mut </span>f64
     }
 
@@ -5684,7 +5683,7 @@
     /// let b = a.as_slice();
     /// assert_eq!(b, &amp;[1f64,2f64,3f64,4f64]);
     /// ```
-    </span><span class="kw">pub fn </span>as_slice(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[f64] {
+    </span><span class="kw">fn </span>as_slice(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[f64] {
         <span class="kw-2">&amp;</span><span class="self">self</span>.data[..]
     }
 
@@ -5700,7 +5699,7 @@
     /// assert_eq!(b, &amp;[5f64, 2f64, 3f64, 4f64]);
     /// assert_eq!(a, matrix(vec![5,2,3,4], 2, 2, Col));
     /// ```
-    </span><span class="kw">pub fn </span>as_mut_slice(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut </span>[f64] {
+    </span><span class="kw">fn </span>as_mut_slice(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut </span>[f64] {
         <span class="kw-2">&amp;mut </span><span class="self">self</span>.data[..]
     }
 
@@ -5717,7 +5716,7 @@
     /// let b = a.change_shape();
     /// assert_eq!(b.shape, Col);
     /// ```
-    </span><span class="kw">pub fn </span>change_shape(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
+    </span><span class="kw">fn </span>change_shape(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
         <span class="kw">let </span>r = <span class="self">self</span>.row;
         <span class="kw">let </span>c = <span class="self">self</span>.col;
         <span class="macro">assert_eq!</span>(r * c, <span class="self">self</span>.data.len());
@@ -5758,7 +5757,7 @@
     /// let b = a.change_shape();
     /// assert_eq!(b.shape, Col);
     /// ```
-    </span><span class="kw">pub fn </span>change_shape_mut(<span class="kw-2">&amp;mut </span><span class="self">self</span>) {
+    </span><span class="kw">fn </span>change_shape_mut(<span class="kw-2">&amp;mut </span><span class="self">self</span>) {
         <span class="kw">let </span>r = <span class="self">self</span>.row;
         <span class="kw">let </span>c = <span class="self">self</span>.col;
         <span class="macro">assert_eq!</span>(r * c, <span class="self">self</span>.data.len());
@@ -5798,7 +5797,7 @@
     /// // r[0]     1    3
     /// // r[1]     2    4
     /// ```
-    </span><span class="kw">pub fn </span>spread(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; String {
+    </span><span class="kw">fn </span>spread(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; String {
         <span class="macro">assert_eq!</span>(<span class="self">self</span>.row * <span class="self">self</span>.col, <span class="self">self</span>.data.len());
         <span class="kw">let </span>r = <span class="self">self</span>.row;
         <span class="kw">let </span>c = <span class="self">self</span>.col;
@@ -5819,10 +5818,10 @@
             };
             <span class="kw">return </span><span class="macro">format!</span>(
                 <span class="string">"Result is too large to print - {}x{}\nonly print {}x{} parts:\n{}"</span>,
-                <span class="self">self</span>.row.to_string(),
-                <span class="self">self</span>.col.to_string(),
-                key_row.to_string(),
-                key_col.to_string(),
+                <span class="self">self</span>.row,
+                <span class="self">self</span>.col,
+                key_row,
+                key_col,
                 part.spread()
             );
         }
@@ -5834,7 +5833,7 @@
             .map(
                 |x| min(<span class="macro">format!</span>(<span class="string">"{:.4}"</span>, x).len(), x.to_string().len()), <span class="comment">// Choose minimum of approx vs normal
             </span>)
-            .fold(<span class="number">0</span>, |x, y| max(x, y))
+            .fold(<span class="number">0</span>, max)
             + <span class="number">1</span>;
 
         <span class="kw">if </span>space &lt; <span class="number">5 </span>{
@@ -5869,7 +5868,7 @@
             result.push(<span class="string">'\n'</span>);
         }
 
-        <span class="kw">return </span>result;
+        result
     }
 
     <span class="doccomment">/// Extract Column
@@ -5885,7 +5884,7 @@
     ///     assert_eq!(a.col(0), c!(1,3));
     /// }
     /// ```
-    </span><span class="kw">pub fn </span>col(<span class="kw-2">&amp;</span><span class="self">self</span>, index: usize) -&gt; Vec&lt;f64&gt; {
+    </span><span class="kw">fn </span>col(<span class="kw-2">&amp;</span><span class="self">self</span>, index: usize) -&gt; Vec&lt;f64&gt; {
         <span class="macro">assert!</span>(index &lt; <span class="self">self</span>.col);
         <span class="kw">let </span><span class="kw-2">mut </span>container: Vec&lt;f64&gt; = <span class="macro">vec!</span>[<span class="number">0f64</span>; <span class="self">self</span>.row];
         <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..<span class="self">self</span>.row {
@@ -5907,7 +5906,7 @@
     ///     assert_eq!(a.row(0), c!(1,2));
     /// }
     /// ```
-    </span><span class="kw">pub fn </span>row(<span class="kw-2">&amp;</span><span class="self">self</span>, index: usize) -&gt; Vec&lt;f64&gt; {
+    </span><span class="kw">fn </span>row(<span class="kw-2">&amp;</span><span class="self">self</span>, index: usize) -&gt; Vec&lt;f64&gt; {
         <span class="macro">assert!</span>(index &lt; <span class="self">self</span>.row);
         <span class="kw">let </span><span class="kw-2">mut </span>container: Vec&lt;f64&gt; = <span class="macro">vec!</span>[<span class="number">0f64</span>; <span class="self">self</span>.col];
         <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..<span class="self">self</span>.col {
@@ -5929,7 +5928,7 @@
     ///     assert_eq!(a.diag(), c!(1,4));
     /// }
     /// ```
-    </span><span class="kw">pub fn </span>diag(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Vec&lt;f64&gt; {
+    </span><span class="kw">fn </span>diag(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Vec&lt;f64&gt; {
         <span class="kw">let </span><span class="kw-2">mut </span>container = <span class="macro">vec!</span>[<span class="number">0f64</span>; <span class="self">self</span>.row];
         <span class="kw">let </span>r = <span class="self">self</span>.row;
         <span class="kw">let </span>c = <span class="self">self</span>.col;
@@ -5950,7 +5949,7 @@
     /// let a = matrix(vec![1,2,3,4], 2, 2, Row);
     /// println!("{}", a); // [[1,3],[2,4]]
     /// ```
-    </span><span class="kw">pub fn </span>transpose(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
+    </span><span class="kw">fn </span>transpose(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
         <span class="kw">match </span><span class="self">self</span>.shape {
             Row =&gt; matrix(<span class="self">self</span>.data.clone(), <span class="self">self</span>.col, <span class="self">self</span>.row, Col),
             Col =&gt; matrix(<span class="self">self</span>.data.clone(), <span class="self">self</span>.col, <span class="self">self</span>.row, Row),
@@ -5970,10 +5969,145 @@
     ///     assert_eq!(a.transpose(), a.t());
     /// }
     /// ```
-    </span><span class="kw">pub fn </span>t(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
+    </span><span class="kw">fn </span>t(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
         <span class="self">self</span>.transpose()
     }
 
+    <span class="doccomment">/// Substitute Col
+    </span><span class="attr">#[inline]
+    </span><span class="kw">fn </span>subs_col(<span class="kw-2">&amp;mut </span><span class="self">self</span>, idx: usize, v: <span class="kw-2">&amp;</span>[f64]) {
+        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..<span class="self">self</span>.row {
+            <span class="self">self</span>[(i, idx)] = v[i];
+        }
+    }
+
+    <span class="doccomment">/// Substitute Row
+    </span><span class="attr">#[inline]
+    </span><span class="kw">fn </span>subs_row(<span class="kw-2">&amp;mut </span><span class="self">self</span>, idx: usize, v: <span class="kw-2">&amp;</span>[f64]) {
+        <span class="kw">for </span>j <span class="kw">in </span><span class="number">0</span>..<span class="self">self</span>.col {
+            <span class="self">self</span>[(idx, j)] = v[j];
+        }
+    }
+
+    <span class="doccomment">/// From index operations
+    </span><span class="kw">fn </span>from_index&lt;F, G&gt;(f: F, size: (usize, usize)) -&gt; Matrix
+    <span class="kw">where
+        </span>F: Fn(usize, usize) -&gt; G + Copy,
+        G: Into&lt;f64&gt;,
+    {
+        <span class="kw">let </span>row = size.<span class="number">0</span>;
+        <span class="kw">let </span>col = size.<span class="number">1</span>;
+
+        <span class="kw">let </span><span class="kw-2">mut </span>mat = matrix(<span class="macro">vec!</span>[<span class="number">0f64</span>; row * col], row, col, Row);
+
+        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..row {
+            <span class="kw">for </span>j <span class="kw">in </span><span class="number">0</span>..col {
+                mat[(i, j)] = f(i, j).into();
+            }
+        }
+        mat
+    }
+
+    <span class="doccomment">/// Matrix to `Vec&lt;Vec&lt;f64&gt;&gt;`
+    ///
+    /// To send `Matrix` to `inline-python`
+    </span><span class="kw">fn </span>to_vec(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Vec&lt;Vec&lt;f64&gt;&gt; {
+        <span class="kw">let </span><span class="kw-2">mut </span>result = <span class="macro">vec!</span>[<span class="macro">vec!</span>[<span class="number">0f64</span>; <span class="self">self</span>.col]; <span class="self">self</span>.row];
+        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..<span class="self">self</span>.row {
+            result[i] = <span class="self">self</span>.row(i);
+        }
+        result
+    }
+
+    <span class="kw">fn </span>to_diag(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Matrix {
+        <span class="macro">assert_eq!</span>(<span class="self">self</span>.row, <span class="self">self</span>.col, <span class="string">"Should be square matrix"</span>);
+        <span class="kw">let </span><span class="kw-2">mut </span>result = matrix(<span class="macro">vec!</span>[<span class="number">0f64</span>; <span class="self">self</span>.row * <span class="self">self</span>.col], <span class="self">self</span>.row, <span class="self">self</span>.col, Row);
+        <span class="kw">let </span>diag = <span class="self">self</span>.diag();
+        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..<span class="self">self</span>.row {
+            result[(i, i)] = diag[i];
+        }
+        result
+    }
+
+    <span class="doccomment">/// Submatrix
+    ///
+    /// # Description
+    /// Return below elements of matrix to new matrix
+    ///
+    /// $$
+    /// \begin{pmatrix}
+    /// \\ddots &amp; &amp; &amp; &amp; \\\\
+    ///   &amp; start &amp; \\cdots &amp; end.1 &amp; \\\\
+    ///   &amp; \\vdots &amp; \\ddots &amp; \\vdots &amp; \\\\
+    ///   &amp; end.0 &amp; \\cdots &amp; end &amp; \\\\
+    ///   &amp; &amp; &amp; &amp; \\ddots
+    /// \end{pmatrix}
+    /// $$
+    ///
+    /// # Examples
+    /// ```
+    /// extern crate peroxide;
+    /// use peroxide::fuga::*;
+    ///
+    /// fn main() {
+    ///     let a = ml_matrix("1 2 3;4 5 6;7 8 9");
+    ///     let b = ml_matrix("5 6;8 9");
+    ///     let c = a.submat((1, 1), (2, 2));
+    ///     assert_eq!(b, c);   
+    /// }
+    /// ```
+    </span><span class="kw">fn </span>submat(<span class="kw-2">&amp;</span><span class="self">self</span>, start: (usize, usize), end: (usize, usize)) -&gt; Matrix {
+        <span class="kw">let </span>row = end.<span class="number">0 </span>+ <span class="number">1 </span>- start.<span class="number">0</span>;
+        <span class="kw">let </span>col = end.<span class="number">1 </span>+ <span class="number">1 </span>- start.<span class="number">1</span>;
+        <span class="kw">let </span><span class="kw-2">mut </span>result = matrix(<span class="macro">vec!</span>[<span class="number">0f64</span>; row * col], row, col, <span class="self">self</span>.shape);
+        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..row {
+            <span class="kw">for </span>j <span class="kw">in </span><span class="number">0</span>..col {
+                result[(i, j)] = <span class="self">self</span>[(start.<span class="number">0 </span>+ i, start.<span class="number">1 </span>+ j)];
+            }
+        }
+        result
+    }
+
+    <span class="doccomment">/// Substitute matrix to specific position
+    ///
+    /// # Description
+    /// Substitute below elements of matrix
+    ///
+    /// $$
+    /// \begin{pmatrix}
+    /// \\ddots &amp; &amp; &amp; &amp; \\\\
+    ///   &amp; start &amp; \\cdots &amp; end.1 &amp; \\\\
+    ///   &amp; \\vdots &amp; \\ddots &amp; \\vdots &amp; \\\\
+    ///   &amp; end.0 &amp; \\cdots &amp; end &amp; \\\\
+    ///   &amp; &amp; &amp; &amp; \\ddots
+    /// \end{pmatrix}
+    /// $$
+    ///
+    /// # Examples
+    /// ```
+    /// extern crate peroxide;
+    /// use peroxide::fuga::*;
+    ///
+    /// fn main() {
+    ///     let mut a = ml_matrix("1 2 3;4 5 6;7 8 9");
+    ///     let b = ml_matrix("1 2;3 4");
+    ///     let c = ml_matrix("1 2 3;4 1 2;7 3 4");
+    ///     a.subs_mat((1,1), (2,2), &amp;b);
+    ///     assert_eq!(a, c);       
+    /// }
+    /// ```
+    </span><span class="kw">fn </span>subs_mat(<span class="kw-2">&amp;mut </span><span class="self">self</span>, start: (usize, usize), end: (usize, usize), m: <span class="kw-2">&amp;</span>Matrix) {
+        <span class="kw">let </span>row = end.<span class="number">0 </span>- start.<span class="number">0 </span>+ <span class="number">1</span>;
+        <span class="kw">let </span>col = end.<span class="number">1 </span>- start.<span class="number">1 </span>+ <span class="number">1</span>;
+        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..row {
+            <span class="kw">for </span>j <span class="kw">in </span><span class="number">0</span>..col {
+                <span class="self">self</span>[(start.<span class="number">0 </span>+ i, start.<span class="number">1 </span>+ j)] = m[(i, j)];
+            }
+        }
+    }
+}
+
+<span class="kw">impl </span>Matrix {
     <span class="doccomment">/// Write to CSV
     ///
     /// # Examples
@@ -5989,7 +6123,7 @@
     ///     Ok(())
     /// }
     /// ```
-    </span><span class="attr">#[cfg(feature=<span class="string">"csv"</span>)]
+    </span><span class="attr">#[cfg(feature = <span class="string">"csv"</span>)]
     </span><span class="kw">pub fn </span>write(<span class="kw-2">&amp;</span><span class="self">self</span>, file_path: <span class="kw-2">&amp;</span>str) -&gt; <span class="prelude-ty">Result</span>&lt;(), Box&lt;<span class="kw">dyn </span>Error&gt;&gt; {
         <span class="kw">let </span><span class="kw-2">mut </span>wtr = WriterBuilder::new().from_path(file_path)<span class="question-mark">?</span>;
         <span class="kw">let </span>r = <span class="self">self</span>.row;
@@ -6020,7 +6154,7 @@
     ///     Ok(())
     /// }
     /// ```
-    </span><span class="attr">#[cfg(feature=<span class="string">"csv"</span>)]
+    </span><span class="attr">#[cfg(feature = <span class="string">"csv"</span>)]
     </span><span class="kw">pub fn </span>write_round(<span class="kw-2">&amp;</span><span class="self">self</span>, file_path: <span class="kw-2">&amp;</span>str, round: usize) -&gt; <span class="prelude-ty">Result</span>&lt;(), Box&lt;<span class="kw">dyn </span>Error&gt;&gt; {
         <span class="kw">let </span><span class="kw-2">mut </span>wtr = WriterBuilder::new().from_path(file_path)<span class="question-mark">?</span>;
         <span class="kw">let </span>r = <span class="self">self</span>.row;
@@ -6036,7 +6170,7 @@
         <span class="prelude-val">Ok</span>(())
     }
 
-    <span class="attr">#[cfg(feature=<span class="string">"csv"</span>)]
+    <span class="attr">#[cfg(feature = <span class="string">"csv"</span>)]
     </span><span class="kw">pub fn </span>write_with_header(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
         file_path: <span class="kw-2">&amp;</span>str,
@@ -6058,7 +6192,7 @@
         <span class="prelude-val">Ok</span>(())
     }
 
-    <span class="attr">#[cfg(feature=<span class="string">"csv"</span>)]
+    <span class="attr">#[cfg(feature = <span class="string">"csv"</span>)]
     </span><span class="kw">pub fn </span>write_with_header_round(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
         file_path: <span class="kw-2">&amp;</span>str,
@@ -6106,7 +6240,7 @@
     ///     Ok(())
     /// }
     /// ```
-    </span><span class="attr">#[cfg(feature=<span class="string">"csv"</span>)]
+    </span><span class="attr">#[cfg(feature = <span class="string">"csv"</span>)]
     </span><span class="kw">pub fn </span>read(file_path: <span class="kw-2">&amp;</span>str, header: bool, delimiter: char) -&gt; <span class="prelude-ty">Result</span>&lt;Matrix, Box&lt;<span class="kw">dyn </span>Error&gt;&gt; {
         <span class="kw">let </span><span class="kw-2">mut </span>rdr = ReaderBuilder::new()
             .has_headers(header)
@@ -6131,159 +6265,6 @@
 
         <span class="prelude-val">Ok</span>(m)
     }
-
-    <span class="doccomment">/// Should check shape
-    </span><span class="kw">pub fn </span>subs(<span class="kw-2">&amp;mut </span><span class="self">self</span>, idx: usize, v: <span class="kw-2">&amp;</span>Vec&lt;f64&gt;) {
-        <span class="kw">let </span>p = <span class="kw-2">&amp;mut </span><span class="self">self</span>.mut_ptr();
-        <span class="kw">match </span><span class="self">self</span>.shape {
-            Row =&gt; {
-                <span class="kw">let </span>c = <span class="self">self</span>.col;
-                <span class="kw">unsafe </span>{
-                    p.add(idx * c).copy_from(v.as_ptr(), c);
-                }
-            }
-            Col =&gt; {
-                <span class="kw">let </span>r = <span class="self">self</span>.row;
-                <span class="kw">unsafe </span>{
-                    p.add(idx * r).copy_from(v.as_ptr(), r);
-                }
-            }
-        }
-    }
-
-    <span class="doccomment">/// Substitute Col
-    </span><span class="attr">#[inline]
-    </span><span class="kw">pub fn </span>subs_col(<span class="kw-2">&amp;mut </span><span class="self">self</span>, idx: usize, v: <span class="kw-2">&amp;</span>Vec&lt;f64&gt;) {
-        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..<span class="self">self</span>.row {
-            <span class="self">self</span>[(i, idx)] = v[i];
-        }
-    }
-
-    <span class="doccomment">/// Substitute Row
-    </span><span class="attr">#[inline]
-    </span><span class="kw">pub fn </span>subs_row(<span class="kw-2">&amp;mut </span><span class="self">self</span>, idx: usize, v: <span class="kw-2">&amp;</span>Vec&lt;f64&gt;) {
-        <span class="kw">for </span>j <span class="kw">in </span><span class="number">0</span>..<span class="self">self</span>.col {
-            <span class="self">self</span>[(idx, j)] = v[j];
-        }
-    }
-
-    <span class="doccomment">/// From index operations
-    </span><span class="kw">pub fn </span>from_index&lt;F, G&gt;(f: F, size: (usize, usize)) -&gt; Matrix
-    <span class="kw">where
-        </span>F: Fn(usize, usize) -&gt; G + Copy,
-        G: Into&lt;f64&gt;,
-    {
-        <span class="kw">let </span>row = size.<span class="number">0</span>;
-        <span class="kw">let </span>col = size.<span class="number">1</span>;
-
-        <span class="kw">let </span><span class="kw-2">mut </span>mat = matrix(<span class="macro">vec!</span>[<span class="number">0f64</span>; row * col], row, col, Row);
-
-        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..row {
-            <span class="kw">for </span>j <span class="kw">in </span><span class="number">0</span>..col {
-                mat[(i, j)] = f(i, j).into();
-            }
-        }
-        mat
-    }
-
-    <span class="doccomment">/// Matrix to `Vec&lt;Vec&lt;f64&gt;&gt;`
-    ///
-    /// To send `Matrix` to `inline-python`
-    </span><span class="kw">pub fn </span>to_vec(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Vec&lt;Vec&lt;f64&gt;&gt; {
-        <span class="kw">let </span><span class="kw-2">mut </span>result = <span class="macro">vec!</span>[<span class="macro">vec!</span>[<span class="number">0f64</span>; <span class="self">self</span>.col]; <span class="self">self</span>.row];
-        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..<span class="self">self</span>.row {
-            result[i] = <span class="self">self</span>.row(i);
-        }
-        result
-    }
-
-    <span class="kw">pub fn </span>to_diag(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Matrix {
-        <span class="macro">assert_eq!</span>(<span class="self">self</span>.row, <span class="self">self</span>.col, <span class="string">"Should be square matrix"</span>);
-        <span class="kw">let </span><span class="kw-2">mut </span>result = matrix(<span class="macro">vec!</span>[<span class="number">0f64</span>; <span class="self">self</span>.row * <span class="self">self</span>.col], <span class="self">self</span>.row, <span class="self">self</span>.col, Row);
-        <span class="kw">let </span>diag = <span class="self">self</span>.diag();
-        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..<span class="self">self</span>.row {
-            result[(i, i)] = diag[i];
-        }
-        result
-    }
-
-    <span class="doccomment">/// Submatrix
-    ///
-    /// # Description
-    /// Return below elements of matrix to new matrix
-    /// 
-    /// $$
-    /// \begin{pmatrix}
-    /// \\ddots &amp; &amp; &amp; &amp; \\\\
-    ///   &amp; start &amp; \\cdots &amp; end.1 &amp; \\\\
-    ///   &amp; \\vdots &amp; \\ddots &amp; \\vdots &amp; \\\\
-    ///   &amp; end.0 &amp; \\cdots &amp; end &amp; \\\\
-    ///   &amp; &amp; &amp; &amp; \\ddots
-    /// \end{pmatrix}
-    /// $$
-    ///
-    /// # Examples
-    /// ```
-    /// extern crate peroxide;
-    /// use peroxide::fuga::*;
-    /// 
-    /// fn main() {
-    ///     let a = ml_matrix("1 2 3;4 5 6;7 8 9");
-    ///     let b = ml_matrix("5 6;8 9");
-    ///     let c = a.submat((1, 1), (2, 2));
-    ///     assert_eq!(b, c);   
-    /// }
-    /// ```
-    </span><span class="kw">pub fn </span>submat(<span class="kw-2">&amp;</span><span class="self">self</span>, start: (usize, usize), end: (usize, usize)) -&gt; Matrix {
-        <span class="kw">let </span>row = end.<span class="number">0 </span>- start.<span class="number">0 </span>+ <span class="number">1</span>;
-        <span class="kw">let </span>col = end.<span class="number">1 </span>- start.<span class="number">1 </span>+ <span class="number">1</span>;
-        <span class="kw">let </span><span class="kw-2">mut </span>result = matrix(<span class="macro">vec!</span>[<span class="number">0f64</span>; row * col], row, col, <span class="self">self</span>.shape);
-        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0 </span>.. row {
-            <span class="kw">for </span>j <span class="kw">in </span><span class="number">0 </span>.. col {
-                result[(i, j)] = <span class="self">self</span>[(start.<span class="number">0 </span>+ i, start.<span class="number">1 </span>+ j)];
-            }
-        }
-        result
-    }
-
-    <span class="doccomment">/// Substitute matrix to specific position
-    ///
-    /// # Description
-    /// Substitute below elements of matrix
-    /// 
-    /// $$
-    /// \begin{pmatrix}
-    /// \\ddots &amp; &amp; &amp; &amp; \\\\
-    ///   &amp; start &amp; \\cdots &amp; end.1 &amp; \\\\
-    ///   &amp; \\vdots &amp; \\ddots &amp; \\vdots &amp; \\\\
-    ///   &amp; end.0 &amp; \\cdots &amp; end &amp; \\\\
-    ///   &amp; &amp; &amp; &amp; \\ddots
-    /// \end{pmatrix}
-    /// $$
-    /// 
-    /// # Examples
-    /// ```
-    /// extern crate peroxide;
-    /// use peroxide::fuga::*;
-    /// 
-    /// fn main() {
-    ///     let mut a = ml_matrix("1 2 3;4 5 6;7 8 9");
-    ///     let b = ml_matrix("1 2;3 4");
-    ///     let c = ml_matrix("1 2 3;4 1 2;7 3 4");
-    ///     a.subs_mat((1,1), (2,2), &amp;b);
-    ///     assert_eq!(a, c);       
-    /// }
-    /// ```
-    </span><span class="kw">pub fn </span>subs_mat(<span class="kw-2">&amp;mut </span><span class="self">self</span>, start: (usize, usize), end: (usize, usize), m: <span class="kw-2">&amp;</span>Matrix) {
-        <span class="kw">let </span>row = end.<span class="number">0 </span>- start.<span class="number">0 </span>+ <span class="number">1</span>;
-        <span class="kw">let </span>col = end.<span class="number">1 </span>- start.<span class="number">1 </span>+ <span class="number">1</span>;
-        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0 </span>.. row {
-            <span class="kw">for </span>j <span class="kw">in </span><span class="number">0 </span>.. col {
-                <span class="self">self</span>[(start.<span class="number">0 </span>+ i, start.<span class="number">1 </span>+ j)] = m[(i, j)];
-            }
-        }
-    }
-
     <span class="doccomment">/// Matrix from series
     ///
     /// # Example
@@ -6302,6 +6283,28 @@
     </span><span class="kw">pub fn </span>from_series(series: <span class="kw-2">&amp;</span>Series, row: usize, col: usize, shape: Shape) -&gt; <span class="self">Self </span>{
         <span class="kw">let </span>v: Vec&lt;f64&gt; = series.to_vec();
         matrix(v, row, col, shape)
+    }
+
+    <span class="doccomment">/// From index operations in parallel
+    </span><span class="attr">#[cfg(feature = <span class="string">"parallel"</span>)]
+    </span><span class="kw">fn </span>par_from_index&lt;F, G&gt;(f: F, size: (usize, usize)) -&gt; Matrix
+    <span class="kw">where
+        </span>F: Fn(usize, usize) -&gt; G + Copy + Send + Sync,
+        G: Into&lt;f64&gt;,
+    {
+        <span class="kw">let </span>row = size.<span class="number">0</span>;
+        <span class="kw">let </span>col = size.<span class="number">1</span>;
+
+        <span class="kw">let </span>data = (<span class="number">0</span>..row)
+            .into_par_iter()
+            .flat_map(|i| {
+                (<span class="number">0</span>..col)
+                    .into_par_iter()
+                    .map(|j| f(i, j).into())
+                    .collect::&lt;Vec&lt;f64&gt;&gt;()
+            })
+            .collect::&lt;Vec&lt;f64&gt;&gt;();
+        matrix(data, row, col, Row)
     }
 }
 
@@ -6396,7 +6399,17 @@
 
 <span class="kw">impl </span>Normed <span class="kw">for </span>Matrix {
     <span class="kw">type </span>UnsignedScalar = f64;
-    <span class="kw">fn </span>norm(<span class="kw-2">&amp;</span><span class="self">self</span>, kind: Norm) -&gt; f64 {
+
+    <span class="doccomment">/// Norm of Matrix
+    ///
+    /// # Example
+    /// ```
+    /// use peroxide::fuga::*;
+    ///
+    /// let a = ml_matrix("1 2;3 4");
+    /// assert_eq!(a.norm(Norm::F), (1f64 + 4f64 + 9f64 + 16f64).sqrt());
+    /// ```
+    </span><span class="kw">fn </span>norm(<span class="kw-2">&amp;</span><span class="self">self</span>, kind: Norm) -&gt; f64 {
         <span class="kw">match </span>kind {
             Norm::F =&gt; {
                 <span class="kw">let </span><span class="kw-2">mut </span>s = <span class="number">0f64</span>;
@@ -6462,6 +6475,82 @@
     }
 }
 
+<span class="attr">#[cfg(feature = <span class="string">"parallel"</span>)]
+</span><span class="kw">impl </span>ParallelNormed <span class="kw">for </span>Matrix {
+    <span class="kw">type </span>UnsignedScalar = f64;
+
+    <span class="doccomment">/// Parallel version of norm
+    ///
+    /// # Example
+    /// ```
+    /// use peroxide::fuga::*;
+    ///
+    /// let a = ml_matrix("1 2;3 4");
+    /// assert_eq!(a.par_norm(Norm::F), (1f64 + 4f64 + 9f64 + 16f64).sqrt());
+    /// ```
+    ///
+    </span><span class="kw">fn </span>par_norm(<span class="kw-2">&amp;</span><span class="self">self</span>, kind: Norm) -&gt; f64 {
+        <span class="kw">match </span>kind {
+            Norm::F =&gt; {
+                <span class="kw">let </span><span class="kw-2">mut </span>s = <span class="number">0f64</span>;
+                <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..<span class="self">self</span>.data.len() {
+                    s += <span class="self">self</span>.data[i].powi(<span class="number">2</span>);
+                }
+                s.sqrt()
+            }
+            Norm::Lpq(p, q) =&gt; {
+                <span class="kw">let </span>s = (<span class="number">0</span>..<span class="self">self</span>.col)
+                    .into_par_iter()
+                    .map(|j| {
+                        <span class="kw">let </span>s_row = (<span class="number">0</span>..<span class="self">self</span>.row)
+                            .into_iter()
+                            .map(|i| <span class="self">self</span>[(i, j)].powi(p <span class="kw">as </span>i32))
+                            .sum::&lt;f64&gt;();
+                        s_row.powf(q / p)
+                    })
+                    .sum::&lt;f64&gt;();
+                s.powf(<span class="number">1f64 </span>/ q)
+            }
+            Norm::L1 =&gt; {
+                <span class="kw">let </span><span class="kw-2">mut </span>m = f64::MIN;
+                <span class="kw">match </span><span class="self">self</span>.shape {
+                    Row =&gt; <span class="self">self</span>.change_shape().norm(Norm::L1),
+                    Col =&gt; {
+                        <span class="kw">for </span>c <span class="kw">in </span><span class="number">0</span>..<span class="self">self</span>.col {
+                            <span class="kw">let </span>s = <span class="self">self</span>.col(c).par_iter().sum();
+                            <span class="kw">if </span>s &gt; m {
+                                m = s;
+                            }
+                        }
+                        m
+                    }
+                }
+            }
+            Norm::LInf =&gt; {
+                <span class="kw">let </span><span class="kw-2">mut </span>m = f64::MIN;
+                <span class="kw">match </span><span class="self">self</span>.shape {
+                    Col =&gt; <span class="self">self</span>.change_shape().norm(Norm::LInf),
+                    Row =&gt; {
+                        <span class="kw">for </span>r <span class="kw">in </span><span class="number">0</span>..<span class="self">self</span>.row {
+                            <span class="kw">let </span>s = <span class="self">self</span>.row(r).iter().sum();
+                            <span class="kw">if </span>s &gt; m {
+                                m = s;
+                            }
+                        }
+                        m
+                    }
+                }
+            }
+            Norm::L2 =&gt; {
+                <span class="kw">let </span>a = <span class="kw-2">&amp;</span><span class="self">self</span>.t() * <span class="self">self</span>;
+                <span class="kw">let </span>eig = eigen(<span class="kw-2">&amp;</span>a, EigenMethod::Jacobi);
+                eig.eigenvalue.norm(Norm::LInf)
+            }
+            Norm::Lp(<span class="kw">_</span>) =&gt; <span class="macro">unimplemented!</span>(),
+        }
+    }
+}
+
 <span class="doccomment">/// Frobenius inner product
 </span><span class="kw">impl </span>InnerProduct <span class="kw">for </span>Matrix {
     <span class="kw">fn </span>dot(<span class="kw-2">&amp;</span><span class="self">self</span>, rhs: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; f64 {
@@ -6473,9 +6562,19 @@
     }
 }
 
-<span class="doccomment">/// TODO: Transpose
+<span class="doccomment">/// Frobenius inner product in parallel
+</span><span class="attr">#[cfg(feature = <span class="string">"parallel"</span>)]
+</span><span class="kw">impl </span>ParallelInnerProduct <span class="kw">for </span>Matrix {
+    <span class="kw">fn </span>par_dot(<span class="kw-2">&amp;</span><span class="self">self</span>, rhs: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; f64 {
+        <span class="kw">if </span><span class="self">self</span>.shape == rhs.shape {
+            <span class="self">self</span>.data.par_dot(<span class="kw-2">&amp;</span>rhs.data)
+        } <span class="kw">else </span>{
+            <span class="self">self</span>.data.par_dot(<span class="kw-2">&amp;</span>rhs.change_shape().data)
+        }
+    }
+}
 
-/// Matrix as Linear operator for Vector
+<span class="doccomment">/// Matrix as Linear operator for Vector
 </span><span class="attr">#[allow(non_snake_case)]
 </span><span class="kw">impl </span>LinearOp&lt;Vec&lt;f64&gt;, Vec&lt;f64&gt;&gt; <span class="kw">for </span>Matrix {
     <span class="kw">fn </span>apply(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span>Vec&lt;f64&gt;) -&gt; Vec&lt;f64&gt; {
@@ -7407,6 +7506,8 @@
 // =============================================================================
 
 </span><span class="kw">impl </span>FPMatrix <span class="kw">for </span>Matrix {
+    <span class="kw">type </span>Scalar = f64;
+
     <span class="kw">fn </span>take_row(<span class="kw-2">&amp;</span><span class="self">self</span>, n: usize) -&gt; <span class="self">Self </span>{
         <span class="kw">if </span>n &gt;= <span class="self">self</span>.row {
             <span class="kw">return </span><span class="self">self</span>.clone();
@@ -7489,12 +7590,10 @@
     /// ```rust
     /// use peroxide::fuga::*;
     ///
-    /// fn main() {
-    ///     let x = ml_matrix("1 2;3 4;5 6");
-    ///     let y = x.col_map(|c| c.fmap(|t| t - c.mean()));
+    /// let x = ml_matrix("1 2;3 4;5 6");
+    /// let y = x.col_map(|c| c.fmap(|t| t - c.mean()));
     ///
-    ///     assert_eq!(y, ml_matrix("-2 -2;0 0;2 2"));
-    /// }
+    /// assert_eq!(y, ml_matrix("-2 -2;0 0;2 2"));
     /// ```
     </span><span class="kw">fn </span>col_map&lt;F&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, f: F) -&gt; Matrix
     <span class="kw">where
@@ -7515,12 +7614,10 @@
     /// ```rust
     /// use peroxide::fuga::*;
     ///
-    /// fn main() {
-    ///     let x = ml_matrix("1 2 3;4 5 6");
-    ///     let y = x.row_map(|r| r.fmap(|t| t - r.mean()));
+    /// let x = ml_matrix("1 2 3;4 5 6");
+    /// let y = x.row_map(|r| r.fmap(|t| t - r.mean()));
     ///
-    ///     assert_eq!(y, ml_matrix("-1 0 1;-1 0 1"));
-    /// }
+    /// assert_eq!(y, ml_matrix("-1 0 1;-1 0 1"));
     /// ```
     </span><span class="kw">fn </span>row_map&lt;F&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, f: F) -&gt; Matrix
     <span class="kw">where
@@ -7617,28 +7714,7 @@
 <span class="comment">// =============================================================================
 // Linear Algebra
 // =============================================================================
-
-</span><span class="doccomment">/// Linear algebra trait
-</span><span class="kw">pub trait </span>LinearAlgebra {
-    <span class="kw">fn </span>back_subs(<span class="kw-2">&amp;</span><span class="self">self</span>, b: <span class="kw-2">&amp;</span>Vec&lt;f64&gt;) -&gt; Vec&lt;f64&gt;;
-    <span class="kw">fn </span>forward_subs(<span class="kw-2">&amp;</span><span class="self">self</span>, b: <span class="kw-2">&amp;</span>Vec&lt;f64&gt;) -&gt; Vec&lt;f64&gt;;
-    <span class="kw">fn </span>lu(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; PQLU;
-    <span class="kw">fn </span>waz(<span class="kw-2">&amp;</span><span class="self">self</span>, d_form: Form) -&gt; <span class="prelude-ty">Option</span>&lt;WAZD&gt;;
-    <span class="kw">fn </span>qr(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; QR;
-    <span class="kw">fn </span>svd(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; SVD;
-    <span class="attr">#[cfg(feature = <span class="string">"O3"</span>)]
-    </span><span class="kw">fn </span>cholesky(<span class="kw-2">&amp;</span><span class="self">self</span>, uplo: UPLO) -&gt; Matrix;
-    <span class="kw">fn </span>rref(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Matrix;
-    <span class="kw">fn </span>det(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; f64;
-    <span class="kw">fn </span>block(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; (Matrix, Matrix, Matrix, Matrix);
-    <span class="kw">fn </span>inv(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Matrix;
-    <span class="kw">fn </span>pseudo_inv(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Matrix;
-    <span class="kw">fn </span>solve(<span class="kw-2">&amp;</span><span class="self">self</span>, b: <span class="kw-2">&amp;</span>Vec&lt;f64&gt;, sk: SolveKind) -&gt; Vec&lt;f64&gt;;
-    <span class="kw">fn </span>solve_mat(<span class="kw-2">&amp;</span><span class="self">self</span>, m: <span class="kw-2">&amp;</span>Matrix, sk: SolveKind) -&gt; Matrix;
-    <span class="kw">fn </span>is_symmetric(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool;
-}
-
-<span class="kw">pub fn </span>diag(n: usize) -&gt; Matrix {
+</span><span class="kw">pub fn </span>diag(n: usize) -&gt; Matrix {
     <span class="kw">let </span><span class="kw-2">mut </span>v: Vec&lt;f64&gt; = <span class="macro">vec!</span>[<span class="number">0f64</span>; n * n];
     <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..n {
         <span class="kw">let </span>idx = i * (n + <span class="number">1</span>);
@@ -7647,30 +7723,7 @@
     matrix(v, n, n, Row)
 }
 
-<span class="doccomment">/// Data structure for Complete Pivoting LU decomposition
-///
-/// # Usage
-/// ```rust
-/// extern crate peroxide;
-/// use peroxide::fuga::*;
-///
-/// let a = ml_matrix("1 2;3 4");
-/// let pqlu = a.lu();
-/// let (p, q, l, u) = pqlu.extract();
-/// // p, q are permutations
-/// // l, u are matrices
-/// l.print(); // lower triangular
-/// u.print(); // upper triangular
-/// ```
-</span><span class="attr">#[derive(Debug, Clone)]
-</span><span class="kw">pub struct </span>PQLU {
-    <span class="kw">pub </span>p: Vec&lt;usize&gt;,
-    <span class="kw">pub </span>q: Vec&lt;usize&gt;,
-    <span class="kw">pub </span>l: Matrix,
-    <span class="kw">pub </span>u: Matrix,
-}
-
-<span class="kw">impl </span>PQLU {
+<span class="kw">impl </span>PQLU&lt;Matrix&gt; {
     <span class="kw">pub fn </span>extract(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; (Vec&lt;usize&gt;, Vec&lt;usize&gt;, Matrix, Matrix) {
         (
             <span class="self">self</span>.p.clone(),
@@ -7717,43 +7770,7 @@
     }
 }
 
-<span class="attr">#[derive(Debug, Clone)]
-</span><span class="kw">pub struct </span>WAZD {
-    <span class="kw">pub </span>w: Matrix,
-    <span class="kw">pub </span>z: Matrix,
-    <span class="kw">pub </span>d: Matrix,
-}
-
-<span class="attr">#[derive(Debug, Copy, Clone)]
-</span><span class="kw">pub enum </span>Form {
-    Diagonal,
-    Identity,
-}
-
-<span class="attr">#[derive(Debug, Clone)]
-</span><span class="kw">pub struct </span>QR {
-    <span class="kw">pub </span>q: Matrix,
-    <span class="kw">pub </span>r: Matrix,
-}
-
-<span class="kw">impl </span>QR {
-    <span class="kw">pub fn </span>q(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>Matrix {
-        <span class="kw-2">&amp;</span><span class="self">self</span>.q
-    }
-
-    <span class="kw">pub fn </span>r(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>Matrix {
-        <span class="kw-2">&amp;</span><span class="self">self</span>.r
-    }
-}
-
-<span class="attr">#[derive(Debug, Clone)]
-</span><span class="kw">pub struct </span>SVD {
-    <span class="kw">pub </span>s: Vec&lt;f64&gt;,
-    <span class="kw">pub </span>u: Matrix,
-    <span class="kw">pub </span>vt: Matrix,
-}
-
-<span class="kw">impl </span>SVD {
+<span class="kw">impl </span>SVD&lt;Matrix&gt; {
     <span class="kw">pub fn </span>u(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>Matrix {
         <span class="kw-2">&amp;</span><span class="self">self</span>.u
     }
@@ -7764,7 +7781,7 @@
 
     <span class="kw">pub fn </span>s_mat(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Matrix {
         <span class="kw">let </span><span class="kw-2">mut </span>mat = zeros(<span class="self">self</span>.u.col, <span class="self">self</span>.vt.row);
-        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0 </span>.. mat.row.min(mat.col) {
+        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..mat.row.min(mat.col) {
             mat[(i, i)] = <span class="self">self</span>.s[i];
         }
         mat
@@ -7807,23 +7824,13 @@
             }
         }
 
-        SVD {
-            s,
-            u,
-            vt,
-        }
+        SVD { s, u, vt }
     }
 }
 
-<span class="attr">#[derive(Debug, Copy, Clone)]
-</span><span class="kw">pub enum </span>SolveKind {
-    LU,
-    WAZ,
-}
-
-<span class="kw">impl </span>LinearAlgebra <span class="kw">for </span>Matrix {
+<span class="kw">impl </span>LinearAlgebra&lt;Matrix&gt; <span class="kw">for </span>Matrix {
     <span class="doccomment">/// Backward Substitution for Upper Triangular
-    </span><span class="kw">fn </span>back_subs(<span class="kw-2">&amp;</span><span class="self">self</span>, b: <span class="kw-2">&amp;</span>Vec&lt;f64&gt;) -&gt; Vec&lt;f64&gt; {
+    </span><span class="kw">fn </span>back_subs(<span class="kw-2">&amp;</span><span class="self">self</span>, b: <span class="kw-2">&amp;</span>[f64]) -&gt; Vec&lt;f64&gt; {
         <span class="kw">let </span>n = <span class="self">self</span>.col;
         <span class="kw">let </span><span class="kw-2">mut </span>y = <span class="macro">vec!</span>[<span class="number">0f64</span>; n];
         y[n - <span class="number">1</span>] = b[n - <span class="number">1</span>] / <span class="self">self</span>[(n - <span class="number">1</span>, n - <span class="number">1</span>)];
@@ -7838,7 +7845,7 @@
     }
 
     <span class="doccomment">/// Forward substitution for Lower Triangular
-    </span><span class="kw">fn </span>forward_subs(<span class="kw-2">&amp;</span><span class="self">self</span>, b: <span class="kw-2">&amp;</span>Vec&lt;f64&gt;) -&gt; Vec&lt;f64&gt; {
+    </span><span class="kw">fn </span>forward_subs(<span class="kw-2">&amp;</span><span class="self">self</span>, b: <span class="kw-2">&amp;</span>[f64]) -&gt; Vec&lt;f64&gt; {
         <span class="kw">let </span>n = <span class="self">self</span>.col;
         <span class="kw">let </span><span class="kw-2">mut </span>y = <span class="macro">vec!</span>[<span class="number">0f64</span>; n];
         y[<span class="number">0</span>] = b[<span class="number">0</span>] / <span class="self">self</span>[(<span class="number">0</span>, <span class="number">0</span>)];
@@ -7860,27 +7867,23 @@
     ///
     /// # Caution
     /// It returns `Option&lt;PQLU&gt;` - You should unwrap to obtain real value.
-    /// `PQLU` has four field - `p`, `q`, `l`, `u`.
-    /// `p`, `q` are permutations.
-    /// `l`, `u` are matrices.
+    /// - `PQLU` has four field - `p`, `q`, `l`, `u`.
+    ///   - `p`, `q` are permutations.
+    ///   - `l`, `u` are matrices.
     ///
     /// # Examples
     /// ```
-    /// #[macro_use]
-    /// extern crate peroxide;
     /// use peroxide::fuga::*;
     ///
-    /// fn main() {
-    ///     let a = matrix(vec![1,2,3,4], 2, 2, Row);
-    ///     let pqlu = a.lu();
-    ///     let (p,q,l,u) = (pqlu.p, pqlu.q, pqlu.l, pqlu.u);
-    ///     assert_eq!(p, vec![1]); // swap 0 &amp; 1 (Row)
-    ///     assert_eq!(q, vec![1]); // swap 0 &amp; 1 (Col)
-    ///     assert_eq!(l, matrix(c!(1,0,0.5,1),2,2,Row));
-    ///     assert_eq!(u, matrix(c!(4,3,0,-0.5),2,2,Row));
-    /// }
+    /// let a = matrix(vec![1,2,3,4], 2, 2, Row);
+    /// let pqlu = a.lu();
+    /// let (p,q,l,u) = (pqlu.p, pqlu.q, pqlu.l, pqlu.u);
+    /// assert_eq!(p, vec![1]); // swap 0 &amp; 1 (Row)
+    /// assert_eq!(q, vec![1]); // swap 0 &amp; 1 (Col)
+    /// assert_eq!(l, matrix(vec![1.0,0.0,0.5,1.0],2,2,Row));
+    /// assert_eq!(u, matrix(vec![4.0,3.0,0.0,-0.5],2,2,Row));
     /// ```
-    </span><span class="kw">fn </span>lu(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; PQLU {
+    </span><span class="kw">fn </span>lu(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; PQLU&lt;Matrix&gt; {
         <span class="macro">assert_eq!</span>(<span class="self">self</span>.col, <span class="self">self</span>.row);
         <span class="kw">let </span>n = <span class="self">self</span>.row;
         <span class="kw">let </span>len: usize = n * n;
@@ -7912,7 +7915,7 @@
         PQLU { p, q, l, u }
     }
 
-    <span class="kw">fn </span>waz(<span class="kw-2">&amp;</span><span class="self">self</span>, d_form: Form) -&gt; <span class="prelude-ty">Option</span>&lt;WAZD&gt; {
+    <span class="kw">fn </span>waz(<span class="kw-2">&amp;</span><span class="self">self</span>, d_form: Form) -&gt; <span class="prelude-ty">Option</span>&lt;WAZD&lt;Matrix&gt;&gt; {
         <span class="kw">match </span>d_form {
             Form::Diagonal =&gt; {
                 <span class="kw">let </span>n = <span class="self">self</span>.row;
@@ -7980,24 +7983,21 @@
     ///
     /// # Example
     /// ```
-    /// extern crate peroxide;
     /// use peroxide::fuga::*;
     ///
-    /// fn main() {
-    ///     let a = ml_matrix("12 -51 4;6 167 -68; -4 24 -41");
-    ///     let qr = a.qr();
-    ///     let r = ml_matrix("-14 -21 14; 0 -175 70; 0 0 -35");
-    ///     #[cfg(feature="O3")]
-    ///     {
-    ///         assert_eq!(r, qr.r);
-    ///     }
-    ///     qr.r.print();
+    /// let a = ml_matrix("12 -51 4;6 167 -68; -4 24 -41");
+    /// let qr = a.qr();
+    /// let r = ml_matrix("-14 -21 14; 0 -175 70; 0 0 -35");
+    /// #[cfg(feature="O3")]
+    /// {
+    ///     assert_eq!(r, qr.r);
     /// }
+    /// qr.r.print();
     /// ```
     </span><span class="attr">#[allow(non_snake_case)]
-    </span><span class="kw">fn </span>qr(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; QR {
+    </span><span class="kw">fn </span>qr(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; QR&lt;Matrix&gt; {
         <span class="kw">match </span>() {
-            <span class="attr">#[cfg(feature=<span class="string">"O3"</span>)]
+            <span class="attr">#[cfg(feature = <span class="string">"O3"</span>)]
             </span>() =&gt; {
                 <span class="kw">let </span>opt_dgeqrf = lapack_dgeqrf(<span class="self">self</span>);
                 <span class="kw">match </span>opt_dgeqrf {
@@ -8005,10 +8005,7 @@
                     <span class="prelude-val">Some</span>(dgeqrf) =&gt; {
                         <span class="kw">let </span>q = dgeqrf.get_Q();
                         <span class="kw">let </span>r = dgeqrf.get_R();
-                        QR {
-                            q,
-                            r
-                        }
+                        QR { q, r }
                     }
                 }
             }
@@ -8040,22 +8037,19 @@
     ///
     /// # Examples
     /// ```
-    /// extern crate peroxide;
     /// use peroxide::fuga::*;
     ///
-    /// fn main() {
-    ///     let a = ml_matrix("3 2 2;2 3 -2");
-    ///     #[cfg(feature="O3")]
-    ///     {
-    ///         let svd = a.svd();
-    ///         assert!(eq_vec(&amp;vec![5f64, 3f64], &amp;svd.s, 1e-7));
-    ///     }
-    ///     a.print();
+    /// let a = ml_matrix("3 2 2;2 3 -2");
+    /// #[cfg(feature="O3")]
+    /// {
+    ///     let svd = a.svd();
+    ///     assert!(eq_vec(&amp;vec![5f64, 3f64], &amp;svd.s, 1e-7));
     /// }
+    /// a.print();
     /// ```
-    </span><span class="kw">fn </span>svd(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; SVD {
+    </span><span class="kw">fn </span>svd(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; SVD&lt;Matrix&gt; {
         <span class="kw">match </span>() {
-            <span class="attr">#[cfg(feature=<span class="string">"O3"</span>)]
+            <span class="attr">#[cfg(feature = <span class="string">"O3"</span>)]
             </span>() =&gt; {
                 <span class="kw">let </span>opt_dgesvd = lapack_dgesvd(<span class="self">self</span>);
                 <span class="kw">match </span>opt_dgesvd {
@@ -8064,14 +8058,12 @@
                         SVD_STATUS::Diverge(i) =&gt; {
                             <span class="macro">panic!</span>(<span class="string">"Divergent occurs in SVD - {} iterations"</span>, i)
                         }
-                        SVD_STATUS::Success =&gt; {
-                            SVD {
-                                s: dgesvd.s,
-                                u: dgesvd.u,
-                                vt: dgesvd.vt,
-                            }
-                        }
-                    }
+                        SVD_STATUS::Success =&gt; SVD {
+                            s: dgesvd.s,
+                            u: dgesvd.u,
+                            vt: dgesvd.vt,
+                        },
+                    },
                 }
             }
             <span class="kw">_ </span>=&gt; {
@@ -8084,21 +8076,18 @@
     ///
     /// # Examples
     /// ```
-    /// extern crate peroxide;
     /// use peroxide::fuga::*;
     ///
-    /// fn main() {
-    ///     let a = ml_matrix("1 2;2 5");
-    ///     #[cfg(feature = "O3")]
-    ///     {
-    ///         let u = a.cholesky(Upper);
-    ///         let l = a.cholesky(Lower);
+    /// let a = ml_matrix("1 2;2 5");
+    /// #[cfg(feature = "O3")]
+    /// {
+    ///     let u = a.cholesky(Upper);
+    ///     let l = a.cholesky(Lower);
     ///
-    ///         assert_eq!(u, ml_matrix("1 2;0 1"));
-    ///         assert_eq!(l, ml_matrix("1 0;2 1"));
-    ///     }
-    ///     a.print();
+    ///     assert_eq!(u, ml_matrix("1 2;0 1"));
+    ///     assert_eq!(l, ml_matrix("1 0;2 1"));
     /// }
+    /// a.print();
     /// ```
     </span><span class="attr">#[cfg(feature = <span class="string">"O3"</span>)]
     </span><span class="kw">fn </span>cholesky(<span class="kw-2">&amp;</span><span class="self">self</span>, uplo: UPLO) -&gt; Matrix {
@@ -8311,7 +8300,9 @@
                     <span class="prelude-val">None </span>=&gt; <span class="macro">panic!</span>(<span class="string">"Singular matrix (opt_dgrf)"</span>),
                     <span class="prelude-val">Some</span>(dgrf) =&gt; <span class="kw">match </span>dgrf.status {
                         LAPACK_STATUS::NonSingular =&gt; lapack_dgetri(<span class="kw-2">&amp;</span>dgrf).unwrap(),
-                        LAPACK_STATUS::Singular =&gt; <span class="macro">panic!</span>(<span class="string">"Singular matrix (LAPACK_STATUS Singular)"</span>),
+                        LAPACK_STATUS::Singular =&gt; {
+                            <span class="macro">panic!</span>(<span class="string">"Singular matrix (LAPACK_STATUS Singular)"</span>)
+                        }
                     },
                 }
             }
@@ -8346,13 +8337,13 @@
     /// ```
     </span><span class="kw">fn </span>pseudo_inv(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
         <span class="kw">match </span>() {
-            <span class="attr">#[cfg(feature=<span class="string">"O3"</span>)]
+            <span class="attr">#[cfg(feature = <span class="string">"O3"</span>)]
             </span>() =&gt; {
                 <span class="kw">let </span>svd = <span class="self">self</span>.svd();
                 <span class="kw">let </span>row = svd.vt.row;
                 <span class="kw">let </span>col = svd.u.row;
                 <span class="kw">let </span><span class="kw-2">mut </span>sp = zeros(row, col);
-                <span class="kw">for </span>i <span class="kw">in </span><span class="number">0 </span>.. row.min(col) {
+                <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..row.min(col) {
                     sp[(i, i)] = <span class="number">1f64 </span>/ svd.s[i];
                 }
                 svd.vt.t() * sp * svd.u.t()
@@ -8376,7 +8367,7 @@
     ///
     /// * Biswa Nath Datta, *Numerical Linear Algebra and Applications, Second Edition*
     /// * Ke Chen, *Matrix Preconditioning Techniques and Applications*, Cambridge Monographs on Applied and Computational Mathematics
-    </span><span class="kw">fn </span>solve(<span class="kw-2">&amp;</span><span class="self">self</span>, b: <span class="kw-2">&amp;</span>Vec&lt;f64&gt;, sk: SolveKind) -&gt; Vec&lt;f64&gt; {
+    </span><span class="kw">fn </span>solve(<span class="kw-2">&amp;</span><span class="self">self</span>, b: <span class="kw-2">&amp;</span>[f64], sk: SolveKind) -&gt; Vec&lt;f64&gt; {
         <span class="kw">match </span>sk {
             <span class="attr">#[cfg(feature = <span class="string">"O3"</span>)]
             </span>SolveKind::LU =&gt; {
@@ -8386,6 +8377,7 @@
                     <span class="prelude-val">Some</span>(dgrf) =&gt; <span class="kw">match </span>dgrf.status {
                         LAPACK_STATUS::Singular =&gt; <span class="macro">panic!</span>(<span class="string">"Try solve for Singluar matrix"</span>),
                         LAPACK_STATUS::NonSingular =&gt; {
+                            <span class="kw">let </span>b = b.to_vec();
                             lapack_dgetrs(<span class="kw-2">&amp;</span>dgrf, <span class="kw-2">&amp;</span>(b.into())).unwrap().into()
                         }
                     },
@@ -8395,7 +8387,7 @@
             </span>SolveKind::LU =&gt; {
                 <span class="kw">let </span>lu = <span class="self">self</span>.lu();
                 <span class="kw">let </span>(p, q, l, u) = lu.extract();
-                <span class="kw">let </span><span class="kw-2">mut </span>v = b.clone();
+                <span class="kw">let </span><span class="kw-2">mut </span>v = b.to_vec();
                 v.swap_with_perm(<span class="kw-2">&amp;</span>p.into_iter().enumerate().collect());
                 <span class="kw">let </span>z = l.forward_subs(<span class="kw-2">&amp;</span>v);
                 <span class="kw">let </span><span class="kw-2">mut </span>y = u.back_subs(<span class="kw-2">&amp;</span>z);
@@ -8407,7 +8399,7 @@
                     <span class="prelude-val">None </span>=&gt; <span class="macro">panic!</span>(<span class="string">"Can't solve by WAZ with Singular matrix!"</span>),
                     <span class="prelude-val">Some</span>(obj) =&gt; obj,
                 };
-                <span class="kw">let </span>x = <span class="kw-2">&amp;</span>wazd.w.t() * b;
+                <span class="kw">let </span>x = <span class="kw-2">&amp;</span>wazd.w.t() * <span class="kw-2">&amp;</span>b.to_vec();
                 <span class="kw">let </span>x = <span class="kw-2">&amp;</span>wazd.z * <span class="kw-2">&amp;</span>x;
                 x
             }
@@ -8466,9 +8458,9 @@
             <span class="kw">return </span><span class="bool-val">false</span>;
         }
 
-        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0 </span>.. <span class="self">self</span>.row {
-            <span class="kw">for </span>j <span class="kw">in </span>i .. <span class="self">self</span>.col {
-                <span class="kw">if </span>!nearly_eq(<span class="self">self</span>[(i,j)], <span class="self">self</span>[(j,i)]) {
+        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..<span class="self">self</span>.row {
+            <span class="kw">for </span>j <span class="kw">in </span>i..<span class="self">self</span>.col {
+                <span class="kw">if </span>!nearly_eq(<span class="self">self</span>[(i, j)], <span class="self">self</span>[(j, i)]) {
                     <span class="kw">return </span><span class="bool-val">false</span>;
                 }
             }
@@ -8477,12 +8469,9 @@
     </span>}
 }
 
-<span class="attr">#[allow(non_snake_case)]
-</span><span class="kw">pub fn </span>solve(A: <span class="kw-2">&amp;</span>Matrix, b: <span class="kw-2">&amp;</span>Matrix, sk: SolveKind) -&gt; Matrix {
-    A.solve_mat(b, sk)
-}
-
 <span class="kw">impl </span>MutMatrix <span class="kw">for </span>Matrix {
+    <span class="kw">type </span>Scalar = f64;
+
     <span class="kw">unsafe fn </span>col_mut(<span class="kw-2">&amp;mut </span><span class="self">self</span>, idx: usize) -&gt; Vec&lt;<span class="kw-2">*mut </span>f64&gt; {
         <span class="macro">assert!</span>(idx &lt; <span class="self">self</span>.col, <span class="string">"Index out of range"</span>);
         <span class="kw">match </span><span class="self">self</span>.shape {
@@ -8567,7 +8556,6 @@
         <span class="self">self</span>.mul(m.inv())
     }
 }
-
 
 <span class="kw">impl </span>ExpLogOps <span class="kw">for </span>Matrix {
     <span class="kw">type </span>Float = f64;
@@ -9090,13 +9078,6 @@
     Failed(i32),
 }
 
-<span class="attr">#[allow(non_camel_case_types)]
-#[derive(Debug, Copy, Clone, Eq, PartialEq)]
-</span><span class="kw">pub enum </span>UPLO {
-    Upper,
-    Lower
-}
-
 <span class="doccomment">/// Temporary data structure from `dgetrf`
 </span><span class="attr">#[derive(Debug, Clone)]
 </span><span class="kw">pub struct </span>DGETRF {
@@ -9125,7 +9106,7 @@
 </span><span class="kw">pub struct </span>DPOTRF {
     <span class="kw">pub </span>fact_mat: Matrix,
     <span class="kw">pub </span>uplo: UPLO,
-    <span class="kw">pub </span>status: POSITIVE_STATUS
+    <span class="kw">pub </span>status: POSITIVE_STATUS,
 }
 
 <span class="comment">///// Temporary data structure from `dgeev`
@@ -9319,7 +9300,22 @@
 
             <span class="comment">// Workspace query
             </span><span class="kw">unsafe </span>{
-                dgesvd(jobu, jobvt, m, n, <span class="kw-2">&amp;mut </span>A.data, lda, <span class="kw-2">&amp;mut </span>s, <span class="kw-2">&amp;mut </span>u, ldu, <span class="kw-2">&amp;mut </span>vt, ldvt, <span class="kw-2">&amp;mut </span>work, lwork, <span class="kw-2">&amp;mut </span>info);
+                dgesvd(
+                    jobu,
+                    jobvt,
+                    m,
+                    n,
+                    <span class="kw-2">&amp;mut </span>A.data,
+                    lda,
+                    <span class="kw-2">&amp;mut </span>s,
+                    <span class="kw-2">&amp;mut </span>u,
+                    ldu,
+                    <span class="kw-2">&amp;mut </span>vt,
+                    ldvt,
+                    <span class="kw-2">&amp;mut </span>work,
+                    lwork,
+                    <span class="kw-2">&amp;mut </span>info,
+                );
             }
 
             <span class="kw">let </span>optimal_lwork = work[<span class="number">0</span>] <span class="kw">as </span>usize;
@@ -9378,35 +9374,23 @@
             <span class="kw">let </span><span class="kw-2">mut </span>info = <span class="number">0i32</span>;
             <span class="kw">let </span>uplo = <span class="kw">match </span>UPLO {
                 UPLO::Upper =&gt; <span class="string">b'U'</span>,
-                UPLO::Lower =&gt; <span class="string">b'L'
-            </span>};
+                UPLO::Lower =&gt; <span class="string">b'L'</span>,
+            };
 
-            <span class="kw">unsafe </span>{
-                dpotrf(
-                    uplo,
-                    N,
-                    <span class="kw-2">&amp;mut </span>A.data,
-                    lda,
-                    <span class="kw-2">&amp;mut </span>info,
-                )
-            }
+            <span class="kw">unsafe </span>{ dpotrf(uplo, N, <span class="kw-2">&amp;mut </span>A.data, lda, <span class="kw-2">&amp;mut </span>info) }
 
             <span class="kw">if </span>info == <span class="number">0 </span>{
-                <span class="prelude-val">Some</span>(
-                    DPOTRF {
-                        fact_mat: matrix(A.data, mat.row, mat.col, Col),
-                        uplo: UPLO,
-                        status: POSITIVE_STATUS::Success
-                    }
-                )
+                <span class="prelude-val">Some</span>(DPOTRF {
+                    fact_mat: matrix(A.data, mat.row, mat.col, Col),
+                    uplo: UPLO,
+                    status: POSITIVE_STATUS::Success,
+                })
             } <span class="kw">else if </span>info &gt; <span class="number">0 </span>{
-                <span class="prelude-val">Some</span>(
-                    DPOTRF {
-                        fact_mat: matrix(A.data, mat.row, mat.col, Col),
-                        uplo: UPLO,
-                        status: POSITIVE_STATUS::Failed(info)
-                    }
-                )
+                <span class="prelude-val">Some</span>(DPOTRF {
+                    fact_mat: matrix(A.data, mat.row, mat.col, Col),
+                    uplo: UPLO,
+                    status: POSITIVE_STATUS::Failed(info),
+                })
             } <span class="kw">else </span>{
                 <span class="prelude-val">None
             </span>}
@@ -9520,8 +9504,8 @@
         <span class="kw">let </span>mat = <span class="kw-2">&amp;</span><span class="self">self</span>.fact_mat;
         <span class="kw">let </span>n = mat.col;
         <span class="kw">let </span><span class="kw-2">mut </span>result = matrix(<span class="macro">vec!</span>[<span class="number">0f64</span>; n.pow(<span class="number">2</span>)], n, n, mat.shape);
-        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0 </span>.. n {
-            <span class="kw">for </span>j <span class="kw">in </span>i .. n {
+        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..n {
+            <span class="kw">for </span>j <span class="kw">in </span>i..n {
                 result[(i, j)] = mat[(i, j)];
             }
         }
@@ -9537,8 +9521,8 @@
         <span class="kw">let </span>n = mat.col;
         <span class="kw">let </span><span class="kw-2">mut </span>result = matrix(<span class="macro">vec!</span>[<span class="number">0f64</span>; n.pow(<span class="number">2</span>)], n, n, mat.shape);
 
-        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0 </span>.. n {
-            <span class="kw">for </span>j <span class="kw">in </span><span class="number">0 </span>.. i+<span class="number">1 </span>{
+        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..n {
+            <span class="kw">for </span>j <span class="kw">in </span><span class="number">0</span>..i + <span class="number">1 </span>{
                 result[(i, j)] = mat[(i, j)];
             }
         }

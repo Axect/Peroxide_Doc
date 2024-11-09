@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/special/function.rs`."><title>function.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-46f98efaafac5295.ttf.woff2,FiraSans-Regular-018c141bf0843ffd.woff2,FiraSans-Medium-8f9a781e4970d388.woff2,SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2,SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-dd39b87e5fcfba68.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="peroxide" data-themes="" data-resource-suffix="" data-rustdoc-version="1.80.0 (051478957 2024-07-21)" data-channel="1.80.0" data-search-js="search-d52510db62a78183.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../static.files/storage-118b08c4c78b968e.js"></script><script defer src="../../../static.files/src-script-e66d777a5a92e9b2.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-20a3ad099b048cf2.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-df360f571f6edeae.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/special/function.rs`."><title>function.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-46f98efaafac5295.ttf.woff2,FiraSans-Regular-018c141bf0843ffd.woff2,FiraSans-Medium-8f9a781e4970d388.woff2,SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2,SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-492a78a4a87dcc01.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="peroxide" data-themes="" data-resource-suffix="" data-rustdoc-version="1.82.0 (f6e511eec 2024-10-15)" data-channel="1.82.0" data-search-js="search-a99f1315e7cc5121.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../static.files/storage-118b08c4c78b968e.js"></script><script defer src="../../../static.files/src-script-e66d777a5a92e9b2.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-921df33f47b8780c.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-3b12f09e550e0385.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js"                  integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js"    integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
 <script>
@@ -180,8 +180,6 @@
 <a href="#164" id="164">164</a>
 <a href="#165" id="165">165</a>
 <a href="#166" id="166">166</a>
-<a href="#167" id="167">167</a>
-<a href="#168" id="168">168</a>
 </pre></div><pre class="rust"><code><span class="kw">use </span><span class="kw">crate</span>::special::lanczos::{gamma_approx, ln_gamma_approx};
 <span class="kw">use </span>std::f64::consts::PI;
 
@@ -306,40 +304,38 @@
 ///
 /// Returns [`NAN`](f64::NAN) if the given input is smaller than -1/e (≈ -0.36787944117144233).
 ///
-/// Use [`Precise`](LambertWAccuracyMode::Precise) for 50 bits of accuracy and the [`Simple`](LambertWAccuracyMode::Simple) mode 
+/// Use [`Precise`](LambertWAccuracyMode::Precise) for 50 bits of accuracy and the [`Simple`](LambertWAccuracyMode::Simple) mode
 /// for only 24 bits, but with faster execution time.
-/// 
-/// Wrapper of the `lambert_w_0` and `sp_lambert_w_0` functions of the `lambert_w` crate.
+///
+/// Wrapper of the `lambert_w_0` and `sp_lambert_w_0` functions of the `puruspe` crate.
 ///
 /// # Reference
 ///
 /// [Toshio Fukushima, Precise and fast computation of Lambert W function by piecewise minimax rational function approximation with variable transformation](https://www.researchgate.net/publication/346309410_Precise_and_fast_computation_of_Lambert_W_function_by_piecewise_minimax_rational_function_approximation_with_variable_transformation)
 </span><span class="kw">pub fn </span>lambert_w0(z: f64, mode: LambertWAccuracyMode) -&gt; f64 {
     <span class="kw">match </span>mode {
-        LambertWAccuracyMode::Precise =&gt; lambert_w::lambert_w_0(z),
-        LambertWAccuracyMode::Simple =&gt; lambert_w::sp_lambert_w_0(z),
+        LambertWAccuracyMode::Precise =&gt; puruspe::lambert_w0(z),
+        LambertWAccuracyMode::Simple =&gt; puruspe::sp_lambert_w0(z),
     }
-    .unwrap_or(f64::NAN)
 }
 
 <span class="doccomment">/// The secondary branch of the Lambert W function, W_-1(`z`).
 ///
 /// Returns [`NAN`](f64::NAN) if the given input is positive or smaller than -1/e (≈ -0.36787944117144233).
 ///
-/// Use [`Precise`](LambertWAccuracyMode::Precise) for 50 bits of accuracy and the [`Simple`](LambertWAccuracyMode::Simple) mode 
+/// Use [`Precise`](LambertWAccuracyMode::Precise) for 50 bits of accuracy and the [`Simple`](LambertWAccuracyMode::Simple) mode
 /// for only 24 bits, but with faster execution time.
-/// 
-/// Wrapper of the `lambert_w_m1` and `sp_lambert_w_m1` functions of the `lambert_w` crate.
-/// 
+///
+/// Wrapper of the `lambert_w_m1` and `sp_lambert_w_m1` functions of the `puruspe` crate.
+///
 /// # Reference
 ///
 /// [Toshio Fukushima, Precise and fast computation of Lambert W function by piecewise minimax rational function approximation with variable transformation](https://www.researchgate.net/publication/346309410_Precise_and_fast_computation_of_Lambert_W_function_by_piecewise_minimax_rational_function_approximation_with_variable_transformation)
 </span><span class="kw">pub fn </span>lambert_wm1(z: f64, mode: LambertWAccuracyMode) -&gt; f64 {
     <span class="kw">match </span>mode {
-        LambertWAccuracyMode::Precise =&gt; lambert_w::lambert_w_m1(z),
-        LambertWAccuracyMode::Simple =&gt; lambert_w::sp_lambert_w_m1(z),
+        LambertWAccuracyMode::Precise =&gt; puruspe::lambert_wm1(z),
+        LambertWAccuracyMode::Simple =&gt; puruspe::sp_lambert_wm1(z),
     }
-    .unwrap_or(f64::NAN)
 }
 
 <span class="doccomment">/// Decides the accuracy mode of the Lambert W functions.

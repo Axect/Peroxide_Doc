@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/complex/vector.rs`."><title>vector.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-46f98efaafac5295.ttf.woff2,FiraSans-Regular-018c141bf0843ffd.woff2,FiraSans-Medium-8f9a781e4970d388.woff2,SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2,SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-dd39b87e5fcfba68.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="peroxide" data-themes="" data-resource-suffix="" data-rustdoc-version="1.80.0 (051478957 2024-07-21)" data-channel="1.80.0" data-search-js="search-d52510db62a78183.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../static.files/storage-118b08c4c78b968e.js"></script><script defer src="../../../static.files/src-script-e66d777a5a92e9b2.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-20a3ad099b048cf2.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-df360f571f6edeae.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/complex/vector.rs`."><title>vector.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-46f98efaafac5295.ttf.woff2,FiraSans-Regular-018c141bf0843ffd.woff2,FiraSans-Medium-8f9a781e4970d388.woff2,SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2,SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-492a78a4a87dcc01.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="peroxide" data-themes="" data-resource-suffix="" data-rustdoc-version="1.82.0 (f6e511eec 2024-10-15)" data-channel="1.82.0" data-search-js="search-a99f1315e7cc5121.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../static.files/storage-118b08c4c78b968e.js"></script><script defer src="../../../static.files/src-script-e66d777a5a92e9b2.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-921df33f47b8780c.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-3b12f09e550e0385.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js"                  integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js"    integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
 <script>
@@ -144,10 +144,55 @@
 <a href="#128" id="128">128</a>
 <a href="#129" id="129">129</a>
 <a href="#130" id="130">130</a>
-</pre></div><pre class="rust"><code><span class="kw">use </span>num_complex::Complex;
+<a href="#131" id="131">131</a>
+<a href="#132" id="132">132</a>
+<a href="#133" id="133">133</a>
+<a href="#134" id="134">134</a>
+<a href="#135" id="135">135</a>
+<a href="#136" id="136">136</a>
+<a href="#137" id="137">137</a>
+<a href="#138" id="138">138</a>
+<a href="#139" id="139">139</a>
+<a href="#140" id="140">140</a>
+<a href="#141" id="141">141</a>
+<a href="#142" id="142">142</a>
+<a href="#143" id="143">143</a>
+<a href="#144" id="144">144</a>
+<a href="#145" id="145">145</a>
+<a href="#146" id="146">146</a>
+<a href="#147" id="147">147</a>
+<a href="#148" id="148">148</a>
+<a href="#149" id="149">149</a>
+<a href="#150" id="150">150</a>
+<a href="#151" id="151">151</a>
+<a href="#152" id="152">152</a>
+<a href="#153" id="153">153</a>
+<a href="#154" id="154">154</a>
+<a href="#155" id="155">155</a>
+<a href="#156" id="156">156</a>
+<a href="#157" id="157">157</a>
+<a href="#158" id="158">158</a>
+<a href="#159" id="159">159</a>
+<a href="#160" id="160">160</a>
+<a href="#161" id="161">161</a>
+<a href="#162" id="162">162</a>
+<a href="#163" id="163">163</a>
+<a href="#164" id="164">164</a>
+<a href="#165" id="165">165</a>
+<a href="#166" id="166">166</a>
+<a href="#167" id="167">167</a>
+<a href="#168" id="168">168</a>
+<a href="#169" id="169">169</a>
+<a href="#170" id="170">170</a>
+<a href="#171" id="171">171</a>
+<a href="#172" id="172">172</a>
+<a href="#173" id="173">173</a>
+<a href="#174" id="174">174</a>
+</pre></div><pre class="rust"><code><span class="kw">use </span><span class="kw">crate</span>::fuga::Algorithm;
 <span class="kw">use </span><span class="kw">crate</span>::traits::fp::FPVector;
-<span class="kw">use </span><span class="kw">crate</span>::traits::math::{Vector, Normed, Norm, InnerProduct};
+<span class="kw">use </span><span class="kw">crate</span>::traits::math::{InnerProduct, Norm, Normed, Vector};
 <span class="kw">use </span><span class="kw">crate</span>::traits::sugar::VecOps;
+<span class="kw">use </span>num_complex::Complex;
 
 <span class="kw">impl </span>Vector <span class="kw">for </span>Complex&lt;f64&gt; {
     <span class="kw">type </span>Scalar = <span class="self">Self</span>;
@@ -177,7 +222,8 @@
 
     <span class="kw">fn </span>normalize(<span class="kw-2">&amp;</span><span class="self">self</span>, kind: Norm) -&gt; <span class="self">Self
     </span><span class="kw">where
-            </span><span class="self">Self</span>: Sized {
+        </span><span class="self">Self</span>: Sized,
+    {
         <span class="kw">let </span>n = <span class="self">self</span>.norm(kind);
         <span class="self">self </span>/ n
     }
@@ -194,26 +240,33 @@
 
     <span class="kw">fn </span>fmap&lt;F&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, f: F) -&gt; <span class="self">Self
     </span><span class="kw">where
-            </span>F: Fn(<span class="self">Self</span>::Scalar) -&gt; <span class="self">Self</span>::Scalar {
+        </span>F: Fn(<span class="self">Self</span>::Scalar) -&gt; <span class="self">Self</span>::Scalar,
+    {
         <span class="self">self</span>.iter().map(|<span class="kw-2">&amp;</span>x| f(x)).collect()
     }
 
     <span class="kw">fn </span>zip_with&lt;F&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, f: F, other: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; <span class="self">Self
     </span><span class="kw">where
-            </span>F: Fn(<span class="self">Self</span>::Scalar, <span class="self">Self</span>::Scalar) -&gt; <span class="self">Self</span>::Scalar {
-        <span class="self">self</span>.iter().zip(other.iter()).map(|(<span class="kw-2">&amp;</span>x, <span class="kw-2">&amp;</span>y)| f(x,y)).collect()
+        </span>F: Fn(<span class="self">Self</span>::Scalar, <span class="self">Self</span>::Scalar) -&gt; <span class="self">Self</span>::Scalar,
+    {
+        <span class="self">self</span>.iter()
+            .zip(other.iter())
+            .map(|(<span class="kw-2">&amp;</span>x, <span class="kw-2">&amp;</span>y)| f(x, y))
+            .collect()
     }
 
     <span class="kw">fn </span>reduce&lt;F, T&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, init: T, f: F) -&gt; <span class="self">Self</span>::Scalar
     <span class="kw">where
-            </span>F: Fn(<span class="self">Self</span>::Scalar, <span class="self">Self</span>::Scalar) -&gt; <span class="self">Self</span>::Scalar,
-            T: Into&lt;<span class="self">Self</span>::Scalar&gt; {
-        <span class="self">self</span>.iter().fold(init.into(), |x, <span class="kw-2">&amp;</span>y| f(x,y))
+        </span>F: Fn(<span class="self">Self</span>::Scalar, <span class="self">Self</span>::Scalar) -&gt; <span class="self">Self</span>::Scalar,
+        T: Into&lt;<span class="self">Self</span>::Scalar&gt;,
+    {
+        <span class="self">self</span>.iter().fold(init.into(), |x, <span class="kw-2">&amp;</span>y| f(x, y))
     }
 
     <span class="kw">fn </span>filter&lt;F&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, f: F) -&gt; <span class="self">Self
     </span><span class="kw">where
-            </span>F: Fn(<span class="self">Self</span>::Scalar) -&gt; bool {
+        </span>F: Fn(<span class="self">Self</span>::Scalar) -&gt; bool,
+    {
         <span class="self">self</span>.iter().filter(|<span class="kw-2">&amp;</span>x| f(<span class="kw-2">*</span>x)).cloned().collect()
     }
 
@@ -256,13 +309,14 @@
     <span class="kw">fn </span>norm(<span class="kw-2">&amp;</span><span class="self">self</span>, kind: Norm) -&gt; <span class="self">Self</span>::UnsignedScalar {
         <span class="kw">match </span>kind {
             Norm::L1 =&gt; <span class="self">self</span>.iter().map(|x| Complex::&lt;f64&gt;::norm(<span class="kw-2">*</span>x).abs()).sum(),
-            <span class="kw">_ </span>=&gt; <span class="macro">unimplemented!</span>()
+            <span class="kw">_ </span>=&gt; <span class="macro">unimplemented!</span>(),
         }
     }
 
-    <span class="kw">fn </span>normalize(<span class="kw-2">&amp;</span><span class="self">self</span>, kind: Norm) -&gt; <span class="self">Self
+    <span class="kw">fn </span>normalize(<span class="kw-2">&amp;</span><span class="self">self</span>, _kind: Norm) -&gt; <span class="self">Self
     </span><span class="kw">where
-            </span><span class="self">Self</span>: Sized {
+        </span><span class="self">Self</span>: Sized,
+    {
         <span class="macro">unimplemented!</span>()
     }
 }
@@ -274,4 +328,38 @@
 }
 
 <span class="kw">impl </span>VecOps <span class="kw">for </span>Vec&lt;Complex&lt;f64&gt;&gt; {}
+
+<span class="kw">impl </span>Algorithm <span class="kw">for </span>Vec&lt;Complex&lt;f64&gt;&gt; {
+    <span class="kw">type </span>Scalar = Complex&lt;f64&gt;;
+
+    <span class="kw">fn </span>rank(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Vec&lt;usize&gt; {
+        <span class="macro">unimplemented!</span>()
+    }
+
+    <span class="kw">fn </span>sign(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Complex&lt;f64&gt; {
+        <span class="macro">unimplemented!</span>()
+    }
+
+    <span class="kw">fn </span>arg_max(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; usize {
+        <span class="macro">unimplemented!</span>()
+    }
+
+    <span class="kw">fn </span>arg_min(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; usize {
+        <span class="macro">unimplemented!</span>()
+    }
+
+    <span class="kw">fn </span>max(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Complex&lt;f64&gt; {
+        <span class="macro">unimplemented!</span>()
+    }
+
+    <span class="kw">fn </span>min(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Complex&lt;f64&gt; {
+        <span class="macro">unimplemented!</span>()
+    }
+
+    <span class="kw">fn </span>swap_with_perm(<span class="kw-2">&amp;mut </span><span class="self">self</span>, p: <span class="kw-2">&amp;</span>Vec&lt;(usize, usize)&gt;) {
+        <span class="kw">for </span>(i, j) <span class="kw">in </span>p.iter() {
+            <span class="self">self</span>.swap(<span class="kw-2">*</span>i, <span class="kw-2">*</span>j);
+        }
+    }
+}
 </code></pre></div></section></main></body></html>

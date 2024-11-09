@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"mod":["vector"],"type":["C64"]};
+window.SIDEBAR_ITEMS = {"mod":["integral","matrix","vector"],"type":["C64"]};

@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"enum":["Integral"],"fn":["gauss_kronrod_quadrature","gauss_legendre_quadrature","integrate","kronrod_quadrature","newton_cotes_quadrature"]};
+window.SIDEBAR_ITEMS = {"enum":["Integral"],"fn":["gauss_kronrod_quadrature","gauss_legendre_quadrature","integrate","kronrod_quadrature","newton_cotes_quadrature"],"trait":["GKIntegrable","GLKIntegrable","NCIntegrable"]};

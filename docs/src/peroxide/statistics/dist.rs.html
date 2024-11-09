@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/statistics/dist.rs`."><title>dist.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-46f98efaafac5295.ttf.woff2,FiraSans-Regular-018c141bf0843ffd.woff2,FiraSans-Medium-8f9a781e4970d388.woff2,SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2,SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-dd39b87e5fcfba68.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="peroxide" data-themes="" data-resource-suffix="" data-rustdoc-version="1.80.0 (051478957 2024-07-21)" data-channel="1.80.0" data-search-js="search-d52510db62a78183.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../static.files/storage-118b08c4c78b968e.js"></script><script defer src="../../../static.files/src-script-e66d777a5a92e9b2.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-20a3ad099b048cf2.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-df360f571f6edeae.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/statistics/dist.rs`."><title>dist.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-46f98efaafac5295.ttf.woff2,FiraSans-Regular-018c141bf0843ffd.woff2,FiraSans-Medium-8f9a781e4970d388.woff2,SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2,SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-492a78a4a87dcc01.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="peroxide" data-themes="" data-resource-suffix="" data-rustdoc-version="1.82.0 (f6e511eec 2024-10-15)" data-channel="1.82.0" data-search-js="search-a99f1315e7cc5121.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../static.files/storage-118b08c4c78b968e.js"></script><script defer src="../../../static.files/src-script-e66d777a5a92e9b2.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-921df33f47b8780c.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-3b12f09e550e0385.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js"                  integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js"    integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
 <script>
@@ -952,6 +952,27 @@
 <a href="#936" id="936">936</a>
 <a href="#937" id="937">937</a>
 <a href="#938" id="938">938</a>
+<a href="#939" id="939">939</a>
+<a href="#940" id="940">940</a>
+<a href="#941" id="941">941</a>
+<a href="#942" id="942">942</a>
+<a href="#943" id="943">943</a>
+<a href="#944" id="944">944</a>
+<a href="#945" id="945">945</a>
+<a href="#946" id="946">946</a>
+<a href="#947" id="947">947</a>
+<a href="#948" id="948">948</a>
+<a href="#949" id="949">949</a>
+<a href="#950" id="950">950</a>
+<a href="#951" id="951">951</a>
+<a href="#952" id="952">952</a>
+<a href="#953" id="953">953</a>
+<a href="#954" id="954">954</a>
+<a href="#955" id="955">955</a>
+<a href="#956" id="956">956</a>
+<a href="#957" id="957">957</a>
+<a href="#958" id="958">958</a>
+<a href="#959" id="959">959</a>
 </pre></div><pre class="rust"><code><span class="doccomment">//! Probabilistic distributions
 //!
 //! ## Probability Distribution
@@ -1188,15 +1209,15 @@
 <span class="kw">use </span><span class="self">self</span>::rand::prelude::<span class="kw-2">*</span>;
 <span class="kw">pub use </span><span class="self">self</span>::OPDist::<span class="kw-2">*</span>;
 <span class="kw">pub use </span><span class="self">self</span>::TPDist::<span class="kw-2">*</span>;
-<span class="kw">use </span><span class="kw">crate</span>::traits::fp::FPVector;
 <span class="kw">use </span><span class="kw">crate</span>::special::function::<span class="kw-2">*</span>;
+<span class="kw">use </span><span class="kw">crate</span>::traits::fp::FPVector;
 <span class="comment">//use statistics::rand::ziggurat;
-</span><span class="kw">use </span><span class="kw">crate</span>::statistics::{ops::C, stat::Statistics};
+</span><span class="kw">use </span><span class="self">self</span>::WeightedUniformError::<span class="kw-2">*</span>;
+<span class="kw">use </span><span class="kw">crate</span>::statistics::{ops::C, stat::Statistics};
 <span class="kw">use </span><span class="kw">crate</span>::util::non_macro::{linspace, seq};
 <span class="kw">use </span><span class="kw">crate</span>::util::useful::{auto_zip, find_interval};
+<span class="kw">use </span>anyhow::{bail, <span class="prelude-ty">Result</span>};
 <span class="kw">use </span>std::f64::consts::E;
-<span class="kw">use </span><span class="self">self</span>::WeightedUniformError::<span class="kw-2">*</span>;
-<span class="kw">use </span>anyhow::{<span class="prelude-ty">Result</span>, bail};
 
 <span class="doccomment">/// One parameter distribution
 ///
@@ -1225,7 +1246,7 @@
 <span class="kw">pub struct </span>WeightedUniform&lt;T: PartialOrd + SampleUniform + Copy + Into&lt;f64&gt;&gt; {
     weights: Vec&lt;T&gt;,
     sum: T,
-    intervals: Vec&lt;(T, T)&gt;
+    intervals: Vec&lt;(T, T)&gt;,
 }
 
 <span class="attr">#[derive(Debug, Clone, Copy)]
@@ -1240,7 +1261,9 @@
     <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>std::fmt::Formatter&lt;<span class="lifetime">'_</span>&gt;) -&gt; std::fmt::Result {
         <span class="kw">match </span><span class="self">self </span>{
             WeightedUniformError::AllZeroWeightError =&gt; <span class="macro">write!</span>(f, <span class="string">"all weights are zero"</span>),
-            WeightedUniformError::LengthMismatchError =&gt; <span class="macro">write!</span>(f, <span class="string">"weights and intervals have different length"</span>),
+            WeightedUniformError::LengthMismatchError =&gt; {
+                <span class="macro">write!</span>(f, <span class="string">"weights and intervals have different length"</span>)
+            }
             WeightedUniformError::NoNonZeroIntervalError =&gt; <span class="macro">write!</span>(f, <span class="string">"no non-zero interval found"</span>),
             WeightedUniformError::EmptyWeightError =&gt; <span class="macro">write!</span>(f, <span class="string">"weights are empty"</span>),
         }
@@ -1249,11 +1272,11 @@
 
 <span class="kw">impl </span>WeightedUniform&lt;f64&gt; {
     <span class="doccomment">/// Create a new weighted uniform distribution
-    /// 
+    ///
     /// # Examples
     /// ```
     /// use peroxide::fuga::*;
-    /// 
+    ///
     /// fn main() -&gt; Result&lt;(), Box&lt;dyn Error&gt;&gt; {
     ///     let weights = vec![1f64, 3f64, 0f64, 2f64];
     ///     let intervals = vec![0f64, 1f64, 2f64, 4f64, 5f64];
@@ -1290,32 +1313,31 @@
             }
         }
 
-        <span class="kw">let </span>sum = weights.iter()
+        <span class="kw">let </span>sum = weights
+            .iter()
             .zip(intervals.iter())
             .fold(<span class="number">0f64</span>, |acc, (w, (a, b))| acc + w * (b - a));
 
-        <span class="prelude-val">Ok</span>(
-            WeightedUniform {
-                weights,
-                sum,
-                intervals
-            }
-        )
+        <span class="prelude-val">Ok</span>(WeightedUniform {
+            weights,
+            sum,
+            intervals,
+        })
     }
 
     <span class="doccomment">/// Create WeightedUniform from max pooling
-    /// 
+    ///
     /// # Examples
     /// ```
     /// use peroxide::fuga::*;
-    /// 
+    ///
     /// fn main() -&gt; Result&lt;(), Box&lt;dyn Error&gt;&gt; {
     ///     let w = WeightedUniform::from_max_pool_1d(f, (-2f64, 3f64), 10, 1e-3)?;
     ///     w.weights().print();
     ///
     ///     Ok(())
     /// }
-    /// 
+    ///
     /// fn f(x: f64) -&gt; f64 {
     ///     if x.abs() &lt; 1f64 {
     ///         1f64 - x.abs()
@@ -1325,40 +1347,39 @@
     /// }
     /// ```
     </span><span class="kw">pub fn </span>from_max_pool_1d&lt;F&gt;(f: F, (a, b): (f64, f64), n: usize, eps: f64) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>&gt;
-    <span class="kw">where </span>F: Fn(f64) -&gt; f64 + Copy {
+    <span class="kw">where
+        </span>F: Fn(f64) -&gt; f64 + Copy,
+    {
         <span class="comment">// Find non-zero intervals
         </span><span class="kw">let </span><span class="kw-2">mut </span>a = a;
         <span class="kw">let </span><span class="kw-2">mut </span>b = b;
         <span class="kw">let </span>trial = seq(a, b, eps);
-        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0 </span>.. trial.len() {
+        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..trial.len() {
             <span class="kw">let </span>x = trial[i];
             <span class="kw">if </span>f(x) &gt; <span class="number">0f64 </span>{
-                a = <span class="kw">if </span>i &gt; <span class="number">0 </span>{ trial[i-<span class="number">1</span>] } <span class="kw">else </span>{ x };
+                a = <span class="kw">if </span>i &gt; <span class="number">0 </span>{ trial[i - <span class="number">1</span>] } <span class="kw">else </span>{ x };
                 <span class="kw">break</span>;
             }
         }
-        <span class="kw">for </span>i <span class="kw">in </span>(<span class="number">0 </span>.. trial.len()).rev() {
+        <span class="kw">for </span>i <span class="kw">in </span>(<span class="number">0</span>..trial.len()).rev() {
             <span class="kw">let </span>x = trial[i];
             <span class="kw">if </span>f(x) &gt; <span class="number">0f64 </span>{
-                b = <span class="kw">if </span>i &lt; trial.len() - <span class="number">1 </span>{ trial[i+<span class="number">1</span>] } <span class="kw">else </span>{ x };
+                b = <span class="kw">if </span>i &lt; trial.len() - <span class="number">1 </span>{ trial[i + <span class="number">1</span>] } <span class="kw">else </span>{ x };
                 <span class="kw">break</span>;
             }
         }
         <span class="kw">if </span>a &gt;= b {
             <span class="macro">bail!</span>(NoNonZeroIntervalError);
         }
-        <span class="kw">let </span>domain = linspace(a, b, n+<span class="number">1</span>);
+        <span class="kw">let </span>domain = linspace(a, b, n + <span class="number">1</span>);
 
         <span class="comment">// Find intervals
         </span><span class="kw">let </span>intervals = auto_zip(<span class="kw-2">&amp;</span>domain);
 
         <span class="comment">// Find weights
-        </span><span class="kw">let </span>weights: Vec&lt;f64&gt; = intervals.iter()
-            .map(
-                |(a, b)| {
-                    seq(<span class="kw-2">*</span>a, <span class="kw-2">*</span>b+eps, eps).reduce(<span class="number">0f64</span>, |acc, x| acc.max(f(x)))
-                }
-            )
+        </span><span class="kw">let </span>weights: Vec&lt;f64&gt; = intervals
+            .iter()
+            .map(|(a, b)| seq(<span class="kw-2">*</span>a, <span class="kw-2">*</span>b + eps, eps).reduce(<span class="number">0f64</span>, |acc, x| acc.max(f(x))))
             .collect();
 
         <span class="self">Self</span>::new(weights, domain)
@@ -1373,11 +1394,19 @@
     }
 
     <span class="kw">pub fn </span>domain_linspace(<span class="kw-2">&amp;</span><span class="self">self</span>, n: usize) -&gt; Vec&lt;f64&gt; {
-        linspace(<span class="self">self</span>.intervals[<span class="number">0</span>].<span class="number">0</span>, <span class="self">self</span>.intervals[<span class="self">self</span>.intervals.len()-<span class="number">1</span>].<span class="number">1</span>, n)
+        linspace(
+            <span class="self">self</span>.intervals[<span class="number">0</span>].<span class="number">0</span>,
+            <span class="self">self</span>.intervals[<span class="self">self</span>.intervals.len() - <span class="number">1</span>].<span class="number">1</span>,
+            n,
+        )
     }
 
     <span class="kw">pub fn </span>domain_seq(<span class="kw-2">&amp;</span><span class="self">self</span>, step: f64) -&gt; Vec&lt;f64&gt; {
-        seq(<span class="self">self</span>.intervals[<span class="number">0</span>].<span class="number">0</span>, <span class="self">self</span>.intervals[<span class="self">self</span>.intervals.len()-<span class="number">1</span>].<span class="number">1</span>, step)
+        seq(
+            <span class="self">self</span>.intervals[<span class="number">0</span>].<span class="number">0</span>,
+            <span class="self">self</span>.intervals[<span class="self">self</span>.intervals.len() - <span class="number">1</span>].<span class="number">1</span>,
+            step,
+        )
     }
 
     <span class="kw">pub fn </span>sum(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; f64 {
@@ -1387,15 +1416,19 @@
     <span class="kw">pub fn </span>update_weights(<span class="kw-2">&amp;mut </span><span class="self">self</span>, weights: Vec&lt;f64&gt;) {
         <span class="macro">assert_eq!</span>(<span class="self">self</span>.intervals.len(), weights.len());
         <span class="self">self</span>.weights = weights;
-        <span class="self">self</span>.sum = <span class="self">self</span>.weights.iter()
+        <span class="self">self</span>.sum = <span class="self">self
+            </span>.weights
+            .iter()
             .zip(<span class="self">self</span>.intervals.iter())
             .fold(<span class="number">0f64</span>, |acc, (w, (a, b))| acc + w * (b - a));
     }
 
     <span class="kw">pub fn </span>update_intervals(<span class="kw-2">&amp;mut </span><span class="self">self</span>, intervals: Vec&lt;f64&gt;) {
-        <span class="macro">assert_eq!</span>(<span class="self">self</span>.weights.len()+<span class="number">1</span>, intervals.len());
+        <span class="macro">assert_eq!</span>(<span class="self">self</span>.weights.len() + <span class="number">1</span>, intervals.len());
         <span class="self">self</span>.intervals = auto_zip(<span class="kw-2">&amp;</span>intervals);
-        <span class="self">self</span>.sum = <span class="self">self</span>.weights.iter()
+        <span class="self">self</span>.sum = <span class="self">self
+            </span>.weights
+            .iter()
             .zip(<span class="self">self</span>.intervals.iter())
             .fold(<span class="number">0f64</span>, |acc, (w, (a, b))| acc + w * (b - a));
     }
@@ -1447,7 +1480,11 @@
 
     <span class="kw">fn </span>params(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Parameter {
         <span class="kw">let </span>weights = <span class="self">self</span>.weights.iter().map(|x| (<span class="kw-2">*</span>x).into()).collect();
-        <span class="kw">let </span>intervals = <span class="self">self</span>.intervals.iter().map(|(x, y)| ((<span class="kw-2">*</span>x).into(), (<span class="kw-2">*</span>y).into())).collect();
+        <span class="kw">let </span>intervals = <span class="self">self
+            </span>.intervals
+            .iter()
+            .map(|(x, y)| ((<span class="kw-2">*</span>x).into(), (<span class="kw-2">*</span>y).into()))
+            .collect();
         (weights, intervals)
     }
 }
@@ -1573,11 +1610,7 @@
 
             Binomial(num, mu) =&gt; {
                 <span class="kw">let </span>binom = rand_distr::Binomial::new(<span class="kw-2">*</span>num <span class="kw">as </span>u64, (<span class="kw-2">*</span>mu).into()).unwrap();
-                binom
-                    .sample_iter(rng)
-                    .take(n)
-                    .map(|t| t <span class="kw">as </span>f64)
-                    .collect()
+                binom.sample_iter(rng).take(n).map(|t| t <span class="kw">as </span>f64).collect()
             }
 
             Normal(m, s) =&gt; {
@@ -1743,10 +1776,12 @@
         <span class="kw">let </span>ics: Vec&lt;usize&gt; = w.sample_iter(<span class="kw-2">&amp;mut </span>rng_clip).take(n).collect();
         <span class="kw-2">*</span>rng = rng_clip;
 
-        ics.into_iter().map(|idx| {
-            <span class="kw">let </span>(l, r) = <span class="self">self</span>.intervals[idx];
-            rng.gen_range(l ..=r)
-        }).collect::&lt;Vec&lt;f64&gt;&gt;()
+        ics.into_iter()
+            .map(|idx| {
+                <span class="kw">let </span>(l, r) = <span class="self">self</span>.intervals[idx];
+                rng.gen_range(l..=r)
+            })
+            .collect::&lt;Vec&lt;f64&gt;&gt;()
     }
 
     <span class="kw">fn </span>pdf&lt;S: PartialOrd + SampleUniform + Copy + Into&lt;f64&gt;&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, x: S) -&gt; f64 {
@@ -1766,11 +1801,11 @@
             <span class="kw">return </span><span class="number">1f64</span>;
         }
         <span class="kw">let </span>idx = find_interval(<span class="self">self</span>.intervals(), x);
-        <span class="self">self</span>.weights[<span class="number">0 </span>..=idx].iter()
-            .zip(<span class="self">self</span>.intervals[<span class="number">0 </span>..=idx].iter())
-            .fold(<span class="number">0f64</span>, |acc, (w, (a, b))| {
-                acc + w * (b - a)
-            }) / <span class="self">self</span>.sum
+        <span class="self">self</span>.weights[<span class="number">0</span>..=idx]
+            .iter()
+            .zip(<span class="self">self</span>.intervals[<span class="number">0</span>..=idx].iter())
+            .fold(<span class="number">0f64</span>, |acc, (w, (a, b))| acc + w * (b - a))
+            / <span class="self">self</span>.sum
     }
 }
 
@@ -1866,16 +1901,23 @@
     <span class="kw">type </span>Value = f64;
 
     <span class="kw">fn </span>mean(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Value {
-        <span class="self">self</span>.intervals().iter().zip(<span class="self">self</span>.weights().iter())
-            .map(|((l, r), w)| (r.powi(<span class="number">2</span>)-l.powi(<span class="number">2</span>))/<span class="number">2f64 </span>* w)
-            .sum::&lt;f64&gt;() / <span class="self">self</span>.sum
+        <span class="self">self</span>.intervals()
+            .iter()
+            .zip(<span class="self">self</span>.weights().iter())
+            .map(|((l, r), w)| (r.powi(<span class="number">2</span>) - l.powi(<span class="number">2</span>)) / <span class="number">2f64 </span>* w)
+            .sum::&lt;f64&gt;()
+            / <span class="self">self</span>.sum
     }
 
     <span class="kw">fn </span>var(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Value {
         <span class="kw">let </span>mean = <span class="self">self</span>.mean();
-        <span class="self">self</span>.intervals().iter().zip(<span class="self">self</span>.weights().iter())
+        <span class="self">self</span>.intervals()
+            .iter()
+            .zip(<span class="self">self</span>.weights().iter())
             .map(|((l, r), w)| w * (r.powi(<span class="number">3</span>) - l.powi(<span class="number">3</span>)) / <span class="number">3f64</span>)
-            .sum::&lt;f64&gt;() / <span class="self">self</span>.sum - mean * mean
+            .sum::&lt;f64&gt;()
+            / <span class="self">self</span>.sum
+            - mean * mean
     }
 
     <span class="kw">fn </span>sd(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Value {

@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/prelude/mod.rs`."><title>mod.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-46f98efaafac5295.ttf.woff2,FiraSans-Regular-018c141bf0843ffd.woff2,FiraSans-Medium-8f9a781e4970d388.woff2,SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2,SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-dd39b87e5fcfba68.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="peroxide" data-themes="" data-resource-suffix="" data-rustdoc-version="1.80.0 (051478957 2024-07-21)" data-channel="1.80.0" data-search-js="search-d52510db62a78183.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../static.files/storage-118b08c4c78b968e.js"></script><script defer src="../../../static.files/src-script-e66d777a5a92e9b2.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-20a3ad099b048cf2.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-df360f571f6edeae.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/prelude/mod.rs`."><title>mod.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-46f98efaafac5295.ttf.woff2,FiraSans-Regular-018c141bf0843ffd.woff2,FiraSans-Medium-8f9a781e4970d388.woff2,SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2,SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-492a78a4a87dcc01.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="peroxide" data-themes="" data-resource-suffix="" data-rustdoc-version="1.82.0 (f6e511eec 2024-10-15)" data-channel="1.82.0" data-search-js="search-a99f1315e7cc5121.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../static.files/storage-118b08c4c78b968e.js"></script><script defer src="../../../static.files/src-script-e66d777a5a92e9b2.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-921df33f47b8780c.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-3b12f09e550e0385.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js"                  integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js"    integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
 <script>
@@ -238,6 +238,13 @@
 <a href="#222" id="222">222</a>
 <a href="#223" id="223">223</a>
 <a href="#224" id="224">224</a>
+<a href="#225" id="225">225</a>
+<a href="#226" id="226">226</a>
+<a href="#227" id="227">227</a>
+<a href="#228" id="228">228</a>
+<a href="#229" id="229">229</a>
+<a href="#230" id="230">230</a>
+<a href="#231" id="231">231</a>
 </pre></div><pre class="rust"><code><span class="doccomment">//! Do not disturbed. Just use.
 //!
 //! # Philosophy
@@ -385,7 +392,7 @@
 </span><span class="attr">#[allow(unused_imports)]
 </span><span class="kw">pub use </span><span class="kw">crate</span>::macros::{julia_macro::<span class="kw-2">*</span>, matlab_macro::<span class="kw-2">*</span>, r_macro::<span class="kw-2">*</span>};
 
-<span class="kw">pub use </span>peroxide_ad::{ad_function, ad_closure};
+<span class="kw">pub use </span>peroxide_ad::{ad_closure, ad_function};
 
 <span class="kw">pub mod </span>simpler;
 
@@ -393,36 +400,41 @@
     fp::{FPMatrix, FPVector},
     general::Algorithm,
     math::{InnerProduct, LinearOp, MatrixProduct, Vector, VectorProduct},
+    matrix::{MatrixTrait, PQLU, QR, WAZD},
     mutable::{MutFP, MutMatrix},
     num::Real,
     pointer::{MatrixPtr, Oxide, Redox, RedoxCommon},
-    sugar::{Scalable, ScalableMut, VecOps, ConvToMat},
+    sugar::{ConvToMat, Scalable, ScalableMut, VecOps},
 };
 
-<span class="kw">pub use </span>peroxide_num::{ExpLogOps, TrigOps, PowOps};
+<span class="kw">pub use </span>peroxide_num::{ExpLogOps, PowOps, TrigOps};
 
 <span class="kw">pub use </span>simpler::SimpleNorm;
 
+<span class="attr">#[cfg(feature = <span class="string">"csv"</span>)]
+</span><span class="kw">pub use </span><span class="kw">crate</span>::structure::dataframe::WithCSV;
 <span class="attr">#[allow(unused_imports)]
 </span><span class="kw">pub use </span><span class="kw">crate</span>::structure::{
-    ad::<span class="kw-2">*</span>,
     ad::AD::<span class="kw-2">*</span>,
+    ad::<span class="kw-2">*</span>,
+    dataframe::{
+        DType, DTypeArray, DTypeValue, DataFrame, Scalar, Series, TypedScalar, TypedVector,
+    },
     matrix::{
         combine, diag, gemm, gemv, gen_householder, inv_l, inv_u, matrix, ml_matrix, py_matrix,
-        r_matrix, Col, Matrix, Row, Shape, PQLU, QR, WAZD,
+        r_matrix, Col, Matrix, Row, Shape,
     },
-    polynomial::{Polynomial,poly,Calculus,lagrange_polynomial,legendre_polynomial},
+    polynomial::{lagrange_polynomial, legendre_polynomial, poly, Calculus, Polynomial},
     vector::<span class="kw-2">*</span>,
-    dataframe::{
-        DataFrame, DType, DTypeArray, DTypeValue, Series, Scalar, TypedScalar, TypedVector
-    },
-    <span class="comment">//complex::C64,
-</span>};
-<span class="attr">#[cfg(feature=<span class="string">"csv"</span>)]
-</span><span class="kw">pub use </span><span class="kw">crate</span>::structure::dataframe::WithCSV;
+};
 
-<span class="attr">#[cfg(feature=<span class="string">"nc"</span>)]
+<span class="attr">#[cfg(feature = <span class="string">"nc"</span>)]
 </span><span class="kw">pub use </span><span class="kw">crate</span>::structure::dataframe::WithNetCDF;
+
+<span class="attr">#[cfg(feature = <span class="string">"complex"</span>)]
+#[allow(ambiguous_glob_reexports)]
+#[allow(unused_imports)]
+</span><span class="kw">pub use </span><span class="kw">crate</span>::complex::{integral::<span class="kw-2">*</span>, matrix::<span class="kw-2">*</span>, vector::<span class="kw-2">*</span>, C64};
 
 <span class="kw">pub use </span>simpler::{solve, SimplerLinearAlgebra};
 
@@ -434,8 +446,8 @@
 
 <span class="attr">#[allow(unused_imports)]
 </span><span class="kw">pub use </span><span class="kw">crate</span>::special::function::{
-    beta, erf, erfc, gamma, gaussian, inc_beta, inc_gamma, inv_erf, inv_erfc, inv_inc_gamma,
-    inv_inc_beta, ln_gamma, phi, poch,
+    beta, erf, erfc, gamma, gaussian, inc_beta, inc_gamma, inv_erf, inv_erfc, inv_inc_beta,
+    inv_inc_gamma, ln_gamma, phi, poch,
 };
 
 <span class="attr">#[allow(unused_imports)]
@@ -445,19 +457,21 @@
     ode::<span class="kw-2">*</span>,
     optimize::<span class="kw-2">*</span>,
     root::<span class="kw-2">*</span>,
-    spline::{cubic_spline, CubicSpline, CubicHermiteSpline, Spline},
+    spline::{cubic_spline, CubicHermiteSpline, CubicSpline, Spline},
     utils::<span class="kw-2">*</span>,
 };
 
-<span class="kw">pub use </span>simpler::{eigen, integrate, chebyshev_polynomial, cubic_hermite_spline, lambert_w0, lambert_wm1};
+<span class="kw">pub use </span>simpler::{
+    chebyshev_polynomial, cubic_hermite_spline, eigen, integrate, lambert_w0, lambert_wm1,
+};
 
 <span class="attr">#[allow(unused_imports)]
 </span><span class="kw">pub use </span><span class="kw">crate</span>::statistics::stat::Metric::<span class="kw-2">*</span>;
 
-<span class="attr">#[cfg(feature=<span class="string">"parquet"</span>)]
+<span class="attr">#[cfg(feature = <span class="string">"parquet"</span>)]
 </span><span class="kw">pub use </span>simpler::SimpleParquet;
 
-<span class="attr">#[cfg(feature=<span class="string">"plot"</span>)]
+<span class="attr">#[cfg(feature = <span class="string">"plot"</span>)]
 </span><span class="kw">pub use </span><span class="kw">crate</span>::util::plot::<span class="kw-2">*</span>;
 
 <span class="kw">pub use </span>anyhow;

@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/numerical/root.rs`."><title>root.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-46f98efaafac5295.ttf.woff2,FiraSans-Regular-018c141bf0843ffd.woff2,FiraSans-Medium-8f9a781e4970d388.woff2,SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2,SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-dd39b87e5fcfba68.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="peroxide" data-themes="" data-resource-suffix="" data-rustdoc-version="1.80.0 (051478957 2024-07-21)" data-channel="1.80.0" data-search-js="search-d52510db62a78183.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../static.files/storage-118b08c4c78b968e.js"></script><script defer src="../../../static.files/src-script-e66d777a5a92e9b2.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-20a3ad099b048cf2.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-df360f571f6edeae.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/numerical/root.rs`."><title>root.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-46f98efaafac5295.ttf.woff2,FiraSans-Regular-018c141bf0843ffd.woff2,FiraSans-Medium-8f9a781e4970d388.woff2,SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2,SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-492a78a4a87dcc01.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="peroxide" data-themes="" data-resource-suffix="" data-rustdoc-version="1.82.0 (f6e511eec 2024-10-15)" data-channel="1.82.0" data-search-js="search-a99f1315e7cc5121.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../static.files/storage-118b08c4c78b968e.js"></script><script defer src="../../../static.files/src-script-e66d777a5a92e9b2.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-921df33f47b8780c.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-3b12f09e550e0385.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js"                  integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js"    integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
 <script>
@@ -897,6 +897,10 @@
 <a href="#881" id="881">881</a>
 <a href="#882" id="882">882</a>
 <a href="#883" id="883">883</a>
+<a href="#884" id="884">884</a>
+<a href="#885" id="885">885</a>
+<a href="#886" id="886">886</a>
+<a href="#887" id="887">887</a>
 </pre></div><pre class="rust"><code><span class="doccomment">//! # Root Finding Methods
 //!
 //! This module provides a collection of root finding algorithms for solving nonlinear equations.
@@ -965,26 +969,26 @@
 //! extern crate peroxide;
 //! use peroxide::fuga::*;
 //! use anyhow::Result;
-//! 
+//!
 //! fn main() -&gt; Result&lt;()&gt; {
 //!     let root_bisect = bisection!(f, (0.0, 2.0), 100, 1e-6)?;
 //!     let root_newton = newton!(f, 0.0, 100, 1e-6)?;
 //!     let root_false_pos = false_position!(f, (0.0, 2.0), 100, 1e-6)?;
 //!     let root_secant = secant!(f, (0.0, 2.0), 100, 1e-6)?;
-//! 
+//!
 //!     println!("root_bisect: {}", root_bisect);
 //!     println!("root_newton: {}", root_newton);
 //!     println!("root_false_pos: {}", root_false_pos);
 //!     println!("root_secant: {}", root_secant);
-//! 
+//!
 //!     assert!(f(root_bisect).abs() &lt; 1e-6);
 //!     assert!(f(root_newton).abs() &lt; 1e-6);
 //!     assert!(f(root_false_pos).abs() &lt; 1e-6);
 //!     assert!(f(root_secant).abs() &lt; 1e-6);
-//! 
+//!
 //!     Ok(())
 //! }
-//! 
+//!
 //! #[ad_function]
 //! fn f(x: f64) -&gt; f64 {
 //!     (x - 1f64).powi(3)
@@ -1111,9 +1115,9 @@
 //! The `Cosine` struct implements the `RootFindingProblem` trait for the `f64` initial guess type.
 //! The initial guess is set to `0.0`, which is a point where the derivative of the cosine function is 0.
 //! This leads to the `NewtonMethod` returning a `RootError::ZeroDerivative` error, which is handled in the example.
-</span><span class="kw">use </span>anyhow::{<span class="prelude-ty">Result</span>, bail};
+</span><span class="kw">use </span>anyhow::{bail, <span class="prelude-ty">Result</span>};
 
-<span class="kw">use </span><span class="kw">crate</span>::traits::math::{Normed, Norm, LinearOp};
+<span class="kw">use </span><span class="kw">crate</span>::traits::math::{LinearOp, Norm, Normed};
 <span class="kw">use </span><span class="kw">crate</span>::traits::sugar::{ConvToMat, VecOps};
 <span class="kw">use </span><span class="kw">crate</span>::util::non_macro::zeros;
 
@@ -1146,12 +1150,15 @@
         }
 
         <span class="kw">let </span>problem = BisectionProblem { f: <span class="macro-nonterminal">$f </span>};
-        <span class="kw">let </span>bisection = BisectionMethod { max_iter: <span class="macro-nonterminal">$max_iter</span>, tol: <span class="macro-nonterminal">$tol </span>};
+        <span class="kw">let </span>bisection = BisectionMethod {
+            max_iter: <span class="macro-nonterminal">$max_iter</span>,
+            tol: <span class="macro-nonterminal">$tol</span>,
+        };
         <span class="kw">match </span>bisection.find(<span class="kw-2">&amp;</span>problem) {
             <span class="prelude-val">Ok</span>(root) =&gt; <span class="prelude-val">Ok</span>(root[<span class="number">0</span>]),
             <span class="prelude-val">Err</span>(e) =&gt; <span class="prelude-val">Err</span>(e),
         }
-    }}
+    }};
 }
 
 <span class="doccomment">/// High level macro for newton (using Automatic differentiation)
@@ -1183,7 +1190,7 @@
 
         <span class="kw">impl </span>RootFindingProblem&lt;<span class="number">1</span>, <span class="number">1</span>, f64&gt; <span class="kw">for </span>NewtonProblem {
             <span class="kw">fn </span>initial_guess(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; f64 {
-                <span class="macro-nonterminal">$x 
+                <span class="macro-nonterminal">$x
             </span>}
 
             <span class="kw">fn </span>function(<span class="kw-2">&amp;</span><span class="self">self</span>, x: [f64; <span class="number">1</span>]) -&gt; <span class="prelude-ty">Result</span>&lt;[f64; <span class="number">1</span>]&gt; {
@@ -1199,12 +1206,15 @@
         }
 
         <span class="kw">let </span>problem = NewtonProblem;
-        <span class="kw">let </span>newton = NewtonMethod { max_iter: <span class="macro-nonterminal">$max_iter</span>, tol: <span class="macro-nonterminal">$tol </span>};
+        <span class="kw">let </span>newton = NewtonMethod {
+            max_iter: <span class="macro-nonterminal">$max_iter</span>,
+            tol: <span class="macro-nonterminal">$tol</span>,
+        };
         <span class="kw">match </span>newton.find(<span class="kw-2">&amp;</span>problem) {
             <span class="prelude-val">Ok</span>(root) =&gt; <span class="prelude-val">Ok</span>(root[<span class="number">0</span>]),
             <span class="prelude-val">Err</span>(e) =&gt; <span class="prelude-val">Err</span>(e),
         }
-    }}
+    }};
 }
 
 <span class="doccomment">/// High level macro for false position
@@ -1233,12 +1243,15 @@
         }
 
         <span class="kw">let </span>problem = FalsePositionProblem { f: <span class="macro-nonterminal">$f </span>};
-        <span class="kw">let </span>false_position = FalsePositionMethod { max_iter: <span class="macro-nonterminal">$max_iter</span>, tol: <span class="macro-nonterminal">$tol </span>};
+        <span class="kw">let </span>false_position = FalsePositionMethod {
+            max_iter: <span class="macro-nonterminal">$max_iter</span>,
+            tol: <span class="macro-nonterminal">$tol</span>,
+        };
         <span class="kw">match </span>false_position.find(<span class="kw-2">&amp;</span>problem) {
             <span class="prelude-val">Ok</span>(root) =&gt; <span class="prelude-val">Ok</span>(root[<span class="number">0</span>]),
             <span class="prelude-val">Err</span>(e) =&gt; <span class="prelude-val">Err</span>(e),
         }
-    }}
+    }};
 }
 
 <span class="doccomment">/// High level macro for secant
@@ -1267,14 +1280,16 @@
         }
 
         <span class="kw">let </span>problem = SecantProblem { f: <span class="macro-nonterminal">$f </span>};
-        <span class="kw">let </span>secant = SecantMethod { max_iter: <span class="macro-nonterminal">$max_iter</span>, tol: <span class="macro-nonterminal">$tol </span>};
+        <span class="kw">let </span>secant = SecantMethod {
+            max_iter: <span class="macro-nonterminal">$max_iter</span>,
+            tol: <span class="macro-nonterminal">$tol</span>,
+        };
         <span class="kw">match </span>secant.find(<span class="kw-2">&amp;</span>problem) {
             <span class="prelude-val">Ok</span>(root) =&gt; <span class="prelude-val">Ok</span>(root[<span class="number">0</span>]),
             <span class="prelude-val">Err</span>(e) =&gt; <span class="prelude-val">Err</span>(e),
         }
-    }}
+    }};
 }
-
 
 <span class="comment">// ┌─────────────────────────────────────────────────────────┐
 //  Type aliases
@@ -1358,7 +1373,7 @@
             RootError::NoRoot =&gt; <span class="macro">write!</span>(f, <span class="string">"There is no root in the interval"</span>),
             RootError::NotConverge(a) =&gt; <span class="macro">write!</span>(f, <span class="string">"Not yet converge. Our guess is {:?}"</span>, a),
             RootError::ZeroDerivative(a) =&gt; <span class="macro">write!</span>(f, <span class="string">"Zero derivative in {:?}"</span>, a),
-            RootError::ZeroSecant(a,b) =&gt; <span class="macro">write!</span>(f, <span class="string">"Zero secant in ({:?}, {:?})"</span>, a, b),
+            RootError::ZeroSecant(a, b) =&gt; <span class="macro">write!</span>(f, <span class="string">"Zero secant in ({:?}, {:?})"</span>, a, b),
         }
     }
 }
@@ -1382,7 +1397,7 @@
 </span><span class="macro">macro_rules!</span> single_function {
     (<span class="macro-nonterminal">$problem</span>:expr, <span class="macro-nonterminal">$x</span>:expr) =&gt; {{
         <span class="macro-nonterminal">$problem</span>.function([<span class="macro-nonterminal">$x</span>])<span class="question-mark">?</span>[<span class="number">0</span>]
-    }}
+    }};
 }
 
 <span class="doccomment">/// Macro for single derivative
@@ -1404,7 +1419,7 @@
 </span><span class="macro">macro_rules!</span> single_derivative {
     (<span class="macro-nonterminal">$problem</span>:expr, <span class="macro-nonterminal">$x</span>:expr) =&gt; {{
         <span class="macro-nonterminal">$problem</span>.derivative([<span class="macro-nonterminal">$x</span>])<span class="question-mark">?</span>[<span class="number">0</span>][<span class="number">0</span>]
-    }}
+    }};
 }
 
 <span class="comment">// ┌─────────────────────────────────────────────────────────┐
@@ -1441,10 +1456,7 @@
         <span class="self">self</span>.tol
     }
 
-    <span class="kw">fn </span>find&lt;P: RootFindingProblem&lt;<span class="number">1</span>, <span class="number">1</span>, (f64, f64)&gt;&gt;(
-        <span class="kw-2">&amp;</span><span class="self">self</span>,
-        problem: <span class="kw-2">&amp;</span>P,
-    ) -&gt; <span class="prelude-ty">Result</span>&lt;[f64; <span class="number">1</span>]&gt; {
+    <span class="kw">fn </span>find&lt;P: RootFindingProblem&lt;<span class="number">1</span>, <span class="number">1</span>, (f64, f64)&gt;&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, problem: <span class="kw-2">&amp;</span>P) -&gt; <span class="prelude-ty">Result</span>&lt;[f64; <span class="number">1</span>]&gt; {
         <span class="kw">let </span>state = problem.initial_guess();
         <span class="kw">let </span>(<span class="kw-2">mut </span>a, <span class="kw-2">mut </span>b) = state;
         <span class="kw">let </span><span class="kw-2">mut </span>fa = <span class="macro">single_function!</span>(problem, a);
@@ -1512,10 +1524,7 @@
     <span class="kw">fn </span>tol(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; f64 {
         <span class="self">self</span>.tol
     }
-    <span class="kw">fn </span>find&lt;P: RootFindingProblem&lt;<span class="number">1</span>, <span class="number">1</span>, f64&gt;&gt;(
-        <span class="kw-2">&amp;</span><span class="self">self</span>,
-        problem: <span class="kw-2">&amp;</span>P,
-    ) -&gt; <span class="prelude-ty">Result</span>&lt;[f64; <span class="number">1</span>]&gt; {
+    <span class="kw">fn </span>find&lt;P: RootFindingProblem&lt;<span class="number">1</span>, <span class="number">1</span>, f64&gt;&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, problem: <span class="kw-2">&amp;</span>P) -&gt; <span class="prelude-ty">Result</span>&lt;[f64; <span class="number">1</span>]&gt; {
         <span class="kw">let </span><span class="kw-2">mut </span>x = problem.initial_guess();
 
         <span class="kw">for _ in </span><span class="number">0</span>..<span class="self">self</span>.max_iter {
@@ -1566,10 +1575,7 @@
     <span class="kw">fn </span>tol(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; f64 {
         <span class="self">self</span>.tol
     }
-    <span class="kw">fn </span>find&lt;P: RootFindingProblem&lt;<span class="number">1</span>, <span class="number">1</span>, (f64, f64)&gt;&gt;(
-        <span class="kw-2">&amp;</span><span class="self">self</span>,
-        problem: <span class="kw-2">&amp;</span>P,
-    ) -&gt; <span class="prelude-ty">Result</span>&lt;[f64; <span class="number">1</span>]&gt; {
+    <span class="kw">fn </span>find&lt;P: RootFindingProblem&lt;<span class="number">1</span>, <span class="number">1</span>, (f64, f64)&gt;&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, problem: <span class="kw-2">&amp;</span>P) -&gt; <span class="prelude-ty">Result</span>&lt;[f64; <span class="number">1</span>]&gt; {
         <span class="kw">let </span>state = problem.initial_guess();
         <span class="kw">let </span>(<span class="kw-2">mut </span>x0, <span class="kw-2">mut </span>x1) = state;
         <span class="kw">let </span><span class="kw-2">mut </span>f0 = <span class="macro">single_function!</span>(problem, x0);
@@ -1628,10 +1634,7 @@
     <span class="kw">fn </span>tol(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; f64 {
         <span class="self">self</span>.tol
     }
-    <span class="kw">fn </span>find&lt;P: RootFindingProblem&lt;<span class="number">1</span>, <span class="number">1</span>, (f64, f64)&gt;&gt;(
-        <span class="kw-2">&amp;</span><span class="self">self</span>,
-        problem: <span class="kw-2">&amp;</span>P,
-    ) -&gt; <span class="prelude-ty">Result</span>&lt;[f64; <span class="number">1</span>]&gt; {
+    <span class="kw">fn </span>find&lt;P: RootFindingProblem&lt;<span class="number">1</span>, <span class="number">1</span>, (f64, f64)&gt;&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, problem: <span class="kw-2">&amp;</span>P) -&gt; <span class="prelude-ty">Result</span>&lt;[f64; <span class="number">1</span>]&gt; {
         <span class="kw">let </span>state = problem.initial_guess();
         <span class="kw">let </span>(<span class="kw-2">mut </span>a, <span class="kw-2">mut </span>b) = state;
         <span class="kw">let </span><span class="kw-2">mut </span>fa = <span class="macro">single_function!</span>(problem, a);
@@ -1691,7 +1694,7 @@
 /// ```rust
 /// use peroxide::fuga::*;
 /// use peroxide::numerical::root::{Pt, Intv};
-/// 
+///
 /// fn main() -&gt; Result&lt;(), Box&lt;dyn std::error::Error&gt;&gt; {
 ///     let problem = CircleTangentLine;
 ///     let broyden = BroydenMethod { max_iter: 100, tol: 1e-6, rtol: 1e-6 };
@@ -1704,9 +1707,9 @@
 ///
 ///     Ok(())
 /// }
-/// 
+///
 /// struct CircleTangentLine;
-/// 
+///
 /// impl RootFindingProblem&lt;2, 2, Intv&lt;2&gt;&gt; for CircleTangentLine {
 ///     fn function(&amp;self, x: Pt&lt;2&gt;) -&gt; anyhow::Result&lt;Pt&lt;2&gt;&gt; {
 ///         Ok([
@@ -1714,7 +1717,7 @@
 ///             x[0] + x[1] - 2f64.sqrt()
 ///         ])
 ///     }
-/// 
+///
 ///     fn initial_guess(&amp;self) -&gt; Intv&lt;2&gt; {
 ///         ([0.0, 0.1], [-0.1, 0.2])
 ///     }
@@ -1735,10 +1738,7 @@
     <span class="kw">fn </span>tol(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; f64 {
         <span class="self">self</span>.tol
     }
-    <span class="kw">fn </span>find&lt;P: RootFindingProblem&lt;I, O, Intv&lt;I&gt;&gt;&gt;(
-        <span class="kw-2">&amp;</span><span class="self">self</span>,
-        problem: <span class="kw-2">&amp;</span>P,
-    ) -&gt; <span class="prelude-ty">Result</span>&lt;Pt&lt;I&gt;&gt; {
+    <span class="kw">fn </span>find&lt;P: RootFindingProblem&lt;I, O, Intv&lt;I&gt;&gt;&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, problem: <span class="kw-2">&amp;</span>P) -&gt; <span class="prelude-ty">Result</span>&lt;Pt&lt;I&gt;&gt; {
         <span class="comment">// Init state
         </span><span class="kw">let </span>state = problem.initial_guess();
         <span class="kw">let </span>(<span class="kw-2">mut </span>x0, <span class="kw-2">mut </span>x1) = state;
@@ -1756,11 +1756,19 @@
             <span class="kw">if </span>fx1.norm(Norm::L2) &lt; <span class="self">self</span>.tol {
                 <span class="kw">return </span><span class="prelude-val">Ok</span>(x1);
             }
-            <span class="kw">let </span>dx = x1.iter().zip(x0.iter()).map(|(x1, x0)| x1 - x0).collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;();
+            <span class="kw">let </span>dx = x1
+                .iter()
+                .zip(x0.iter())
+                .map(|(x1, x0)| x1 - x0)
+                .collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;();
             <span class="kw">if </span>dx.norm(Norm::L2) &lt; <span class="self">self</span>.rtol {
                 <span class="kw">return </span><span class="prelude-val">Ok</span>(x1);
             }
-            <span class="kw">let </span>df = fx1.iter().zip(fx0.iter()).map(|(fx1, fx0)| fx1 - fx0).collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;();
+            <span class="kw">let </span>df = fx1
+                .iter()
+                .zip(fx0.iter())
+                .map(|(fx1, fx0)| fx1 - fx0)
+                .collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;();
 
             <span class="kw">let </span>denom = dx.add_v(<span class="kw-2">&amp;</span>H.apply(<span class="kw-2">&amp;</span>df));
             <span class="kw">let </span>right = <span class="kw-2">&amp;</span>dx.to_row() * <span class="kw-2">&amp;</span>H;

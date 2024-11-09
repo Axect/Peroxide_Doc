@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["Form","SolveKind","UPLO"],"fn":["solve"],"struct":["PQLU","QR","SVD","WAZD"],"trait":["LinearAlgebra","MatrixTrait"]};

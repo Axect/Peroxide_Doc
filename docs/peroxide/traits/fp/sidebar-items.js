@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"trait":["FPMatrix","FPVector"]};
+window.SIDEBAR_ITEMS = {"trait":["FPMatrix","FPVector","ParallelFPMatrix","ParallelFPVector"]};

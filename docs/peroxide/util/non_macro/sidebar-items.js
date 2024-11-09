@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"enum":["ConcatenateError"],"fn":["cat","cbind","column_stack","concat","eye","eye_shape","linspace","linspace_with_precision","logspace","rand","rand_with_rng","rbind","row_stack","seq","seq_with_precision","zeros","zeros_shape"]};
+window.SIDEBAR_ITEMS = {"enum":["ConcatenateError"],"fn":["cat","cbind","column_stack","concat","eye","eye_shape","linspace","linspace_with_precision","logspace","rand","rand_with_dist","rand_with_rng","rbind","row_stack","seq","seq_with_precision","zeros","zeros_shape"]};
