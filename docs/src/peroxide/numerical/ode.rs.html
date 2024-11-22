@@ -1009,14 +1009,6 @@
 <a href="#993" id="993">993</a>
 <a href="#994" id="994">994</a>
 <a href="#995" id="995">995</a>
-<a href="#996" id="996">996</a>
-<a href="#997" id="997">997</a>
-<a href="#998" id="998">998</a>
-<a href="#999" id="999">999</a>
-<a href="#1000" id="1000">1000</a>
-<a href="#1001" id="1001">1001</a>
-<a href="#1002" id="1002">1002</a>
-<a href="#1003" id="1003">1003</a>
 </pre></div><pre class="rust"><code><span class="doccomment">//! # Ordinary Differential Equation (ODE) Solvers
 //!
 //! This module provides traits and structs for solving ordinary differential equations (ODEs).
@@ -1067,10 +1059,12 @@
 //!         max_step_iter: 100,
 //!     };
 //!     let basic_ode_solver = BasicODESolver::new(rkf);
+//!     let initial_conditions = vec![1f64];
 //!     let (t_vec, y_vec) = basic_ode_solver.solve(
 //!         &amp;Test,
 //!         (0f64, 10f64),
 //!         0.01,
+//!         &amp;initial_conditions,
 //!     )?;
 //!     let y_vec: Vec&lt;f64&gt; = y_vec.into_iter().flatten().collect();
 //!     println!("{}", y_vec.len());
@@ -1096,10 +1090,6 @@
 //! struct Test;
 //!
 //! impl ODEProblem for Test {
-//!     fn initial_conditions(&amp;self) -&gt; Vec&lt;f64&gt; {
-//!         vec![1f64]
-//!     }
-//!
 //!     fn rhs(&amp;self, t: f64, y: &amp;[f64], dy: &amp;mut [f64]) -&gt; anyhow::Result&lt;()&gt; {
 //!         Ok(dy[0] = (5f64 * t.powi(2) - y[0]) / (t + y[0]).exp())
 //!     }
@@ -1120,10 +1110,6 @@
 /// struct MyODEProblem;
 ///
 /// impl ODEProblem for MyODEProblem {
-///     fn initial_conditions(&amp;self) -&gt; Vec&lt;f64&gt; {
-///         vec![1.0, 2.0]
-///     }
-///
 ///     fn rhs(&amp;self, t: f64, y: &amp;[f64], dy: &amp;mut [f64]) -&gt; anyhow::Result&lt;()&gt; {
 ///         dy[0] = -0.5 * y[0];
 ///         dy[1] = y[0] - y[1];
@@ -1132,7 +1118,6 @@
 /// }
 /// ```
 </span><span class="kw">pub trait </span>ODEProblem {
-    <span class="kw">fn </span>initial_conditions(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Vec&lt;f64&gt;;
     <span class="kw">fn </span>rhs(<span class="kw-2">&amp;</span><span class="self">self</span>, t: f64, y: <span class="kw-2">&amp;</span>[f64], dy: <span class="kw-2">&amp;mut </span>[f64]) -&gt; <span class="prelude-ty">Result</span>&lt;()&gt;;
 }
 
@@ -1162,7 +1147,6 @@
 /// }
 ///
 /// impl ODEProblem for ConstrainedProblem {
-///     fn initial_conditions(&amp;self) -&gt; Vec&lt;f64&gt; { vec![0.0] } // y_0 = 0
 ///     fn rhs(&amp;self, t: f64, y: &amp;[f64], dy: &amp;mut [f64]) -&gt; anyhow::Result&lt;()&gt; {
 ///         if y[0] &lt; self.y_constraint {
 ///             anyhow::bail!(ODEError::ConstraintViolation(t, y.to_vec(), dy.to_vec()));
@@ -1201,6 +1185,7 @@
         problem: <span class="kw-2">&amp;</span>P,
         t_span: (f64, f64),
         dt: f64,
+        initial_conditions: <span class="kw-2">&amp;</span>[f64],
     ) -&gt; <span class="prelude-ty">Result</span>&lt;(Vec&lt;f64&gt;, Vec&lt;Vec&lt;f64&gt;&gt;)&gt;;
 }
 
@@ -1212,12 +1197,14 @@
 /// use peroxide::fuga::*;
 ///
 /// fn main() -&gt; Result&lt;(), Box&lt;dyn Error&gt;&gt; {
+///     let initial_conditions = vec![1f64];
 ///     let rkf = RKF45::new(1e-4, 0.9, 1e-6, 1e-1, 100);
 ///     let basic_ode_solver = BasicODESolver::new(rkf);
 ///     let (t_vec, y_vec) = basic_ode_solver.solve(
 ///         &amp;Test,
 ///         (0f64, 10f64),
 ///         0.01,
+///         &amp;initial_conditions,
 ///     )?;
 ///     let y_vec: Vec&lt;f64&gt; = y_vec.into_iter().flatten().collect();
 ///
@@ -1227,10 +1214,6 @@
 /// struct Test;
 ///
 /// impl ODEProblem for Test {
-///     fn initial_conditions(&amp;self) -&gt; Vec&lt;f64&gt; {
-///         vec![1f64]
-///     }
-///
 ///     fn rhs(&amp;self, t: f64, y: &amp;[f64], dy: &amp;mut [f64]) -&gt; anyhow::Result&lt;()&gt; {
 ///         dy[0] = (5f64 * t.powi(2) - y[0]) / (t + y[0]).exp();
 ///         Ok(())
@@ -1253,10 +1236,11 @@
         problem: <span class="kw-2">&amp;</span>P,
         t_span: (f64, f64),
         dt: f64,
+        initial_conditions: <span class="kw-2">&amp;</span>[f64],
     ) -&gt; <span class="prelude-ty">Result</span>&lt;(Vec&lt;f64&gt;, Vec&lt;Vec&lt;f64&gt;&gt;)&gt; {
         <span class="kw">let </span><span class="kw-2">mut </span>t = t_span.<span class="number">0</span>;
         <span class="kw">let </span><span class="kw-2">mut </span>dt = dt;
-        <span class="kw">let </span><span class="kw-2">mut </span>y = problem.initial_conditions();
+        <span class="kw">let </span><span class="kw-2">mut </span>y = initial_conditions.to_vec();
         <span class="kw">let </span><span class="kw-2">mut </span>t_vec = <span class="macro">vec!</span>[t];
         <span class="kw">let </span><span class="kw-2">mut </span>y_vec = <span class="macro">vec!</span>[y.clone()];
 

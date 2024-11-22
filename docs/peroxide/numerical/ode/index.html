@@ -14,7 +14,7 @@
     });
 </script>
 
-</head><body class="rustdoc mod"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../../../peroxide/index.html">peroxide</a><span class="version">0.38.1</span></h2></div><h2 class="location"><a href="#">Module ode</a></h2><div class="sidebar-elems"><section><ul class="block"><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li><li><a href="#traits">Traits</a></li></ul></section><h2><a href="../index.html">In peroxide::<wbr>numerical</a></h2></div></nav><div class="sidebar-resizer"></div><main><div class="width-limiter"><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><h1>Module <a href="../../index.html">peroxide</a>::<wbr><a href="../index.html">numerical</a>::<wbr><a class="mod" href="#">ode</a><button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><span class="out-of-band"><a class="src" href="../../../src/peroxide/numerical/ode.rs.html#1-1003">source</a> · <button id="toggle-all-docs" title="collapse all docs">[<span>&#x2212;</span>]</button></span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><h2 id="ordinary-differential-equation-ode-solvers"><a class="doc-anchor" href="#ordinary-differential-equation-ode-solvers">§</a>Ordinary Differential Equation (ODE) Solvers</h2>
+</head><body class="rustdoc mod"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../../../peroxide/index.html">peroxide</a><span class="version">0.39.0</span></h2></div><h2 class="location"><a href="#">Module ode</a></h2><div class="sidebar-elems"><section><ul class="block"><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li><li><a href="#traits">Traits</a></li></ul></section><h2><a href="../index.html">In peroxide::<wbr>numerical</a></h2></div></nav><div class="sidebar-resizer"></div><main><div class="width-limiter"><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><h1>Module <a href="../../index.html">peroxide</a>::<wbr><a href="../index.html">numerical</a>::<wbr><a class="mod" href="#">ode</a><button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><span class="out-of-band"><a class="src" href="../../../src/peroxide/numerical/ode.rs.html#1-995">source</a> · <button id="toggle-all-docs" title="collapse all docs">[<span>&#x2212;</span>]</button></span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><h2 id="ordinary-differential-equation-ode-solvers"><a class="doc-anchor" href="#ordinary-differential-equation-ode-solvers">§</a>Ordinary Differential Equation (ODE) Solvers</h2>
 <p>This module provides traits and structs for solving ordinary differential equations (ODEs).</p>
 <h3 id="overview"><a class="doc-anchor" href="#overview">§</a>Overview</h3>
 <ul>
@@ -71,10 +71,12 @@
         max_step_iter: <span class="number">100</span>,
     };
     <span class="kw">let </span>basic_ode_solver = BasicODESolver::new(rkf);
+    <span class="kw">let </span>initial_conditions = <span class="macro">vec!</span>[<span class="number">1f64</span>];
     <span class="kw">let </span>(t_vec, y_vec) = basic_ode_solver.solve(
         <span class="kw-2">&amp;</span>Test,
         (<span class="number">0f64</span>, <span class="number">10f64</span>),
         <span class="number">0.01</span>,
+        <span class="kw-2">&amp;</span>initial_conditions,
     )<span class="question-mark">?</span>;
     <span class="kw">let </span>y_vec: Vec&lt;f64&gt; = y_vec.into_iter().flatten().collect();
     <span class="macro">println!</span>(<span class="string">"{}"</span>, y_vec.len());
@@ -97,10 +99,6 @@
 </span><span class="kw">struct </span>Test;
 
 <span class="kw">impl </span>ODEProblem <span class="kw">for </span>Test {
-    <span class="kw">fn </span>initial_conditions(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Vec&lt;f64&gt; {
-        <span class="macro">vec!</span>[<span class="number">1f64</span>]
-    }
-
     <span class="kw">fn </span>rhs(<span class="kw-2">&amp;</span><span class="self">self</span>, t: f64, y: <span class="kw-2">&amp;</span>[f64], dy: <span class="kw-2">&amp;mut </span>[f64]) -&gt; anyhow::Result&lt;()&gt; {
         <span class="prelude-val">Ok</span>(dy[<span class="number">0</span>] = (<span class="number">5f64 </span>* t.powi(<span class="number">2</span>) - y[<span class="number">0</span>]) / (t + y[<span class="number">0</span>]).exp())
     }
