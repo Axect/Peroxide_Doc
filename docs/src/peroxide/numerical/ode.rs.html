@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/numerical/ode.rs`."><title>ode.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../../static.files/rustdoc-42caa33d.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="peroxide" data-themes="" data-resource-suffix="" data-rustdoc-version="1.84.0 (9fc6b4312 2025-01-07)" data-channel="1.84.0" data-search-js="search-92e6798f.js" data-settings-js="settings-0f613d39.js" ><script src="../../../static.files/storage-59e33391.js"></script><script defer src="../../../static.files/src-script-56102188.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-5f194d8c.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-893ab5e7.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-6580c154.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-044be391.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/numerical/ode.rs`."><title>ode.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-46f98efaafac5295.ttf.woff2,FiraSans-Regular-018c141bf0843ffd.woff2,FiraSans-Medium-8f9a781e4970d388.woff2,SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2,SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-b0742ba02757f159.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="peroxide" data-themes="" data-resource-suffix="" data-rustdoc-version="1.83.0 (90b35a623 2024-11-26)" data-channel="1.83.0" data-search-js="search-f0d225181b97f9a4.js" data-settings-js="settings-805db61a62df4bd2.js" ><script src="../../../static.files/storage-1d39b6787ed640ff.js"></script><script defer src="../../../static.files/src-script-e66d777a5a92e9b2.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-f070b9041d14864c.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-0111fcff984fae8f.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js"                  integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js"    integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
 <script>
@@ -1009,7 +1009,119 @@
 <a href="#992" id="992">992</a>
 <a href="#993" id="993">993</a>
 <a href="#994" id="994">994</a>
-<a href="#995" id="995">995</a></pre></div><pre class="rust"><code><span class="doccomment">//! # Ordinary Differential Equation (ODE) Solvers
+<a href="#995" id="995">995</a>
+<a href="#996" id="996">996</a>
+<a href="#997" id="997">997</a>
+<a href="#998" id="998">998</a>
+<a href="#999" id="999">999</a>
+<a href="#1000" id="1000">1000</a>
+<a href="#1001" id="1001">1001</a>
+<a href="#1002" id="1002">1002</a>
+<a href="#1003" id="1003">1003</a>
+<a href="#1004" id="1004">1004</a>
+<a href="#1005" id="1005">1005</a>
+<a href="#1006" id="1006">1006</a>
+<a href="#1007" id="1007">1007</a>
+<a href="#1008" id="1008">1008</a>
+<a href="#1009" id="1009">1009</a>
+<a href="#1010" id="1010">1010</a>
+<a href="#1011" id="1011">1011</a>
+<a href="#1012" id="1012">1012</a>
+<a href="#1013" id="1013">1013</a>
+<a href="#1014" id="1014">1014</a>
+<a href="#1015" id="1015">1015</a>
+<a href="#1016" id="1016">1016</a>
+<a href="#1017" id="1017">1017</a>
+<a href="#1018" id="1018">1018</a>
+<a href="#1019" id="1019">1019</a>
+<a href="#1020" id="1020">1020</a>
+<a href="#1021" id="1021">1021</a>
+<a href="#1022" id="1022">1022</a>
+<a href="#1023" id="1023">1023</a>
+<a href="#1024" id="1024">1024</a>
+<a href="#1025" id="1025">1025</a>
+<a href="#1026" id="1026">1026</a>
+<a href="#1027" id="1027">1027</a>
+<a href="#1028" id="1028">1028</a>
+<a href="#1029" id="1029">1029</a>
+<a href="#1030" id="1030">1030</a>
+<a href="#1031" id="1031">1031</a>
+<a href="#1032" id="1032">1032</a>
+<a href="#1033" id="1033">1033</a>
+<a href="#1034" id="1034">1034</a>
+<a href="#1035" id="1035">1035</a>
+<a href="#1036" id="1036">1036</a>
+<a href="#1037" id="1037">1037</a>
+<a href="#1038" id="1038">1038</a>
+<a href="#1039" id="1039">1039</a>
+<a href="#1040" id="1040">1040</a>
+<a href="#1041" id="1041">1041</a>
+<a href="#1042" id="1042">1042</a>
+<a href="#1043" id="1043">1043</a>
+<a href="#1044" id="1044">1044</a>
+<a href="#1045" id="1045">1045</a>
+<a href="#1046" id="1046">1046</a>
+<a href="#1047" id="1047">1047</a>
+<a href="#1048" id="1048">1048</a>
+<a href="#1049" id="1049">1049</a>
+<a href="#1050" id="1050">1050</a>
+<a href="#1051" id="1051">1051</a>
+<a href="#1052" id="1052">1052</a>
+<a href="#1053" id="1053">1053</a>
+<a href="#1054" id="1054">1054</a>
+<a href="#1055" id="1055">1055</a>
+<a href="#1056" id="1056">1056</a>
+<a href="#1057" id="1057">1057</a>
+<a href="#1058" id="1058">1058</a>
+<a href="#1059" id="1059">1059</a>
+<a href="#1060" id="1060">1060</a>
+<a href="#1061" id="1061">1061</a>
+<a href="#1062" id="1062">1062</a>
+<a href="#1063" id="1063">1063</a>
+<a href="#1064" id="1064">1064</a>
+<a href="#1065" id="1065">1065</a>
+<a href="#1066" id="1066">1066</a>
+<a href="#1067" id="1067">1067</a>
+<a href="#1068" id="1068">1068</a>
+<a href="#1069" id="1069">1069</a>
+<a href="#1070" id="1070">1070</a>
+<a href="#1071" id="1071">1071</a>
+<a href="#1072" id="1072">1072</a>
+<a href="#1073" id="1073">1073</a>
+<a href="#1074" id="1074">1074</a>
+<a href="#1075" id="1075">1075</a>
+<a href="#1076" id="1076">1076</a>
+<a href="#1077" id="1077">1077</a>
+<a href="#1078" id="1078">1078</a>
+<a href="#1079" id="1079">1079</a>
+<a href="#1080" id="1080">1080</a>
+<a href="#1081" id="1081">1081</a>
+<a href="#1082" id="1082">1082</a>
+<a href="#1083" id="1083">1083</a>
+<a href="#1084" id="1084">1084</a>
+<a href="#1085" id="1085">1085</a>
+<a href="#1086" id="1086">1086</a>
+<a href="#1087" id="1087">1087</a>
+<a href="#1088" id="1088">1088</a>
+<a href="#1089" id="1089">1089</a>
+<a href="#1090" id="1090">1090</a>
+<a href="#1091" id="1091">1091</a>
+<a href="#1092" id="1092">1092</a>
+<a href="#1093" id="1093">1093</a>
+<a href="#1094" id="1094">1094</a>
+<a href="#1095" id="1095">1095</a>
+<a href="#1096" id="1096">1096</a>
+<a href="#1097" id="1097">1097</a>
+<a href="#1098" id="1098">1098</a>
+<a href="#1099" id="1099">1099</a>
+<a href="#1100" id="1100">1100</a>
+<a href="#1101" id="1101">1101</a>
+<a href="#1102" id="1102">1102</a>
+<a href="#1103" id="1103">1103</a>
+<a href="#1104" id="1104">1104</a>
+<a href="#1105" id="1105">1105</a>
+<a href="#1106" id="1106">1106</a>
+<a href="#1107" id="1107">1107</a></pre></div><pre class="rust"><code><span class="doccomment">//! # Ordinary Differential Equation (ODE) Solvers
 //!
 //! This module provides traits and structs for solving ordinary differential equations (ODEs).
 //!
@@ -1097,6 +1209,9 @@
 //! ```
 
 </span><span class="kw">use </span>anyhow::{bail, <span class="prelude-ty">Result</span>};
+<span class="kw">use </span><span class="kw">crate</span>::fuga::ConvToMat;
+<span class="kw">use </span><span class="kw">crate</span>::util::non_macro::eye;
+<span class="kw">use </span><span class="kw">crate</span>::traits::math::{Norm, Normed, InnerProduct, Vector};
 
 <span class="doccomment">/// Trait for defining an ODE problem.
 ///
@@ -1901,13 +2016,13 @@
 </span><span class="doccomment">/// Enum for implicit solvers.
 ///
 /// This enum defines the available implicit solvers for the Gauss-Legendre 4th order integrator.
-/// Currently, only the fixed-point iteration method is implemented.
+/// Currently, there are two options: fixed-point iteration and Broyden's method.
 </span><span class="attr">#[derive(Debug, Clone, Copy)]
 #[cfg_attr(feature = <span class="string">"serde"</span>, derive(serde::Serialize, serde::Deserialize))]
 </span><span class="kw">pub enum </span>ImplicitSolver {
     FixedPoint,
-    <span class="comment">//Broyden,
-    //TrustRegion(f64, f64),
+    Broyden,
+    <span class="comment">//TrustRegion(f64, f64),
 </span>}
 
 <span class="doccomment">/// Gauss-Legendre 4th order integrator.
@@ -1950,7 +2065,8 @@
 }
 
 <span class="kw">impl </span>ODEIntegrator <span class="kw">for </span>GL4 {
-    <span class="attr">#[inline]
+    <span class="attr">#[allow(non_snake_case)]
+    #[inline]
     </span><span class="kw">fn </span>step&lt;P: ODEProblem&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, problem: <span class="kw-2">&amp;</span>P, t: f64, y: <span class="kw-2">&amp;mut </span>[f64], dt: f64) -&gt; <span class="prelude-ty">Result</span>&lt;f64&gt; {
         <span class="kw">let </span>n = y.len();
         <span class="kw">let </span>sqrt3 = <span class="number">3.0_f64</span>.sqrt();
@@ -1994,7 +2110,76 @@
                         <span class="kw">break</span>;
                     }
                 }
-            }
+            },
+            ImplicitSolver::Broyden =&gt; {
+                <span class="kw">let </span>m = <span class="number">2 </span>* n;
+                <span class="kw">let </span><span class="kw-2">mut </span>U = <span class="macro">vec!</span>[<span class="number">0.0</span>; m];
+
+                <span class="comment">// Initial Guess via Fixed-Point Iteration
+                </span>{
+                    <span class="kw">let </span><span class="kw-2">mut </span>k1 = <span class="macro">vec!</span>[<span class="number">0.0</span>; n];
+                    <span class="kw">let </span><span class="kw-2">mut </span>k2 = <span class="macro">vec!</span>[<span class="number">0.0</span>; n];
+                    <span class="kw">let </span><span class="kw-2">mut </span>y1 = <span class="macro">vec!</span>[<span class="number">0.0</span>; n];
+                    <span class="kw">let </span><span class="kw-2">mut </span>y2 = <span class="macro">vec!</span>[<span class="number">0.0</span>; n];
+
+                    y1.copy_from_slice(y);
+                    y2.copy_from_slice(y);
+                    problem.rhs(t + c * dt, <span class="kw-2">&amp;</span>y1, <span class="kw-2">&amp;mut </span>k1)<span class="question-mark">?</span>;
+                    problem.rhs(t + d * dt, <span class="kw-2">&amp;</span>y2, <span class="kw-2">&amp;mut </span>k2)<span class="question-mark">?</span>;
+                    <span class="kw">for </span>i <span class="kw">in </span><span class="number">0 </span>.. n {
+                        U[i] = k1[i];
+                        U[n + i] = k2[i];
+                    }
+                }
+
+                <span class="comment">// F_vec = F(U)
+                </span><span class="kw">let </span><span class="kw-2">mut </span>F_vec = <span class="macro">vec!</span>[<span class="number">0.0</span>; m];
+                compute_F(problem, t, y, dt, c, d, sqrt3, <span class="kw-2">&amp;</span>U, <span class="kw-2">&amp;mut </span>F_vec)<span class="question-mark">?</span>;
+
+                <span class="comment">// Initialize inverse Jacobian matrix
+                </span><span class="kw">let </span><span class="kw-2">mut </span>J_inv = eye(m);
+
+                <span class="comment">// Repeat Broyden's method
+                </span><span class="kw">for _ in </span><span class="number">0 </span>.. <span class="self">self</span>.max_step_iter {
+                    <span class="comment">// delta = - J_inv * F_vec
+                    </span><span class="kw">let </span><span class="kw-2">mut </span>delta = (<span class="kw-2">&amp;</span>J_inv * <span class="kw-2">&amp;</span>F_vec).mul_scalar(-<span class="number">1.0</span>);
+
+                    <span class="comment">// U &lt;- U + delta
+                    </span>U.iter_mut().zip(delta.iter_mut()).for_each(|(u, d)| <span class="kw-2">*</span>u += <span class="kw-2">*</span>d);
+
+                    <span class="kw">let </span><span class="kw-2">mut </span>F_new = <span class="macro">vec!</span>[<span class="number">0.0</span>; m];
+                    compute_F(problem, t, y, dt, c, d, sqrt3, <span class="kw-2">&amp;</span>U, <span class="kw-2">&amp;mut </span>F_new)<span class="question-mark">?</span>;
+
+                    <span class="comment">// If infinity norm of F_new is less than tol, break
+                    </span><span class="kw">if </span>F_new.norm(Norm::LInf) &lt; <span class="self">self</span>.tol {
+                        <span class="kw">break</span>;
+                    }
+
+                    <span class="comment">// Residual: delta_F = F_new - F_vec
+                    </span><span class="kw">let </span>delta_F = F_new.sub_vec(<span class="kw-2">&amp;</span>F_vec);
+
+                    <span class="comment">// J_inv * delta_F
+                    </span><span class="kw">let </span>J_inv_delta_F = <span class="kw-2">&amp;</span>J_inv * <span class="kw-2">&amp;</span>delta_F;
+                    <span class="kw">let </span>denom = delta.dot(<span class="kw-2">&amp;</span>J_inv_delta_F);
+                    <span class="kw">if </span>denom.abs() &lt; <span class="number">1e-12 </span>{
+                        <span class="kw">break</span>;
+                    }
+
+                    <span class="comment">// Broyden "good" update
+                    // J_inv &lt;- J_inv + ((delta - J_inv * delta_F) * delta^T * J_inv) / denom
+                    </span><span class="kw">let </span>delta_minus_J_inv_delta_F = delta.sub_vec(<span class="kw-2">&amp;</span>J_inv_delta_F).to_col();
+                    <span class="kw">let </span>delta_T_J_inv = <span class="kw-2">&amp;</span>delta.to_row() * <span class="kw-2">&amp;</span>J_inv;
+                    <span class="kw">let </span>update = (delta_minus_J_inv_delta_F * delta_T_J_inv) / denom;
+                    J_inv = J_inv + update;
+                    F_vec = F_new;
+                }
+
+                <span class="comment">// Extract k1 and k2
+                </span><span class="kw">for </span>i <span class="kw">in </span><span class="number">0 </span>.. n {
+                    k1[i] = U[i];
+                    k2[i] = U[n + i];
+                }
+            },
         }
 
         <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..n {
@@ -2003,5 +2188,44 @@
 
         <span class="prelude-val">Ok</span>(dt)
     }
+}
+
+<span class="comment">// Helper function to compute the function F(U) for the implicit solver.
+// y1 = y + dt*(c*k1 + d*k2 - sqrt3/2*(k2-k1))
+// y2 = y + dt*(c*k1 + d*k2 + sqrt3/2*(k2-k1))
+</span><span class="attr">#[allow(non_snake_case)]
+</span><span class="kw">fn </span>compute_F&lt;P: ODEProblem&gt;(
+    problem: <span class="kw-2">&amp;</span>P,
+    t: f64,
+    y: <span class="kw-2">&amp;</span>[f64],
+    dt: f64,
+    c: f64,
+    d: f64,
+    sqrt3: f64,
+    U: <span class="kw-2">&amp;</span>[f64],
+    F: <span class="kw-2">&amp;mut </span>[f64],
+) -&gt; <span class="prelude-ty">Result</span>&lt;()&gt; {
+    <span class="kw">let </span>n = y.len();
+    <span class="kw">let </span><span class="kw-2">mut </span>y1 = <span class="macro">vec!</span>[<span class="number">0.0</span>; n];
+    <span class="kw">let </span><span class="kw-2">mut </span>y2 = <span class="macro">vec!</span>[<span class="number">0.0</span>; n];
+
+    <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..n {
+        <span class="kw">let </span>k1 = U[i];
+        <span class="kw">let </span>k2 = U[n + i];
+        y1[i] = y[i] + dt * (c * k1 + d * k2 - sqrt3 * (k2 - k1) / <span class="number">2.0</span>);
+        y2[i] = y[i] + dt * (c * k1 + d * k2 + sqrt3 * (k2 - k1) / <span class="number">2.0</span>);
+    }
+
+    <span class="kw">let </span><span class="kw-2">mut </span>f1 = <span class="macro">vec!</span>[<span class="number">0.0</span>; n];
+    <span class="kw">let </span><span class="kw-2">mut </span>f2 = <span class="macro">vec!</span>[<span class="number">0.0</span>; n];
+    problem.rhs(t + c * dt, <span class="kw-2">&amp;</span>y1, <span class="kw-2">&amp;mut </span>f1)<span class="question-mark">?</span>;
+    problem.rhs(t + d * dt, <span class="kw-2">&amp;</span>y2, <span class="kw-2">&amp;mut </span>f2)<span class="question-mark">?</span>;
+
+    <span class="comment">// F = [ k1 - f1, k2 - f2 ]
+    </span><span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..n {
+        F[i] = U[i] - f1[i];
+        F[n + i] = U[n + i] - f2[i];
+    }
+    <span class="prelude-val">Ok</span>(())
 }
 </code></pre></div></section></main></body></html>
