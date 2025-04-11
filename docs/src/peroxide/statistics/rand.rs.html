@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/statistics/rand.rs`."><title>rand.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../../static.files/rustdoc-42caa33d.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="peroxide" data-themes="" data-resource-suffix="" data-rustdoc-version="1.84.1 (e71f9a9a9 2025-01-27)" data-channel="1.84.1" data-search-js="search-92e6798f.js" data-settings-js="settings-0f613d39.js" ><script src="../../../static.files/storage-59e33391.js"></script><script defer src="../../../static.files/src-script-56102188.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-5f194d8c.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-893ab5e7.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-6580c154.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-044be391.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/statistics/rand.rs`."><title>rand.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../../static.files/rustdoc-46132b98.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="peroxide" data-themes="" data-resource-suffix="" data-rustdoc-version="1.85.1 (4eb161250 2025-03-15)" data-channel="1.85.1" data-search-js="search-75f5ac3e.js" data-settings-js="settings-0f613d39.js" ><script src="../../../static.files/storage-59e33391.js"></script><script defer src="../../../static.files/src-script-56102188.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-5f194d8c.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-893ab5e7.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-6580c154.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-044be391.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js"                  integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js"    integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
 <script>
@@ -583,8 +583,7 @@
 <a href="#566" id="566">566</a>
 <a href="#567" id="567">567</a>
 <a href="#568" id="568">568</a>
-<a href="#569" id="569">569</a>
-<a href="#570" id="570">570</a></pre></div><pre class="rust"><code><span class="doccomment">//! Random number generator
+<a href="#569" id="569">569</a></pre></div><pre class="rust"><code><span class="doccomment">//! Random number generator
 //!
 //! ## Uniform random number generator
 //!
@@ -594,9 +593,9 @@
 //!     use rand::prelude::*;
 //!
 //!     fn main() {
-//!         let mut rng = thread_rng();
+//!         let mut rng = rand::rng();
 //!
-//!         let a = rng.gen_range(0f64..=1f64); // Generate random f64 number ranges from 0 to 1
+//!         let a = rng.random_range(0f64..=1f64); // Generate random f64 number ranges from 0 to 1
 //!     }
 //!     ```
 //!
@@ -606,9 +605,8 @@
 //!
 //!
 
-</span><span class="kw">extern crate </span>rand;
-<span class="kw">use </span><span class="self">self</span>::rand::distributions::uniform::SampleUniform;
-<span class="kw">use </span><span class="self">self</span>::rand::prelude::<span class="kw-2">*</span>;
+</span><span class="kw">use </span>rand_distr::uniform::SampleUniform;
+<span class="kw">use </span>rand::prelude::<span class="kw-2">*</span>;
 
 <span class="kw">use </span><span class="kw">crate</span>::statistics::dist::{WeightedUniform, RNG};
 <span class="attr">#[allow(unused_imports)]
@@ -652,7 +650,7 @@
 /// ```
 /// use peroxide::fuga::*;
 ///
-/// let mut rng = thread_rng();
+/// let mut rng = rand::rng();
 /// println!("{}", rand_num(&amp;mut rng, 1, 7));       // Roll a die
 /// println!("{}", rand_num(&amp;mut rng, 0f64, 1f64)); // Uniform [0,1)
 /// ```
@@ -660,7 +658,7 @@
 <span class="kw">where
     </span>T: PartialOrd + SampleUniform + Copy,
 {
-    rng.gen_range(start..=end)
+    rng.random_range(start..=end)
 }
 
 <span class="comment">// =============================================================================
@@ -675,8 +673,8 @@
     <span class="kw">let </span><span class="kw-2">mut </span>w = <span class="number">0f64</span>;
 
     <span class="kw">while </span>w == <span class="number">0. </span>|| w &gt;= <span class="number">1. </span>{
-        x1 = <span class="number">2.0 </span>* rng.gen_range(<span class="number">0f64</span>..=<span class="number">1f64</span>) - <span class="number">1.0</span>;
-        x2 = <span class="number">2.0 </span>* rng.gen_range(<span class="number">0f64</span>..=<span class="number">1f64</span>) - <span class="number">1.0</span>;
+        x1 = <span class="number">2.0 </span>* rng.random_range(<span class="number">0f64</span>..=<span class="number">1f64</span>) - <span class="number">1.0</span>;
+        x2 = <span class="number">2.0 </span>* rng.random_range(<span class="number">0f64</span>..=<span class="number">1f64</span>) - <span class="number">1.0</span>;
         w = x1 * x1 + x2 * x2;
     }
 
@@ -1055,7 +1053,7 @@
 <span class="kw">where
     </span>F: Fn(f64) -&gt; f64 + Copy,
 {
-    <span class="kw">let </span><span class="kw-2">mut </span>rng = thread_rng();
+    <span class="kw">let </span><span class="kw-2">mut </span>rng = rand::rng();
 
     <span class="kw">let </span><span class="kw-2">mut </span>result = <span class="macro">vec!</span>[<span class="number">0f64</span>; n];
 
@@ -1070,7 +1068,7 @@
             <span class="kw">if </span>weight &lt;= <span class="number">0f64 </span>{
                 <span class="kw">continue</span>;
             } <span class="kw">else </span>{
-                <span class="kw">let </span>y = rng.gen_range(<span class="number">0f64</span>..=weight);
+                <span class="kw">let </span>y = rng.random_range(<span class="number">0f64</span>..=weight);
 
                 <span class="kw">if </span>y &lt;= f(x) {
                     result[n - left_num] = x;
@@ -1139,7 +1137,7 @@
             <span class="kw">if </span>weight &lt;= <span class="number">0f64 </span>{
                 <span class="kw">continue</span>;
             } <span class="kw">else </span>{
-                <span class="kw">let </span>y = rng.gen_range(<span class="number">0f64</span>..=weight);
+                <span class="kw">let </span>y = rng.random_range(<span class="number">0f64</span>..=weight);
 
                 <span class="kw">if </span>y &lt;= f(x) {
                     result[n - left_num] = x;

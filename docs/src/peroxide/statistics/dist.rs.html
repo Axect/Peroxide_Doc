@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/statistics/dist.rs`."><title>dist.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../../static.files/rustdoc-42caa33d.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="peroxide" data-themes="" data-resource-suffix="" data-rustdoc-version="1.84.1 (e71f9a9a9 2025-01-27)" data-channel="1.84.1" data-search-js="search-92e6798f.js" data-settings-js="settings-0f613d39.js" ><script src="../../../static.files/storage-59e33391.js"></script><script defer src="../../../static.files/src-script-56102188.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-5f194d8c.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-893ab5e7.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-6580c154.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-044be391.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/statistics/dist.rs`."><title>dist.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../../static.files/rustdoc-46132b98.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="peroxide" data-themes="" data-resource-suffix="" data-rustdoc-version="1.85.1 (4eb161250 2025-03-15)" data-channel="1.85.1" data-search-js="search-75f5ac3e.js" data-settings-js="settings-0f613d39.js" ><script src="../../../static.files/storage-59e33391.js"></script><script defer src="../../../static.files/src-script-56102188.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-5f194d8c.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-893ab5e7.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-6580c154.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-044be391.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js"                  integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js"    integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
 <script>
@@ -973,7 +973,8 @@
 <a href="#956" id="956">956</a>
 <a href="#957" id="957">957</a>
 <a href="#958" id="958">958</a>
-<a href="#959" id="959">959</a></pre></div><pre class="rust"><code><span class="doccomment">//! Probabilistic distributions
+<a href="#959" id="959">959</a>
+<a href="#960" id="960">960</a></pre></div><pre class="rust"><code><span class="doccomment">//! Probabilistic distributions
 //!
 //! ## Probability Distribution
 //!
@@ -1002,7 +1003,8 @@
 //!     * `sample_with_rng`: Extract samples with specific rng
 //!     * `pdf` : Calculate pdf value at specific point
 //!     ```no_run
-//!     use rand::{Rng, distributions::uniform::SampleUniform};
+//!     use rand::Rng;
+//!     use rand_distr::uniform::SampleUniform;
 //!     pub trait RNG {
 //!         /// Extract samples of distributions
 //!         fn sample(&amp;self, n: usize) -&gt; Vec&lt;f64&gt;;
@@ -1203,9 +1205,9 @@
 
 </span><span class="kw">extern crate </span>rand;
 <span class="kw">extern crate </span>rand_distr;
-<span class="kw">use </span>rand_distr::WeightedAliasIndex;
+<span class="kw">use </span>rand_distr::weighted::WeightedAliasIndex;
 
-<span class="kw">use </span><span class="self">self</span>::rand::distributions::uniform::SampleUniform;
+<span class="kw">use </span><span class="self">self</span>::rand_distr::uniform::SampleUniform;
 <span class="kw">use </span><span class="self">self</span>::rand::prelude::<span class="kw-2">*</span>;
 <span class="kw">pub use </span><span class="self">self</span>::OPDist::<span class="kw-2">*</span>;
 <span class="kw">pub use </span><span class="self">self</span>::TPDist::<span class="kw-2">*</span>;
@@ -1496,7 +1498,7 @@
 </span><span class="kw">pub trait </span>RNG {
     <span class="doccomment">/// Extract samples of distributions
     </span><span class="kw">fn </span>sample(<span class="kw-2">&amp;</span><span class="self">self</span>, n: usize) -&gt; Vec&lt;f64&gt; {
-        <span class="kw">let </span><span class="kw-2">mut </span>rng = thread_rng();
+        <span class="kw">let </span><span class="kw-2">mut </span>rng = rand::rng();
         <span class="self">self</span>.sample_with_rng(<span class="kw-2">&amp;mut </span>rng, n)
     }
 
@@ -1529,7 +1531,7 @@
                 <span class="kw">let </span><span class="kw-2">mut </span>v = <span class="macro">vec!</span>[<span class="number">0f64</span>; n];
 
                 <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..n {
-                    <span class="kw">let </span>uniform = rng.gen_range(<span class="number">0f64</span>..=<span class="number">1f64</span>);
+                    <span class="kw">let </span>uniform = rng.random_range(<span class="number">0f64</span>..=<span class="number">1f64</span>);
                     <span class="kw">if </span>uniform &lt;= (<span class="kw-2">*</span>prob).into() {
                         v[i] = <span class="number">1f64</span>;
                     } <span class="kw">else </span>{
@@ -1603,7 +1605,7 @@
                 <span class="kw">let </span><span class="kw-2">mut </span>v = <span class="macro">vec!</span>[<span class="number">0f64</span>; n];
 
                 <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..n {
-                    v[i] = rng.gen_range(<span class="kw-2">*</span>start..=<span class="kw-2">*</span>end).into();
+                    v[i] = rng.random_range(<span class="kw-2">*</span>start..=<span class="kw-2">*</span>end).into();
                 }
                 v
             }
@@ -1618,7 +1620,7 @@
                 normal.sample_iter(rng).take(n).collect()
             }
             <span class="comment">//            Normal(m, s) =&gt; {
-            //                let mut rng = thread_rng();
+            //                let mut rng = rand::rng();
             //                let mut v = vec![0f64; n];
             //
             //                for i in 0..n {
@@ -1631,8 +1633,8 @@
                 beta.sample_iter(rng).take(n).collect()
             }
             <span class="comment">//            Beta(a, b) =&gt; {
-            //                let mut rng1 = thread_rng();
-            //                let mut rng2 = thread_rng();
+            //                let mut rng1 = rand::rng();
+            //                let mut rng2 = rand::rng();
             //                let mut v = vec![0f64; n];
             //
             //                let a_f64 = (*a).into();
@@ -1645,8 +1647,8 @@
             //                let mut iter_num = 0usize;
             //
             //                while iter_num &lt; n {
-            //                    let u1 = rng1.gen_range(0f64, 1f64);
-            //                    let u2 = rng2.gen_range(0f64, 1f64);
+            //                    let u1 = rng1.random_range(0f64, 1f64);
+            //                    let u2 = rng2.random_range(0f64, 1f64);
             //
             //                    if u2 &lt;= 1f64 / c * self.pdf(u1) {
             //                        v[iter_num] = u1;
@@ -1667,14 +1669,14 @@
               //                let d = a_f64 - 1f64 / 3f64;
               //                let c = 1f64 / (9f64 * d).sqrt();
               //
-              //                let mut rng1 = thread_rng();
-              //                let mut rng2 = thread_rng();
+              //                let mut rng1 = rand::rng();
+              //                let mut rng2 = rand::rng();
               //
               //                let mut v = vec![0f64; n];
               //                let mut iter_num = 0usize;
               //
               //                while iter_num &lt; n {
-              //                    let u = rng1.gen_range(0f64, 1f64);
+              //                    let u = rng1.random_range(0f64, 1f64);
               //                    let z = ziggurat(&amp;mut rng2, 1f64);
               //                    let w = (1f64 + c * z).powi(3);
               //
@@ -1779,7 +1781,7 @@
         ics.into_iter()
             .map(|idx| {
                 <span class="kw">let </span>(l, r) = <span class="self">self</span>.intervals[idx];
-                rng.gen_range(l..=r)
+                rng.random_range(l..=r)
             })
             .collect::&lt;Vec&lt;f64&gt;&gt;()
     }

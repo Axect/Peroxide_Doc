@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"attr":["ad_function"],"macro":["ad_closure"],"mod":["simpler"],"trait":["ExpLogOps","PowOps","TrigOps"]};
+window.SIDEBAR_ITEMS = {"attr":["ad_function"],"macro":["ad_closure"],"mod":["simpler"],"struct":["SmallRng","StdRng","ThreadRng"],"trait":["CryptoRng","Distribution","ExpLogOps","IndexedMutRandom","IndexedRandom","IteratorRandom","PowOps","Rng","RngCore","SeedableRng","SliceRandom","TrigOps"]};
