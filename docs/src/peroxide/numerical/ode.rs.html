@@ -1121,7 +1121,17 @@
 <a href="#1104" id="1104">1104</a>
 <a href="#1105" id="1105">1105</a>
 <a href="#1106" id="1106">1106</a>
-<a href="#1107" id="1107">1107</a></pre></div><pre class="rust"><code><span class="doccomment">//! # Ordinary Differential Equation (ODE) Solvers
+<a href="#1107" id="1107">1107</a>
+<a href="#1108" id="1108">1108</a>
+<a href="#1109" id="1109">1109</a>
+<a href="#1110" id="1110">1110</a>
+<a href="#1111" id="1111">1111</a>
+<a href="#1112" id="1112">1112</a>
+<a href="#1113" id="1113">1113</a>
+<a href="#1114" id="1114">1114</a>
+<a href="#1115" id="1115">1115</a>
+<a href="#1116" id="1116">1116</a>
+<a href="#1117" id="1117">1117</a></pre></div><pre class="rust"><code><span class="doccomment">//! # Ordinary Differential Equation (ODE) Solvers
 //!
 //! This module provides traits and structs for solving ordinary differential equations (ODEs).
 //!
@@ -1489,6 +1499,7 @@
 /// In MATLAB, it is called `ode3`.
 </span><span class="attr">#[derive(Debug, Clone, Copy, Default)]
 #[cfg_attr(feature = <span class="string">"serde"</span>, derive(serde::Serialize, serde::Deserialize))]
+#[cfg_attr(feature = <span class="string">"rkyv"</span>, derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize))]
 </span><span class="kw">pub struct </span>RALS3;
 
 <span class="kw">impl </span>ButcherTableau <span class="kw">for </span>RALS3 {
@@ -1504,6 +1515,7 @@
 /// It calculates four intermediate values (k1, k2, k3, k4) to estimate the next step solution.
 </span><span class="attr">#[derive(Debug, Clone, Copy, Default)]
 #[cfg_attr(feature = <span class="string">"serde"</span>, derive(serde::Serialize, serde::Deserialize))]
+#[cfg_attr(feature = <span class="string">"rkyv"</span>, derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize))]
 </span><span class="kw">pub struct </span>RK4;
 
 <span class="kw">impl </span>ButcherTableau <span class="kw">for </span>RK4 {
@@ -1518,6 +1530,7 @@
 /// This fourth order method is known as minimum truncation error RK4.
 </span><span class="attr">#[derive(Debug, Clone, Copy, Default)]
 #[cfg_attr(feature = <span class="string">"serde"</span>, derive(serde::Serialize, serde::Deserialize))]
+#[cfg_attr(feature = <span class="string">"rkyv"</span>, derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize))]
 </span><span class="kw">pub struct </span>RALS4;
 
 <span class="kw">impl </span>ButcherTableau <span class="kw">for </span>RALS4 {
@@ -1537,6 +1550,7 @@
 /// This integrator uses the 5th order Runge-Kutta method to numerically integrate the ODE system.
 </span><span class="attr">#[derive(Debug, Clone, Copy, Default)]
 #[cfg_attr(feature = <span class="string">"serde"</span>, derive(serde::Serialize, serde::Deserialize))]
+#[cfg_attr(feature = <span class="string">"rkyv"</span>, derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize))]
 </span><span class="kw">pub struct </span>RK5;
 
 <span class="kw">impl </span>ButcherTableau <span class="kw">for </span>RK5 {
@@ -1596,6 +1610,7 @@
 /// - `max_step_iter`: The maximum number of iterations per step.
 </span><span class="attr">#[derive(Debug, Clone, Copy)]
 #[cfg_attr(feature = <span class="string">"serde"</span>, derive(serde::Serialize, serde::Deserialize))]
+#[cfg_attr(feature = <span class="string">"rkyv"</span>, derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize))]
 </span><span class="kw">pub struct </span>BS23 {
     <span class="kw">pub </span>tol: f64,
     <span class="kw">pub </span>safety_factor: f64,
@@ -1677,6 +1692,7 @@
 /// - `max_step_iter`: The maximum number of iterations per step.
 </span><span class="attr">#[derive(Debug, Clone, Copy)]
 #[cfg_attr(feature = <span class="string">"serde"</span>, derive(serde::Serialize, serde::Deserialize))]
+#[cfg_attr(feature = <span class="string">"rkyv"</span>, derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize))]
 </span><span class="kw">pub struct </span>RKF45 {
     <span class="kw">pub </span>tol: f64,
     <span class="kw">pub </span>safety_factor: f64,
@@ -1779,6 +1795,7 @@
 /// - `max_step_iter`: The maximum number of iterations per step.
 </span><span class="attr">#[derive(Debug, Clone, Copy)]
 #[cfg_attr(feature = <span class="string">"serde"</span>, derive(serde::Serialize, serde::Deserialize))]
+#[cfg_attr(feature = <span class="string">"rkyv"</span>, derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize))]
 </span><span class="kw">pub struct </span>DP45 {
     <span class="kw">pub </span>tol: f64,
     <span class="kw">pub </span>safety_factor: f64,
@@ -1900,6 +1917,7 @@
 /// - Ch. Tsitouras, Comput. Math. Appl. 62 (2011) 770-780.
 </span><span class="attr">#[derive(Debug, Clone, Copy)]
 #[cfg_attr(feature = <span class="string">"serde"</span>, derive(serde::Serialize, serde::Deserialize))]
+#[cfg_attr(feature = <span class="string">"rkyv"</span>, derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize))]
 </span><span class="kw">pub struct </span>TSIT45 {
     <span class="kw">pub </span>tol: f64,
     <span class="kw">pub </span>safety_factor: f64,
@@ -2019,6 +2037,7 @@
 /// Currently, there are two options: fixed-point iteration and Broyden's method.
 </span><span class="attr">#[derive(Debug, Clone, Copy)]
 #[cfg_attr(feature = <span class="string">"serde"</span>, derive(serde::Serialize, serde::Deserialize))]
+#[cfg_attr(feature = <span class="string">"rkyv"</span>, derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize))]
 </span><span class="kw">pub enum </span>ImplicitSolver {
     FixedPoint,
     Broyden,
@@ -2038,6 +2057,7 @@
 /// - `max_step_iter`: The maximum number of iterations for the implicit solver per step.
 </span><span class="attr">#[derive(Debug, Clone, Copy)]
 #[cfg_attr(feature = <span class="string">"serde"</span>, derive(serde::Serialize, serde::Deserialize))]
+#[cfg_attr(feature = <span class="string">"rkyv"</span>, derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize))]
 </span><span class="kw">pub struct </span>GL4 {
     <span class="kw">pub </span>solver: ImplicitSolver,
     <span class="kw">pub </span>tol: f64,

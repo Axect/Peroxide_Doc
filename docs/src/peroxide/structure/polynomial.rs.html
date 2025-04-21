@@ -679,7 +679,8 @@
 <a href="#662" id="662">662</a>
 <a href="#663" id="663">663</a>
 <a href="#664" id="664">664</a>
-<a href="#665" id="665">665</a></pre></div><pre class="rust"><code><span class="attr">#[allow(unused_imports)]
+<a href="#665" id="665">665</a>
+<a href="#666" id="666">666</a></pre></div><pre class="rust"><code><span class="attr">#[allow(unused_imports)]
 </span><span class="kw">use </span><span class="kw">crate</span>::structure::matrix::<span class="kw-2">*</span>;
 <span class="attr">#[allow(unused_imports)]
 </span><span class="kw">use </span><span class="kw">crate</span>::structure::vector::<span class="kw-2">*</span>;
@@ -699,6 +700,7 @@
 </span><span class="doccomment">/// Polynomial Structure
 </span><span class="attr">#[derive(Debug, Clone, Default)]
 #[cfg_attr(feature = <span class="string">"serde"</span>, derive(Serialize, Deserialize))]
+#[cfg_attr(feature = <span class="string">"rkyv"</span>, derive(rkyv::Archive, rkyv::Deserialize, rkyv::Serialize))]
 </span><span class="kw">pub struct </span>Polynomial {
     <span class="kw">pub </span>coef: Vec&lt;f64&gt;,
 }
