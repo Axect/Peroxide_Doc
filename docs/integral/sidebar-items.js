@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["f","integral_f","main"]};
