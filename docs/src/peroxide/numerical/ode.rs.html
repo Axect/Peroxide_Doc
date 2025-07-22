@@ -340,7 +340,7 @@
 <a href=#324 id=324 data-nosnippet>324</a>                    error = error.max(dt * s.abs())
 <a href=#325 id=325 data-nosnippet>325</a>                }
 <a href=#326 id=326 data-nosnippet>326</a>
-<a href=#327 id=327 data-nosnippet>327</a>                <span class="kw">let </span>factor = (<span class="self">self</span>.tol() * dt / error).powf(<span class="number">0.2</span>);
+<a href=#327 id=327 data-nosnippet>327</a>                <span class="kw">let </span>factor = (<span class="self">self</span>.tol() / error).powf(<span class="number">0.2</span>);
 <a href=#328 id=328 data-nosnippet>328</a>                <span class="kw">let </span>new_dt = <span class="self">self</span>.safety_factor() * dt * factor;
 <a href=#329 id=329 data-nosnippet>329</a>                <span class="kw">let </span>new_dt = new_dt.clamp(<span class="self">self</span>.min_step_size(), <span class="self">self</span>.max_step_size());
 <a href=#330 id=330 data-nosnippet>330</a>
@@ -1118,8 +1118,8 @@
 <a href=#1102 id=1102 data-nosnippet>1102</a>    // BU_i = BE_i (8th order) - ErrorCoeff_i
 <a href=#1103 id=1103 data-nosnippet>1103</a>    // ErrorCoeff_i = [-41/840, 0, ..., 0, -41/840 (for k11), 41/840 (for k12), 41/840 (for k13)]
 <a href=#1104 id=1104 data-nosnippet>1104</a>    </span><span class="kw">const </span>BU: <span class="kw-2">&amp;</span><span class="lifetime">'static </span>[f64] = <span class="kw-2">&amp;</span>[
-<a href=#1105 id=1105 data-nosnippet>1105</a>        <span class="number">41.0 </span>/ <span class="number">420.0</span>, <span class="comment">// 41/840 - (-41/840)
-<a href=#1106 id=1106 data-nosnippet>1106</a>        </span><span class="number">0.0</span>,
+<a href=#1105 id=1105 data-nosnippet>1105</a>        <span class="number">0.0</span>,
+<a href=#1106 id=1106 data-nosnippet>1106</a>        <span class="number">0.0</span>,
 <a href=#1107 id=1107 data-nosnippet>1107</a>        <span class="number">0.0</span>,
 <a href=#1108 id=1108 data-nosnippet>1108</a>        <span class="number">0.0</span>,
 <a href=#1109 id=1109 data-nosnippet>1109</a>        <span class="number">0.0</span>,
@@ -1128,10 +1128,10 @@
 <a href=#1112 id=1112 data-nosnippet>1112</a>        <span class="number">9.0 </span>/ <span class="number">35.0</span>,
 <a href=#1113 id=1113 data-nosnippet>1113</a>        <span class="number">9.0 </span>/ <span class="number">280.0</span>,
 <a href=#1114 id=1114 data-nosnippet>1114</a>        <span class="number">9.0 </span>/ <span class="number">280.0</span>,
-<a href=#1115 id=1115 data-nosnippet>1115</a>        <span class="number">41.0 </span>/ <span class="number">420.0</span>,  <span class="comment">// 41/840 - (-41/840)
-<a href=#1116 id=1116 data-nosnippet>1116</a>        </span>-<span class="number">41.0 </span>/ <span class="number">840.0</span>, <span class="comment">// 0.0 - (41/840)
-<a href=#1117 id=1117 data-nosnippet>1117</a>        </span>-<span class="number">41.0 </span>/ <span class="number">840.0</span>, <span class="comment">// 0.0 - (41/840)
-<a href=#1118 id=1118 data-nosnippet>1118</a>    </span>];
+<a href=#1115 id=1115 data-nosnippet>1115</a>        <span class="number">0.0</span>,
+<a href=#1116 id=1116 data-nosnippet>1116</a>        <span class="number">41.0 </span>/ <span class="number">840.0</span>,
+<a href=#1117 id=1117 data-nosnippet>1117</a>        <span class="number">41.0 </span>/ <span class="number">840.0</span>,
+<a href=#1118 id=1118 data-nosnippet>1118</a>    ];
 <a href=#1119 id=1119 data-nosnippet>1119</a>
 <a href=#1120 id=1120 data-nosnippet>1120</a>    <span class="comment">// Coefficients for the 8th order solution (used for error estimation)
 <a href=#1121 id=1121 data-nosnippet>1121</a>    // These are from the y[i+1] formula in the MATLAB description
