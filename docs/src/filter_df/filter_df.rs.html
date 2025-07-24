@@ -21,44 +21,40 @@
 <a href=#5 id=5 data-nosnippet>5</a>    <span class="kw">let </span>y = <span class="macro">vec!</span>[<span class="number">1f64</span>, <span class="number">2.0</span>, <span class="number">3.0</span>, <span class="number">4.0</span>, <span class="number">5.0</span>];
 <a href=#6 id=6 data-nosnippet>6</a>    <span class="kw">let </span>z = <span class="macro">vec!</span>[<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>, <span class="string">'e'</span>];
 <a href=#7 id=7 data-nosnippet>7</a>
-<a href=#8 id=8 data-nosnippet>8</a>    <span class="kw">let </span><span class="kw-2">mut </span>df = DataFrame::new(<span class="macro">vec!</span>[
-<a href=#9 id=9 data-nosnippet>9</a>        Series::new(x),
-<a href=#10 id=10 data-nosnippet>10</a>        Series::new(y),
-<a href=#11 id=11 data-nosnippet>11</a>        Series::new(z),
-<a href=#12 id=12 data-nosnippet>12</a>    ]);
-<a href=#13 id=13 data-nosnippet>13</a>    df.set_header(<span class="macro">vec!</span>[<span class="string">"x"</span>, <span class="string">"y"</span>, <span class="string">"z"</span>]);
-<a href=#14 id=14 data-nosnippet>14</a>
-<a href=#15 id=15 data-nosnippet>15</a>    df.print();
-<a href=#16 id=16 data-nosnippet>16</a>
-<a href=#17 id=17 data-nosnippet>17</a>    <span class="kw">let </span>filtered_df = df.filter_by(<span class="string">"x"</span>, |x| {
-<a href=#18 id=18 data-nosnippet>18</a>        <span class="kw">if let </span>DTypeValue::I32(val) = x.value {
-<a href=#19 id=19 data-nosnippet>19</a>            val % <span class="number">2 </span>== <span class="number">0
-<a href=#20 id=20 data-nosnippet>20</a>        </span>} <span class="kw">else </span>{
-<a href=#21 id=21 data-nosnippet>21</a>            <span class="bool-val">false
-<a href=#22 id=22 data-nosnippet>22</a>        </span>}
-<a href=#23 id=23 data-nosnippet>23</a>    })<span class="question-mark">?</span>;
-<a href=#24 id=24 data-nosnippet>24</a>
-<a href=#25 id=25 data-nosnippet>25</a>    filtered_df.print();
-<a href=#26 id=26 data-nosnippet>26</a>
-<a href=#27 id=27 data-nosnippet>27</a>    <span class="kw">let </span>filtered_df2 = df.filter_by(<span class="string">"y"</span>, |y| {
-<a href=#28 id=28 data-nosnippet>28</a>        <span class="kw">if let </span>DTypeValue::F64(val) = y.value {
-<a href=#29 id=29 data-nosnippet>29</a>            val &gt; <span class="number">2.0
-<a href=#30 id=30 data-nosnippet>30</a>        </span>} <span class="kw">else </span>{
-<a href=#31 id=31 data-nosnippet>31</a>            <span class="bool-val">false
-<a href=#32 id=32 data-nosnippet>32</a>        </span>}
-<a href=#33 id=33 data-nosnippet>33</a>    })<span class="question-mark">?</span>;
-<a href=#34 id=34 data-nosnippet>34</a>
-<a href=#35 id=35 data-nosnippet>35</a>    filtered_df2.print();
-<a href=#36 id=36 data-nosnippet>36</a>
-<a href=#37 id=37 data-nosnippet>37</a>    <span class="kw">let </span>filtered_df3 = df.filter_by(<span class="string">"z"</span>, |z| {
-<a href=#38 id=38 data-nosnippet>38</a>        <span class="kw">if let </span>DTypeValue::Char(val) = z.value {
-<a href=#39 id=39 data-nosnippet>39</a>            val &lt; <span class="string">'d'
-<a href=#40 id=40 data-nosnippet>40</a>        </span>} <span class="kw">else </span>{
-<a href=#41 id=41 data-nosnippet>41</a>            <span class="bool-val">false
-<a href=#42 id=42 data-nosnippet>42</a>        </span>}
-<a href=#43 id=43 data-nosnippet>43</a>    })<span class="question-mark">?</span>;
-<a href=#44 id=44 data-nosnippet>44</a>
-<a href=#45 id=45 data-nosnippet>45</a>    filtered_df3.print();
-<a href=#46 id=46 data-nosnippet>46</a>
-<a href=#47 id=47 data-nosnippet>47</a>    <span class="prelude-val">Ok</span>(())
-<a href=#48 id=48 data-nosnippet>48</a>}</code></pre></div></section></main></body></html>
+<a href=#8 id=8 data-nosnippet>8</a>    <span class="kw">let </span><span class="kw-2">mut </span>df = DataFrame::new(<span class="macro">vec!</span>[Series::new(x), Series::new(y), Series::new(z)]);
+<a href=#9 id=9 data-nosnippet>9</a>    df.set_header(<span class="macro">vec!</span>[<span class="string">"x"</span>, <span class="string">"y"</span>, <span class="string">"z"</span>]);
+<a href=#10 id=10 data-nosnippet>10</a>
+<a href=#11 id=11 data-nosnippet>11</a>    df.print();
+<a href=#12 id=12 data-nosnippet>12</a>
+<a href=#13 id=13 data-nosnippet>13</a>    <span class="kw">let </span>filtered_df = df.filter_by(<span class="string">"x"</span>, |x| {
+<a href=#14 id=14 data-nosnippet>14</a>        <span class="kw">if let </span>DTypeValue::I32(val) = x.value {
+<a href=#15 id=15 data-nosnippet>15</a>            val % <span class="number">2 </span>== <span class="number">0
+<a href=#16 id=16 data-nosnippet>16</a>        </span>} <span class="kw">else </span>{
+<a href=#17 id=17 data-nosnippet>17</a>            <span class="bool-val">false
+<a href=#18 id=18 data-nosnippet>18</a>        </span>}
+<a href=#19 id=19 data-nosnippet>19</a>    })<span class="question-mark">?</span>;
+<a href=#20 id=20 data-nosnippet>20</a>
+<a href=#21 id=21 data-nosnippet>21</a>    filtered_df.print();
+<a href=#22 id=22 data-nosnippet>22</a>
+<a href=#23 id=23 data-nosnippet>23</a>    <span class="kw">let </span>filtered_df2 = df.filter_by(<span class="string">"y"</span>, |y| {
+<a href=#24 id=24 data-nosnippet>24</a>        <span class="kw">if let </span>DTypeValue::F64(val) = y.value {
+<a href=#25 id=25 data-nosnippet>25</a>            val &gt; <span class="number">2.0
+<a href=#26 id=26 data-nosnippet>26</a>        </span>} <span class="kw">else </span>{
+<a href=#27 id=27 data-nosnippet>27</a>            <span class="bool-val">false
+<a href=#28 id=28 data-nosnippet>28</a>        </span>}
+<a href=#29 id=29 data-nosnippet>29</a>    })<span class="question-mark">?</span>;
+<a href=#30 id=30 data-nosnippet>30</a>
+<a href=#31 id=31 data-nosnippet>31</a>    filtered_df2.print();
+<a href=#32 id=32 data-nosnippet>32</a>
+<a href=#33 id=33 data-nosnippet>33</a>    <span class="kw">let </span>filtered_df3 = df.filter_by(<span class="string">"z"</span>, |z| {
+<a href=#34 id=34 data-nosnippet>34</a>        <span class="kw">if let </span>DTypeValue::Char(val) = z.value {
+<a href=#35 id=35 data-nosnippet>35</a>            val &lt; <span class="string">'d'
+<a href=#36 id=36 data-nosnippet>36</a>        </span>} <span class="kw">else </span>{
+<a href=#37 id=37 data-nosnippet>37</a>            <span class="bool-val">false
+<a href=#38 id=38 data-nosnippet>38</a>        </span>}
+<a href=#39 id=39 data-nosnippet>39</a>    })<span class="question-mark">?</span>;
+<a href=#40 id=40 data-nosnippet>40</a>
+<a href=#41 id=41 data-nosnippet>41</a>    filtered_df3.print();
+<a href=#42 id=42 data-nosnippet>42</a>
+<a href=#43 id=43 data-nosnippet>43</a>    <span class="prelude-val">Ok</span>(())
+<a href=#44 id=44 data-nosnippet>44</a>}</code></pre></div></section></main></body></html>

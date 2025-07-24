@@ -137,7 +137,7 @@
 <a href=#121 id=121 data-nosnippet>121</a>//!     df.print();
 <a href=#122 id=122 data-nosnippet>122</a>//!
 <a href=#123 id=123 data-nosnippet>123</a>//!     # #[cfg(feature="parquet")] {
-<a href=#124 id=124 data-nosnippet>124</a>//!     df.write_parquet("example_data/test.parquet", CompressionOptions::Uncompressed).unwrap();
+<a href=#124 id=124 data-nosnippet>124</a>//!     df.write_parquet("example_data/test.parquet", SNAPPY).unwrap();
 <a href=#125 id=125 data-nosnippet>125</a>//!     # }
 <a href=#126 id=126 data-nosnippet>126</a>//! }
 <a href=#127 id=127 data-nosnippet>127</a>//! ```
@@ -244,4 +244,4 @@
 <a href=#228 id=228 data-nosnippet>228</a>};
 <a href=#229 id=229 data-nosnippet>229</a>
 <a href=#230 id=230 data-nosnippet>230</a><span class="attr">#[cfg(feature = <span class="string">"parquet"</span>)]
-<a href=#231 id=231 data-nosnippet>231</a></span><span class="kw">pub use </span>arrow2::io::parquet::write::CompressionOptions;</code></pre></div></section></main></body></html>
+<a href=#231 id=231 data-nosnippet>231</a></span><span class="kw">pub use </span>parquet::basic::Compression::<span class="kw-2">*</span>;</code></pre></div></section></main></body></html>

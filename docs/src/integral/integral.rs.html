@@ -19,12 +19,12 @@
 <a href=#3 id=3 data-nosnippet>3</a><span class="kw">fn </span>main() {
 <a href=#4 id=4 data-nosnippet>4</a>    <span class="kw">let </span>a = <span class="number">0.0</span>;
 <a href=#5 id=5 data-nosnippet>5</a>    <span class="kw">let </span>b = linspace(<span class="number">0.0</span>, <span class="number">100f64</span>, <span class="number">100</span>);
-<a href=#6 id=6 data-nosnippet>6</a>    <span class="kw">let </span>result = b.iter()
-<a href=#7 id=7 data-nosnippet>7</a>        .map(|<span class="kw-2">&amp;</span>x| {
-<a href=#8 id=8 data-nosnippet>8</a>            integrate(f, (a, x), G7K15R(<span class="number">1e-10</span>, <span class="number">20</span>))
-<a href=#9 id=9 data-nosnippet>9</a>        })
-<a href=#10 id=10 data-nosnippet>10</a>        .collect::&lt;Vec&lt;f64&gt;&gt;();
-<a href=#11 id=11 data-nosnippet>11</a>    <span class="kw">let </span>total_error = result.iter()
+<a href=#6 id=6 data-nosnippet>6</a>    <span class="kw">let </span>result = b
+<a href=#7 id=7 data-nosnippet>7</a>        .iter()
+<a href=#8 id=8 data-nosnippet>8</a>        .map(|<span class="kw-2">&amp;</span>x| integrate(f, (a, x), G7K15R(<span class="number">1e-10</span>, <span class="number">20</span>)))
+<a href=#9 id=9 data-nosnippet>9</a>        .collect::&lt;Vec&lt;f64&gt;&gt;();
+<a href=#10 id=10 data-nosnippet>10</a>    <span class="kw">let </span>total_error = result
+<a href=#11 id=11 data-nosnippet>11</a>        .iter()
 <a href=#12 id=12 data-nosnippet>12</a>        .zip(b.iter())
 <a href=#13 id=13 data-nosnippet>13</a>        .map(|(<span class="kw-2">&amp;</span>integral, <span class="kw-2">&amp;</span>x)| (integral - (integral_f(x) - integral_f(a))).abs())
 <a href=#14 id=14 data-nosnippet>14</a>        .sum::&lt;f64&gt;();

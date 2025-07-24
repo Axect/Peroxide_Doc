@@ -30,7 +30,7 @@
 <a href=#14 id=14 data-nosnippet>14</a><span class="attr">#[allow(unused_imports)]
 <a href=#15 id=15 data-nosnippet>15</a></span><span class="kw">use </span><span class="kw">crate</span>::traits::matrix::{Form, LinearAlgebra, MatrixTrait, SolveKind, PQLU, QR, UPLO, WAZD};
 <a href=#16 id=16 data-nosnippet>16</a><span class="attr">#[cfg(feature = <span class="string">"parquet"</span>)]
-<a href=#17 id=17 data-nosnippet>17</a></span><span class="kw">use </span>arrow2::io::parquet::write::CompressionOptions;
+<a href=#17 id=17 data-nosnippet>17</a></span><span class="kw">use </span>parquet::basic::Compression;
 <a href=#18 id=18 data-nosnippet>18</a><span class="attr">#[cfg(feature = <span class="string">"parquet"</span>)]
 <a href=#19 id=19 data-nosnippet>19</a></span><span class="kw">use </span>std::error::Error;
 <a href=#20 id=20 data-nosnippet>20</a>
@@ -214,7 +214,7 @@
 <a href=#198 id=198 data-nosnippet>198</a><span class="attr">#[cfg(feature = <span class="string">"parquet"</span>)]
 <a href=#199 id=199 data-nosnippet>199</a></span><span class="kw">impl </span>SimpleParquet <span class="kw">for </span>DataFrame {
 <a href=#200 id=200 data-nosnippet>200</a>    <span class="kw">fn </span>write_parquet(<span class="kw-2">&amp;</span><span class="self">self</span>, path: <span class="kw-2">&amp;</span>str) -&gt; <span class="prelude-ty">Result</span>&lt;(), Box&lt;<span class="kw">dyn </span>Error&gt;&gt; {
-<a href=#201 id=201 data-nosnippet>201</a>        WithParquet::write_parquet(<span class="self">self</span>, path, CompressionOptions::Uncompressed)
+<a href=#201 id=201 data-nosnippet>201</a>        WithParquet::write_parquet(<span class="self">self</span>, path, Compression::SNAPPY)
 <a href=#202 id=202 data-nosnippet>202</a>    }
 <a href=#203 id=203 data-nosnippet>203</a>
 <a href=#204 id=204 data-nosnippet>204</a>    <span class="kw">fn </span>read_parquet(path: <span class="kw-2">&amp;</span>str) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, Box&lt;<span class="kw">dyn </span>Error&gt;&gt; {

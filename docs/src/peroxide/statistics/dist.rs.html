@@ -717,31 +717,31 @@
 <a href=#701 id=701 data-nosnippet>701</a>                    rand_distr::Gamma::&lt;f64&gt;::new((<span class="kw-2">*</span>shape).into(), <span class="number">1f64 </span>/ (<span class="kw-2">*</span>scale).into()).unwrap();
 <a href=#702 id=702 data-nosnippet>702</a>                gamma.sample_iter(rng).take(n).collect()
 <a href=#703 id=703 data-nosnippet>703</a>            } <span class="comment">//            Gamma(a, b) =&gt; {
-<a href=#704 id=704 data-nosnippet>704</a>              //                let a_f64 = (*a).into();
-<a href=#705 id=705 data-nosnippet>705</a>              //                let b_f64 = (*b).into();
-<a href=#706 id=706 data-nosnippet>706</a>              //
-<a href=#707 id=707 data-nosnippet>707</a>              //                // for Marsaglia &amp; Tsang's Method
-<a href=#708 id=708 data-nosnippet>708</a>              //                let d = a_f64 - 1f64 / 3f64;
-<a href=#709 id=709 data-nosnippet>709</a>              //                let c = 1f64 / (9f64 * d).sqrt();
-<a href=#710 id=710 data-nosnippet>710</a>              //
-<a href=#711 id=711 data-nosnippet>711</a>              //                let mut rng1 = rand::rng();
-<a href=#712 id=712 data-nosnippet>712</a>              //                let mut rng2 = rand::rng();
-<a href=#713 id=713 data-nosnippet>713</a>              //
-<a href=#714 id=714 data-nosnippet>714</a>              //                let mut v = vec![0f64; n];
-<a href=#715 id=715 data-nosnippet>715</a>              //                let mut iter_num = 0usize;
-<a href=#716 id=716 data-nosnippet>716</a>              //
-<a href=#717 id=717 data-nosnippet>717</a>              //                while iter_num &lt; n {
-<a href=#718 id=718 data-nosnippet>718</a>              //                    let u = rng1.random_range(0f64, 1f64);
-<a href=#719 id=719 data-nosnippet>719</a>              //                    let z = ziggurat(&amp;mut rng2, 1f64);
-<a href=#720 id=720 data-nosnippet>720</a>              //                    let w = (1f64 + c * z).powi(3);
-<a href=#721 id=721 data-nosnippet>721</a>              //
-<a href=#722 id=722 data-nosnippet>722</a>              //                    if z &gt;= -1f64 / c &amp;&amp; u.ln() &lt; 0.5 * z.powi(2) + d - d * w + d * w.ln() {
-<a href=#723 id=723 data-nosnippet>723</a>              //                        v[iter_num] = d * w / b_f64;
-<a href=#724 id=724 data-nosnippet>724</a>              //                        iter_num += 1;
-<a href=#725 id=725 data-nosnippet>725</a>              //                    }
-<a href=#726 id=726 data-nosnippet>726</a>              //                }
-<a href=#727 id=727 data-nosnippet>727</a>              //                v
-<a href=#728 id=728 data-nosnippet>728</a>              //            }
+<a href=#704 id=704 data-nosnippet>704</a>            //                let a_f64 = (*a).into();
+<a href=#705 id=705 data-nosnippet>705</a>            //                let b_f64 = (*b).into();
+<a href=#706 id=706 data-nosnippet>706</a>            //
+<a href=#707 id=707 data-nosnippet>707</a>            //                // for Marsaglia &amp; Tsang's Method
+<a href=#708 id=708 data-nosnippet>708</a>            //                let d = a_f64 - 1f64 / 3f64;
+<a href=#709 id=709 data-nosnippet>709</a>            //                let c = 1f64 / (9f64 * d).sqrt();
+<a href=#710 id=710 data-nosnippet>710</a>            //
+<a href=#711 id=711 data-nosnippet>711</a>            //                let mut rng1 = rand::rng();
+<a href=#712 id=712 data-nosnippet>712</a>            //                let mut rng2 = rand::rng();
+<a href=#713 id=713 data-nosnippet>713</a>            //
+<a href=#714 id=714 data-nosnippet>714</a>            //                let mut v = vec![0f64; n];
+<a href=#715 id=715 data-nosnippet>715</a>            //                let mut iter_num = 0usize;
+<a href=#716 id=716 data-nosnippet>716</a>            //
+<a href=#717 id=717 data-nosnippet>717</a>            //                while iter_num &lt; n {
+<a href=#718 id=718 data-nosnippet>718</a>            //                    let u = rng1.random_range(0f64, 1f64);
+<a href=#719 id=719 data-nosnippet>719</a>            //                    let z = ziggurat(&amp;mut rng2, 1f64);
+<a href=#720 id=720 data-nosnippet>720</a>            //                    let w = (1f64 + c * z).powi(3);
+<a href=#721 id=721 data-nosnippet>721</a>            //
+<a href=#722 id=722 data-nosnippet>722</a>            //                    if z &gt;= -1f64 / c &amp;&amp; u.ln() &lt; 0.5 * z.powi(2) + d - d * w + d * w.ln() {
+<a href=#723 id=723 data-nosnippet>723</a>            //                        v[iter_num] = d * w / b_f64;
+<a href=#724 id=724 data-nosnippet>724</a>            //                        iter_num += 1;
+<a href=#725 id=725 data-nosnippet>725</a>            //                    }
+<a href=#726 id=726 data-nosnippet>726</a>            //                }
+<a href=#727 id=727 data-nosnippet>727</a>            //                v
+<a href=#728 id=728 data-nosnippet>728</a>            //            }
 <a href=#729 id=729 data-nosnippet>729</a>            </span>LogNormal(mu, sigma) =&gt; {
 <a href=#730 id=730 data-nosnippet>730</a>                <span class="kw">let </span>log_normal =
 <a href=#731 id=731 data-nosnippet>731</a>                    rand_distr::LogNormal::&lt;f64&gt;::new((<span class="kw-2">*</span>mu).into(), (<span class="kw-2">*</span>sigma).into()).unwrap();
@@ -837,186 +837,182 @@
 <a href=#821 id=821 data-nosnippet>821</a>
 <a href=#822 id=822 data-nosnippet>822</a>                inc_gamma(a, b * x)
 <a href=#823 id=823 data-nosnippet>823</a>            }
-<a href=#824 id=824 data-nosnippet>824</a>            LogNormal(mu, sigma) =&gt; {
-<a href=#825 id=825 data-nosnippet>825</a>                phi(
-<a href=#826 id=826 data-nosnippet>826</a>                    (x.ln() - (<span class="kw-2">*</span>mu).into()) / (<span class="kw-2">*</span>sigma).into(),
-<a href=#827 id=827 data-nosnippet>827</a>                )
-<a href=#828 id=828 data-nosnippet>828</a>            }
-<a href=#829 id=829 data-nosnippet>829</a>        }
-<a href=#830 id=830 data-nosnippet>830</a>    }
-<a href=#831 id=831 data-nosnippet>831</a>}
-<a href=#832 id=832 data-nosnippet>832</a>
-<a href=#833 id=833 data-nosnippet>833</a><span class="kw">impl </span>RNG <span class="kw">for </span>WeightedUniform&lt;f64&gt; {
-<a href=#834 id=834 data-nosnippet>834</a>    <span class="kw">fn </span>sample_with_rng&lt;R: Rng + Clone&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, rng: <span class="kw-2">&amp;mut </span>R, n: usize) -&gt; Vec&lt;f64&gt; {
-<a href=#835 id=835 data-nosnippet>835</a>        <span class="kw">let </span>w = WeightedAliasIndex::new(<span class="self">self</span>.weights.clone()).unwrap();
-<a href=#836 id=836 data-nosnippet>836</a>        <span class="kw">let </span><span class="kw-2">mut </span>rng_clip = rng.clone();
-<a href=#837 id=837 data-nosnippet>837</a>        <span class="kw">let </span>ics: Vec&lt;usize&gt; = w.sample_iter(<span class="kw-2">&amp;mut </span>rng_clip).take(n).collect();
-<a href=#838 id=838 data-nosnippet>838</a>        <span class="kw-2">*</span>rng = rng_clip;
-<a href=#839 id=839 data-nosnippet>839</a>
-<a href=#840 id=840 data-nosnippet>840</a>        ics.into_iter()
-<a href=#841 id=841 data-nosnippet>841</a>            .map(|idx| {
-<a href=#842 id=842 data-nosnippet>842</a>                <span class="kw">let </span>(l, r) = <span class="self">self</span>.intervals[idx];
-<a href=#843 id=843 data-nosnippet>843</a>                rng.random_range(l..=r)
-<a href=#844 id=844 data-nosnippet>844</a>            })
-<a href=#845 id=845 data-nosnippet>845</a>            .collect::&lt;Vec&lt;f64&gt;&gt;()
-<a href=#846 id=846 data-nosnippet>846</a>    }
-<a href=#847 id=847 data-nosnippet>847</a>
-<a href=#848 id=848 data-nosnippet>848</a>    <span class="kw">fn </span>pdf&lt;S: PartialOrd + SampleUniform + Copy + Into&lt;f64&gt;&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, x: S) -&gt; f64 {
-<a href=#849 id=849 data-nosnippet>849</a>        <span class="kw">let </span>x: f64 = x.into();
-<a href=#850 id=850 data-nosnippet>850</a>        <span class="kw">if </span>x &lt; <span class="self">self</span>.intervals[<span class="number">0</span>].<span class="number">0 </span>|| x &gt; <span class="self">self</span>.intervals[<span class="self">self</span>.intervals.len() - <span class="number">1</span>].<span class="number">1 </span>{
-<a href=#851 id=851 data-nosnippet>851</a>            <span class="kw">return </span><span class="number">0f64</span>;
-<a href=#852 id=852 data-nosnippet>852</a>        }
-<a href=#853 id=853 data-nosnippet>853</a>        <span class="kw">let </span>idx = find_interval(<span class="self">self</span>.intervals(), x);
-<a href=#854 id=854 data-nosnippet>854</a>        <span class="self">self</span>.weights[idx] / <span class="self">self</span>.sum
-<a href=#855 id=855 data-nosnippet>855</a>    }
-<a href=#856 id=856 data-nosnippet>856</a>
-<a href=#857 id=857 data-nosnippet>857</a>    <span class="kw">fn </span>cdf&lt;S: PartialOrd + SampleUniform + Copy + Into&lt;f64&gt;&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, x: S) -&gt; f64 {
-<a href=#858 id=858 data-nosnippet>858</a>        <span class="kw">let </span>x: f64 = x.into();
-<a href=#859 id=859 data-nosnippet>859</a>        <span class="kw">if </span>x &lt; <span class="self">self</span>.intervals[<span class="number">0</span>].<span class="number">0 </span>{
-<a href=#860 id=860 data-nosnippet>860</a>            <span class="kw">return </span><span class="number">0f64</span>;
-<a href=#861 id=861 data-nosnippet>861</a>        } <span class="kw">else if </span>x &gt; <span class="self">self</span>.intervals[<span class="self">self</span>.intervals.len() - <span class="number">1</span>].<span class="number">1 </span>{
-<a href=#862 id=862 data-nosnippet>862</a>            <span class="kw">return </span><span class="number">1f64</span>;
-<a href=#863 id=863 data-nosnippet>863</a>        }
-<a href=#864 id=864 data-nosnippet>864</a>        <span class="kw">let </span>idx = find_interval(<span class="self">self</span>.intervals(), x);
-<a href=#865 id=865 data-nosnippet>865</a>        <span class="self">self</span>.weights[<span class="number">0</span>..=idx]
-<a href=#866 id=866 data-nosnippet>866</a>            .iter()
-<a href=#867 id=867 data-nosnippet>867</a>            .zip(<span class="self">self</span>.intervals[<span class="number">0</span>..=idx].iter())
-<a href=#868 id=868 data-nosnippet>868</a>            .fold(<span class="number">0f64</span>, |acc, (w, (a, b))| acc + w * (b - a))
-<a href=#869 id=869 data-nosnippet>869</a>            / <span class="self">self</span>.sum
-<a href=#870 id=870 data-nosnippet>870</a>    }
-<a href=#871 id=871 data-nosnippet>871</a>}
+<a href=#824 id=824 data-nosnippet>824</a>            LogNormal(mu, sigma) =&gt; phi((x.ln() - (<span class="kw-2">*</span>mu).into()) / (<span class="kw-2">*</span>sigma).into()),
+<a href=#825 id=825 data-nosnippet>825</a>        }
+<a href=#826 id=826 data-nosnippet>826</a>    }
+<a href=#827 id=827 data-nosnippet>827</a>}
+<a href=#828 id=828 data-nosnippet>828</a>
+<a href=#829 id=829 data-nosnippet>829</a><span class="kw">impl </span>RNG <span class="kw">for </span>WeightedUniform&lt;f64&gt; {
+<a href=#830 id=830 data-nosnippet>830</a>    <span class="kw">fn </span>sample_with_rng&lt;R: Rng + Clone&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, rng: <span class="kw-2">&amp;mut </span>R, n: usize) -&gt; Vec&lt;f64&gt; {
+<a href=#831 id=831 data-nosnippet>831</a>        <span class="kw">let </span>w = WeightedAliasIndex::new(<span class="self">self</span>.weights.clone()).unwrap();
+<a href=#832 id=832 data-nosnippet>832</a>        <span class="kw">let </span><span class="kw-2">mut </span>rng_clip = rng.clone();
+<a href=#833 id=833 data-nosnippet>833</a>        <span class="kw">let </span>ics: Vec&lt;usize&gt; = w.sample_iter(<span class="kw-2">&amp;mut </span>rng_clip).take(n).collect();
+<a href=#834 id=834 data-nosnippet>834</a>        <span class="kw-2">*</span>rng = rng_clip;
+<a href=#835 id=835 data-nosnippet>835</a>
+<a href=#836 id=836 data-nosnippet>836</a>        ics.into_iter()
+<a href=#837 id=837 data-nosnippet>837</a>            .map(|idx| {
+<a href=#838 id=838 data-nosnippet>838</a>                <span class="kw">let </span>(l, r) = <span class="self">self</span>.intervals[idx];
+<a href=#839 id=839 data-nosnippet>839</a>                rng.random_range(l..=r)
+<a href=#840 id=840 data-nosnippet>840</a>            })
+<a href=#841 id=841 data-nosnippet>841</a>            .collect::&lt;Vec&lt;f64&gt;&gt;()
+<a href=#842 id=842 data-nosnippet>842</a>    }
+<a href=#843 id=843 data-nosnippet>843</a>
+<a href=#844 id=844 data-nosnippet>844</a>    <span class="kw">fn </span>pdf&lt;S: PartialOrd + SampleUniform + Copy + Into&lt;f64&gt;&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, x: S) -&gt; f64 {
+<a href=#845 id=845 data-nosnippet>845</a>        <span class="kw">let </span>x: f64 = x.into();
+<a href=#846 id=846 data-nosnippet>846</a>        <span class="kw">if </span>x &lt; <span class="self">self</span>.intervals[<span class="number">0</span>].<span class="number">0 </span>|| x &gt; <span class="self">self</span>.intervals[<span class="self">self</span>.intervals.len() - <span class="number">1</span>].<span class="number">1 </span>{
+<a href=#847 id=847 data-nosnippet>847</a>            <span class="kw">return </span><span class="number">0f64</span>;
+<a href=#848 id=848 data-nosnippet>848</a>        }
+<a href=#849 id=849 data-nosnippet>849</a>        <span class="kw">let </span>idx = find_interval(<span class="self">self</span>.intervals(), x);
+<a href=#850 id=850 data-nosnippet>850</a>        <span class="self">self</span>.weights[idx] / <span class="self">self</span>.sum
+<a href=#851 id=851 data-nosnippet>851</a>    }
+<a href=#852 id=852 data-nosnippet>852</a>
+<a href=#853 id=853 data-nosnippet>853</a>    <span class="kw">fn </span>cdf&lt;S: PartialOrd + SampleUniform + Copy + Into&lt;f64&gt;&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, x: S) -&gt; f64 {
+<a href=#854 id=854 data-nosnippet>854</a>        <span class="kw">let </span>x: f64 = x.into();
+<a href=#855 id=855 data-nosnippet>855</a>        <span class="kw">if </span>x &lt; <span class="self">self</span>.intervals[<span class="number">0</span>].<span class="number">0 </span>{
+<a href=#856 id=856 data-nosnippet>856</a>            <span class="kw">return </span><span class="number">0f64</span>;
+<a href=#857 id=857 data-nosnippet>857</a>        } <span class="kw">else if </span>x &gt; <span class="self">self</span>.intervals[<span class="self">self</span>.intervals.len() - <span class="number">1</span>].<span class="number">1 </span>{
+<a href=#858 id=858 data-nosnippet>858</a>            <span class="kw">return </span><span class="number">1f64</span>;
+<a href=#859 id=859 data-nosnippet>859</a>        }
+<a href=#860 id=860 data-nosnippet>860</a>        <span class="kw">let </span>idx = find_interval(<span class="self">self</span>.intervals(), x);
+<a href=#861 id=861 data-nosnippet>861</a>        <span class="self">self</span>.weights[<span class="number">0</span>..=idx]
+<a href=#862 id=862 data-nosnippet>862</a>            .iter()
+<a href=#863 id=863 data-nosnippet>863</a>            .zip(<span class="self">self</span>.intervals[<span class="number">0</span>..=idx].iter())
+<a href=#864 id=864 data-nosnippet>864</a>            .fold(<span class="number">0f64</span>, |acc, (w, (a, b))| acc + w * (b - a))
+<a href=#865 id=865 data-nosnippet>865</a>            / <span class="self">self</span>.sum
+<a href=#866 id=866 data-nosnippet>866</a>    }
+<a href=#867 id=867 data-nosnippet>867</a>}
+<a href=#868 id=868 data-nosnippet>868</a>
+<a href=#869 id=869 data-nosnippet>869</a><span class="kw">impl</span>&lt;T: PartialOrd + SampleUniform + Copy + Into&lt;f64&gt;&gt; Statistics <span class="kw">for </span>OPDist&lt;T&gt; {
+<a href=#870 id=870 data-nosnippet>870</a>    <span class="kw">type </span>Array = Vec&lt;f64&gt;;
+<a href=#871 id=871 data-nosnippet>871</a>    <span class="kw">type </span>Value = f64;
 <a href=#872 id=872 data-nosnippet>872</a>
-<a href=#873 id=873 data-nosnippet>873</a><span class="kw">impl</span>&lt;T: PartialOrd + SampleUniform + Copy + Into&lt;f64&gt;&gt; Statistics <span class="kw">for </span>OPDist&lt;T&gt; {
-<a href=#874 id=874 data-nosnippet>874</a>    <span class="kw">type </span>Array = Vec&lt;f64&gt;;
-<a href=#875 id=875 data-nosnippet>875</a>    <span class="kw">type </span>Value = f64;
-<a href=#876 id=876 data-nosnippet>876</a>
-<a href=#877 id=877 data-nosnippet>877</a>    <span class="kw">fn </span>mean(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Value {
-<a href=#878 id=878 data-nosnippet>878</a>        <span class="kw">match </span><span class="self">self </span>{
-<a href=#879 id=879 data-nosnippet>879</a>            Bernoulli(mu) =&gt; (<span class="kw-2">*</span>mu).into(),
-<a href=#880 id=880 data-nosnippet>880</a>            StudentT(<span class="kw">_</span>) =&gt; <span class="number">0f64</span>,
-<a href=#881 id=881 data-nosnippet>881</a>        }
-<a href=#882 id=882 data-nosnippet>882</a>    }
-<a href=#883 id=883 data-nosnippet>883</a>
-<a href=#884 id=884 data-nosnippet>884</a>    <span class="kw">fn </span>var(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Value {
-<a href=#885 id=885 data-nosnippet>885</a>        <span class="kw">match </span><span class="self">self </span>{
-<a href=#886 id=886 data-nosnippet>886</a>            Bernoulli(mu) =&gt; {
-<a href=#887 id=887 data-nosnippet>887</a>                <span class="kw">let </span>mu_f64 = (<span class="kw-2">*</span>mu).into();
-<a href=#888 id=888 data-nosnippet>888</a>                mu_f64 * (<span class="number">1f64 </span>- mu_f64)
+<a href=#873 id=873 data-nosnippet>873</a>    <span class="kw">fn </span>mean(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Value {
+<a href=#874 id=874 data-nosnippet>874</a>        <span class="kw">match </span><span class="self">self </span>{
+<a href=#875 id=875 data-nosnippet>875</a>            Bernoulli(mu) =&gt; (<span class="kw-2">*</span>mu).into(),
+<a href=#876 id=876 data-nosnippet>876</a>            StudentT(<span class="kw">_</span>) =&gt; <span class="number">0f64</span>,
+<a href=#877 id=877 data-nosnippet>877</a>        }
+<a href=#878 id=878 data-nosnippet>878</a>    }
+<a href=#879 id=879 data-nosnippet>879</a>
+<a href=#880 id=880 data-nosnippet>880</a>    <span class="kw">fn </span>var(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Value {
+<a href=#881 id=881 data-nosnippet>881</a>        <span class="kw">match </span><span class="self">self </span>{
+<a href=#882 id=882 data-nosnippet>882</a>            Bernoulli(mu) =&gt; {
+<a href=#883 id=883 data-nosnippet>883</a>                <span class="kw">let </span>mu_f64 = (<span class="kw-2">*</span>mu).into();
+<a href=#884 id=884 data-nosnippet>884</a>                mu_f64 * (<span class="number">1f64 </span>- mu_f64)
+<a href=#885 id=885 data-nosnippet>885</a>            }
+<a href=#886 id=886 data-nosnippet>886</a>            StudentT(nu) =&gt; {
+<a href=#887 id=887 data-nosnippet>887</a>                <span class="kw">let </span>nu_f64 = (<span class="kw-2">*</span>nu).into();
+<a href=#888 id=888 data-nosnippet>888</a>                nu_f64 / (nu_f64 - <span class="number">2f64</span>)
 <a href=#889 id=889 data-nosnippet>889</a>            }
-<a href=#890 id=890 data-nosnippet>890</a>            StudentT(nu) =&gt; {
-<a href=#891 id=891 data-nosnippet>891</a>                <span class="kw">let </span>nu_f64 = (<span class="kw-2">*</span>nu).into();
-<a href=#892 id=892 data-nosnippet>892</a>                nu_f64 / (nu_f64 - <span class="number">2f64</span>)
-<a href=#893 id=893 data-nosnippet>893</a>            }
-<a href=#894 id=894 data-nosnippet>894</a>        }
-<a href=#895 id=895 data-nosnippet>895</a>    }
-<a href=#896 id=896 data-nosnippet>896</a>
-<a href=#897 id=897 data-nosnippet>897</a>    <span class="kw">fn </span>sd(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Value {
-<a href=#898 id=898 data-nosnippet>898</a>        <span class="kw">match </span><span class="self">self </span>{
-<a href=#899 id=899 data-nosnippet>899</a>            Bernoulli(_mu) =&gt; <span class="self">self</span>.var().sqrt(),
-<a href=#900 id=900 data-nosnippet>900</a>            StudentT(_nu) =&gt; <span class="self">self</span>.var().sqrt(),
-<a href=#901 id=901 data-nosnippet>901</a>        }
+<a href=#890 id=890 data-nosnippet>890</a>        }
+<a href=#891 id=891 data-nosnippet>891</a>    }
+<a href=#892 id=892 data-nosnippet>892</a>
+<a href=#893 id=893 data-nosnippet>893</a>    <span class="kw">fn </span>sd(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Value {
+<a href=#894 id=894 data-nosnippet>894</a>        <span class="kw">match </span><span class="self">self </span>{
+<a href=#895 id=895 data-nosnippet>895</a>            Bernoulli(_mu) =&gt; <span class="self">self</span>.var().sqrt(),
+<a href=#896 id=896 data-nosnippet>896</a>            StudentT(_nu) =&gt; <span class="self">self</span>.var().sqrt(),
+<a href=#897 id=897 data-nosnippet>897</a>        }
+<a href=#898 id=898 data-nosnippet>898</a>    }
+<a href=#899 id=899 data-nosnippet>899</a>
+<a href=#900 id=900 data-nosnippet>900</a>    <span class="kw">fn </span>cov(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Array {
+<a href=#901 id=901 data-nosnippet>901</a>        <span class="macro">unimplemented!</span>()
 <a href=#902 id=902 data-nosnippet>902</a>    }
 <a href=#903 id=903 data-nosnippet>903</a>
-<a href=#904 id=904 data-nosnippet>904</a>    <span class="kw">fn </span>cov(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Array {
+<a href=#904 id=904 data-nosnippet>904</a>    <span class="kw">fn </span>cor(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Array {
 <a href=#905 id=905 data-nosnippet>905</a>        <span class="macro">unimplemented!</span>()
 <a href=#906 id=906 data-nosnippet>906</a>    }
-<a href=#907 id=907 data-nosnippet>907</a>
-<a href=#908 id=908 data-nosnippet>908</a>    <span class="kw">fn </span>cor(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Array {
-<a href=#909 id=909 data-nosnippet>909</a>        <span class="macro">unimplemented!</span>()
-<a href=#910 id=910 data-nosnippet>910</a>    }
-<a href=#911 id=911 data-nosnippet>911</a>}
+<a href=#907 id=907 data-nosnippet>907</a>}
+<a href=#908 id=908 data-nosnippet>908</a>
+<a href=#909 id=909 data-nosnippet>909</a><span class="kw">impl</span>&lt;T: PartialOrd + SampleUniform + Copy + Into&lt;f64&gt;&gt; Statistics <span class="kw">for </span>TPDist&lt;T&gt; {
+<a href=#910 id=910 data-nosnippet>910</a>    <span class="kw">type </span>Array = Vec&lt;f64&gt;;
+<a href=#911 id=911 data-nosnippet>911</a>    <span class="kw">type </span>Value = f64;
 <a href=#912 id=912 data-nosnippet>912</a>
-<a href=#913 id=913 data-nosnippet>913</a><span class="kw">impl</span>&lt;T: PartialOrd + SampleUniform + Copy + Into&lt;f64&gt;&gt; Statistics <span class="kw">for </span>TPDist&lt;T&gt; {
-<a href=#914 id=914 data-nosnippet>914</a>    <span class="kw">type </span>Array = Vec&lt;f64&gt;;
-<a href=#915 id=915 data-nosnippet>915</a>    <span class="kw">type </span>Value = f64;
-<a href=#916 id=916 data-nosnippet>916</a>
-<a href=#917 id=917 data-nosnippet>917</a>    <span class="kw">fn </span>mean(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Value {
-<a href=#918 id=918 data-nosnippet>918</a>        <span class="kw">match </span><span class="self">self </span>{
-<a href=#919 id=919 data-nosnippet>919</a>            Uniform(a, b) =&gt; ((<span class="kw-2">*</span>a).into() + (<span class="kw-2">*</span>b).into()) / <span class="number">2f64</span>,
-<a href=#920 id=920 data-nosnippet>920</a>            Binomial(n, mu) =&gt; (<span class="kw-2">*</span>n <span class="kw">as </span>f64) * (<span class="kw-2">*</span>mu).into(),
-<a href=#921 id=921 data-nosnippet>921</a>            Normal(m, _s) =&gt; (<span class="kw-2">*</span>m).into(),
-<a href=#922 id=922 data-nosnippet>922</a>            Beta(a, b) =&gt; (<span class="kw-2">*</span>a).into() / ((<span class="kw-2">*</span>a).into() + (<span class="kw-2">*</span>b).into()),
-<a href=#923 id=923 data-nosnippet>923</a>            Gamma(a, b) =&gt; (<span class="kw-2">*</span>a).into() / (<span class="kw-2">*</span>b).into(),
-<a href=#924 id=924 data-nosnippet>924</a>            LogNormal(mu, sigma) =&gt; {
-<a href=#925 id=925 data-nosnippet>925</a>                <span class="kw">let </span>mu_f64 = (<span class="kw-2">*</span>mu).into();
-<a href=#926 id=926 data-nosnippet>926</a>                <span class="kw">let </span>sigma_f64 = (<span class="kw-2">*</span>sigma).into();
-<a href=#927 id=927 data-nosnippet>927</a>                E.powf(mu_f64 + <span class="number">0.5 </span>* sigma_f64.powi(<span class="number">2</span>))
-<a href=#928 id=928 data-nosnippet>928</a>            }
-<a href=#929 id=929 data-nosnippet>929</a>        }
-<a href=#930 id=930 data-nosnippet>930</a>    }
-<a href=#931 id=931 data-nosnippet>931</a>
-<a href=#932 id=932 data-nosnippet>932</a>    <span class="kw">fn </span>var(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Value {
-<a href=#933 id=933 data-nosnippet>933</a>        <span class="kw">match </span><span class="self">self </span>{
-<a href=#934 id=934 data-nosnippet>934</a>            Uniform(a, b) =&gt; ((<span class="kw-2">*</span>b).into() - (<span class="kw-2">*</span>a).into()).powi(<span class="number">2</span>) / <span class="number">12f64</span>,
-<a href=#935 id=935 data-nosnippet>935</a>            Binomial(n, mu) =&gt; (<span class="kw-2">*</span>n <span class="kw">as </span>f64) * (<span class="kw-2">*</span>mu).into() * (<span class="number">1f64 </span>- (<span class="kw-2">*</span>mu).into()),
-<a href=#936 id=936 data-nosnippet>936</a>            Normal(_m, s) =&gt; (<span class="kw-2">*</span>s).into().powi(<span class="number">2</span>),
-<a href=#937 id=937 data-nosnippet>937</a>            Beta(a, b) =&gt; {
-<a href=#938 id=938 data-nosnippet>938</a>                <span class="kw">let </span>a_f64 = (<span class="kw-2">*</span>a).into();
-<a href=#939 id=939 data-nosnippet>939</a>                <span class="kw">let </span>b_f64 = (<span class="kw-2">*</span>b).into();
-<a href=#940 id=940 data-nosnippet>940</a>                a_f64 * b_f64 / ((a_f64 + b_f64).powi(<span class="number">2</span>) * (a_f64 + b_f64 + <span class="number">1f64</span>))
-<a href=#941 id=941 data-nosnippet>941</a>            }
-<a href=#942 id=942 data-nosnippet>942</a>            Gamma(a, b) =&gt; (<span class="kw-2">*</span>a).into() / (<span class="kw-2">*</span>b).into().powi(<span class="number">2</span>),
-<a href=#943 id=943 data-nosnippet>943</a>            LogNormal(mu, sigma) =&gt; {
-<a href=#944 id=944 data-nosnippet>944</a>                <span class="kw">let </span>mu_f64 = (<span class="kw-2">*</span>mu).into();
-<a href=#945 id=945 data-nosnippet>945</a>                <span class="kw">let </span>sigma_f64 = (<span class="kw-2">*</span>sigma).into();
-<a href=#946 id=946 data-nosnippet>946</a>                (E.powf(sigma_f64.powi(<span class="number">2</span>)) - <span class="number">1f64</span>) * E.powf(<span class="number">2f64 </span>* mu_f64 + sigma_f64.powi(<span class="number">2</span>))
-<a href=#947 id=947 data-nosnippet>947</a>            }
-<a href=#948 id=948 data-nosnippet>948</a>        }
-<a href=#949 id=949 data-nosnippet>949</a>    }
-<a href=#950 id=950 data-nosnippet>950</a>
-<a href=#951 id=951 data-nosnippet>951</a>    <span class="kw">fn </span>sd(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Value {
-<a href=#952 id=952 data-nosnippet>952</a>        <span class="kw">match </span><span class="self">self </span>{
-<a href=#953 id=953 data-nosnippet>953</a>            Uniform(_a, _b) =&gt; <span class="self">self</span>.var().sqrt(),
-<a href=#954 id=954 data-nosnippet>954</a>            Binomial(_n, _mu) =&gt; <span class="self">self</span>.var().sqrt(),
-<a href=#955 id=955 data-nosnippet>955</a>            Normal(_m, s) =&gt; (<span class="kw-2">*</span>s).into(),
-<a href=#956 id=956 data-nosnippet>956</a>            Beta(_a, _b) =&gt; <span class="self">self</span>.var().sqrt(),
-<a href=#957 id=957 data-nosnippet>957</a>            Gamma(_a, _b) =&gt; <span class="self">self</span>.var().sqrt(),
-<a href=#958 id=958 data-nosnippet>958</a>            LogNormal(_mu, _sigma) =&gt; <span class="self">self</span>.var().sqrt(),
-<a href=#959 id=959 data-nosnippet>959</a>        }
+<a href=#913 id=913 data-nosnippet>913</a>    <span class="kw">fn </span>mean(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Value {
+<a href=#914 id=914 data-nosnippet>914</a>        <span class="kw">match </span><span class="self">self </span>{
+<a href=#915 id=915 data-nosnippet>915</a>            Uniform(a, b) =&gt; ((<span class="kw-2">*</span>a).into() + (<span class="kw-2">*</span>b).into()) / <span class="number">2f64</span>,
+<a href=#916 id=916 data-nosnippet>916</a>            Binomial(n, mu) =&gt; (<span class="kw-2">*</span>n <span class="kw">as </span>f64) * (<span class="kw-2">*</span>mu).into(),
+<a href=#917 id=917 data-nosnippet>917</a>            Normal(m, _s) =&gt; (<span class="kw-2">*</span>m).into(),
+<a href=#918 id=918 data-nosnippet>918</a>            Beta(a, b) =&gt; (<span class="kw-2">*</span>a).into() / ((<span class="kw-2">*</span>a).into() + (<span class="kw-2">*</span>b).into()),
+<a href=#919 id=919 data-nosnippet>919</a>            Gamma(a, b) =&gt; (<span class="kw-2">*</span>a).into() / (<span class="kw-2">*</span>b).into(),
+<a href=#920 id=920 data-nosnippet>920</a>            LogNormal(mu, sigma) =&gt; {
+<a href=#921 id=921 data-nosnippet>921</a>                <span class="kw">let </span>mu_f64 = (<span class="kw-2">*</span>mu).into();
+<a href=#922 id=922 data-nosnippet>922</a>                <span class="kw">let </span>sigma_f64 = (<span class="kw-2">*</span>sigma).into();
+<a href=#923 id=923 data-nosnippet>923</a>                E.powf(mu_f64 + <span class="number">0.5 </span>* sigma_f64.powi(<span class="number">2</span>))
+<a href=#924 id=924 data-nosnippet>924</a>            }
+<a href=#925 id=925 data-nosnippet>925</a>        }
+<a href=#926 id=926 data-nosnippet>926</a>    }
+<a href=#927 id=927 data-nosnippet>927</a>
+<a href=#928 id=928 data-nosnippet>928</a>    <span class="kw">fn </span>var(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Value {
+<a href=#929 id=929 data-nosnippet>929</a>        <span class="kw">match </span><span class="self">self </span>{
+<a href=#930 id=930 data-nosnippet>930</a>            Uniform(a, b) =&gt; ((<span class="kw-2">*</span>b).into() - (<span class="kw-2">*</span>a).into()).powi(<span class="number">2</span>) / <span class="number">12f64</span>,
+<a href=#931 id=931 data-nosnippet>931</a>            Binomial(n, mu) =&gt; (<span class="kw-2">*</span>n <span class="kw">as </span>f64) * (<span class="kw-2">*</span>mu).into() * (<span class="number">1f64 </span>- (<span class="kw-2">*</span>mu).into()),
+<a href=#932 id=932 data-nosnippet>932</a>            Normal(_m, s) =&gt; (<span class="kw-2">*</span>s).into().powi(<span class="number">2</span>),
+<a href=#933 id=933 data-nosnippet>933</a>            Beta(a, b) =&gt; {
+<a href=#934 id=934 data-nosnippet>934</a>                <span class="kw">let </span>a_f64 = (<span class="kw-2">*</span>a).into();
+<a href=#935 id=935 data-nosnippet>935</a>                <span class="kw">let </span>b_f64 = (<span class="kw-2">*</span>b).into();
+<a href=#936 id=936 data-nosnippet>936</a>                a_f64 * b_f64 / ((a_f64 + b_f64).powi(<span class="number">2</span>) * (a_f64 + b_f64 + <span class="number">1f64</span>))
+<a href=#937 id=937 data-nosnippet>937</a>            }
+<a href=#938 id=938 data-nosnippet>938</a>            Gamma(a, b) =&gt; (<span class="kw-2">*</span>a).into() / (<span class="kw-2">*</span>b).into().powi(<span class="number">2</span>),
+<a href=#939 id=939 data-nosnippet>939</a>            LogNormal(mu, sigma) =&gt; {
+<a href=#940 id=940 data-nosnippet>940</a>                <span class="kw">let </span>mu_f64 = (<span class="kw-2">*</span>mu).into();
+<a href=#941 id=941 data-nosnippet>941</a>                <span class="kw">let </span>sigma_f64 = (<span class="kw-2">*</span>sigma).into();
+<a href=#942 id=942 data-nosnippet>942</a>                (E.powf(sigma_f64.powi(<span class="number">2</span>)) - <span class="number">1f64</span>) * E.powf(<span class="number">2f64 </span>* mu_f64 + sigma_f64.powi(<span class="number">2</span>))
+<a href=#943 id=943 data-nosnippet>943</a>            }
+<a href=#944 id=944 data-nosnippet>944</a>        }
+<a href=#945 id=945 data-nosnippet>945</a>    }
+<a href=#946 id=946 data-nosnippet>946</a>
+<a href=#947 id=947 data-nosnippet>947</a>    <span class="kw">fn </span>sd(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Value {
+<a href=#948 id=948 data-nosnippet>948</a>        <span class="kw">match </span><span class="self">self </span>{
+<a href=#949 id=949 data-nosnippet>949</a>            Uniform(_a, _b) =&gt; <span class="self">self</span>.var().sqrt(),
+<a href=#950 id=950 data-nosnippet>950</a>            Binomial(_n, _mu) =&gt; <span class="self">self</span>.var().sqrt(),
+<a href=#951 id=951 data-nosnippet>951</a>            Normal(_m, s) =&gt; (<span class="kw-2">*</span>s).into(),
+<a href=#952 id=952 data-nosnippet>952</a>            Beta(_a, _b) =&gt; <span class="self">self</span>.var().sqrt(),
+<a href=#953 id=953 data-nosnippet>953</a>            Gamma(_a, _b) =&gt; <span class="self">self</span>.var().sqrt(),
+<a href=#954 id=954 data-nosnippet>954</a>            LogNormal(_mu, _sigma) =&gt; <span class="self">self</span>.var().sqrt(),
+<a href=#955 id=955 data-nosnippet>955</a>        }
+<a href=#956 id=956 data-nosnippet>956</a>    }
+<a href=#957 id=957 data-nosnippet>957</a>
+<a href=#958 id=958 data-nosnippet>958</a>    <span class="kw">fn </span>cov(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Array {
+<a href=#959 id=959 data-nosnippet>959</a>        <span class="macro">unimplemented!</span>()
 <a href=#960 id=960 data-nosnippet>960</a>    }
 <a href=#961 id=961 data-nosnippet>961</a>
-<a href=#962 id=962 data-nosnippet>962</a>    <span class="kw">fn </span>cov(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Array {
+<a href=#962 id=962 data-nosnippet>962</a>    <span class="kw">fn </span>cor(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Array {
 <a href=#963 id=963 data-nosnippet>963</a>        <span class="macro">unimplemented!</span>()
 <a href=#964 id=964 data-nosnippet>964</a>    }
-<a href=#965 id=965 data-nosnippet>965</a>
-<a href=#966 id=966 data-nosnippet>966</a>    <span class="kw">fn </span>cor(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Array {
-<a href=#967 id=967 data-nosnippet>967</a>        <span class="macro">unimplemented!</span>()
-<a href=#968 id=968 data-nosnippet>968</a>    }
-<a href=#969 id=969 data-nosnippet>969</a>}
+<a href=#965 id=965 data-nosnippet>965</a>}
+<a href=#966 id=966 data-nosnippet>966</a>
+<a href=#967 id=967 data-nosnippet>967</a><span class="kw">impl </span>Statistics <span class="kw">for </span>WeightedUniform&lt;f64&gt; {
+<a href=#968 id=968 data-nosnippet>968</a>    <span class="kw">type </span>Array = Vec&lt;f64&gt;;
+<a href=#969 id=969 data-nosnippet>969</a>    <span class="kw">type </span>Value = f64;
 <a href=#970 id=970 data-nosnippet>970</a>
-<a href=#971 id=971 data-nosnippet>971</a><span class="kw">impl </span>Statistics <span class="kw">for </span>WeightedUniform&lt;f64&gt; {
-<a href=#972 id=972 data-nosnippet>972</a>    <span class="kw">type </span>Array = Vec&lt;f64&gt;;
-<a href=#973 id=973 data-nosnippet>973</a>    <span class="kw">type </span>Value = f64;
-<a href=#974 id=974 data-nosnippet>974</a>
-<a href=#975 id=975 data-nosnippet>975</a>    <span class="kw">fn </span>mean(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Value {
-<a href=#976 id=976 data-nosnippet>976</a>        <span class="self">self</span>.intervals()
-<a href=#977 id=977 data-nosnippet>977</a>            .iter()
-<a href=#978 id=978 data-nosnippet>978</a>            .zip(<span class="self">self</span>.weights().iter())
-<a href=#979 id=979 data-nosnippet>979</a>            .map(|((l, r), w)| (r.powi(<span class="number">2</span>) - l.powi(<span class="number">2</span>)) / <span class="number">2f64 </span>* w)
-<a href=#980 id=980 data-nosnippet>980</a>            .sum::&lt;f64&gt;()
-<a href=#981 id=981 data-nosnippet>981</a>            / <span class="self">self</span>.sum
-<a href=#982 id=982 data-nosnippet>982</a>    }
-<a href=#983 id=983 data-nosnippet>983</a>
-<a href=#984 id=984 data-nosnippet>984</a>    <span class="kw">fn </span>var(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Value {
-<a href=#985 id=985 data-nosnippet>985</a>        <span class="kw">let </span>mean = <span class="self">self</span>.mean();
-<a href=#986 id=986 data-nosnippet>986</a>        <span class="self">self</span>.intervals()
-<a href=#987 id=987 data-nosnippet>987</a>            .iter()
-<a href=#988 id=988 data-nosnippet>988</a>            .zip(<span class="self">self</span>.weights().iter())
-<a href=#989 id=989 data-nosnippet>989</a>            .map(|((l, r), w)| w * (r.powi(<span class="number">3</span>) - l.powi(<span class="number">3</span>)) / <span class="number">3f64</span>)
-<a href=#990 id=990 data-nosnippet>990</a>            .sum::&lt;f64&gt;()
-<a href=#991 id=991 data-nosnippet>991</a>            / <span class="self">self</span>.sum
-<a href=#992 id=992 data-nosnippet>992</a>            - mean * mean
+<a href=#971 id=971 data-nosnippet>971</a>    <span class="kw">fn </span>mean(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Value {
+<a href=#972 id=972 data-nosnippet>972</a>        <span class="self">self</span>.intervals()
+<a href=#973 id=973 data-nosnippet>973</a>            .iter()
+<a href=#974 id=974 data-nosnippet>974</a>            .zip(<span class="self">self</span>.weights().iter())
+<a href=#975 id=975 data-nosnippet>975</a>            .map(|((l, r), w)| (r.powi(<span class="number">2</span>) - l.powi(<span class="number">2</span>)) / <span class="number">2f64 </span>* w)
+<a href=#976 id=976 data-nosnippet>976</a>            .sum::&lt;f64&gt;()
+<a href=#977 id=977 data-nosnippet>977</a>            / <span class="self">self</span>.sum
+<a href=#978 id=978 data-nosnippet>978</a>    }
+<a href=#979 id=979 data-nosnippet>979</a>
+<a href=#980 id=980 data-nosnippet>980</a>    <span class="kw">fn </span>var(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Value {
+<a href=#981 id=981 data-nosnippet>981</a>        <span class="kw">let </span>mean = <span class="self">self</span>.mean();
+<a href=#982 id=982 data-nosnippet>982</a>        <span class="self">self</span>.intervals()
+<a href=#983 id=983 data-nosnippet>983</a>            .iter()
+<a href=#984 id=984 data-nosnippet>984</a>            .zip(<span class="self">self</span>.weights().iter())
+<a href=#985 id=985 data-nosnippet>985</a>            .map(|((l, r), w)| w * (r.powi(<span class="number">3</span>) - l.powi(<span class="number">3</span>)) / <span class="number">3f64</span>)
+<a href=#986 id=986 data-nosnippet>986</a>            .sum::&lt;f64&gt;()
+<a href=#987 id=987 data-nosnippet>987</a>            / <span class="self">self</span>.sum
+<a href=#988 id=988 data-nosnippet>988</a>            - mean * mean
+<a href=#989 id=989 data-nosnippet>989</a>    }
+<a href=#990 id=990 data-nosnippet>990</a>
+<a href=#991 id=991 data-nosnippet>991</a>    <span class="kw">fn </span>sd(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Value {
+<a href=#992 id=992 data-nosnippet>992</a>        <span class="self">self</span>.var().sqrt()
 <a href=#993 id=993 data-nosnippet>993</a>    }
 <a href=#994 id=994 data-nosnippet>994</a>
-<a href=#995 id=995 data-nosnippet>995</a>    <span class="kw">fn </span>sd(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Value {
-<a href=#996 id=996 data-nosnippet>996</a>        <span class="self">self</span>.var().sqrt()
+<a href=#995 id=995 data-nosnippet>995</a>    <span class="kw">fn </span>cov(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Array {
+<a href=#996 id=996 data-nosnippet>996</a>        <span class="macro">vec!</span>[<span class="self">self</span>.var()]
 <a href=#997 id=997 data-nosnippet>997</a>    }
 <a href=#998 id=998 data-nosnippet>998</a>
-<a href=#999 id=999 data-nosnippet>999</a>    <span class="kw">fn </span>cov(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Array {
-<a href=#1000 id=1000 data-nosnippet>1000</a>        <span class="macro">vec!</span>[<span class="self">self</span>.var()]
+<a href=#999 id=999 data-nosnippet>999</a>    <span class="kw">fn </span>cor(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Array {
+<a href=#1000 id=1000 data-nosnippet>1000</a>        <span class="macro">vec!</span>[<span class="number">1f64</span>]
 <a href=#1001 id=1001 data-nosnippet>1001</a>    }
-<a href=#1002 id=1002 data-nosnippet>1002</a>
-<a href=#1003 id=1003 data-nosnippet>1003</a>    <span class="kw">fn </span>cor(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Array {
-<a href=#1004 id=1004 data-nosnippet>1004</a>        <span class="macro">vec!</span>[<span class="number">1f64</span>]
-<a href=#1005 id=1005 data-nosnippet>1005</a>    }
-<a href=#1006 id=1006 data-nosnippet>1006</a>}</code></pre></div></section></main></body></html>
+<a href=#1002 id=1002 data-nosnippet>1002</a>}</code></pre></div></section></main></body></html>

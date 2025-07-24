@@ -1307,119 +1307,117 @@
 <a href=#1291 id=1291 data-nosnippet>1291</a>                    </span><span class="kw">let </span>delta = (<span class="kw-2">&amp;</span>J_inv * <span class="kw-2">&amp;</span>F_vec).mul_scalar(-<span class="number">1.0</span>);
 <a href=#1292 id=1292 data-nosnippet>1292</a>
 <a href=#1293 id=1293 data-nosnippet>1293</a>                    <span class="comment">// U &lt;- U + delta
-<a href=#1294 id=1294 data-nosnippet>1294</a>                    </span>U.iter_mut()
-<a href=#1295 id=1295 data-nosnippet>1295</a>                        .zip(delta.iter())
-<a href=#1296 id=1296 data-nosnippet>1296</a>                        .for_each(|(u, d)| <span class="kw-2">*</span>u += <span class="kw-2">*</span>d);
-<a href=#1297 id=1297 data-nosnippet>1297</a>
-<a href=#1298 id=1298 data-nosnippet>1298</a>                    <span class="kw">let </span><span class="kw-2">mut </span>F_new = <span class="macro">vec!</span>[<span class="number">0.0</span>; m];
-<a href=#1299 id=1299 data-nosnippet>1299</a>                    compute_F(problem, t, y, dt, <span class="kw-2">&amp;</span>U, <span class="kw-2">&amp;mut </span>F_new)<span class="question-mark">?</span>;
-<a href=#1300 id=1300 data-nosnippet>1300</a>
-<a href=#1301 id=1301 data-nosnippet>1301</a>                    <span class="comment">// If infinity norm of F_new is less than tol, break
-<a href=#1302 id=1302 data-nosnippet>1302</a>                    </span><span class="kw">if </span>F_new.norm(Norm::LInf) &lt; <span class="self">self</span>.tol {
-<a href=#1303 id=1303 data-nosnippet>1303</a>                        <span class="kw">break</span>;
-<a href=#1304 id=1304 data-nosnippet>1304</a>                    }
-<a href=#1305 id=1305 data-nosnippet>1305</a>
-<a href=#1306 id=1306 data-nosnippet>1306</a>                    <span class="comment">// Residual: delta_F = F_new - F_vec
-<a href=#1307 id=1307 data-nosnippet>1307</a>                    </span><span class="kw">let </span>delta_F = F_new.sub_vec(<span class="kw-2">&amp;</span>F_vec);
-<a href=#1308 id=1308 data-nosnippet>1308</a>
-<a href=#1309 id=1309 data-nosnippet>1309</a>                    <span class="comment">// J_inv * delta_F
-<a href=#1310 id=1310 data-nosnippet>1310</a>                    </span><span class="kw">let </span>J_inv_delta_F = <span class="kw-2">&amp;</span>J_inv * <span class="kw-2">&amp;</span>delta_F;
-<a href=#1311 id=1311 data-nosnippet>1311</a>
-<a href=#1312 id=1312 data-nosnippet>1312</a>                    <span class="kw">let </span>denom = delta.dot(<span class="kw-2">&amp;</span>J_inv_delta_F);
-<a href=#1313 id=1313 data-nosnippet>1313</a>                    <span class="kw">if </span>denom.abs() &lt; <span class="number">1e-12 </span>{
-<a href=#1314 id=1314 data-nosnippet>1314</a>                        <span class="kw">break</span>;
-<a href=#1315 id=1315 data-nosnippet>1315</a>                    }
-<a href=#1316 id=1316 data-nosnippet>1316</a>
-<a href=#1317 id=1317 data-nosnippet>1317</a>                    <span class="comment">// Broyden's "good" update for the inverse Jacobian
-<a href=#1318 id=1318 data-nosnippet>1318</a>                    // J_inv &lt;- J_inv + ((delta - J_inv * delta_F) * delta^T * J_inv) / denom
-<a href=#1319 id=1319 data-nosnippet>1319</a>                    </span><span class="kw">let </span>delta_minus_J_inv_delta_F = delta.sub_vec(<span class="kw-2">&amp;</span>J_inv_delta_F).to_col();
-<a href=#1320 id=1320 data-nosnippet>1320</a>                    <span class="kw">let </span>delta_T_J_inv = <span class="kw-2">&amp;</span>delta.to_row() * <span class="kw-2">&amp;</span>J_inv;
-<a href=#1321 id=1321 data-nosnippet>1321</a>                    <span class="kw">let </span>update = (delta_minus_J_inv_delta_F * delta_T_J_inv) / denom;
-<a href=#1322 id=1322 data-nosnippet>1322</a>                    J_inv = J_inv + update;
-<a href=#1323 id=1323 data-nosnippet>1323</a>                    F_vec = F_new;
-<a href=#1324 id=1324 data-nosnippet>1324</a>                }
-<a href=#1325 id=1325 data-nosnippet>1325</a>
-<a href=#1326 id=1326 data-nosnippet>1326</a>                k1.copy_from_slice(<span class="kw-2">&amp;</span>U[..n]);
-<a href=#1327 id=1327 data-nosnippet>1327</a>                k2.copy_from_slice(<span class="kw-2">&amp;</span>U[n..]);
-<a href=#1328 id=1328 data-nosnippet>1328</a>            }
-<a href=#1329 id=1329 data-nosnippet>1329</a>        }
-<a href=#1330 id=1330 data-nosnippet>1330</a>
-<a href=#1331 id=1331 data-nosnippet>1331</a>        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..n {
-<a href=#1332 id=1332 data-nosnippet>1332</a>            y[i] += dt * (B1 * k1[i] + B2 * k2[i]);
-<a href=#1333 id=1333 data-nosnippet>1333</a>        }
-<a href=#1334 id=1334 data-nosnippet>1334</a>
-<a href=#1335 id=1335 data-nosnippet>1335</a>        <span class="prelude-val">Ok</span>(dt)
-<a href=#1336 id=1336 data-nosnippet>1336</a>    }
-<a href=#1337 id=1337 data-nosnippet>1337</a>}
-<a href=#1338 id=1338 data-nosnippet>1338</a>
-<a href=#1339 id=1339 data-nosnippet>1339</a><span class="comment">//// Helper function to compute the function F(U) for the implicit solver.
-<a href=#1340 id=1340 data-nosnippet>1340</a>//// y1 = y + dt*(c*k1 + d*k2 - sqrt3/2*(k2-k1))
-<a href=#1341 id=1341 data-nosnippet>1341</a>//// y2 = y + dt*(c*k1 + d*k2 + sqrt3/2*(k2-k1))
-<a href=#1342 id=1342 data-nosnippet>1342</a>//#[allow(non_snake_case)]
-<a href=#1343 id=1343 data-nosnippet>1343</a>//fn compute_F&lt;P: ODEProblem&gt;(
-<a href=#1344 id=1344 data-nosnippet>1344</a>//    problem: &amp;P,
-<a href=#1345 id=1345 data-nosnippet>1345</a>//    t: f64,
-<a href=#1346 id=1346 data-nosnippet>1346</a>//    y: &amp;[f64],
-<a href=#1347 id=1347 data-nosnippet>1347</a>//    dt: f64,
-<a href=#1348 id=1348 data-nosnippet>1348</a>//    c: f64,
-<a href=#1349 id=1349 data-nosnippet>1349</a>//    d: f64,
-<a href=#1350 id=1350 data-nosnippet>1350</a>//    sqrt3: f64,
-<a href=#1351 id=1351 data-nosnippet>1351</a>//    U: &amp;[f64],
-<a href=#1352 id=1352 data-nosnippet>1352</a>//    F: &amp;mut [f64],
-<a href=#1353 id=1353 data-nosnippet>1353</a>//) -&gt; Result&lt;()&gt; {
-<a href=#1354 id=1354 data-nosnippet>1354</a>//    let n = y.len();
-<a href=#1355 id=1355 data-nosnippet>1355</a>//    let mut y1 = vec![0.0; n];
-<a href=#1356 id=1356 data-nosnippet>1356</a>//    let mut y2 = vec![0.0; n];
-<a href=#1357 id=1357 data-nosnippet>1357</a>//
-<a href=#1358 id=1358 data-nosnippet>1358</a>//    for i in 0..n {
-<a href=#1359 id=1359 data-nosnippet>1359</a>//        let k1 = U[i];
-<a href=#1360 id=1360 data-nosnippet>1360</a>//        let k2 = U[n + i];
-<a href=#1361 id=1361 data-nosnippet>1361</a>//        y1[i] = y[i] + dt * (c * k1 + d * k2 - sqrt3 * (k2 - k1) / 2.0);
-<a href=#1362 id=1362 data-nosnippet>1362</a>//        y2[i] = y[i] + dt * (c * k1 + d * k2 + sqrt3 * (k2 - k1) / 2.0);
-<a href=#1363 id=1363 data-nosnippet>1363</a>//    }
-<a href=#1364 id=1364 data-nosnippet>1364</a>//
-<a href=#1365 id=1365 data-nosnippet>1365</a>//    let mut f1 = vec![0.0; n];
-<a href=#1366 id=1366 data-nosnippet>1366</a>//    let mut f2 = vec![0.0; n];
-<a href=#1367 id=1367 data-nosnippet>1367</a>//    problem.rhs(t + c * dt, &amp;y1, &amp;mut f1)?;
-<a href=#1368 id=1368 data-nosnippet>1368</a>//    problem.rhs(t + d * dt, &amp;y2, &amp;mut f2)?;
-<a href=#1369 id=1369 data-nosnippet>1369</a>//
-<a href=#1370 id=1370 data-nosnippet>1370</a>//    // F = [ k1 - f1, k2 - f2 ]
-<a href=#1371 id=1371 data-nosnippet>1371</a>//    for i in 0..n {
-<a href=#1372 id=1372 data-nosnippet>1372</a>//        F[i] = U[i] - f1[i];
-<a href=#1373 id=1373 data-nosnippet>1373</a>//        F[n + i] = U[n + i] - f2[i];
-<a href=#1374 id=1374 data-nosnippet>1374</a>//    }
-<a href=#1375 id=1375 data-nosnippet>1375</a>//    Ok(())
-<a href=#1376 id=1376 data-nosnippet>1376</a>//}
-<a href=#1377 id=1377 data-nosnippet>1377</a></span><span class="doccomment">/// Helper function to compute the residual F(U) = U - f(y + dt*A*U)
-<a href=#1378 id=1378 data-nosnippet>1378</a></span><span class="attr">#[allow(non_snake_case)]
-<a href=#1379 id=1379 data-nosnippet>1379</a></span><span class="kw">fn </span>compute_F&lt;P: ODEProblem&gt;(
-<a href=#1380 id=1380 data-nosnippet>1380</a>    problem: <span class="kw-2">&amp;</span>P,
-<a href=#1381 id=1381 data-nosnippet>1381</a>    t: f64,
-<a href=#1382 id=1382 data-nosnippet>1382</a>    y: <span class="kw-2">&amp;</span>[f64],
-<a href=#1383 id=1383 data-nosnippet>1383</a>    dt: f64,
-<a href=#1384 id=1384 data-nosnippet>1384</a>    U: <span class="kw-2">&amp;</span>[f64], <span class="comment">// U is a concatenated vector [k1, k2]
-<a href=#1385 id=1385 data-nosnippet>1385</a>    </span>F: <span class="kw-2">&amp;mut </span>[f64],
-<a href=#1386 id=1386 data-nosnippet>1386</a>) -&gt; <span class="prelude-ty">Result</span>&lt;()&gt; {
-<a href=#1387 id=1387 data-nosnippet>1387</a>    <span class="kw">let </span>n = y.len();
-<a href=#1388 id=1388 data-nosnippet>1388</a>    <span class="kw">let </span>(k1_slice, k2_slice) = U.split_at(n);
-<a href=#1389 id=1389 data-nosnippet>1389</a>
-<a href=#1390 id=1390 data-nosnippet>1390</a>    <span class="kw">let </span><span class="kw-2">mut </span>y1 = <span class="macro">vec!</span>[<span class="number">0.0</span>; n];
-<a href=#1391 id=1391 data-nosnippet>1391</a>    <span class="kw">let </span><span class="kw-2">mut </span>y2 = <span class="macro">vec!</span>[<span class="number">0.0</span>; n];
-<a href=#1392 id=1392 data-nosnippet>1392</a>
-<a href=#1393 id=1393 data-nosnippet>1393</a>    <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..n {
-<a href=#1394 id=1394 data-nosnippet>1394</a>        y1[i] = y[i] + dt * (A11 * k1_slice[i] + A12 * k2_slice[i]);
-<a href=#1395 id=1395 data-nosnippet>1395</a>        y2[i] = y[i] + dt * (A21 * k1_slice[i] + A22 * k2_slice[i]);
-<a href=#1396 id=1396 data-nosnippet>1396</a>    }
-<a href=#1397 id=1397 data-nosnippet>1397</a>    
-<a href=#1398 id=1398 data-nosnippet>1398</a>    <span class="comment">// F is an output parameter, its parts f1 and f2 are stored temporarily
-<a href=#1399 id=1399 data-nosnippet>1399</a>    </span><span class="kw">let </span>(f1, f2) = F.split_at_mut(n);
-<a href=#1400 id=1400 data-nosnippet>1400</a>    problem.rhs(t + C1 * dt, <span class="kw-2">&amp;</span>y1, f1)<span class="question-mark">?</span>;
-<a href=#1401 id=1401 data-nosnippet>1401</a>    problem.rhs(t + C2 * dt, <span class="kw-2">&amp;</span>y2, f2)<span class="question-mark">?</span>;
-<a href=#1402 id=1402 data-nosnippet>1402</a>
-<a href=#1403 id=1403 data-nosnippet>1403</a>    <span class="comment">// Compute final residual F = [k1 - f1, k2 - f2]
-<a href=#1404 id=1404 data-nosnippet>1404</a>    </span><span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..n {
-<a href=#1405 id=1405 data-nosnippet>1405</a>        f1[i] = k1_slice[i] - f1[i];
-<a href=#1406 id=1406 data-nosnippet>1406</a>        f2[i] = k2_slice[i] - f2[i];
-<a href=#1407 id=1407 data-nosnippet>1407</a>    }
-<a href=#1408 id=1408 data-nosnippet>1408</a>    <span class="prelude-val">Ok</span>(())
-<a href=#1409 id=1409 data-nosnippet>1409</a>}</code></pre></div></section></main></body></html>
+<a href=#1294 id=1294 data-nosnippet>1294</a>                    </span>U.iter_mut().zip(delta.iter()).for_each(|(u, d)| <span class="kw-2">*</span>u += <span class="kw-2">*</span>d);
+<a href=#1295 id=1295 data-nosnippet>1295</a>
+<a href=#1296 id=1296 data-nosnippet>1296</a>                    <span class="kw">let </span><span class="kw-2">mut </span>F_new = <span class="macro">vec!</span>[<span class="number">0.0</span>; m];
+<a href=#1297 id=1297 data-nosnippet>1297</a>                    compute_F(problem, t, y, dt, <span class="kw-2">&amp;</span>U, <span class="kw-2">&amp;mut </span>F_new)<span class="question-mark">?</span>;
+<a href=#1298 id=1298 data-nosnippet>1298</a>
+<a href=#1299 id=1299 data-nosnippet>1299</a>                    <span class="comment">// If infinity norm of F_new is less than tol, break
+<a href=#1300 id=1300 data-nosnippet>1300</a>                    </span><span class="kw">if </span>F_new.norm(Norm::LInf) &lt; <span class="self">self</span>.tol {
+<a href=#1301 id=1301 data-nosnippet>1301</a>                        <span class="kw">break</span>;
+<a href=#1302 id=1302 data-nosnippet>1302</a>                    }
+<a href=#1303 id=1303 data-nosnippet>1303</a>
+<a href=#1304 id=1304 data-nosnippet>1304</a>                    <span class="comment">// Residual: delta_F = F_new - F_vec
+<a href=#1305 id=1305 data-nosnippet>1305</a>                    </span><span class="kw">let </span>delta_F = F_new.sub_vec(<span class="kw-2">&amp;</span>F_vec);
+<a href=#1306 id=1306 data-nosnippet>1306</a>
+<a href=#1307 id=1307 data-nosnippet>1307</a>                    <span class="comment">// J_inv * delta_F
+<a href=#1308 id=1308 data-nosnippet>1308</a>                    </span><span class="kw">let </span>J_inv_delta_F = <span class="kw-2">&amp;</span>J_inv * <span class="kw-2">&amp;</span>delta_F;
+<a href=#1309 id=1309 data-nosnippet>1309</a>
+<a href=#1310 id=1310 data-nosnippet>1310</a>                    <span class="kw">let </span>denom = delta.dot(<span class="kw-2">&amp;</span>J_inv_delta_F);
+<a href=#1311 id=1311 data-nosnippet>1311</a>                    <span class="kw">if </span>denom.abs() &lt; <span class="number">1e-12 </span>{
+<a href=#1312 id=1312 data-nosnippet>1312</a>                        <span class="kw">break</span>;
+<a href=#1313 id=1313 data-nosnippet>1313</a>                    }
+<a href=#1314 id=1314 data-nosnippet>1314</a>
+<a href=#1315 id=1315 data-nosnippet>1315</a>                    <span class="comment">// Broyden's "good" update for the inverse Jacobian
+<a href=#1316 id=1316 data-nosnippet>1316</a>                    // J_inv &lt;- J_inv + ((delta - J_inv * delta_F) * delta^T * J_inv) / denom
+<a href=#1317 id=1317 data-nosnippet>1317</a>                    </span><span class="kw">let </span>delta_minus_J_inv_delta_F = delta.sub_vec(<span class="kw-2">&amp;</span>J_inv_delta_F).to_col();
+<a href=#1318 id=1318 data-nosnippet>1318</a>                    <span class="kw">let </span>delta_T_J_inv = <span class="kw-2">&amp;</span>delta.to_row() * <span class="kw-2">&amp;</span>J_inv;
+<a href=#1319 id=1319 data-nosnippet>1319</a>                    <span class="kw">let </span>update = (delta_minus_J_inv_delta_F * delta_T_J_inv) / denom;
+<a href=#1320 id=1320 data-nosnippet>1320</a>                    J_inv = J_inv + update;
+<a href=#1321 id=1321 data-nosnippet>1321</a>                    F_vec = F_new;
+<a href=#1322 id=1322 data-nosnippet>1322</a>                }
+<a href=#1323 id=1323 data-nosnippet>1323</a>
+<a href=#1324 id=1324 data-nosnippet>1324</a>                k1.copy_from_slice(<span class="kw-2">&amp;</span>U[..n]);
+<a href=#1325 id=1325 data-nosnippet>1325</a>                k2.copy_from_slice(<span class="kw-2">&amp;</span>U[n..]);
+<a href=#1326 id=1326 data-nosnippet>1326</a>            }
+<a href=#1327 id=1327 data-nosnippet>1327</a>        }
+<a href=#1328 id=1328 data-nosnippet>1328</a>
+<a href=#1329 id=1329 data-nosnippet>1329</a>        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..n {
+<a href=#1330 id=1330 data-nosnippet>1330</a>            y[i] += dt * (B1 * k1[i] + B2 * k2[i]);
+<a href=#1331 id=1331 data-nosnippet>1331</a>        }
+<a href=#1332 id=1332 data-nosnippet>1332</a>
+<a href=#1333 id=1333 data-nosnippet>1333</a>        <span class="prelude-val">Ok</span>(dt)
+<a href=#1334 id=1334 data-nosnippet>1334</a>    }
+<a href=#1335 id=1335 data-nosnippet>1335</a>}
+<a href=#1336 id=1336 data-nosnippet>1336</a>
+<a href=#1337 id=1337 data-nosnippet>1337</a><span class="comment">//// Helper function to compute the function F(U) for the implicit solver.
+<a href=#1338 id=1338 data-nosnippet>1338</a>//// y1 = y + dt*(c*k1 + d*k2 - sqrt3/2*(k2-k1))
+<a href=#1339 id=1339 data-nosnippet>1339</a>//// y2 = y + dt*(c*k1 + d*k2 + sqrt3/2*(k2-k1))
+<a href=#1340 id=1340 data-nosnippet>1340</a>//#[allow(non_snake_case)]
+<a href=#1341 id=1341 data-nosnippet>1341</a>//fn compute_F&lt;P: ODEProblem&gt;(
+<a href=#1342 id=1342 data-nosnippet>1342</a>//    problem: &amp;P,
+<a href=#1343 id=1343 data-nosnippet>1343</a>//    t: f64,
+<a href=#1344 id=1344 data-nosnippet>1344</a>//    y: &amp;[f64],
+<a href=#1345 id=1345 data-nosnippet>1345</a>//    dt: f64,
+<a href=#1346 id=1346 data-nosnippet>1346</a>//    c: f64,
+<a href=#1347 id=1347 data-nosnippet>1347</a>//    d: f64,
+<a href=#1348 id=1348 data-nosnippet>1348</a>//    sqrt3: f64,
+<a href=#1349 id=1349 data-nosnippet>1349</a>//    U: &amp;[f64],
+<a href=#1350 id=1350 data-nosnippet>1350</a>//    F: &amp;mut [f64],
+<a href=#1351 id=1351 data-nosnippet>1351</a>//) -&gt; Result&lt;()&gt; {
+<a href=#1352 id=1352 data-nosnippet>1352</a>//    let n = y.len();
+<a href=#1353 id=1353 data-nosnippet>1353</a>//    let mut y1 = vec![0.0; n];
+<a href=#1354 id=1354 data-nosnippet>1354</a>//    let mut y2 = vec![0.0; n];
+<a href=#1355 id=1355 data-nosnippet>1355</a>//
+<a href=#1356 id=1356 data-nosnippet>1356</a>//    for i in 0..n {
+<a href=#1357 id=1357 data-nosnippet>1357</a>//        let k1 = U[i];
+<a href=#1358 id=1358 data-nosnippet>1358</a>//        let k2 = U[n + i];
+<a href=#1359 id=1359 data-nosnippet>1359</a>//        y1[i] = y[i] + dt * (c * k1 + d * k2 - sqrt3 * (k2 - k1) / 2.0);
+<a href=#1360 id=1360 data-nosnippet>1360</a>//        y2[i] = y[i] + dt * (c * k1 + d * k2 + sqrt3 * (k2 - k1) / 2.0);
+<a href=#1361 id=1361 data-nosnippet>1361</a>//    }
+<a href=#1362 id=1362 data-nosnippet>1362</a>//
+<a href=#1363 id=1363 data-nosnippet>1363</a>//    let mut f1 = vec![0.0; n];
+<a href=#1364 id=1364 data-nosnippet>1364</a>//    let mut f2 = vec![0.0; n];
+<a href=#1365 id=1365 data-nosnippet>1365</a>//    problem.rhs(t + c * dt, &amp;y1, &amp;mut f1)?;
+<a href=#1366 id=1366 data-nosnippet>1366</a>//    problem.rhs(t + d * dt, &amp;y2, &amp;mut f2)?;
+<a href=#1367 id=1367 data-nosnippet>1367</a>//
+<a href=#1368 id=1368 data-nosnippet>1368</a>//    // F = [ k1 - f1, k2 - f2 ]
+<a href=#1369 id=1369 data-nosnippet>1369</a>//    for i in 0..n {
+<a href=#1370 id=1370 data-nosnippet>1370</a>//        F[i] = U[i] - f1[i];
+<a href=#1371 id=1371 data-nosnippet>1371</a>//        F[n + i] = U[n + i] - f2[i];
+<a href=#1372 id=1372 data-nosnippet>1372</a>//    }
+<a href=#1373 id=1373 data-nosnippet>1373</a>//    Ok(())
+<a href=#1374 id=1374 data-nosnippet>1374</a>//}
+<a href=#1375 id=1375 data-nosnippet>1375</a></span><span class="doccomment">/// Helper function to compute the residual F(U) = U - f(y + dt*A*U)
+<a href=#1376 id=1376 data-nosnippet>1376</a></span><span class="attr">#[allow(non_snake_case)]
+<a href=#1377 id=1377 data-nosnippet>1377</a></span><span class="kw">fn </span>compute_F&lt;P: ODEProblem&gt;(
+<a href=#1378 id=1378 data-nosnippet>1378</a>    problem: <span class="kw-2">&amp;</span>P,
+<a href=#1379 id=1379 data-nosnippet>1379</a>    t: f64,
+<a href=#1380 id=1380 data-nosnippet>1380</a>    y: <span class="kw-2">&amp;</span>[f64],
+<a href=#1381 id=1381 data-nosnippet>1381</a>    dt: f64,
+<a href=#1382 id=1382 data-nosnippet>1382</a>    U: <span class="kw-2">&amp;</span>[f64], <span class="comment">// U is a concatenated vector [k1, k2]
+<a href=#1383 id=1383 data-nosnippet>1383</a>    </span>F: <span class="kw-2">&amp;mut </span>[f64],
+<a href=#1384 id=1384 data-nosnippet>1384</a>) -&gt; <span class="prelude-ty">Result</span>&lt;()&gt; {
+<a href=#1385 id=1385 data-nosnippet>1385</a>    <span class="kw">let </span>n = y.len();
+<a href=#1386 id=1386 data-nosnippet>1386</a>    <span class="kw">let </span>(k1_slice, k2_slice) = U.split_at(n);
+<a href=#1387 id=1387 data-nosnippet>1387</a>
+<a href=#1388 id=1388 data-nosnippet>1388</a>    <span class="kw">let </span><span class="kw-2">mut </span>y1 = <span class="macro">vec!</span>[<span class="number">0.0</span>; n];
+<a href=#1389 id=1389 data-nosnippet>1389</a>    <span class="kw">let </span><span class="kw-2">mut </span>y2 = <span class="macro">vec!</span>[<span class="number">0.0</span>; n];
+<a href=#1390 id=1390 data-nosnippet>1390</a>
+<a href=#1391 id=1391 data-nosnippet>1391</a>    <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..n {
+<a href=#1392 id=1392 data-nosnippet>1392</a>        y1[i] = y[i] + dt * (A11 * k1_slice[i] + A12 * k2_slice[i]);
+<a href=#1393 id=1393 data-nosnippet>1393</a>        y2[i] = y[i] + dt * (A21 * k1_slice[i] + A22 * k2_slice[i]);
+<a href=#1394 id=1394 data-nosnippet>1394</a>    }
+<a href=#1395 id=1395 data-nosnippet>1395</a>
+<a href=#1396 id=1396 data-nosnippet>1396</a>    <span class="comment">// F is an output parameter, its parts f1 and f2 are stored temporarily
+<a href=#1397 id=1397 data-nosnippet>1397</a>    </span><span class="kw">let </span>(f1, f2) = F.split_at_mut(n);
+<a href=#1398 id=1398 data-nosnippet>1398</a>    problem.rhs(t + C1 * dt, <span class="kw-2">&amp;</span>y1, f1)<span class="question-mark">?</span>;
+<a href=#1399 id=1399 data-nosnippet>1399</a>    problem.rhs(t + C2 * dt, <span class="kw-2">&amp;</span>y2, f2)<span class="question-mark">?</span>;
+<a href=#1400 id=1400 data-nosnippet>1400</a>
+<a href=#1401 id=1401 data-nosnippet>1401</a>    <span class="comment">// Compute final residual F = [k1 - f1, k2 - f2]
+<a href=#1402 id=1402 data-nosnippet>1402</a>    </span><span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..n {
+<a href=#1403 id=1403 data-nosnippet>1403</a>        f1[i] = k1_slice[i] - f1[i];
+<a href=#1404 id=1404 data-nosnippet>1404</a>        f2[i] = k2_slice[i] - f2[i];
+<a href=#1405 id=1405 data-nosnippet>1405</a>    }
+<a href=#1406 id=1406 data-nosnippet>1406</a>    <span class="prelude-val">Ok</span>(())
+<a href=#1407 id=1407 data-nosnippet>1407</a>}</code></pre></div></section></main></body></html>
