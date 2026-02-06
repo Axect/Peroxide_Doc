@@ -14,7 +14,7 @@
     });
 </script>
 
-</head><body class="rustdoc mod"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><rustdoc-topbar><h2><a href="#">Module dataframe</a></h2></rustdoc-topbar><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../../../peroxide/index.html">peroxide</a><span class="version">0.40.1</span></h2></div><div class="sidebar-elems"><section id="rustdoc-toc"><h2 class="location"><a href="#">Module dataframe</a></h2><h3><a href="#">Sections</a></h3><ul class="block top-toc"><li><a href="#series" title="Series">Series</a><ul><li><a href="#1-declare-series" title="1. Declare Series">1. Declare Series</a></li><li><a href="#2-methods-for-series" title="2. Methods for Series">2. Methods for Series</a></li><li><a href="#3-example" title="3. Example">3. Example</a></li></ul></li><li><a href="#dataframe" title="DataFrame">DataFrame</a><ul><li><a href="#1-declare-dataframe" title="1. Declare DataFrame">1. Declare DataFrame</a></li><li><a href="#2-methods-for-dataframe" title="2. Methods for DataFrame">2. Methods for DataFrame</a></li></ul></li></ul><h3><a href="#structs">Module Items</a></h3><ul class="block"><li><a href="#structs" title="Structs">Structs</a></li><li><a href="#enums" title="Enums">Enums</a></li><li><a href="#traits" title="Traits">Traits</a></li></ul></section><div id="rustdoc-modnav"><h2><a href="../index.html">In peroxide::<wbr>structure</a></h2></div></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><div class="width-limiter"><section id="main-content" class="content"><div class="main-heading"><div class="rustdoc-breadcrumbs"><a href="../../index.html">peroxide</a>::<wbr><a href="../index.html">structure</a></div><h1>Module <span>dataframe</span>&nbsp;<button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"><a class="src" href="../../../src/peroxide/structure/dataframe.rs.html#1-2167">Source</a> </span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Pandas-like dataframe &amp; series.</p>
+</head><body class="rustdoc mod"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><rustdoc-topbar><h2><a href="#">Module dataframe</a></h2></rustdoc-topbar><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../../../peroxide/index.html">peroxide</a><span class="version">0.40.2</span></h2></div><div class="sidebar-elems"><section id="rustdoc-toc"><h2 class="location"><a href="#">Module dataframe</a></h2><h3><a href="#">Sections</a></h3><ul class="block top-toc"><li><a href="#series" title="Series">Series</a><ul><li><a href="#1-declare-series" title="1. Declare Series">1. Declare Series</a></li><li><a href="#2-methods-for-series" title="2. Methods for Series">2. Methods for Series</a></li><li><a href="#3-example" title="3. Example">3. Example</a></li></ul></li><li><a href="#dataframe" title="DataFrame">DataFrame</a><ul><li><a href="#1-declare-dataframe" title="1. Declare DataFrame">1. Declare DataFrame</a></li><li><a href="#2-methods-for-dataframe" title="2. Methods for DataFrame">2. Methods for DataFrame</a></li></ul></li></ul><h3><a href="#structs">Module Items</a></h3><ul class="block"><li><a href="#structs" title="Structs">Structs</a></li><li><a href="#enums" title="Enums">Enums</a></li><li><a href="#traits" title="Traits">Traits</a></li></ul></section><div id="rustdoc-modnav"><h2><a href="../index.html">In peroxide::<wbr>structure</a></h2></div></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><div class="width-limiter"><section id="main-content" class="content"><div class="main-heading"><div class="rustdoc-breadcrumbs"><a href="../../index.html">peroxide</a>::<wbr><a href="../index.html">structure</a></div><h1>Module <span>dataframe</span>&nbsp;<button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"><a class="src" href="../../../src/peroxide/structure/dataframe.rs.html#1-2524">Source</a> </span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Pandas-like dataframe &amp; series.</p>
 <h3 id="series"><a class="doc-anchor" href="#series">§</a>Series</h3><h4 id="1-declare-series"><a class="doc-anchor" href="#1-declare-series">§</a>1. Declare Series</h4>
 <ul>
 <li>To declare series, you should have <code>Vec&lt;T&gt;</code> where <code>T</code> is one of following types.</li>
@@ -57,10 +57,21 @@
 <p><code>Series</code> methods</p>
 
 <div class="example-wrap ignore"><a href="#" class="tooltip" title="This example is not tested">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="kw">impl </span>Series {
-    <span class="kw">pub fn </span>at(<span class="kw-2">&amp;</span><span class="self">self</span>, i: usize) -&gt; Scalar;
+    <span class="comment">// Core
+    </span><span class="kw">pub fn </span>at(<span class="kw-2">&amp;</span><span class="self">self</span>, i: usize) -&gt; Scalar;
     <span class="kw">pub fn </span>len(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; usize;
     <span class="kw">pub fn </span>to_type(<span class="kw-2">&amp;</span><span class="self">self</span>, dtype: DType) -&gt; Series;
     <span class="kw">pub fn </span>as_type(<span class="kw-2">&amp;mut </span><span class="self">self</span>, dtype: DType);
+    <span class="kw">pub fn </span>select_indices(<span class="kw-2">&amp;</span><span class="self">self</span>, indices: <span class="kw-2">&amp;</span>[usize]) -&gt; Series;
+    <span class="kw">pub fn </span>to_f64_vec(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; anyhow::Result&lt;Vec&lt;f64&gt;&gt;;
+
+    <span class="comment">// Statistics (numeric types only, except min/max)
+    </span><span class="kw">pub fn </span>sum(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; anyhow::Result&lt;f64&gt;;
+    <span class="kw">pub fn </span>mean(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; anyhow::Result&lt;f64&gt;;
+    <span class="kw">pub fn </span>var(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; anyhow::Result&lt;f64&gt;;
+    <span class="kw">pub fn </span>sd(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; anyhow::Result&lt;f64&gt;;
+    <span class="kw">pub fn </span>min(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; anyhow::Result&lt;Scalar&gt;;
+    <span class="kw">pub fn </span>max(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; anyhow::Result&lt;Scalar&gt;;
 }</code></pre></div>
 <ul>
 <li><code>at</code> is simple getter for <code>Series</code>. It returns <code>Scalar</code>.</li>
@@ -72,6 +83,10 @@
 <li><code>U8</code> can be changed to all types.</li>
 </ul>
 </li>
+<li><code>select_indices</code> selects elements by indices, returning a new Series.</li>
+<li><code>to_f64_vec</code> converts numeric Series to <code>Vec&lt;f64&gt;</code> (bridge for statistics).</li>
+<li><code>sum</code>, <code>mean</code>, <code>var</code>, <code>sd</code> convert to <code>f64</code> internally via <code>to_f64_vec</code>.</li>
+<li><code>min</code>, <code>max</code> preserve the original type and return <code>Scalar</code>. Works on all ordered types including <code>Char</code> and <code>String</code>.</li>
 </ul>
 </li>
 </ul>
@@ -87,8 +102,19 @@
     a.print();       <span class="comment">// print for Series
     </span>b.dtype.print(); <span class="comment">// print for dtype of Series (=Char)
     </span>c.as_type(U8);   <span class="comment">// Bool =&gt; U8
-     
+
     </span><span class="macro">assert_eq!</span>(c.dtype, U8);
+
+    <span class="comment">// Select by indices
+    </span><span class="kw">let </span>d = a.select_indices(<span class="kw-2">&amp;</span>[<span class="number">0</span>, <span class="number">2</span>]);
+    <span class="macro">assert_eq!</span>(d, Series::new(<span class="macro">vec!</span>[<span class="number">1</span>, <span class="number">3</span>]));
+
+    <span class="comment">// Statistics
+    </span><span class="kw">let </span>e = Series::new(<span class="macro">vec!</span>[<span class="number">1.0</span>, <span class="number">2.0</span>, <span class="number">3.0</span>, <span class="number">4.0</span>, <span class="number">5.0</span>]);
+    <span class="macro">assert_eq!</span>(e.sum().unwrap(), <span class="number">15.0</span>);
+    <span class="macro">assert_eq!</span>(e.mean().unwrap(), <span class="number">3.0</span>);
+    <span class="macro">assert_eq!</span>(e.min().unwrap(), Scalar::new(<span class="number">1.0f64</span>));
+    <span class="macro">assert_eq!</span>(e.max().unwrap(), Scalar::new(<span class="number">5.0f64</span>));
 }</code></pre></div><h3 id="dataframe"><a class="doc-anchor" href="#dataframe">§</a>DataFrame</h3><h4 id="1-declare-dataframe"><a class="doc-anchor" href="#1-declare-dataframe">§</a>1. Declare DataFrame</h4>
 <ul>
 <li>To declare dataframe, use constructor.
@@ -130,7 +156,8 @@
 <p><code>DataFrame</code> method</p>
 
 <div class="example-wrap ignore"><a href="#" class="tooltip" title="This example is not tested">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="kw">impl </span>DataFrame {
-    <span class="kw">pub fn </span>new(v: Vec&lt;Series&gt;) -&gt; <span class="self">Self</span>;
+    <span class="comment">// Constructor &amp; Basic
+    </span><span class="kw">pub fn </span>new(v: Vec&lt;Series&gt;) -&gt; <span class="self">Self</span>;
     <span class="kw">pub fn </span>header(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>Vec&lt;String&gt;;
     <span class="kw">pub fn </span>header_mut(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut </span>Vec&lt;String&gt;;
     <span class="kw">pub fn </span>set_header(<span class="kw-2">&amp;mut </span><span class="self">self</span>, new_header: Vec&lt;<span class="kw-2">&amp;</span>str&gt;);
@@ -139,18 +166,53 @@
     <span class="kw">pub fn </span>row(<span class="kw-2">&amp;</span><span class="self">self</span>, i: usize) -&gt; DataFrame;
     <span class="kw">pub fn </span>spread(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; String;
     <span class="kw">pub fn </span>as_types(<span class="kw-2">&amp;mut </span><span class="self">self</span>, dtypes: Vec&lt;DType&gt;);
-    <span class="kw">pub fn </span>filter_by&lt;F: Fn(Scalar) -&gt; bool&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, column: <span class="kw-2">&amp;</span>str, f: F) -&gt; anyhow::Result&lt;DataFrame&gt;;
+    <span class="kw">pub fn </span>filter_by&lt;F&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, column: <span class="kw-2">&amp;</span>str, f: F) -&gt; anyhow::Result&lt;DataFrame&gt;;
     <span class="kw">pub fn </span>mask(<span class="kw-2">&amp;</span><span class="self">self</span>, mask: <span class="kw-2">&amp;</span>Series) -&gt; anyhow::Result&lt;DataFrame&gt;;
     <span class="kw">pub fn </span>select_rows(<span class="kw-2">&amp;</span><span class="self">self</span>, indices: <span class="kw-2">&amp;</span>[usize]) -&gt; DataFrame;
+
+    <span class="comment">// Shape &amp; Info
+    </span><span class="kw">pub fn </span>nrow(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; usize;
+    <span class="kw">pub fn </span>ncol(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; usize;
+    <span class="kw">pub fn </span>shape(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; (usize, usize);
+    <span class="kw">pub fn </span>dtypes(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Vec&lt;DType&gt;;
+    <span class="kw">pub fn </span>is_empty(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool;
+    <span class="kw">pub fn </span>contains(<span class="kw-2">&amp;</span><span class="self">self</span>, col_header: <span class="kw-2">&amp;</span>str) -&gt; bool;
+
+    <span class="comment">// Row Operations
+    </span><span class="kw">pub fn </span>head(<span class="kw-2">&amp;</span><span class="self">self</span>, n: usize) -&gt; DataFrame;
+    <span class="kw">pub fn </span>tail(<span class="kw-2">&amp;</span><span class="self">self</span>, n: usize) -&gt; DataFrame;
+    <span class="kw">pub fn </span>slice(<span class="kw-2">&amp;</span><span class="self">self</span>, offset: usize, length: usize) -&gt; DataFrame;
+
+    <span class="comment">// Column Operations
+    </span><span class="kw">pub fn </span>select(<span class="kw-2">&amp;</span><span class="self">self</span>, columns: <span class="kw-2">&amp;</span>[<span class="kw-2">&amp;</span>str]) -&gt; DataFrame;
+    <span class="kw">pub fn </span>rename(<span class="kw-2">&amp;mut </span><span class="self">self</span>, old: <span class="kw-2">&amp;</span>str, new: <span class="kw-2">&amp;</span>str);
+    <span class="kw">pub fn </span>column_names(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Vec&lt;<span class="kw-2">&amp;</span>str&gt;;
+    <span class="kw">pub fn </span>select_dtypes(<span class="kw-2">&amp;</span><span class="self">self</span>, dtypes: <span class="kw-2">&amp;</span>[DType]) -&gt; DataFrame;
+
+    <span class="comment">// Statistics (numeric columns only)
+    </span><span class="kw">pub fn </span>describe(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; DataFrame;
+    <span class="kw">pub fn </span>sum(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; DataFrame;
+    <span class="kw">pub fn </span>mean(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; DataFrame;
 }</code></pre></div>
 <ul>
 <li><code>push(&amp;mut self, name: &amp;str, series: Series)</code>: push head &amp; Series pair</li>
 <li><code>drop(&amp;mut self, col_header: &amp;str)</code>: drop specific column by header</li>
 <li><code>row(&amp;self, i: usize) -&gt; DataFrame</code> : Extract $i$-th row as new DataFrame</li>
-<li><code>filter_by&lt;F: Fn(Scalar) -&gt; bool&gt;(&amp;self, column: &amp;str, f: F) -&gt; anyhow::Result&lt;DataFrame&gt;</code>
-: Filter DataFrame by specific column</li>
-<li><code>mask(&amp;self, mask: &amp;Series) -&gt; anyhow::Result&lt;DataFrame&gt;</code> : Mask DataFrame by Series</li>
-<li><code>select_rows(&amp;self, indices: &amp;[usize]) -&gt; DataFrame</code> : Select rows by indices</li>
+<li><code>filter_by(&amp;self, column, f)</code> : Filter DataFrame by specific column</li>
+<li><code>mask(&amp;self, mask: &amp;Series)</code> : Mask DataFrame by boolean Series</li>
+<li><code>select_rows(&amp;self, indices)</code> : Select rows by indices</li>
+<li><code>nrow</code>, <code>ncol</code>, <code>shape</code> : Row count (max column length), column count, <code>(nrow, ncol)</code> tuple</li>
+<li><code>dtypes</code> : <code>Vec&lt;DType&gt;</code> of each column’s type</li>
+<li><code>is_empty</code> : <code>true</code> if no columns or no rows</li>
+<li><code>contains(col_header)</code> : <code>true</code> if the column exists</li>
+<li><code>head(n)</code>, <code>tail(n)</code> : First / last <code>n</code> rows</li>
+<li><code>slice(offset, length)</code> : Row slice starting at <code>offset</code></li>
+<li><code>select(columns)</code> : Select columns by name (panics on missing)</li>
+<li><code>rename(old, new)</code> : Rename a column in-place</li>
+<li><code>column_names</code> : <code>Vec&lt;&amp;str&gt;</code> of all headers</li>
+<li><code>select_dtypes(dtypes)</code> : Select columns matching given DTypes</li>
+<li><code>describe</code> : Computes count / mean / sd / min / max for each numeric column</li>
+<li><code>sum</code>, <code>mean</code> : Single-row DataFrame with column-wise sum / mean</li>
 </ul>
 </li>
 <li>
