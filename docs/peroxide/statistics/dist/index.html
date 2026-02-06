@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Probabilistic distributions"><title>peroxide::statistics::dist - Rust</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../../static.files/rustdoc-1a91846b.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="peroxide" data-themes="" data-resource-suffix="" data-rustdoc-version="1.88.0 (6b00bc388 2025-06-23)" data-channel="1.88.0" data-search-js="search-f7877310.js" data-settings-js="settings-5514c975.js" ><script src="../../../static.files/storage-4e99c027.js"></script><script defer src="../sidebar-items.js"></script><script defer src="../../../static.files/main-7ef8a74a.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-893ab5e7.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-6580c154.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-044be391.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Probabilistic distributions"><title>peroxide::statistics::dist - Rust</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../../static.files/rustdoc-ca0dd0c4.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="peroxide" data-themes="" data-resource-suffix="" data-rustdoc-version="1.93.0 (254b59607 2026-01-19)" data-channel="1.93.0" data-search-js="search-9e2438ea.js" data-stringdex-js="stringdex-a3946164.js" data-settings-js="settings-c38705f0.js" ><script src="../../../static.files/storage-e2aeef58.js"></script><script defer src="../sidebar-items.js"></script><script defer src="../../../static.files/main-a410ff4d.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-263c88ec.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-044be391.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js"                  integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js"    integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
 <script>
@@ -14,7 +14,7 @@
     });
 </script>
 
-</head><body class="rustdoc mod"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../../../peroxide/index.html">peroxide</a><span class="version">0.40.0</span></h2></div><div class="sidebar-elems"><section id="rustdoc-toc"><h2 class="location"><a href="#">Module dist</a></h2><h3><a href="#">Sections</a></h3><ul class="block top-toc"><li><a href="#probability-distribution" title="Probability Distribution">Probability Distribution</a><ul><li><a href="#rng-trait" title="`RNG` trait"><code>RNG</code> trait</a></li><li><a href="#bernoulli-distribution" title="Bernoulli Distribution">Bernoulli Distribution</a></li><li><a href="#uniform-distribution" title="Uniform Distribution">Uniform Distribution</a></li><li><a href="#normal-distribution" title="Normal Distribution">Normal Distribution</a></li><li><a href="#beta-distribution" title="Beta Distribution">Beta Distribution</a></li><li><a href="#gamma-distribution" title="Gamma Distribution">Gamma Distribution</a></li><li><a href="#binomial-distribution" title="Binomial Distribution">Binomial Distribution</a></li><li><a href="#students-t-distribution" title="Student’s t Distribution">Student’s t Distribution</a></li><li><a href="#weighted-uniform-distribution" title="Weighted Uniform Distribution">Weighted Uniform Distribution</a></li><li><a href="#log-normal-distribution" title="Log Normal Distribution">Log Normal Distribution</a></li></ul></li></ul><h3><a href="#structs">Module Items</a></h3><ul class="block"><li><a href="#structs" title="Structs">Structs</a></li><li><a href="#enums" title="Enums">Enums</a></li><li><a href="#traits" title="Traits">Traits</a></li></ul></section><div id="rustdoc-modnav"><h2><a href="../index.html">In peroxide::<wbr>statistics</a></h2></div></div></nav><div class="sidebar-resizer"></div><main><div class="width-limiter"><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><div class="rustdoc-breadcrumbs"><a href="../../index.html">peroxide</a>::<wbr><a href="../index.html">statistics</a></div><h1>Module <span>dist</span><button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"><a class="src" href="../../../src/peroxide/statistics/dist.rs.html#1-1002">Source</a> </span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Probabilistic distributions</p>
+</head><body class="rustdoc mod"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><rustdoc-topbar><h2><a href="#">Module dist</a></h2></rustdoc-topbar><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../../../peroxide/index.html">peroxide</a><span class="version">0.40.1</span></h2></div><div class="sidebar-elems"><section id="rustdoc-toc"><h2 class="location"><a href="#">Module dist</a></h2><h3><a href="#">Sections</a></h3><ul class="block top-toc"><li><a href="#probability-distribution" title="Probability Distribution">Probability Distribution</a><ul><li><a href="#rng-trait" title="`RNG` trait"><code>RNG</code> trait</a></li><li><a href="#bernoulli-distribution" title="Bernoulli Distribution">Bernoulli Distribution</a></li><li><a href="#uniform-distribution" title="Uniform Distribution">Uniform Distribution</a></li><li><a href="#normal-distribution" title="Normal Distribution">Normal Distribution</a></li><li><a href="#beta-distribution" title="Beta Distribution">Beta Distribution</a></li><li><a href="#gamma-distribution" title="Gamma Distribution">Gamma Distribution</a></li><li><a href="#binomial-distribution" title="Binomial Distribution">Binomial Distribution</a></li><li><a href="#students-t-distribution" title="Student’s t Distribution">Student’s t Distribution</a></li><li><a href="#weighted-uniform-distribution" title="Weighted Uniform Distribution">Weighted Uniform Distribution</a></li><li><a href="#log-normal-distribution" title="Log Normal Distribution">Log Normal Distribution</a></li></ul></li></ul><h3><a href="#structs">Module Items</a></h3><ul class="block"><li><a href="#structs" title="Structs">Structs</a></li><li><a href="#enums" title="Enums">Enums</a></li><li><a href="#traits" title="Traits">Traits</a></li></ul></section><div id="rustdoc-modnav"><h2><a href="../index.html">In peroxide::<wbr>statistics</a></h2></div></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><div class="width-limiter"><section id="main-content" class="content"><div class="main-heading"><div class="rustdoc-breadcrumbs"><a href="../../index.html">peroxide</a>::<wbr><a href="../index.html">statistics</a></div><h1>Module <span>dist</span>&nbsp;<button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"><a class="src" href="../../../src/peroxide/statistics/dist.rs.html#1-1002">Source</a> </span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Probabilistic distributions</p>
 <h3 id="probability-distribution"><a class="doc-anchor" href="#probability-distribution">§</a>Probability Distribution</h3>
 <ul>
 <li>There are some famous pdf in Peroxide (not checked pdfs will be implemented soon)
@@ -71,8 +71,7 @@
     /// # Type
     /// `f64 -&gt; f64`
     </span><span class="kw">fn </span>pdf&lt;S: PartialOrd + SampleUniform + Copy + Into&lt;f64&gt;&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, x: S) -&gt; f64;
-}</code></pre></div>
-</li>
+}</code></pre></div></li>
 </ul>
 <h4 id="bernoulli-distribution"><a class="doc-anchor" href="#bernoulli-distribution">§</a>Bernoulli Distribution</h4>
 <ul>
@@ -108,8 +107,7 @@ $$ \text{Bern}(x | \mu) = \mu^x (1-\mu)^{1-x} $$</p>
     </span>b.mean().print();                         <span class="comment">// 0.1
     </span>b.var().print();                          <span class="comment">// 0.09 (approximately)
     </span>b.sd().print();                           <span class="comment">// 0.3  (approximately)
-</span>}</code></pre></div>
-</li>
+</span>}</code></pre></div></li>
 </ul>
 <h4 id="uniform-distribution"><a class="doc-anchor" href="#uniform-distribution">§</a>Uniform Distribution</h4>
 <ul>
@@ -140,8 +138,7 @@ $$\text{Unif}(x | a, b) = \begin{cases} \frac{1}{b - a} &amp; x \in [a,b]\\ 0 &a
     a.mean().print();
     a.var().print();
     a.sd().print();
-}</code></pre></div>
-</li>
+}</code></pre></div></li>
 </ul>
 <h4 id="normal-distribution"><a class="doc-anchor" href="#normal-distribution">§</a>Normal Distribution</h4>
 <ul>
@@ -175,8 +172,7 @@ $$\mathcal{N}(x | \mu, \sigma^2) = \frac{1}{\sqrt{2\pi \sigma^2}} \exp{\left( - 
     </span>a.mean().print();
     a.var().print();
     a.sd().print();
-}</code></pre></div>
-</li>
+}</code></pre></div></li>
 </ul>
 <h4 id="beta-distribution"><a class="doc-anchor" href="#beta-distribution">§</a>Beta Distribution</h4>
 <ul>
@@ -204,8 +200,7 @@ where $\text{B}(\alpha, \beta) = \frac{\Gamma(\alpha)\Gamma(\beta)}{\Gamma(\alph
     a.pdf(<span class="number">0.3</span>).print();
     a.mean().print();
     a.var().print();
-}</code></pre></div>
-</li>
+}</code></pre></div></li>
 </ul>
 <h4 id="gamma-distribution"><a class="doc-anchor" href="#gamma-distribution">§</a>Gamma Distribution</h4>
 <ul>
@@ -233,8 +228,7 @@ where $\Gamma(\alpha) = \int_0^\infty x^{\alpha-1} e^{-x} dx$ is the Gamma funct
     a.pdf(<span class="number">1.5</span>).print();
     a.mean().print();
     a.var().print();
-}</code></pre></div>
-</li>
+}</code></pre></div></li>
 </ul>
 <h4 id="binomial-distribution"><a class="doc-anchor" href="#binomial-distribution">§</a>Binomial Distribution</h4>
 <ul>
@@ -262,8 +256,7 @@ where $\binom{n}{k} = \frac{n!}{k!(n-k)!}$ is the binomial coefficient.</p>
     a.pdf(<span class="number">3</span>).print();
     a.mean().print();
     a.var().print();
-}</code></pre></div>
-</li>
+}</code></pre></div></li>
 </ul>
 <h4 id="students-t-distribution"><a class="doc-anchor" href="#students-t-distribution">§</a>Student’s t Distribution</h4>
 <ul>
@@ -291,8 +284,7 @@ where $\nu$ is the degrees of freedom and $\Gamma$ is the Gamma function.</p>
     a.pdf(<span class="number">1.0</span>).print();
     a.mean().print(); <span class="comment">// Undefined for nu &lt;= 1
     </span>a.var().print();  <span class="comment">// Undefined for nu &lt;= 2
-</span>}</code></pre></div>
-</li>
+</span>}</code></pre></div></li>
 </ul>
 <h4 id="weighted-uniform-distribution"><a class="doc-anchor" href="#weighted-uniform-distribution">§</a>Weighted Uniform Distribution</h4>
 <ul>
