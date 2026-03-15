@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"enum":["DType","DTypeArray","DTypeValue"],"struct":["DataFrame","Scalar","Series"],"trait":["TypedScalar","TypedVector","WithCSV","WithNetCDF","WithParquet"]};
+window.SIDEBAR_ITEMS = {"enum":["DType","DTypeArray","DTypeValue"],"struct":["DataFrame","Scalar","Series"],"trait":["TypedScalar","TypedVector","WithCSV","WithParquet"]};

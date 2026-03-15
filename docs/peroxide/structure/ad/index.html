@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Taylor mode forward automatic differentiation"><title>peroxide::structure::ad - Rust</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../../static.files/rustdoc-ca0dd0c4.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="peroxide" data-themes="" data-resource-suffix="" data-rustdoc-version="1.93.0 (254b59607 2026-01-19)" data-channel="1.93.0" data-search-js="search-9e2438ea.js" data-stringdex-js="stringdex-a3946164.js" data-settings-js="settings-c38705f0.js" ><script src="../../../static.files/storage-e2aeef58.js"></script><script defer src="../sidebar-items.js"></script><script defer src="../../../static.files/main-a410ff4d.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-263c88ec.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-044be391.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Taylor mode forward automatic differentiation with const-generic `Jet&#60;N&#62;` type"><title>peroxide::structure::ad - Rust</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../../static.files/rustdoc-ca0dd0c4.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="peroxide" data-themes="" data-resource-suffix="" data-rustdoc-version="1.93.1 (01f6ddf75 2026-02-11)" data-channel="1.93.1" data-search-js="search-9e2438ea.js" data-stringdex-js="stringdex-a3946164.js" data-settings-js="settings-c38705f0.js" ><script src="../../../static.files/storage-e2aeef58.js"></script><script defer src="../sidebar-items.js"></script><script defer src="../../../static.files/main-a410ff4d.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-263c88ec.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-044be391.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js"                  integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js"    integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
 <script>
@@ -14,95 +14,155 @@
     });
 </script>
 
-</head><body class="rustdoc mod"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><rustdoc-topbar><h2><a href="#">Module ad</a></h2></rustdoc-topbar><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../../../peroxide/index.html">peroxide</a><span class="version">0.40.2</span></h2></div><div class="sidebar-elems"><section id="rustdoc-toc"><h2 class="location"><a href="#">Module ad</a></h2><h3><a href="#">Sections</a></h3><ul class="block top-toc"><li><a href="#important-features" title="Important Features">Important Features</a></li><li><a href="#implemented-traits-for-ad" title="Implemented Traits for `AD`">Implemented Traits for <code>AD</code></a></li><li><a href="#iterator-of-ad" title="Iterator of `AD`">Iterator of <code>AD</code></a></li><li><a href="#default-constructor" title="Default Constructor">Default Constructor</a></li><li><a href="#methods" title="Methods">Methods</a></li><li><a href="#implemented-operations" title="Implemented Operations">Implemented Operations</a></li><li><a href="#usage" title="Usage">Usage</a><ul><li><a href="#construction" title="Construction">Construction</a></li><li><a href="#operation" title="Operation">Operation</a></li></ul></li></ul><h3><a href="#structs">Module Items</a></h3><ul class="block"><li><a href="#structs" title="Structs">Structs</a></li><li><a href="#enums" title="Enums">Enums</a></li><li><a href="#traits" title="Traits">Traits</a></li></ul></section><div id="rustdoc-modnav"><h2><a href="../index.html">In peroxide::<wbr>structure</a></h2></div></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><div class="width-limiter"><section id="main-content" class="content"><div class="main-heading"><div class="rustdoc-breadcrumbs"><a href="../../index.html">peroxide</a>::<wbr><a href="../index.html">structure</a></div><h1>Module <span>ad</span>&nbsp;<button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"><a class="src" href="../../../src/peroxide/structure/ad.rs.html#1-1432">Source</a> </span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Taylor mode forward automatic differentiation</p>
-<h3 id="important-features"><a class="doc-anchor" href="#important-features">§</a>Important Features</h3>
+</head><body class="rustdoc mod"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><rustdoc-topbar><h2><a href="#">Module ad</a></h2></rustdoc-topbar><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../../../peroxide/index.html">peroxide</a><span class="version">0.41.0</span></h2></div><div class="sidebar-elems"><section id="rustdoc-toc"><h2 class="location"><a href="#">Module ad</a></h2><h3><a href="#">Sections</a></h3><ul class="block top-toc"><li><a href="#overview" title="Overview">Overview</a></li><li><a href="#type-aliases" title="Type Aliases">Type Aliases</a></li><li><a href="#constructors" title="Constructors">Constructors</a></li><li><a href="#accessors" title="Accessors">Accessors</a></li><li><a href="#implemented-operations" title="Implemented Operations">Implemented Operations</a></li><li><a href="#usage" title="Usage">Usage</a><ul><li><a href="#higher-order-derivatives" title="Higher-order derivatives">Higher-order derivatives</a></li><li><a href="#using-the-ad_function-macro" title="Using the `#[ad_function]` macro">Using the <code>#[ad_function]</code> macro</a></li><li><a href="#generic-functions-with-real-trait" title="Generic functions with `Real` trait">Generic functions with <code>Real</code> trait</a></li><li><a href="#jacobian-computation" title="Jacobian computation">Jacobian computation</a></li><li><a href="#backward-compatible-constructors" title="Backward-compatible constructors">Backward-compatible constructors</a></li></ul></li><li><a href="#accuracy-jetn-vs-finite-differences" title="Accuracy: Jet&#60;N&#62; vs Finite Differences">Accuracy: Jet&lt;N&gt; vs Finite Differences</a></li><li><a href="#taylor-series-convergence" title="Taylor Series Convergence">Taylor Series Convergence</a></li></ul><h3><a href="#structs">Module Items</a></h3><ul class="block"><li><a href="#structs" title="Structs">Structs</a></li><li><a href="#traits" title="Traits">Traits</a></li><li><a href="#functions" title="Functions">Functions</a></li><li><a href="#types" title="Type Aliases">Type Aliases</a></li></ul></section><div id="rustdoc-modnav"><h2><a href="../index.html">In peroxide::<wbr>structure</a></h2></div></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><div class="width-limiter"><section id="main-content" class="content"><div class="main-heading"><div class="rustdoc-breadcrumbs"><a href="../../index.html">peroxide</a>::<wbr><a href="../index.html">structure</a></div><h1>Module <span>ad</span>&nbsp;<button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"><a class="src" href="../../../src/peroxide/structure/ad.rs.html#1-1346">Source</a> </span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Taylor mode forward automatic differentiation with const-generic <code>Jet&lt;N&gt;</code> type</p>
+<h3 id="overview"><a class="doc-anchor" href="#overview">§</a>Overview</h3>
+<p>This module provides a const-generic <code>Jet&lt;N&gt;</code> struct for Taylor-mode forward AD
+of arbitrary order N. The struct stores <strong>normalized</strong> Taylor coefficients:</p>
+<div class="example-wrap"><pre class="language-text"><code>Jet { value: c_0, deriv: [c_1, c_2, ..., c_N] }</code></pre></div>
+<p>where $c_k = f^{(k)}(a) / k!$ is the $k$-th normalized Taylor coefficient evaluated
+at the expansion point $a$. This normalization eliminates binomial coefficients
+from all arithmetic recurrences.</p>
+<h3 id="type-aliases"><a class="doc-anchor" href="#type-aliases">§</a>Type Aliases</h3>
 <ul>
-<li>Can automatic differentiate up to 2nd order (<code>AD0</code> ~ <code>AD2</code>)</li>
-<li>All <code>AD</code> are in stack (Guarantee high performance)</li>
-<li>You can see <code>AD</code> via <code>.print()</code></li>
+<li><code>Dual = Jet&lt;1&gt;</code> — first-order forward AD (value + first derivative)</li>
+<li><code>HyperDual = Jet&lt;2&gt;</code> — second-order forward AD (value + first + second derivative)</li>
 </ul>
-<h3 id="implemented-traits-for-ad"><a class="doc-anchor" href="#implemented-traits-for-ad">§</a>Implemented Traits for <code>AD</code></h3>
+<h3 id="constructors"><a class="doc-anchor" href="#constructors">§</a>Constructors</h3>
 <ul>
-<li><code>#[derive(Debug, Copy, Clone, PartialEq)]</code></li>
-<li><code>std::fmt::Display</code></li>
-<li><code>IntoIterator&lt;Item = f64&gt;</code></li>
-<li><code>IntoIterator&lt;Item = &amp;f64&gt;</code></li>
-<li><code>IntoIterator&lt;Item = &amp;mut f64&gt;</code></li>
-<li><code>FromIterator&lt;f64&gt;</code></li>
-<li><code>FromIterator&lt;&amp;f64&gt;</code></li>
-<li><code>Index</code>, <code>IndexMut</code></li>
-<li><code>std::ops::{Neg, Add, Sub, Mul, Div}</code></li>
-<li><code>peroxide_num::{PowOps, ExpLogOps, TrigOps}</code></li>
-<li><code>peroxide::util::print::Printable</code></li>
+<li><code>Jet::var(x)</code> — independent variable at point x (deriv[0] = 1)</li>
+<li><code>Jet::constant(x)</code> — constant (all derivatives zero)</li>
+<li><code>Jet::new(value, deriv)</code> — raw constructor</li>
+<li><code>ad0(x)</code> — <code>Jet&lt;0&gt;</code> constant (backward compat)</li>
+<li><code>ad1(x, dx)</code> — <code>Jet&lt;1&gt;</code> with first derivative (backward compat)</li>
+<li><code>ad2(x, dx, ddx)</code> — <code>Jet&lt;2&gt;</code> with first and second derivatives (backward compat)</li>
 </ul>
-<h3 id="iterator-of-ad"><a class="doc-anchor" href="#iterator-of-ad">§</a>Iterator of <code>AD</code></h3>
-<p>There are three iterators.</p>
+<h3 id="accessors"><a class="doc-anchor" href="#accessors">§</a>Accessors</h3>
 <ul>
-<li><code>ADIntoIter</code></li>
-<li><code>ADIter&lt;'a&gt;</code></li>
-<li><code>ADIterMut&lt;'a&gt;</code></li>
-</ul>
-<p>Each implements <code>DoubleEndedIterator</code>, <code>ExactSizeIterator</code> also.</p>
-<h3 id="default-constructor"><a class="doc-anchor" href="#default-constructor">§</a>Default Constructor</h3>
-<ul>
-<li><code>AD0(f64)</code> : just constant</li>
-<li><code>AD1(f64, f64)</code> : 1st order AD</li>
-<li><code>AD2(f64, f64, f64)</code> : 2nd order AD</li>
-</ul>
-<h3 id="methods"><a class="doc-anchor" href="#methods">§</a>Methods</h3>
-<ul>
-<li><code>empty(&amp;self) -&gt; AD</code></li>
-<li><code>to_order(&amp;self, n: usize) -&gt; AD</code></li>
-<li><code>iter(&amp;self) -&gt; ADIter{i}</code></li>
-<li><code>iter_mut(&amp;self) -&gt; ADIterMut{i}</code></li>
-<li><code>len(&amp;self) -&gt; usize</code></li>
-<li><code>order(&amp;self) -&gt; usize</code></li>
-<li><code>from_order(n: usize) -&gt; AD</code></li>
-<li><code>x(&amp;self) -&gt; f64</code></li>
-<li><code>dx(&amp;self) -&gt; f64</code></li>
-<li><code>ddx(&amp;self) -&gt; f64</code></li>
+<li><code>.value()</code> / <code>.x()</code> — $f(a)$</li>
+<li><code>.dx()</code> — $f’(a)$</li>
+<li><code>.ddx()</code> — $f’’(a)$</li>
+<li><code>.derivative(k)</code> — $f^{(k)}(a)$ (raw factorial-scaled derivative)</li>
+<li><code>.taylor_coeff(k)</code> — normalized Taylor coefficient $c_k$</li>
 </ul>
 <h3 id="implemented-operations"><a class="doc-anchor" href="#implemented-operations">§</a>Implemented Operations</h3>
 <ul>
-<li><code>Add, Sub, Mul, Div</code></li>
-<li><code>sin, cos, tan</code></li>
-<li><code>sinh, cosh, tanh</code></li>
-<li><code>sin_cos</code>, <code>sinh_cosh</code></li>
-<li><code>exp, ln, log, log2, log10</code></li>
-<li><code>powi, powf, sqrt, pow</code></li>
-<li><code>asin</code>, <code>acos</code>, <code>atan</code></li>
-<li><code>asinh</code>, <code>acosh</code>, <code>atanh</code></li>
+<li><code>Add, Sub, Mul, Div</code> (Jet op Jet, Jet op f64, f64 op Jet)</li>
+<li><code>Neg</code></li>
+<li><code>ExpLogOps</code>: <code>exp</code>, <code>ln</code>, <code>log</code>, <code>log2</code>, <code>log10</code></li>
+<li><code>PowOps</code>: <code>powi</code>, <code>powf</code>, <code>pow</code>, <code>sqrt</code></li>
+<li><code>TrigOps</code>: <code>sin_cos</code>, <code>sin</code>, <code>cos</code>, <code>tan</code>, <code>sinh</code>, <code>cosh</code>, <code>tanh</code>,
+<code>asin</code>, <code>acos</code>, <code>atan</code>, <code>asinh</code>, <code>acosh</code>, <code>atanh</code></li>
 </ul>
-<h3 id="usage"><a class="doc-anchor" href="#usage">§</a>Usage</h3><h4 id="construction"><a class="doc-anchor" href="#construction">§</a>Construction</h4>
+<h3 id="usage"><a class="doc-anchor" href="#usage">§</a>Usage</h3>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern crate </span>peroxide;
 <span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
 
 <span class="kw">fn </span>main() {
-    <span class="comment">// Declare x where x = 2
-    </span><span class="kw">let </span>a = AD1(<span class="number">2f64</span>, <span class="number">1f64</span>);
-    <span class="comment">// Declare x^2 where x = 2
-    </span><span class="kw">let </span>b = AD2(<span class="number">4f64</span>, <span class="number">4f64</span>, <span class="number">2f64</span>);
-    <span class="comment">// Convert AD1 -&gt; AD2
-    </span><span class="kw">let </span>c = a.to_order(<span class="number">2</span>);
-    <span class="comment">// Zeros
-    </span><span class="kw">let </span>d = AD::from_order(<span class="number">2</span>);
+    <span class="comment">// First derivative of f(x) = x^2 at x = 2
+    </span><span class="kw">let </span>x = Jet::&lt;<span class="number">1</span>&gt;::var(<span class="number">2.0</span>);
+    <span class="kw">let </span>y = x.powi(<span class="number">2</span>);
+    <span class="macro">assert_eq!</span>(y.value(), <span class="number">4.0</span>);
+    <span class="macro">assert_eq!</span>(y.dx(), <span class="number">4.0</span>);  <span class="comment">// f'(2) = 2*2 = 4
 
-    <span class="macro">assert_eq!</span>(c, AD2(<span class="number">2f64</span>, <span class="number">1f64</span>, <span class="number">0f64</span>));
-    <span class="macro">assert_eq!</span>(d, AD2(<span class="number">0f64</span>, <span class="number">0f64</span>, <span class="number">0f64</span>));
-}</code></pre></div><h4 id="operation"><a class="doc-anchor" href="#operation">§</a>Operation</h4>
-<p>For every binary operation, it returns higher order AD
-(ex: AD1 + AD2 = AD2)</p>
-
+    // Second derivative using HyperDual
+    </span><span class="kw">let </span>x2 = HyperDual::new(<span class="number">2.0</span>, [<span class="number">1.0</span>, <span class="number">0.0</span>]);
+    <span class="kw">let </span>y2 = x2.powi(<span class="number">2</span>);
+    <span class="macro">assert_eq!</span>(y2.value(), <span class="number">4.0</span>);
+    <span class="macro">assert_eq!</span>(y2.dx(), <span class="number">4.0</span>);   <span class="comment">// f'(2) = 4
+    </span><span class="macro">assert_eq!</span>(y2.ddx(), <span class="number">2.0</span>);  <span class="comment">// f''(2) = 2
+</span>}</code></pre></div><h4 id="higher-order-derivatives"><a class="doc-anchor" href="#higher-order-derivatives">§</a>Higher-order derivatives</h4>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern crate </span>peroxide;
 <span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
 
 <span class="kw">fn </span>main() {
-    <span class="kw">let </span>a = AD1(<span class="number">2f64</span>, <span class="number">1f64</span>);       <span class="comment">// x        at x = 2
-    </span><span class="kw">let </span>b = AD2(<span class="number">4f64</span>, <span class="number">4f64</span>, <span class="number">2f64</span>); <span class="comment">// x^2      at x = 2
-    </span><span class="kw">let </span>c = a + b;                 <span class="comment">// x^2 + x  at x = 2
-    </span><span class="kw">let </span>d = a * b;                 <span class="comment">// x^3      at x = 2
-    </span><span class="kw">let </span>e = a / b;                 <span class="comment">// 1/x      at x = 2
-    </span><span class="macro">assert_eq!</span>(c, AD2(<span class="number">6f64</span>, <span class="number">5f64</span>, <span class="number">2f64</span>));
-    <span class="macro">assert_eq!</span>(d, AD2(<span class="number">8f64</span>, <span class="number">12f64</span>, <span class="number">12f64</span>));
-    <span class="macro">assert_eq!</span>(e, AD2(<span class="number">0.5</span>, -<span class="number">0.25</span>, <span class="number">0.25</span>));
-}</code></pre></div></div></details><h2 id="structs" class="section-header">Structs<a href="#structs" class="anchor">§</a></h2><dl class="item-table"><dt><a class="struct" href="struct.ADFn.html" title="struct peroxide::structure::ad::ADFn">ADFn</a></dt><dd>Generic AD functions</dd><dt><a class="struct" href="struct.ADIntoIter.html" title="struct peroxide::structure::ad::ADIntoIter">ADInto<wbr>Iter</a></dt><dt><a class="struct" href="struct.ADIter.html" title="struct peroxide::structure::ad::ADIter">ADIter</a></dt><dt><a class="struct" href="struct.ADIterMut.html" title="struct peroxide::structure::ad::ADIterMut">ADIter<wbr>Mut</a></dt></dl><h2 id="enums" class="section-header">Enums<a href="#enums" class="anchor">§</a></h2><dl class="item-table"><dt><a class="enum" href="enum.AD.html" title="enum peroxide::structure::ad::AD">AD</a></dt></dl><h2 id="traits" class="section-header">Traits<a href="#traits" class="anchor">§</a></h2><dl class="item-table"><dt><a class="trait" href="trait.ADVec.html" title="trait peroxide::structure::ad::ADVec">ADVec</a></dt></dl></section></div></main></body></html>
+    <span class="comment">// 5th derivative of x^5 at x = 1
+    </span><span class="kw">let </span>x = Jet::&lt;<span class="number">5</span>&gt;::var(<span class="number">1.0</span>);
+    <span class="kw">let </span>y = x.powi(<span class="number">5</span>);
+    <span class="macro">assert_eq!</span>(y.derivative(<span class="number">5</span>), <span class="number">120.0</span>);  <span class="comment">// 5! = 120
+</span>}</code></pre></div><h4 id="using-the-ad_function-macro"><a class="doc-anchor" href="#using-the-ad_function-macro">§</a>Using the <code>#[ad_function]</code> macro</h4>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern crate </span>peroxide;
+<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
+
+<span class="attr">#[ad_function]
+</span><span class="kw">fn </span>f(x: f64) -&gt; f64 {
+    x.sin() + x.powi(<span class="number">2</span>)
+}
+
+<span class="kw">fn </span>main() {
+    <span class="comment">// f_grad and f_hess are generated automatically
+    </span><span class="kw">let </span>grad = f_grad(<span class="number">1.0</span>);   <span class="comment">// f'(1) = cos(1) + 2
+    </span><span class="kw">let </span>hess = f_hess(<span class="number">1.0</span>);   <span class="comment">// f''(1) = -sin(1) + 2
+
+    </span><span class="macro">assert!</span>((grad - (<span class="number">1.0_f64</span>.cos() + <span class="number">2.0</span>)).abs() &lt; <span class="number">1e-10</span>);
+    <span class="macro">assert!</span>((hess - (-<span class="number">1.0_f64</span>.sin() + <span class="number">2.0</span>)).abs() &lt; <span class="number">1e-10</span>);
+}</code></pre></div><h4 id="generic-functions-with-real-trait"><a class="doc-anchor" href="#generic-functions-with-real-trait">§</a>Generic functions with <code>Real</code> trait</h4>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern crate </span>peroxide;
+<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
+
+<span class="kw">fn </span>quadratic&lt;T: Real&gt;(x: T) -&gt; T {
+    x.powi(<span class="number">2</span>) + x * <span class="number">3.0 </span>+ T::from_f64(<span class="number">1.0</span>)
+}
+
+<span class="kw">fn </span>main() {
+    <span class="comment">// Works with both f64 and AD (= Jet&lt;2&gt;)
+    </span><span class="kw">let </span>val = quadratic(<span class="number">2.0_f64</span>);                <span class="comment">// 11.0
+    </span><span class="kw">let </span>jet = quadratic(AD1(<span class="number">2.0</span>, <span class="number">1.0</span>));
+    <span class="macro">assert_eq!</span>(val, <span class="number">11.0</span>);                       <span class="comment">// f(2) = 4 + 6 + 1
+    </span><span class="macro">assert_eq!</span>(jet.value(), <span class="number">11.0</span>);               <span class="comment">// f(2) = 11
+    </span><span class="macro">assert_eq!</span>(jet.dx(), <span class="number">7.0</span>);                   <span class="comment">// f'(2) = 2*2 + 3
+</span>}</code></pre></div><h4 id="jacobian-computation"><a class="doc-anchor" href="#jacobian-computation">§</a>Jacobian computation</h4>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern crate </span>peroxide;
+<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
+
+<span class="kw">fn </span>main() {
+    <span class="comment">// Jacobian of f(x,y) = [x - y, x + 2*y] at (1, 1)
+    </span><span class="kw">let </span>x = <span class="macro">vec!</span>[<span class="number">1.0</span>, <span class="number">1.0</span>];
+    <span class="kw">let </span>j = jacobian(f, <span class="kw-2">&amp;</span>x);
+    j.print();
+    <span class="comment">//       c[0] c[1]
+    // r[0]     1   -1
+    // r[1]     1    2
+</span>}
+
+<span class="kw">fn </span>f(xs: <span class="kw-2">&amp;</span>Vec&lt;AD&gt;) -&gt; Vec&lt;AD&gt; {
+    <span class="kw">let </span>x = xs[<span class="number">0</span>];
+    <span class="kw">let </span>y = xs[<span class="number">1</span>];
+    <span class="macro">vec!</span>[x - y, x + <span class="number">2.0 </span>* y]
+}</code></pre></div><h4 id="backward-compatible-constructors"><a class="doc-anchor" href="#backward-compatible-constructors">§</a>Backward-compatible constructors</h4>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern crate </span>peroxide;
+<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
+
+<span class="kw">fn </span>main() {
+    <span class="comment">// These work just like the old AD1/AD2 constructors
+    </span><span class="kw">let </span>a = AD1(<span class="number">2.0</span>, <span class="number">1.0</span>);   <span class="comment">// value=2, f'=1
+    </span><span class="kw">let </span>b = AD2(<span class="number">4.0</span>, <span class="number">4.0</span>, <span class="number">2.0</span>);  <span class="comment">// x^2 at x=2
+
+    </span><span class="macro">assert_eq!</span>(a.x(), <span class="number">2.0</span>);
+    <span class="macro">assert_eq!</span>(b.dx(), <span class="number">4.0</span>);
+    <span class="macro">assert_eq!</span>(b.ddx(), <span class="number">2.0</span>);
+
+    <span class="comment">// New constructors (equivalent)
+    </span><span class="kw">let </span>c = Jet::&lt;<span class="number">1</span>&gt;::var(<span class="number">2.0</span>);  <span class="comment">// Same as Dual var at x=2
+    </span><span class="macro">assert_eq!</span>(c.dx(), <span class="number">1.0</span>);     <span class="comment">// dx/dx = 1 for independent variable
+</span>}</code></pre></div><h3 id="accuracy-jetn-vs-finite-differences"><a class="doc-anchor" href="#accuracy-jetn-vs-finite-differences">§</a>Accuracy: Jet&lt;N&gt; vs Finite Differences</h3>
+<p><code>Jet&lt;N&gt;</code> computes derivatives to <strong>machine precision</strong> because it propagates
+exact Taylor coefficients through the computation graph. In contrast, finite
+difference methods suffer from both truncation and cancellation errors that
+worsen rapidly at higher derivative orders.</p>
+<p>The plot below compares the relative error of <code>Jet&lt;N&gt;</code> against central finite
+differences ($h = 10^{-4}$) for $f(x) = \sin(x)$ at $x = 1.0$, across derivative orders 1–8:</p>
+<p><img src="https://raw.githubusercontent.com/Axect/Peroxide/master/example_data/derivative_accuracy.png" alt="Derivative Accuracy" /></p>
+<p><code>Jet&lt;N&gt;</code> (blue) stays at $\sim 10^{-15}$ (machine epsilon) for all orders,
+while finite differences (green) degrade from $\sim 10^{-9}$ at order 1 to $&gt; 10^{0}$ at order 4.</p>
+<h3 id="taylor-series-convergence"><a class="doc-anchor" href="#taylor-series-convergence">§</a>Taylor Series Convergence</h3>
+<p>Since <code>Jet&lt;N&gt;</code> stores normalized Taylor coefficients $c_k = f^{(k)}(a)/k!$,
+you can directly reconstruct the Taylor polynomial of any function:</p>
+<p>$$T_N(x) = c_0 + c_1 (x-a) + c_2 (x-a)^2 + \cdots + c_N (x-a)^N$$</p>
+<p>The plot below shows the Taylor polynomial of $\sin(x)$ around $x = 0$ for
+increasing truncation orders $N = 1, 3, 5, 7, 9$:</p>
+<p><img src="https://raw.githubusercontent.com/Axect/Peroxide/master/example_data/taylor_convergence.png" alt="Taylor Convergence" /></p>
+<p>As $N$ increases, the Taylor polynomial converges to the exact $\sin(x)$ curve
+over a wider interval.</p>
+</div></details><h2 id="structs" class="section-header">Structs<a href="#structs" class="anchor">§</a></h2><dl class="item-table"><dt><a class="struct" href="struct.ADFn.html" title="struct peroxide::structure::ad::ADFn">ADFn</a></dt><dd>Generic AD function wrapper.</dd><dt><a class="struct" href="struct.Jet.html" title="struct peroxide::structure::ad::Jet">Jet</a></dt><dd>Const-generic Taylor-mode forward AD type.</dd></dl><h2 id="traits" class="section-header">Traits<a href="#traits" class="anchor">§</a></h2><dl class="item-table"><dt><a class="trait" href="trait.ADVec.html" title="trait peroxide::structure::ad::ADVec">ADVec</a></dt><dd>Backward compatibility trait: provides <code>to_ad_vec</code> and <code>to_f64_vec</code> on vector types.</dd><dt><a class="trait" href="trait.JetVec.html" title="trait peroxide::structure::ad::JetVec">JetVec</a></dt><dd>Trait for converting between <code>Vec&lt;f64&gt;</code> and <code>Vec&lt;Jet&lt;1&gt;&gt;</code>.</dd></dl><h2 id="functions" class="section-header">Functions<a href="#functions" class="anchor">§</a></h2><dl class="item-table"><dt><a class="fn" href="fn.AD0.html" title="fn peroxide::structure::ad::AD0">AD0</a></dt><dd>Backward compatibility constructor: <code>AD0(x)</code> creates a zero-derivative <code>Jet&lt;2&gt;</code> constant.</dd><dt><a class="fn" href="fn.AD1.html" title="fn peroxide::structure::ad::AD1">AD1</a></dt><dd>Backward compatibility constructor: <code>AD1(x, dx)</code> creates a <code>Jet&lt;2&gt;</code> with given first derivative.</dd><dt><a class="fn" href="fn.AD2.html" title="fn peroxide::structure::ad::AD2">AD2</a></dt><dd>Backward compatibility constructor: <code>AD2(x, dx, ddx)</code> creates a <code>Jet&lt;2&gt;</code> with given derivatives.</dd><dt><a class="fn" href="fn.ad0.html" title="fn peroxide::structure::ad::ad0">ad0</a></dt><dd>Create a <code>Jet&lt;0&gt;</code> constant (zero-order, value only).</dd><dt><a class="fn" href="fn.ad1.html" title="fn peroxide::structure::ad::ad1">ad1</a></dt><dd>Create a <code>Jet&lt;1&gt;</code> with value and first derivative.
+<code>dx</code> is the raw first derivative $f’(a)$; stored as <code>deriv[0]</code> $= dx / 1! = dx$.</dd><dt><a class="fn" href="fn.ad2.html" title="fn peroxide::structure::ad::ad2">ad2</a></dt><dd>Create a <code>Jet&lt;2&gt;</code> with value, first derivative, and second derivative.
+<code>ddx</code> is the raw second derivative $f’‘(a)$; stored internally as <code>deriv[1]</code> $= f’’(a) / 2!$.</dd></dl><h2 id="types" class="section-header">Type Aliases<a href="#types" class="anchor">§</a></h2><dl class="item-table"><dt><a class="type" href="type.AD.html" title="type peroxide::structure::ad::AD">AD</a></dt><dd>Backward compatibility alias: <code>AD</code> is now <code>Jet&lt;2&gt;</code>.</dd><dt><a class="type" href="type.Dual.html" title="type peroxide::structure::ad::Dual">Dual</a></dt><dd>First-order forward AD: stores value and first derivative.</dd><dt><a class="type" href="type.HyperDual.html" title="type peroxide::structure::ad::HyperDual">Hyper<wbr>Dual</a></dt><dd>Second-order forward AD: stores value, first derivative, and second derivative $/, 2!$.</dd></dl></section></div></main></body></html>
